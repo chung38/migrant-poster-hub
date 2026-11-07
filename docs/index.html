@@ -222,6 +222,8 @@ function thumbHtml(it){
     ? `<img loading="lazy" src="${esc(it.thumb)}" alt="" onerror="this.outerHTML='${typeLabel.replace(/"/g,'&quot;')}'">`
     : typeLabel;
 }
+// 先開本站的檢視頁（政府網站的檔案多半設成強制下載，手機直接開會空白）
+const viewHref = it => `view.html?id=${encodeURIComponent(it.id)}`;
 const sizeTxt = it => it.size ? `${(it.size/1048576).toFixed(it.size>1048576?1:2)}MB` : '';
 
 function card(g){
@@ -230,7 +232,7 @@ function card(g){
   const one = g.items.length === 1 ? g.items[0] : null;
   const langTags = LANG_ORDER.filter(l => g.langs.includes(l)).map(l=>`<span class="tag lang">${LANG_NAMES[l]}</span>`).join('');
   const cover = one
-    ? `<a class="thumb" href="${esc(one.fileUrl)}" target="_blank" rel="noopener">`
+    ? `<a class="thumb" href="${viewHref(one)}">`
     : `<button class="thumb" data-open="${idx}">`;
   return `<article class="card">
     ${cover}${thumbHtml(g.cover)}${isNew?'<span class="badge-new">NEW</span>':''}${one?'':`<span class="badge-count">${g.items.length} 種版本</span>`}${one?'</a>':'</button>'}
@@ -240,7 +242,7 @@ function card(g){
       <div class="tags">${langTags}${g.categories.slice(0,2).map(c=>`<span class="tag">${esc(c)}</span>`).join('')}</div>
       <div class="actions">
         ${one
-          ? `<a class="primary" href="${esc(one.fileUrl)}" target="_blank" rel="noopener">開啟檔案</a>`
+          ? `<a class="primary" href="${viewHref(one)}">開啟檔案</a>`
           : `<a class="primary" href="#" data-open="${idx}">選擇語言</a>`}
         <a href="${esc(g.sourcePage)}" target="_blank" rel="noopener">原網頁</a>
       </div>
@@ -252,7 +254,7 @@ function openSheet(g){
   document.getElementById('sheet-title').textContent = g.title;
   document.getElementById('sheet-meta').innerHTML = `${esc(g.agency)} · ${esc(g.date)} · <a href="${esc(g.sourcePage)}" target="_blank" rel="noopener">原網頁</a>`;
   document.getElementById('sheet-list').innerHTML = g.items.map(it => `
-    <a class="ver" href="${esc(it.fileUrl)}" target="_blank" rel="noopener">
+    <a class="ver" href="${viewHref(it)}">
       <span class="vthumb">${thumbHtml(it)}</span>
       <span class="vinfo"><b>${esc(versionLabel(it))}</b><small>${esc((it.ext||'').toUpperCase())}${sizeTxt(it)?' · '+sizeTxt(it):''}</small></span>
       <span class="vgo">開啟 ›</span>

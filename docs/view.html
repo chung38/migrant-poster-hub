@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>檢視文宣</title>
+<style>
+  :root{--bg:#f6f3ec;--paper:#fffdf8;--ink:#1f2a2e;--muted:#6b7378;--line:#e4ddd0;--accent:#0f766e;--chip:#efe9dd}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);font:15px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;display:flex;flex-direction:column}
+  header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--paper);border-bottom:1px solid var(--line)}
+  header a.back{flex:none;text-decoration:none;color:var(--ink);background:var(--chip);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px}
+  header .t{flex:1;min-width:0}
+  header h1{margin:0;font-size:15px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  header .m{font-size:12px;color:var(--muted)}
+  main{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;display:flex;justify-content:center;align-items:flex-start}
+  main img{max-width:100%;height:auto;display:block;margin:0 auto;background:#fff}
+  main iframe{width:100%;height:100%;border:0;background:#fff}
+  .tip{font-size:12px;color:var(--muted);text-align:center;padding:6px 12px}
+  footer{display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  footer a{flex:1;text-align:center;text-decoration:none;border-radius:10px;padding:10px 0;border:1px solid var(--line);color:var(--accent);font-size:14px}
+  footer a.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .msg{padding:60px 20px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="./" id="back" aria-label="回列表">‹</a>
+  <div class="t"><h1 id="title">載入中…</h1><div class="m" id="meta"></div></div>
+</header>
+<div class="tip" id="tip" hidden></div>
+<main id="main"></main>
+<footer id="foot" hidden>
+  <a class="primary" id="dl" target="_blank" rel="noopener">下載原檔</a>
+  <a id="src" target="_blank" rel="noopener">原網頁</a>
+</footer>
+<script>
+// 政府網站多半把檔案設成「強制下載」（Content-Disposition: attachment），
+// 手機 App 內建瀏覽器直接開會變空白。所以在這裡用 <img> 顯示圖片、用 Google 文件檢視器顯示 PDF。
+const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+(async () => {
+  const id = new URLSearchParams(location.search).get('id');
+  const main = document.getElementById('main');
+  if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) {
+    document.getElementById('back').onclick = e => { e.preventDefault(); history.back(); };
+  }
+  let it;
+  try {
+    const data = await (await fetch('catalog.json?' + Date.now())).json();
+    it = data.items.find(x => x.id === id);
+  } catch {}
+  if (!it) { document.getElementById('title').textContent = '找不到這份文宣'; main.innerHTML = '<div class="msg">可能已被移除，請回列表重新搜尋。</div>'; return; }
+
+  const label = it.version || '';
+  document.title = it.title;
+  document.getElementById('title').textContent = it.groupTitle ? `${it.groupTitle}${label ? '－' + label : ''}` : it.title;
+  document.getElementById('meta').textContent = [it.agency, it.date || (it.addedAt||'').slice(0,10), (it.ext||'').toUpperCase()].filter(Boolean).join(' · ');
+  document.getElementById('dl').href = it.fileUrl;
+  document.getElementById('src').href = it.sourcePage;
+  document.getElementById('foot').hidden = false;
+  const tip = document.getElementById('tip');
+
+  if (['jpg','jpeg','png','gif','webp'].includes(it.ext)) {
+    tip.textContent = '可用兩指放大；長按圖片可儲存或分享';
+    tip.hidden = false;
+    const img = new Image();
+    img.alt = it.title;
+    img.referrerPolicy = 'no-referrer';
+    img.onerror = () => {
+      main.innerHTML = `${it.thumb ? `<img src="${esc(it.thumb)}" alt="">` : ''}<div class="msg">原檔暫時無法顯示（政府網站可能下架或改網址）。<br>可按「原網頁」到公告頁查看。</div>`;
+    };
+    img.src = it.fileUrl;
+    main.appendChild(img);
+  } else if (it.ext === 'pdf') {
+    tip.textContent = 'PDF 透過 Google 文件檢視器顯示；若空白請稍等或按「下載原檔」';
+    tip.hidden = false;
+    main.innerHTML = `<iframe src="https://docs.google.com/viewer?embedded=true&url=${encodeURIComponent(it.fileUrl)}" title="PDF"></iframe>`;
+  } else {
+    main.innerHTML = `${it.thumb ? `<img src="${esc(it.thumb)}" alt="">` : ''}<div class="msg">這個檔案類型（${esc((it.ext||'').toUpperCase())}）無法在網頁上預覽，請按「下載原檔」。</div>`;
+  }
+})();
+</script>
+</body>
+</html>
