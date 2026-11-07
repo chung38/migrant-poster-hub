@@ -345,11 +345,41 @@ async function makeThumb(buf, ext, id) {
 
 // ---------------------------------------------------------------- 主流程
 
+/** 彰化縣外國人在地服務網：列表是 JavaScript 從 API 載入的，所以直接呼叫它的 API（各語言分開呼叫） */
+async function chcgNews2Candidates(src, report) {
+  const base = src.base || 'https://foreigners.chcg.gov.tw';
+  const out = [];
+  for (const lang of src.langs || ['zh']) {
+    await politeWait(base);
+    const res = await fetch(`${base}/Api/WebAp/News2/List`, {
+      method: 'POST',
+      headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ lang, groupSeq: src.groupSeq ?? 2, isNews: null, keyword: '', sortingDesc: true, sorting: 'CreatedDate', currentPage: 1, pageSize: src.pageSize || 100 }),
+      signal: AbortSignal.timeout(settings.timeoutMs),
+      dispatcher: src.insecureTLS ? insecureAgent : undefined,
+    });
+    if (!res.ok) throw new Error(`API ${lang} HTTP ${res.status}`);
+    const json = await res.json();
+    (json.data || []).forEach((d, idx) => {
+      const sourcePage = `${base}/News2/Detail/${d.newsId}`;
+      const date = (d.startDate || '').slice(0, 10) || null;
+      const common = { sourcePage, date, snippet: clean(d.summary || ''), lang, seriesOrder: idx };
+      const photos = (d.photoList && d.photoList.length ? d.photoList : d.photo ? [d.photo] : []);
+      photos.forEach((p, k) => out.push({ ...common, fileUrl: `${base}/Photo/ori/${p.code}`, title: clean(d.name), linkText: p.name || '', photoNo: k }));
+      if (d.file?.code) out.push({ ...common, fileUrl: `${base}/File/Get/${d.file.code}`, title: clean(d.name), linkText: d.file.name || '', photoNo: photos.length });
+    });
+    report.listedDetails = (report.listedDetails || 0) + (json.data || []).length;
+  }
+  return out;
+}
+
 async function crawlSource(src, report, budget) {
   const candidates = [];
   const details = new Map();
 
-  for (const start of src.startUrls) {
+  if (src.type === 'chcgNews2') candidates.push(...(await chcgNews2Candidates(src, report)));
+
+  for (const start of src.startUrls || []) {
     const { $, finalUrl } = await getPage(start, src);
     const detailRe = src.detailPattern ? new RegExp(src.detailPattern) : null;
     for (const l of collectLinks($, finalUrl)) {
@@ -450,7 +480,7 @@ async function saveCandidate(c, src, report) {
   const title = clean(c.title) || fileName.replace(/\.[a-z0-9]+$/i, '') || '未命名文宣';
   const textForClass = `${c.linkText} ${fileName} ${c.snippet}`;
   const { primary, all } = classify({ title, text: textForClass }, cats, src.defaultCategory);
-  const langs = detectLangs({ title: `${title} ${c.linkText} ${fileName}`, text: c.snippet, url: `${c.sourcePage} ${finalUrl}` }, src.lang);
+  const langs = detectLangs({ title: `${title} ${c.linkText} ${fileName}`, text: c.snippet, url: `${c.sourcePage} ${finalUrl}` }, c.lang || src.lang);
   const id = shortId(c.fileUrl);
 
   const item = {
@@ -465,6 +495,7 @@ async function saveCandidate(c, src, report) {
     size: buf ? buf.length : Number(headers?.get('content-length') || 0) || null,
     sha256: hash,
     thumb: buf ? await makeThumb(buf, ext, id) : null,
+    phash: undefined,
     date: c.date,
     langs,
     primaryCategory: primary,
@@ -472,6 +503,8 @@ async function saveCandidate(c, src, report) {
     snippet: c.snippet ? c.snippet.slice(0, 200) : '',
     addedAt: now(),
   };
+  if (c.seriesOrder != null) item.seriesOrder = c.seriesOrder;
+  if (c.photoNo != null) item.photoNo = c.photoNo;
   if (finalUrl !== c.fileUrl) item.altUrls = [c.fileUrl];
 
   catalog.items.push(item);
@@ -546,32 +579,82 @@ function assignGroups(items) {
     }
   }
 
+  // 同一個 series（例如交通部 168、彰化縣服務網）的各語言版：
+  // 同一天發布的公告，用「縮圖長得像不像」（感知雜湊 dHash）配對；圖文排版相同、只是文字語言不同
   const seriesOf = Object.fromEntries(cfg.sources.filter((x) => x.series).map((x) => [x.id, x.series]));
   const buckets = new Map();
   for (const it of items) {
     const series = seriesOf[it.sources?.[0]];
     if (!series || it.group) continue;
-    const lang = it.langs?.[0] || 'zh';
     const key = `${series}|${it.date || ''}`;
     if (!buckets.has(key)) buckets.set(key, new Map());
-    const byLang = buckets.get(key);
-    if (!byLang.has(lang)) byLang.set(lang, []);
-    byLang.get(lang).push(it);
+    const units = buckets.get(key);
+    const ukey = `${it.langs?.[0] || 'zh'}|${it.sourcePage}`;
+    if (!units.has(ukey)) units.set(ukey, []);
+    units.get(ukey).push(it);
   }
-  const pageNo = (u) => Number((u.match(/(\d{6,})(?!.*\d{6,})/) || [])[1] || 0);
-  for (const [key, byLang] of buckets) {
-    const lists = [...byLang.values()];
-    if (lists.length < 2 || new Set(lists.map((l) => l.length)).size !== 1) continue;
-    for (const l of lists) l.sort((a, b) => pageNo(a.sourcePage) - pageNo(b.sourcePage));
-    for (let i = 0; i < lists[0].length; i++) {
-      const members = lists.map((l) => l[i]);
-      const title = (members.find((m) => m.langs?.[0] === 'zh') || members.find((m) => m.langs?.[0] === 'en') || members[0]).title;
-      for (const m of members) {
-        m.group = `s:${shortId(`${key}|${i}`)}`;
-        m.groupTitle = title;
-        m.version = LANG_VERSION[m.langs?.[0]] || '';
+  const LANG_PRIORITY = ['zh', 'en', 'vi', 'id', 'th'];
+  const langOf = (u) => u[0].langs?.[0] || 'zh';
+  for (const [key, unitMap] of buckets) {
+    const units = [...unitMap.values()].map((u) => u.sort((a, b) => (a.photoNo || 0) - (b.photoNo || 0)));
+    const langs = [...new Set(units.map(langOf))].sort((a, b) => LANG_PRIORITY.indexOf(a) - LANG_PRIORITY.indexOf(b));
+    if (langs.length < 2) continue;
+    const clusters = []; // 每個 cluster：{ anchor: unit, members: Map(lang → unit) }
+    for (const lang of langs) {
+      const mine = units.filter((u) => langOf(u) === lang);
+      const pairs = [];
+      for (const u of mine) {
+        for (const c of clusters) {
+          if (c.members.has(lang)) continue;
+          const d = hamming(u[0].phash, c.anchor[0].phash);
+          if (d <= PHASH_MAX) pairs.push({ u, c, d });
+        }
       }
+      pairs.sort((x, y) => x.d - y.d);
+      const used = new Set();
+      for (const { u, c, d } of pairs) {
+        if (used.has(u) || c.members.has(lang)) continue;
+        c.members.set(lang, u);
+        used.add(u);
+      }
+      for (const u of mine) if (!used.has(u)) clusters.push({ anchor: u, members: new Map([[lang, u]]) });
     }
+    clusters.forEach((c, i) => {
+      if (c.members.size < 2) return;
+      const lead = c.members.get('zh') || c.members.get('en') || c.anchor;
+      for (const unit of c.members.values()) {
+        unit.forEach((m, k) => {
+          m.group = `s:${shortId(`${key}|${lead[0].id}`)}`;
+          m.groupTitle = lead[0].title;
+          m.version = (LANG_VERSION[m.langs?.[0]] || '') + (unit.length > 1 ? `（第 ${k + 1} 張）` : '');
+        });
+      }
+    });
+  }
+}
+
+// ---------------------------------------------------------------- 感知雜湊（判斷兩張圖是不是同一張海報的不同語言版）
+
+const PHASH_MAX = 0.42; // 16×16 dHash 的差異比例；實測同一張海報不同語言約 0–0.40，不同海報約 0.41 以上
+async function dhash(input) {
+  const N = 16;
+  const { data } = await sharp(input).greyscale().resize(N + 1, N, { fit: 'fill' }).raw().toBuffer({ resolveWithObject: true });
+  let bits = '';
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) bits += data[y * (N + 1) + x] > data[y * (N + 1) + x + 1] ? '1' : '0';
+  return bits;
+}
+function hamming(a, b) {
+  if (!a || !b || a.length !== b.length) return 1;
+  let n = 0;
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) n++;
+  return n / a.length;
+}
+/** 舊資料沒有 phash 的，從縮圖補算 */
+async function fillPhash(items) {
+  for (const it of items) {
+    if (it.phash || !it.thumb) continue;
+    const abs = path.join(ROOT, 'docs', it.thumb);
+    if (fss.existsSync(abs)) it.phash = await dhash(abs).catch(() => undefined);
   }
 }
 
@@ -602,6 +685,7 @@ async function main() {
   }
   if (DRY) return console.log('\n(--dry 模式，沒有寫入任何檔案)');
 
+  await fillPhash(catalog.items);
   assignGroups(catalog.items);
   catalog.items.sort((a, b) => (b.date || b.addedAt).localeCompare(a.date || a.addedAt));
   catalog.updatedAt = now();
