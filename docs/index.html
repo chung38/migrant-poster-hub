@@ -85,6 +85,9 @@
   .more{text-align:center;margin:18px 0 4px}
   .more button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--paper);color:var(--accent);border-radius:999px;padding:9px 22px;cursor:pointer}
   .hint2{text-align:center;color:var(--muted);font-size:13px;margin:14px 0 0}
+  .chip.home[aria-pressed="true"]{background:var(--warn);border-color:var(--warn)}
+  .backbar{display:flex;align-items:center;gap:10px;margin:4px 0 14px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+  .backbar button{font:inherit;font-size:14px;border:1px solid var(--accent);color:var(--accent);background:var(--paper);border-radius:999px;padding:6px 14px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -277,7 +280,8 @@ function renderFilters(){
   }).join('');
   const agencies = [...new Set(GROUPS.map(g=>g.agency))].sort();
   const langs = LANG_ORDER.filter(l => count(g => g.langs.includes(l)));
-  document.getElementById('filters').innerHTML = catChips
+  const noFilter = !(state.q.trim() || state.cat || state.agency || state.lang || state.type);
+  document.getElementById('filters').innerHTML = `<span class="chip home" data-home aria-pressed="${noFilter}">🆕 最新更新</span>` + catChips
     + `<span class="sep"></span>`
     + langs.map(l=>`<span class="chip" data-k="lang" data-v="${l}" aria-pressed="${state.lang===l}">${LANG_NAMES[l]}</span>`).join('')
     + `<span class="sep"></span>`
@@ -303,6 +307,8 @@ function render(){
     html += `<div class="hint">「${esc(state.q)}」同時帶出類別：<b>${rc.map(esc).join('、')}</b>${kw.length?`（含外語文宣，如 ${kw.map(esc).join('、')}）`:''}　共 ${list.length} 則</div>`;
   }
   if (searching){
+    const what = [state.q.trim() && `「${esc(state.q.trim())}」`, state.cat, state.lang && LANG_NAMES[state.lang], state.type && {img:'圖片',pdf:'PDF',other:'其他檔'}[state.type], state.agency].filter(Boolean).join('・');
+    html += `<div class="backbar"><button data-home>‹ 返回最新更新</button><span>目前：${what}・${list.length} 則</span></div>`;
     html += `<div class="grid">${list.slice(0,300).map(card).join('')}</div>`;
     if (list.length > 300) html += `<p class="empty">只顯示前 300 則，請加關鍵字縮小範圍</p>`;
   } else {
@@ -322,7 +328,10 @@ function update(pushHash=true){
   if (pushHash){
     const p = new URLSearchParams();
     for (const k of ['q','cat','agency','lang','type']) if (state[k]) p.set(k, state[k]);
-    history.replaceState(null,'', p.toString() ? `#${p}` : location.pathname);
+    const url = p.toString() ? `#${p}` : location.pathname;
+    if (url !== (location.hash || location.pathname)) {
+      if (pushHash === 'replace') history.replaceState(null,'', url); else history.pushState(null,'', url);
+    }
   }
 }
 
@@ -339,15 +348,23 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-close]')){ closeSheet(); return; }
   const chip = e.target.closest('.chip[data-k]');
   if (chip){ const k = chip.dataset.k, v = chip.dataset.v; state[k] = state[k]===v ? '' : v; update(); return; }
+  if (e.target.closest('[data-home]')){ goHome(); return; }
   if (e.target.closest('[data-more]')){ state.homeLimit += HOME_PAGE; render(); return; }
   const ex = e.target.closest('[data-expand]');
   if (ex){ const n = ex.dataset.expand; state.expanded.has(n)?state.expanded.delete(n):state.expanded.add(n); render(); }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
 let t;
-document.getElementById('q').addEventListener('input', e => { clearTimeout(t); t = setTimeout(()=>{ state.q = e.target.value; update(); }, 180); });
+document.getElementById('q').addEventListener('input', e => { clearTimeout(t); t = setTimeout(()=>{ state.q = e.target.value; update('replace'); }, 180); });
 document.getElementById('form').addEventListener('submit', e => e.preventDefault());
-document.getElementById('clear').onclick = () => { Object.assign(state,{q:'',cat:'',agency:'',lang:'',type:''}); document.getElementById('q').value=''; update(); };
+function goHome(){ Object.assign(state,{q:'',cat:'',agency:'',lang:'',type:'',homeLimit:HOME_PAGE}); document.getElementById('q').value=''; update(); window.scrollTo({top:0,behavior:'smooth'}); }
+document.getElementById('clear').onclick = goHome;
+// 手機「上一頁」也能回到上一個畫面（例如從類別回到最新更新）
+window.addEventListener('hashchange', () => {
+  const p = new URLSearchParams(location.hash.slice(1));
+  for (const k of ['q','cat','agency','lang','type']) state[k] = p.get(k) || '';
+  document.getElementById('q').value = state.q; update(false);
+});
 
 (async () => {
   try {
