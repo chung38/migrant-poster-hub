@@ -62,6 +62,26 @@
   .src .ok{color:var(--accent)} .src .bad{color:var(--bad)}
   mark{background:#fde68a;padding:0 1px;border-radius:2px}
   @media (max-width:520px){ .filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none} .grid{grid-template-columns:repeat(2,1fr);gap:10px} h1{font-size:21px} .title{font-size:13.5px} }
+  button.thumb{border:0;padding:0;width:100%;cursor:pointer;font:inherit}
+  .badge-count{position:absolute;right:8px;bottom:8px;background:rgba(31,42,46,.82);color:#fff;font-size:11.5px;padding:3px 8px;border-radius:999px}
+  .sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+  .sheet[hidden]{display:none}
+  .sheet .backdrop{position:absolute;inset:0;background:rgba(20,25,28,.45)}
+  .sheet .panel{position:relative;background:var(--paper);width:min(560px,100%);max-height:85vh;overflow:auto;
+    border-radius:18px 18px 0 0;padding:18px 18px 24px;box-shadow:0 -10px 30px rgba(0,0,0,.18);animation:up .18s ease-out}
+  @media (min-width:700px){ .sheet{align-items:center} .sheet .panel{border-radius:18px} }
+  @keyframes up{from{transform:translateY(30px);opacity:.5}to{transform:none;opacity:1}}
+  .panel h3{margin:0 34px 4px 0;font-size:17px;line-height:1.4}
+  .panel .x{position:absolute;top:12px;right:12px;border:0;background:var(--chip);width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer}
+  .panel .pm{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .ver{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);border-radius:12px;margin-top:8px;text-decoration:none;color:inherit}
+  .ver:active,.ver:hover{border-color:var(--accent);background:#f3faf8}
+  .vthumb{width:64px;height:64px;flex:none;border-radius:8px;overflow:hidden;background:#ece6da;display:flex;align-items:center;justify-content:center}
+  .vthumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .vthumb .type{font-size:12px}
+  .vinfo{flex:1;display:flex;flex-direction:column}
+  .vinfo small{color:var(--muted);font-size:12px}
+  .vgo{color:var(--accent);font-size:14px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -80,23 +100,77 @@
 
 <main id="out"></main>
 
+<div class="sheet" id="sheet" hidden>
+  <div class="backdrop" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <button class="x" data-close aria-label="關閉">✕</button>
+    <h3 id="sheet-title"></h3>
+    <div class="pm" id="sheet-meta"></div>
+    <div id="sheet-list"></div>
+  </div>
+</div>
+
 <footer>
   <details><summary>各來源最近一次抓取狀態</summary><div id="report"></div></details>
 </footer>
 
 <script>
-const LANG_NAMES = { vi:'越南', id:'印尼', th:'泰國', en:'英/菲', zh:'中文', multi:'多國語' };
+const LANG_NAMES = { zh:'中文', vi:'越南', id:'印尼', th:'泰國', en:'英/菲', multi:'多國語' };
+const LANG_ORDER = ['zh','vi','id','th','en','multi'];
 const state = { q:'', cat:'', agency:'', lang:'', type:'', expanded:new Set() };
 let DATA = { items:[], categories:[] };
+let GROUPS = [];
 
 const fold = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'')
   .replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().normalize('NFC');
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-// 檔案一律連回政府網站原始位置；縮圖存在 docs/thumbs/
-const fileHref = it => it.fileUrl;
 const isImg = it => ['jpg','jpeg','png','gif','webp'].includes(it.ext);
 const typeOf = it => isImg(it) ? 'img' : it.ext === 'pdf' ? 'pdf' : 'other';
+const dateOf = it => it.date || (it.addedAt||'').slice(0,10);
+
+/** 同一則公告（同一個原網頁＋同一個主標題）的各國語言版本合成一組 */
+function baseTitle(t){ return String(t).split('－')[0].trim(); }
+function versionLabel(it){
+  const suffix = String(it.title).split('－').slice(1).join('－').trim();
+  if (suffix) return suffix;
+  const l = (it.langs||[]).filter(x => x !== 'multi');
+  if (l.length === 1) return LANG_NAMES[l[0]] + '版';
+  return (it.langs||[]).includes('multi') ? '多國語合輯' : (it.ext||'').toUpperCase();
+}
+const LABEL_LANG = [[/中文|華語|國語/,'zh'],[/越南|越文|tiếng việt/i,'vi'],[/印尼|indonesia/i,'id'],[/泰/,'th'],[/英文|英語|菲律賓|english|tagalog/i,'en']];
+/** 依「版本名稱」補正語言（例如「－中文版」），並決定排序：中文、越、印、泰、英、合輯 */
+function effLangs(it){
+  const label = String(it.title).split('－').slice(1).join('－');
+  const hit = LABEL_LANG.find(([re]) => re.test(label));
+  return hit ? [hit[1]] : (it.langs||[]);
+}
+function langRank(it){
+  const l = effLangs(it).find(x => x !== 'multi') || 'multi';
+  const r = LANG_ORDER.indexOf(l); return r < 0 ? 99 : r;
+}
+function buildGroups(items){
+  const map = new Map();
+  for (const it of items){
+    const key = `${it.sourcePage}|${baseTitle(it.title)}`;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(it);
+  }
+  return [...map.values()].map(arr => {
+    arr.sort((a,b) => langRank(a) - langRank(b));
+    const langs = [...new Set(arr.flatMap(effLangs))];
+    const categories = [...new Set(arr.flatMap(i => i.categories))];
+    const cover = arr.find(i => i.thumb) || arr[0];
+    return {
+      title: arr.length > 1 ? baseTitle(arr[0].title) : arr[0].title,
+      items: arr, cover, langs, categories,
+      primaryCategory: arr[0].primaryCategory,
+      agency: arr[0].agency, sourcePage: arr[0].sourcePage,
+      date: arr.map(dateOf).sort().pop(),
+      addedAt: arr.map(i=>i.addedAt).sort().pop(),
+      text: fold(arr.map(i => [i.title, i.snippet, i.agency, i.sourceName, i.categories.join(' ')].join(' ')).join(' ') + ' ' + langs.map(l=>LANG_NAMES[l]).join(' ')),
+    };
+  });
+}
 
 /** 找出這次搜尋「連帶」的類別：輸入 毒品 → 反毒類（裡面有越南文、印尼文的同義字） */
 function relatedCats(q){
@@ -107,30 +181,28 @@ function relatedCats(q){
   ).map(c => c.name);
 }
 
-function score(it, terms, cats){
+function score(g, terms, cats){
   if (!terms.length) return 1;
-  const hay = fold([it.title, it.snippet, it.agency, it.sourceName, it.categories.join(' '), (it.langs||[]).map(l=>LANG_NAMES[l]).join(' ')].join(' '));
-  // 所有關鍵字都要出現（AND），或是屬於搜尋帶出的類別
-  const title = fold(it.title);
+  const title = fold(g.title);
   let s = 0;
   if (terms.every(t => title.includes(t))) s += 6;
-  else if (terms.every(t => hay.includes(t))) s += 3;
-  if (it.categories.some(c => cats.includes(c))) s += 4;
+  else if (terms.every(t => g.text.includes(t))) s += 3;
+  if (g.categories.some(c => cats.includes(c))) s += 4;
   return s;
 }
 
 function filtered(){
   const terms = fold(state.q).split(/\s+/).filter(Boolean);
   const cats = relatedCats(state.q);
-  return DATA.items
-    .filter(it => !state.cat || it.categories.includes(state.cat))
-    .filter(it => !state.agency || it.agency === state.agency)
-    .filter(it => !state.lang || (it.langs||[]).includes(state.lang))
-    .filter(it => !state.type || typeOf(it) === state.type)
-    .map(it => ({ it, s: score(it, terms, cats) }))
+  return GROUPS
+    .filter(g => !state.cat || g.categories.includes(state.cat))
+    .filter(g => !state.agency || g.agency === state.agency)
+    .filter(g => !state.lang || g.langs.includes(state.lang))
+    .filter(g => !state.type || g.items.some(i => typeOf(i) === state.type))
+    .map(g => ({ g, s: score(g, terms, cats) }))
     .filter(x => x.s > 0)
-    .sort((a,b) => b.s - a.s || (b.it.date||b.it.addedAt).localeCompare(a.it.date||a.it.addedAt))
-    .map(x => x.it);
+    .sort((a,b) => b.s - a.s || b.g.date.localeCompare(a.g.date))
+    .map(x => x.g);
 }
 
 function hl(text){
@@ -143,38 +215,61 @@ function hl(text){
   return h;
 }
 
-function card(it){
-  const isNew = Date.now() - new Date(it.addedAt).getTime() < 7*864e5;
+function thumbHtml(it){
   const typeLabel = `<span class="type">${esc((it.ext||'file').toUpperCase())}</span>`;
-  const thumb = it.thumb
+  return it.thumb
     ? `<img loading="lazy" src="${esc(it.thumb)}" alt="" onerror="this.outerHTML='${typeLabel.replace(/"/g,'&quot;')}'">`
     : typeLabel;
-  const size = it.size ? ` · ${(it.size/1048576).toFixed(it.size>1048576?1:2)}MB` : '';
+}
+const sizeTxt = it => it.size ? `${(it.size/1048576).toFixed(it.size>1048576?1:2)}MB` : '';
+
+function card(g){
+  const idx = GROUPS.indexOf(g);
+  const isNew = Date.now() - new Date(g.addedAt).getTime() < 7*864e5;
+  const one = g.items.length === 1 ? g.items[0] : null;
+  const langTags = LANG_ORDER.filter(l => g.langs.includes(l)).map(l=>`<span class="tag lang">${LANG_NAMES[l]}</span>`).join('');
+  const cover = one
+    ? `<a class="thumb" href="${esc(one.fileUrl)}" target="_blank" rel="noopener">`
+    : `<button class="thumb" data-open="${idx}">`;
   return `<article class="card">
-    <a class="thumb" href="${esc(fileHref(it))}" target="_blank" rel="noopener">${thumb}${isNew?'<span class="badge-new">NEW</span>':''}</a>
+    ${cover}${thumbHtml(g.cover)}${isNew?'<span class="badge-new">NEW</span>':''}${one?'':`<span class="badge-count">${g.items.length} 種版本</span>`}${one?'</a>':'</button>'}
     <div class="body">
-      <div class="title" title="${esc(it.title)}">${hl(it.title)}</div>
-      <div class="meta">${esc(it.agency)} · ${esc(it.date || it.addedAt.slice(0,10))}${size}</div>
-      <div class="tags">
-        ${(it.langs||[]).map(l=>`<span class="tag lang">${esc(LANG_NAMES[l]||l)}</span>`).join('')}
-        ${it.categories.slice(0,3).map(c=>`<span class="tag">${esc(c)}</span>`).join('')}
-      </div>
+      <div class="title" title="${esc(g.title)}">${hl(g.title)}</div>
+      <div class="meta">${esc(g.agency)} · ${esc(g.date)}${one && sizeTxt(one) ? ' · '+sizeTxt(one) : ''}</div>
+      <div class="tags">${langTags}${g.categories.slice(0,2).map(c=>`<span class="tag">${esc(c)}</span>`).join('')}</div>
       <div class="actions">
-        <a class="primary" href="${esc(fileHref(it))}" target="_blank" rel="noopener">開啟檔案</a>
-        <a href="${esc(it.sourcePage)}" target="_blank" rel="noopener">原網頁</a>
+        ${one
+          ? `<a class="primary" href="${esc(one.fileUrl)}" target="_blank" rel="noopener">開啟檔案</a>`
+          : `<a class="primary" href="#" data-open="${idx}">選擇語言</a>`}
+        <a href="${esc(g.sourcePage)}" target="_blank" rel="noopener">原網頁</a>
       </div>
     </div></article>`;
 }
 
+function openSheet(g){
+  const sheet = document.getElementById('sheet');
+  document.getElementById('sheet-title').textContent = g.title;
+  document.getElementById('sheet-meta').innerHTML = `${esc(g.agency)} · ${esc(g.date)} · <a href="${esc(g.sourcePage)}" target="_blank" rel="noopener">原網頁</a>`;
+  document.getElementById('sheet-list').innerHTML = g.items.map(it => `
+    <a class="ver" href="${esc(it.fileUrl)}" target="_blank" rel="noopener">
+      <span class="vthumb">${thumbHtml(it)}</span>
+      <span class="vinfo"><b>${esc(versionLabel(it))}</b><small>${esc((it.ext||'').toUpperCase())}${sizeTxt(it)?' · '+sizeTxt(it):''}</small></span>
+      <span class="vgo">開啟 ›</span>
+    </a>`).join('');
+  sheet.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet(){ document.getElementById('sheet').hidden = true; document.body.style.overflow = ''; }
+
 function renderFilters(){
-  const count = (fn) => DATA.items.filter(fn).length;
+  const count = (fn) => GROUPS.filter(fn).length;
   const catChips = DATA.categories.map(c => {
-    const n = count(it => it.categories.includes(c.name));
+    const n = count(g => g.categories.includes(c.name));
     if (!n) return '';
     return `<span class="chip" data-k="cat" data-v="${esc(c.name)}" aria-pressed="${state.cat===c.name}">${c.icon||''} ${esc(c.name)}<span class="n">${n}</span></span>`;
   }).join('');
-  const agencies = [...new Set(DATA.items.map(i=>i.agency))].sort();
-  const langs = Object.keys(LANG_NAMES).filter(l => count(it => (it.langs||[]).includes(l)));
+  const agencies = [...new Set(GROUPS.map(g=>g.agency))].sort();
+  const langs = LANG_ORDER.filter(l => count(g => g.langs.includes(l)));
   document.getElementById('filters').innerHTML = catChips
     + `<span class="sep"></span>`
     + langs.map(l=>`<span class="chip" data-k="lang" data-v="${l}" aria-pressed="${state.lang===l}">${LANG_NAMES[l]}</span>`).join('')
@@ -188,7 +283,7 @@ function render(){
   const list = filtered();
   const out = document.getElementById('out');
   const searching = state.q.trim() || state.cat || state.agency || state.lang || state.type;
-  if (!DATA.items.length){
+  if (!GROUPS.length){
     out.innerHTML = `<div class="empty">還沒有資料。第一次排程跑完後就會出現（GitHub → Actions → 每日抓取文宣 → Run workflow 可以馬上跑）。</div>`;
     return;
   }
@@ -198,21 +293,21 @@ function render(){
   const rc = relatedCats(state.q);
   if (state.q.trim() && rc.length){
     const kw = DATA.categories.filter(c=>rc.includes(c.name)).flatMap(c=>c.keywords).filter(k=>!/[一-鿿]|^\d+$/.test(k)).slice(0,6);
-    html += `<div class="hint">「${esc(state.q)}」同時帶出類別：<b>${rc.map(esc).join('、')}</b>${kw.length?`（含外語文宣，如 ${kw.map(esc).join('、')}）`:''}　共 ${list.length} 筆</div>`;
+    html += `<div class="hint">「${esc(state.q)}」同時帶出類別：<b>${rc.map(esc).join('、')}</b>${kw.length?`（含外語文宣，如 ${kw.map(esc).join('、')}）`:''}　共 ${list.length} 則</div>`;
   }
   if (searching){
     html += `<div class="grid">${list.slice(0,300).map(card).join('')}</div>`;
-    if (list.length > 300) html += `<p class="empty">只顯示前 300 筆，請加關鍵字縮小範圍</p>`;
+    if (list.length > 300) html += `<p class="empty">只顯示前 300 則，請加關鍵字縮小範圍</p>`;
   } else {
     // 沒有搜尋時：依類別分區顯示（同一類放在一起）
     const groups = new Map();
-    for (const it of list){ const c = it.primaryCategory; if(!groups.has(c)) groups.set(c,[]); groups.get(c).push(it); }
+    for (const g of list){ const c = g.primaryCategory; if(!groups.has(c)) groups.set(c,[]); groups.get(c).push(g); }
     const order = DATA.categories.map(c=>c.name);
     for (const name of [...groups.keys()].sort((a,b)=>order.indexOf(a)-order.indexOf(b))){
       const arr = groups.get(name);
       const icon = (DATA.categories.find(c=>c.name===name)||{}).icon||'';
       const open = state.expanded.has(name);
-      html += `<section class="cat"><h2>${icon} ${esc(name)}<span class="n">${arr.length} 筆</span>
+      html += `<section class="cat"><h2>${icon} ${esc(name)}<span class="n">${arr.length} 則</span>
         ${arr.length>8?`<button data-expand="${esc(name)}">${open?'收合':'看全部'}</button>`:''}</h2>
         <div class="grid">${(open?arr:arr.slice(0,8)).map(card).join('')}</div></section>`;
     }
@@ -237,11 +332,15 @@ function renderReport(rep){
 }
 
 document.addEventListener('click', e => {
+  const op = e.target.closest('[data-open]');
+  if (op){ e.preventDefault(); openSheet(GROUPS[Number(op.dataset.open)]); return; }
+  if (e.target.closest('[data-close]')){ closeSheet(); return; }
   const chip = e.target.closest('.chip[data-k]');
   if (chip){ const k = chip.dataset.k, v = chip.dataset.v; state[k] = state[k]===v ? '' : v; update(); return; }
   const ex = e.target.closest('[data-expand]');
   if (ex){ const n = ex.dataset.expand; state.expanded.has(n)?state.expanded.delete(n):state.expanded.add(n); render(); }
 });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
 let t;
 document.getElementById('q').addEventListener('input', e => { clearTimeout(t); t = setTimeout(()=>{ state.q = e.target.value; update(); }, 180); });
 document.getElementById('form').addEventListener('submit', e => e.preventDefault());
@@ -252,10 +351,11 @@ document.getElementById('clear').onclick = () => { Object.assign(state,{q:'',cat
     const r = await fetch('catalog.json?'+Date.now()); DATA = await r.json();
     DATA.items ||= []; DATA.categories ||= [];
   } catch { DATA = { items:[], categories:[] }; }
+  GROUPS = buildGroups(DATA.items);
   const p = new URLSearchParams(location.hash.slice(1));
   for (const k of ['q','cat','agency','lang','type']) state[k] = p.get(k) || '';
   document.getElementById('q').value = state.q;
-  document.getElementById('count').textContent = DATA.items.length ? `共 ${DATA.items.length} 份` : '';
+  document.getElementById('count').textContent = GROUPS.length ? `共 ${GROUPS.length} 則・${DATA.items.length} 個檔案` : '';
   document.getElementById('updated').textContent = DATA.updatedAt ? `每天自動更新，最後更新：${new Date(DATA.updatedAt).toLocaleString('zh-TW')}` : '尚未更新';
   update(false);
   fetch('report.json?'+Date.now()).then(r=>r.json()).then(renderReport).catch(()=>{});
