@@ -10,11 +10,13 @@
   "scripts": {
     "crawl": "node crawler/crawl.js",
     "crawl:dry": "node crawler/crawl.js --dry",
-    "reclassify": "node crawler/crawl.js --reclassify"
+    "reclassify": "node crawler/crawl.js --reclassify",
+    "migrate": "node crawler/crawl.js --migrate"
   },
   "dependencies": {
     "cheerio": "^1.0.0",
     "iconv-lite": "^0.6.3",
+    "sharp": "^0.33.5",
     "undici": "^6.21.0"
   }
 }

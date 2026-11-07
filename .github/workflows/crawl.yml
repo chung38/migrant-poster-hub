@@ -24,8 +24,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: 安裝套件
-        run: npm install --no-audit --no-fund
+      - name: 安裝套件（含 PDF 轉縮圖工具）
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          npm install --no-audit --no-fund
 
       - name: 抓取並分類
         run: node crawler/crawl.js

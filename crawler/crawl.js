@@ -1,16 +1,22 @@
 // crawler/crawl.js
-// 每天執行一次：到 sources.json 列出的政府網頁抓最新文宣 → 下載 → 分類 → 寫入 docs/catalog.json
+// 每天執行一次：到 sources.json 列出的政府網頁抓最新文宣 → 分類 → 寫入 docs/catalog.json
+// 不保存原始檔，只存「政府網站上的檔案連結」＋一張小縮圖（docs/thumbs/*.webp，每張約 10–30KB）
 //
 // 用法：
 //   node crawler/crawl.js                 正常執行
 //   node crawler/crawl.js --only wda-file 只跑某一個來源
 //   node crawler/crawl.js --dry           只列出會下載什麼，不下載
-//   node crawler/crawl.js --reclassify    改了 categories.json 後，重新分類既有資料並搬資料夾
+//   node crawler/crawl.js --reclassify    改了 categories.json 後，重新分類既有資料
+//   node crawler/crawl.js --migrate       （一次性）把舊版 archive/ 的檔案轉成縮圖後刪除
 
 import fs from 'node:fs/promises';
 import fss from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import os from 'node:os';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
 import { fetch, Agent } from 'undici';
@@ -23,11 +29,13 @@ const CATEGORIES_FILE = path.join(ROOT, 'categories.json');
 const CATALOG_FILE = path.join(ROOT, 'docs', 'catalog.json');
 const REPORT_FILE = path.join(ROOT, 'docs', 'report.json');
 const STATE_FILE = path.join(ROOT, 'data', 'state.json');
-const ARCHIVE_DIR = 'archive';
+const THUMB_DIR = path.join(ROOT, 'docs', 'thumbs');
+const execFileP = promisify(execFile);
 
 const args = process.argv.slice(2);
 const DRY = args.includes('--dry');
 const RECLASSIFY = args.includes('--reclassify');
+const MIGRATE = args.includes('--migrate');
 const ONLY = args.includes('--only') ? args[args.indexOf('--only') + 1] : null;
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 MigrantPosterHub/1.0';
@@ -83,6 +91,7 @@ const settings = {
   delayMs: 1200,
   timeoutMs: 30000,
   minImageKB: 15,
+  thumbWidth: 360,
   ...(cfg.settings || {}),
 };
 const categoriesJson = await readJson(CATEGORIES_FILE, null);
@@ -270,13 +279,6 @@ function keywordOk(src, text) {
 
 // ---------------------------------------------------------------- 存檔
 
-const safeName = (s, n = 60) =>
-  clean(s)
-    .replace(/[\\/:*?"<>|#%{}^~`[\]]+/g, '')
-    .replace(/\s+/g, '_')
-    .replace(/^[._]+/, '')
-    .slice(0, n) || 'file';
-
 function guessExt(url, headers) {
   const ct = (headers?.get('content-type') || '').split(';')[0].trim().toLowerCase();
   const cd = headers?.get('content-disposition') || '';
@@ -287,18 +289,58 @@ function guessExt(url, headers) {
   return { ext: ext === 'jpeg' ? 'jpg' : ext, contentType: ct };
 }
 
-function uniquePath(rel) {
-  let p = rel;
-  let i = 2;
-  const { dir, name, ext } = path.parse(rel);
-  while (fss.existsSync(path.join(ROOT, p))) p = path.join(dir, `${name}_${i++}${ext}`);
-  return p.split(path.sep).join('/');
+/** 合併「內頁標題」與「檔案連結文字」，避免出現「【X】－【X】-宣導」這種重複 */
+const core = (t = '') =>
+  t.replace(/\.(pdf|jpe?g|png|gif|webp|docx?|pptx?|odt|odp|zip)$/i, '')
+    .replace(/LINE@移點通|多國語言版|多國語版|宣導|下載|檔案|另開新視窗/g, '')
+    .replace(/[\s【】\[\]（）()「」『』〈〉《》<>\-－—_.:：,，、!！?？]/g, '')
+    .toLowerCase();
+
+function mergeTitle(pageTitle = '', linkText = '') {
+  const page = clean(pageTitle);
+  const link = clean(linkText).replace(/\.(pdf|jpe?g|png|gif|webp|docx?|pptx?|odt|odp|zip)$/i, '');
+  const cp = core(page);
+  const cl = core(link);
+  if (!cl || cp.includes(cl)) return page || link;
+  if (!cp) return link;
+  if (cl.includes(cp)) {
+    // 連結文字＝標題＋額外資訊（例如「【X】越南文版」）→ 只補上多出來的部分
+    let rest = cl;
+    rest = rest.replace(cp, '');
+    const m = link.match(/(中文|越南|越文|印尼|泰文|泰語|泰國|英文|英語|菲律賓|tagalog|english|vietnam|indonesia|thai)[^\s－-]*/i);
+    return m ? `${page}－${m[0]}` : rest.length >= 2 ? `${page}－${link}` : page;
+  }
+  return `${page}－${link}`;
 }
 
-function buildPath(item) {
-  const date = (item.date || item.addedAt.slice(0, 10)).replace(/-/g, '');
-  const lang = item.langs.join('-');
-  return path.join(ARCHIVE_DIR, safeName(item.primaryCategory, 20), safeName(item.agency, 20), `${date}_${safeName(item.title)}_${lang}.${item.ext}`);
+/** 產生縮圖：圖片直接縮；PDF 用 pdftoppm 轉第一頁。失敗回傳 null（網頁會顯示檔案類型圖示） */
+async function makeThumb(buf, ext, id) {
+  try {
+    let input = buf;
+    if (ext === 'pdf') {
+      const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'th-'));
+      try {
+        await fs.writeFile(path.join(tmp, 'in.pdf'), buf);
+        await execFileP('pdftoppm', ['-f', '1', '-l', '1', '-r', '60', '-png', '-singlefile', path.join(tmp, 'in.pdf'), path.join(tmp, 'p')], { timeout: 60000 });
+        input = await fs.readFile(path.join(tmp, 'p.png'));
+      } finally {
+        await fs.rm(tmp, { recursive: true, force: true });
+      }
+    } else if (!IMAGE_EXT.includes(ext)) {
+      return null;
+    }
+    await fs.mkdir(THUMB_DIR, { recursive: true });
+    const rel = `thumbs/${id}.webp`;
+    await sharp(input, { animated: false, limitInputPixels: 2e8 })
+      .rotate()
+      .resize({ width: settings.thumbWidth, height: Math.round(settings.thumbWidth * 1.5), fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 68 })
+      .toFile(path.join(ROOT, 'docs', rel));
+    return rel;
+  } catch (e) {
+    console.log(`   (縮圖失敗 ${id}：${e.message.split('\n')[0]})`);
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------- 主流程
@@ -338,7 +380,7 @@ async function crawlSource(src, report, budget) {
         const linkText = f.text && f.text !== pageTitle ? f.text : '';
         candidates.push({
           fileUrl: f.url,
-          title: multi && linkText ? `${pageTitle}－${linkText.replace(/\.(pdf|jpe?g|png)$/i, '')}` : pageTitle,
+          title: multi ? mergeTitle(pageTitle, linkText) : pageTitle,
           linkText,
           sourcePage: finalUrl,
           date: info.date,
@@ -359,7 +401,7 @@ async function crawlSource(src, report, budget) {
     if (byUrl.has(c.fileUrl) || state.skippedUrls[c.fileUrl]) continue;
     if (!keywordOk(src, `${c.title} ${c.linkText} ${c.snippet}`)) continue;
     if (budget.left <= 0) {
-      report.errors.push('已達本次下載上限 maxNewFilesPerRun，其餘明天繼續');
+      report.errors.push('已達本次上限 maxNewFilesPerRun，其餘明天繼續');
       break;
     }
     if (DRY) {
@@ -371,25 +413,32 @@ async function crawlSource(src, report, budget) {
       await saveCandidate(c, src, report);
       budget.left--;
     } catch (e) {
-      if (e.tooBig) state.skippedUrls[c.fileUrl] = e.message;
       report.errors.push(`${c.fileUrl}：${e.message}`);
     }
   }
 }
 
 async function saveCandidate(c, src, report) {
-  const { buf, headers, finalUrl } = await request(c.fileUrl, src, { maxBytes: settings.maxFileMB * 1048576 });
+  // 暫時下載（只為了判斷檔案類型、去重複、做縮圖），原始檔不保存
+  let buf = null;
+  let headers = null;
+  let finalUrl = c.fileUrl;
+  try {
+    ({ buf, headers, finalUrl } = await request(c.fileUrl, src, { maxBytes: settings.maxFileMB * 1048576 }));
+  } catch (e) {
+    if (!e.tooBig) throw e; // 太大的檔案：不做縮圖，但連結照樣收錄
+  }
   const { ext, contentType } = guessExt(finalUrl, headers);
   if (!ext || !FILE_EXT.includes(ext) || contentType.startsWith('text/html')) {
     state.skippedUrls[c.fileUrl] = `不是文宣檔 (${contentType || '未知'})`;
     return;
   }
-  if (IMAGE_EXT.includes(ext) && buf.length < settings.minImageKB * 1024) {
+  if (buf && IMAGE_EXT.includes(ext) && buf.length < settings.minImageKB * 1024) {
     state.skippedUrls[c.fileUrl] = '圖片太小（多半是網站圖示）';
     return;
   }
-  const hash = sha256(buf);
-  const dup = bySha.get(hash);
+  const hash = buf ? sha256(buf) : null;
+  const dup = hash && bySha.get(hash);
   if (dup) {
     dup.altUrls = [...new Set([...(dup.altUrls || []), c.fileUrl])];
     if (!dup.sources.includes(src.id)) dup.sources.push(src.id);
@@ -402,18 +451,20 @@ async function saveCandidate(c, src, report) {
   const textForClass = `${c.linkText} ${fileName} ${c.snippet}`;
   const { primary, all } = classify({ title, text: textForClass }, cats, src.defaultCategory);
   const langs = detectLangs({ title: `${title} ${c.linkText} ${fileName}`, text: c.snippet, url: `${c.sourcePage} ${finalUrl}` }, src.lang);
+  const id = shortId(c.fileUrl);
 
   const item = {
-    id: shortId(c.fileUrl),
+    id,
     title,
     agency: src.agency,
     sources: [src.id],
     sourceName: src.name,
     sourcePage: c.sourcePage,
-    fileUrl: c.fileUrl,
+    fileUrl: finalUrl,
     ext,
-    size: buf.length,
+    size: buf ? buf.length : Number(headers?.get('content-length') || 0) || null,
     sha256: hash,
+    thumb: buf ? await makeThumb(buf, ext, id) : null,
     date: c.date,
     langs,
     primaryCategory: primary,
@@ -421,40 +472,51 @@ async function saveCandidate(c, src, report) {
     snippet: c.snippet ? c.snippet.slice(0, 200) : '',
     addedAt: now(),
   };
-  item.localPath = uniquePath(buildPath(item));
-  await fs.mkdir(path.join(ROOT, path.dirname(item.localPath)), { recursive: true });
-  await fs.writeFile(path.join(ROOT, item.localPath), buf);
+  if (finalUrl !== c.fileUrl) item.altUrls = [c.fileUrl];
 
   catalog.items.push(item);
-  byUrl.set(item.fileUrl, item);
-  bySha.set(hash, item);
+  byUrl.set(c.fileUrl, item);
+  byUrl.set(finalUrl, item);
+  if (hash) bySha.set(hash, item);
   report.newItems.push(item.title);
 }
 
 async function reclassifyAll() {
-  let moved = 0;
-  const srcMap = Object.fromEntries(cfg.sources.map((s) => [s.id, s]));
+  const srcMap = Object.fromEntries(cfg.sources.map((x) => [x.id, x]));
   for (const it of catalog.items) {
     const src = srcMap[it.sources?.[0]] || {};
     const { primary, all } = classify({ title: it.title, text: it.snippet }, cats, src.defaultCategory);
     it.primaryCategory = primary;
     it.categories = all;
-    const want = buildPath(it).split(path.sep).join('/');
-    if (it.localPath && path.dirname(want) !== path.dirname(it.localPath) && fss.existsSync(path.join(ROOT, it.localPath))) {
-      const target = uniquePath(want);
-      await fs.mkdir(path.join(ROOT, path.dirname(target)), { recursive: true });
-      await fs.rename(path.join(ROOT, it.localPath), path.join(ROOT, target));
-      it.localPath = target;
-      moved++;
+  }
+  console.log(`重新分類完成，共 ${catalog.items.length} 筆`);
+}
+
+/** 舊版（有 archive/ 資料夾）→ 新版：做縮圖、修標題、刪除原始檔 */
+async function migrateOld() {
+  let n = 0;
+  for (const it of catalog.items) {
+    const sep = it.title.indexOf('－');
+    if (sep > 0) it.title = mergeTitle(it.title.slice(0, sep), it.title.slice(sep + 1));
+    if (it.localPath) {
+      const abs = path.join(ROOT, it.localPath);
+      if (fss.existsSync(abs) && !it.thumb) it.thumb = await makeThumb(await fs.readFile(abs), it.ext, it.id);
+      delete it.localPath;
+      n++;
     }
   }
-  console.log(`重新分類完成，搬移 ${moved} 個檔案`);
+  for (const [u, why] of Object.entries(state.skippedUrls)) if (/太大/.test(why)) delete state.skippedUrls[u];
+  await reclassifyAll();
+  await fs.rm(path.join(ROOT, 'archive'), { recursive: true, force: true });
+  console.log(`轉換完成：${n} 筆改為只存連結＋縮圖，已刪除 archive/`);
 }
 
 async function main() {
   const started = now();
   const reports = [];
-  if (RECLASSIFY) {
+  if (MIGRATE) {
+    await migrateOld();
+  } else if (RECLASSIFY) {
     await reclassifyAll();
   } else {
     const budget = { left: settings.maxNewFilesPerRun };
@@ -478,13 +540,11 @@ async function main() {
 
   catalog.items.sort((a, b) => (b.date || b.addedAt).localeCompare(a.date || a.addedAt));
   catalog.updatedAt = now();
-  catalog.repo = process.env.GITHUB_REPOSITORY || catalog.repo || '';
-  catalog.branch = process.env.GITHUB_REF_NAME || catalog.branch || 'main';
   catalog.categories = categoriesJson.categories.map((c) => ({ name: c.name, icon: c.icon, keywords: c.keywords }))
     .concat([{ name: cats.fallback, icon: '📁', keywords: [] }]);
   await writeJson(CATALOG_FILE, catalog);
   await writeJson(STATE_FILE, state);
-  if (!RECLASSIFY) await writeJson(REPORT_FILE, { startedAt: started, finishedAt: now(), sources: reports });
+  if (!RECLASSIFY && !MIGRATE) await writeJson(REPORT_FILE, { startedAt: started, finishedAt: now(), sources: reports });
   console.log(`\n完成：目錄共 ${catalog.items.length} 筆`);
 }
 
