@@ -82,6 +82,9 @@
   .vinfo{flex:1;display:flex;flex-direction:column}
   .vinfo small{color:var(--muted);font-size:12px}
   .vgo{color:var(--accent);font-size:14px;white-space:nowrap}
+  .more{text-align:center;margin:18px 0 4px}
+  .more button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--paper);color:var(--accent);border-radius:999px;padding:9px 22px;cursor:pointer}
+  .hint2{text-align:center;color:var(--muted);font-size:13px;margin:14px 0 0}
 </style>
 </head>
 <body>
@@ -117,7 +120,8 @@
 <script>
 const LANG_NAMES = { zh:'中文', vi:'越南', id:'印尼', th:'泰國', en:'英/菲', multi:'多國語' };
 const LANG_ORDER = ['zh','vi','id','th','en','multi'];
-const state = { q:'', cat:'', agency:'', lang:'', type:'', expanded:new Set() };
+const HOME_PAGE = 12;
+const state = { q:'', cat:'', agency:'', lang:'', type:'', expanded:new Set(), homeLimit: HOME_PAGE };
 let DATA = { items:[], categories:[] };
 let GROUPS = [];
 
@@ -302,18 +306,13 @@ function render(){
     html += `<div class="grid">${list.slice(0,300).map(card).join('')}</div>`;
     if (list.length > 300) html += `<p class="empty">只顯示前 300 則，請加關鍵字縮小範圍</p>`;
   } else {
-    // 沒有搜尋時：依類別分區顯示（同一類放在一起）
-    const groups = new Map();
-    for (const g of list){ const c = g.primaryCategory; if(!groups.has(c)) groups.set(c,[]); groups.get(c).push(g); }
-    const order = DATA.categories.map(c=>c.name);
-    for (const name of [...groups.keys()].sort((a,b)=>order.indexOf(a)-order.indexOf(b))){
-      const arr = groups.get(name);
-      const icon = (DATA.categories.find(c=>c.name===name)||{}).icon||'';
-      const open = state.expanded.has(name);
-      html += `<section class="cat"><h2>${icon} ${esc(name)}<span class="n">${arr.length} 則</span>
-        ${arr.length>8?`<button data-expand="${esc(name)}">${open?'收合':'看全部'}</button>`:''}</h2>
-        <div class="grid">${(open?arr:arr.slice(0,8)).map(card).join('')}</div></section>`;
-    }
+    // 沒有搜尋時：首頁只顯示最新發布的文宣（依發布日期），其他用搜尋或類別找
+    const latest = [...list].sort((a,b) => b.date.localeCompare(a.date) || b.addedAt.localeCompare(a.addedAt));
+    const shown = latest.slice(0, state.homeLimit);
+    html += `<section class="cat"><h2>🆕 最新更新<span class="n">依發布日期・共 ${latest.length} 則</span></h2>
+      <div class="grid">${shown.map(card).join('')}</div>
+      ${latest.length > shown.length ? `<div class="more"><button data-more>再看 ${Math.min(HOME_PAGE, latest.length - shown.length)} 則</button></div>` : ''}
+      <p class="hint2">要找特定主題，請直接搜尋（例如「毒品」）或點上方類別</p></section>`;
   }
   out.innerHTML = html;
 }
@@ -340,6 +339,7 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-close]')){ closeSheet(); return; }
   const chip = e.target.closest('.chip[data-k]');
   if (chip){ const k = chip.dataset.k, v = chip.dataset.v; state[k] = state[k]===v ? '' : v; update(); return; }
+  if (e.target.closest('[data-more]')){ state.homeLimit += HOME_PAGE; render(); return; }
   const ex = e.target.closest('[data-expand]');
   if (ex){ const n = ex.dataset.expand; state.expanded.has(n)?state.expanded.delete(n):state.expanded.add(n); render(); }
 });
