@@ -511,6 +511,70 @@ async function migrateOld() {
   console.log(`轉換完成：${n} 筆改為只存連結＋縮圖，已刪除 archive/`);
 }
 
+
+// ---------------------------------------------------------------- 跨網頁合併同一則文宣的各語言版本
+
+const LANG_VERSION = { zh: '中文版', vi: '越南文版', id: '印尼文版', th: '泰文版', en: '英文版' };
+// 標題裡代表語言版本的字眼，例如「英語版（English）」「越南文版」「(泰文)」
+const LANG_MARK_RE = /\s*[-－—_]?\s*(國語|中文|華語|英語|英文|泰語|泰文|越南語|越南文|越文|印尼語|印尼文|印文|菲律賓語|菲語)版?\s*([（(][^）)]*[）)])?/g;
+
+/**
+ * 有些機關把每種語言放在不同網頁，這裡把它們標成同一組（item.group），搜尋頁會合成一張卡片。
+ * 1. 標題去掉語言字眼後相同 → 同一組（例如司法院《勞動事件法推廣單》英語版／泰語版…）
+ * 2. 同一個 series（例如交通部 168 的越／印／泰／英文版）同一天發布、各語言數量相同 → 依發布順序配對
+ */
+function assignGroups(items) {
+  for (const it of items) { delete it.group; delete it.groupTitle; delete it.version; }
+
+  const byTitle = new Map();
+  for (const it of items) {
+    const base = it.title.split('－')[0];
+    const marks = base.match(LANG_MARK_RE);
+    if (!marks) continue;
+    const stripped = clean(base.replace(LANG_MARK_RE, ' '));
+    if (stripped.length < 4) continue;
+    const key = `${it.agency}|${stripped}`;
+    if (!byTitle.has(key)) byTitle.set(key, []);
+    byTitle.get(key).push({ it, version: clean(marks.join(' ').replace(/^[-－—_\s]+/, '')) });
+  }
+  for (const [key, arr] of byTitle) {
+    if (new Set(arr.map((x) => x.it.sourcePage)).size < 2) continue;
+    for (const { it, version } of arr) {
+      it.group = `t:${shortId(key)}`;
+      it.groupTitle = key.split('|')[1];
+      it.version = version;
+    }
+  }
+
+  const seriesOf = Object.fromEntries(cfg.sources.filter((x) => x.series).map((x) => [x.id, x.series]));
+  const buckets = new Map();
+  for (const it of items) {
+    const series = seriesOf[it.sources?.[0]];
+    if (!series || it.group) continue;
+    const lang = it.langs?.[0] || 'zh';
+    const key = `${series}|${it.date || ''}`;
+    if (!buckets.has(key)) buckets.set(key, new Map());
+    const byLang = buckets.get(key);
+    if (!byLang.has(lang)) byLang.set(lang, []);
+    byLang.get(lang).push(it);
+  }
+  const pageNo = (u) => Number((u.match(/(\d{6,})(?!.*\d{6,})/) || [])[1] || 0);
+  for (const [key, byLang] of buckets) {
+    const lists = [...byLang.values()];
+    if (lists.length < 2 || new Set(lists.map((l) => l.length)).size !== 1) continue;
+    for (const l of lists) l.sort((a, b) => pageNo(a.sourcePage) - pageNo(b.sourcePage));
+    for (let i = 0; i < lists[0].length; i++) {
+      const members = lists.map((l) => l[i]);
+      const title = (members.find((m) => m.langs?.[0] === 'zh') || members.find((m) => m.langs?.[0] === 'en') || members[0]).title;
+      for (const m of members) {
+        m.group = `s:${shortId(`${key}|${i}`)}`;
+        m.groupTitle = title;
+        m.version = LANG_VERSION[m.langs?.[0]] || '';
+      }
+    }
+  }
+}
+
 async function main() {
   const started = now();
   const reports = [];
@@ -538,6 +602,7 @@ async function main() {
   }
   if (DRY) return console.log('\n(--dry 模式，沒有寫入任何檔案)');
 
+  assignGroups(catalog.items);
   catalog.items.sort((a, b) => (b.date || b.addedAt).localeCompare(a.date || a.addedAt));
   catalog.updatedAt = now();
   catalog.categories = categoriesJson.categories.map((c) => ({ name: c.name, icon: c.icon, keywords: c.keywords }))

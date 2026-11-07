@@ -131,6 +131,7 @@ const dateOf = it => it.date || (it.addedAt||'').slice(0,10);
 /** 同一則公告（同一個原網頁＋同一個主標題）的各國語言版本合成一組 */
 function baseTitle(t){ return String(t).split('－')[0].trim(); }
 function versionLabel(it){
+  if (it.version) return it.version;
   const suffix = String(it.title).split('－').slice(1).join('－').trim();
   if (suffix) return suffix;
   const l = (it.langs||[]).filter(x => x !== 'multi');
@@ -151,7 +152,7 @@ function langRank(it){
 function buildGroups(items){
   const map = new Map();
   for (const it of items){
-    const key = `${it.sourcePage}|${baseTitle(it.title)}`;
+    const key = it.group || `${it.sourcePage}|${baseTitle(it.title)}`;
     if (!map.has(key)) map.set(key, []);
     map.get(key).push(it);
   }
@@ -161,7 +162,7 @@ function buildGroups(items){
     const categories = [...new Set(arr.flatMap(i => i.categories))];
     const cover = arr.find(i => i.thumb) || arr[0];
     return {
-      title: arr.length > 1 ? baseTitle(arr[0].title) : arr[0].title,
+      title: arr[0].groupTitle || (arr.length > 1 ? baseTitle(arr[0].title) : arr[0].title),
       items: arr, cover, langs, categories,
       primaryCategory: arr[0].primaryCategory,
       agency: arr[0].agency, sourcePage: arr[0].sourcePage,
