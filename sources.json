@@ -1,0 +1,91 @@
+{
+  "settings": {
+    "maxFileMB": 20,
+    "maxNewFilesPerRun": 300,
+    "maxDetailPerSource": 30,
+    "delayMs": 1200,
+    "timeoutMs": 30000,
+    "minImageKB": 15
+  },
+  "sources": [
+    {
+      "id": "wda-file",
+      "agency": "勞動部",
+      "name": "勞動力發展署 跨國勞動力權益維護資訊網－宣導品",
+      "startUrls": ["https://fw.wda.gov.tw/wda-employer/home/file"],
+      "detailPattern": "/wda-employer/home/file/[0-9a-f]{32}",
+      "enabled": true
+    },
+    {
+      "id": "motc-168-vi",
+      "agency": "交通部",
+      "name": "168交通安全入口網－越南文文宣",
+      "lang": "vi",
+      "startUrls": ["https://168.motc.gov.tw/vn/theme/poster"],
+      "detailPattern": "/vn/theme/poster/post/\\d+",
+      "ogImage": true,
+      "defaultCategory": "交通安全",
+      "enabled": true
+    },
+    {
+      "id": "motc-168-id",
+      "agency": "交通部",
+      "name": "168交通安全入口網－印尼文文宣",
+      "lang": "id",
+      "startUrls": ["https://168.motc.gov.tw/id/theme/poster"],
+      "detailPattern": "/id/theme/poster/post/\\d+",
+      "ogImage": true,
+      "defaultCategory": "交通安全",
+      "enabled": true
+    },
+    {
+      "id": "motc-168-th",
+      "agency": "交通部",
+      "name": "168交通安全入口網－泰文文宣",
+      "lang": "th",
+      "startUrls": ["https://168.motc.gov.tw/th/theme/poster"],
+      "detailPattern": "/th/theme/poster/post/\\d+",
+      "ogImage": true,
+      "defaultCategory": "交通安全",
+      "enabled": true
+    },
+    {
+      "id": "motc-168-en",
+      "agency": "交通部",
+      "name": "168交通安全入口網－英文文宣",
+      "lang": "en",
+      "startUrls": ["https://168.motc.gov.tw/en/theme/poster"],
+      "detailPattern": "/en/theme/poster/post/\\d+",
+      "ogImage": true,
+      "defaultCategory": "交通安全",
+      "enabled": true
+    },
+    {
+      "id": "judicial-labor",
+      "agency": "司法院",
+      "name": "司法院 勞動事件法專區（多國語推廣單）",
+      "startUrls": ["https://www.judicial.gov.tw/tw/lp-1538-1.html"],
+      "detailPattern": "/tw/cp-1538-\\d+-[0-9a-f]+-1\\.html",
+      "requireKeywords": ["英語", "泰語", "越南", "印尼", "多國語", "移工"],
+      "enabled": true
+    },
+    {
+      "id": "fda-promo",
+      "agency": "衛福部",
+      "name": "食品藥物管理署 文宣品下載（只收多國語／反毒）",
+      "startUrls": ["https://www.fda.gov.tw/tc/Promotional.aspx"],
+      "detailPattern": "PromotionalContent\\.aspx\\?id=\\d+",
+      "requireKeywords": ["移工", "外籍", "多國語", "多語", "越南", "印尼", "泰", "英文", "English", "反毒", "毒品", "藥物濫用"],
+      "enabled": true
+    },
+    {
+      "id": "TEMPLATE-county",
+      "agency": "某某縣政府",
+      "name": "（範本）縣市勞工局 移工宣導頁：把 startUrls 換成實際網址、enabled 改 true",
+      "startUrls": ["https://example.gov.tw/移工宣導列表頁"],
+      "detailPattern": "",
+      "requireKeywords": [],
+      "enabled": false
+    }
+  ]
+}

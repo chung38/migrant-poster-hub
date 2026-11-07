@@ -1,0 +1,105 @@
+{
+  "_說明": "每個類別的 keywords 同時包含中文、越南文、印尼文、泰文、英文。搜尋時輸入類別名稱或任何一個關鍵字，都會帶出整個類別。可自行增減。",
+  "fallback": "其他",
+  "categories": [
+    {
+      "name": "反毒",
+      "icon": "🚫",
+      "keywords": ["毒品", "反毒", "拒毒", "吸毒", "販毒", "運毒", "咖啡包", "大麻", "安非他命", "搖頭丸", "K他命", "愷他命", "藥物濫用", "新興毒品",
+        "ma túy", "ma tuý", "chất cấm", "narkoba", "obat terlarang", "narkotika", "ยาเสพติด", "drug", "narcotic", "droga"]
+    },
+    {
+      "name": "交通安全",
+      "icon": "🛵",
+      "keywords": ["交通", "道安", "騎乘", "機車", "酒駕", "安全帽", "微型電動二輪車", "電動自行車", "電動輔助自行車", "駕照", "行人", "號誌", "路口", "超載", "禮讓",
+        "giao thông", "xe máy", "mũ bảo hiểm", "bằng lái", "lái xe", "ngã tư", "xe đạp điện",
+        "lalu lintas", "sepeda motor", "helm", "pengendara", "persimpangan", "sepeda listrik",
+        "จราจร", "รถจักรยานยนต์", "หมวกกันน็อค", "ใบขับขี่", "ทางแยก",
+        "traffic", "road safety", "helmet", "driving", "scooter", "intersection", "pedestrian"]
+    },
+    {
+      "name": "防詐騙",
+      "icon": "🛡️",
+      "keywords": ["詐騙", "防詐", "反詐", "假仲介", "假投資", "假交友", "人頭帳戶", "165",
+        "lừa đảo", "giả mạo", "penipuan", "penipu", "palsu", "ฉ้อโกง", "หลอกลวง", "มิจฉาชีพ", "scam", "fraud"]
+    },
+    {
+      "name": "勞動權益",
+      "icon": "⚖️",
+      "keywords": ["1955", "權益", "申訴", "薪資", "工資", "加班", "勞動契約", "轉換雇主", "仲介費", "勞資爭議", "勞保", "勞基法", "休假", "扣押證件", "聘僱",
+        "quyền lợi", "khiếu nại", "tiền lương", "hợp đồng lao động", "chuyển chủ",
+        "hak pekerja", "hak-hak", "gaji", "pengaduan", "kontrak kerja", "ganti majikan",
+        "สิทธิ", "ค่าจ้าง", "ร้องเรียน", "สัญญาจ้าง", "เปลี่ยนนายจ้าง",
+        "rights", "wage", "salary", "complaint", "overtime", "contract"]
+    },
+    {
+      "name": "職業安全",
+      "icon": "⛑️",
+      "keywords": ["職災", "職業安全", "工安", "職安", "墜落", "熱危害", "中暑", "防護具", "機械", "感電", "職業傷病",
+        "an toàn lao động", "tai nạn lao động", "say nắng", "keselamatan kerja", "kecelakaan kerja", "sengatan panas",
+        "ความปลอดภัยในการทำงาน", "อุบัติเหตุจากการทำงาน", "ลมแดด", "occupational safety", "work injury", "heat stroke"]
+    },
+    {
+      "name": "衛生防疫",
+      "icon": "🩺",
+      "keywords": ["防疫", "傳染病", "疫苗", "結核", "肺結核", "登革熱", "麻疹", "流感", "愛滋", "梅毒", "健檢", "健康檢查", "健保", "1922", "腸病毒", "猴痘", "新冠",
+        "dịch bệnh", "vắc xin", "vacxin", "bệnh lao", "sốt xuất huyết", "sởi", "khám sức khỏe", "bảo hiểm y tế",
+        "penyakit menular", "vaksin", "tbc", "tuberkulosis", "demam berdarah", "campak", "pemeriksaan kesehatan", "kesehatan",
+        "โรคติดต่อ", "วัคซีน", "วัณโรค", "ไข้เลือดออก", "หัด", "ตรวจสุขภาพ",
+        "health", "vaccine", "tuberculosis", "dengue", "measles", "epidemic", "covid"]
+    },
+    {
+      "name": "動植物檢疫",
+      "icon": "🐖",
+      "keywords": ["非洲豬瘟", "豬瘟", "肉製品", "肉品", "檢疫", "禁止攜帶", "違規攜帶", "口蹄疫",
+        "dịch tả lợn", "thịt lợn", "sản phẩm thịt", "kiểm dịch", "flu babi", "demam babi", "daging babi", "karantina",
+        "อหิวาต์แอฟริกาในสุกร", "เนื้อหมู", "กักกัน", "african swine fever", "quarantine", "meat products"]
+    },
+    {
+      "name": "消防防災",
+      "icon": "🔥",
+      "keywords": ["消防", "火災", "防火", "逃生", "119", "滅火器", "用電安全", "延長線", "地震", "颱風", "防災", "一氧化碳", "住警器",
+        "cháy", "hỏa hoạn", "hoả hoạn", "thoát hiểm", "bình chữa cháy", "động đất", "bão",
+        "kebakaran", "pemadam", "evakuasi", "gempa", "topan", "ไฟไหม้", "อัคคีภัย", "หนีไฟ", "แผ่นดินไหว", "พายุ",
+        "fire", "earthquake", "typhoon", "evacuation", "extinguisher"]
+    },
+    {
+      "name": "居留與合法工作",
+      "icon": "🪪",
+      "keywords": ["居留", "逾期", "失聯", "非法工作", "非法打工", "自行到案", "入出境", "居留證", "移民署", "逃逸", "非法雇用", "非法媒介",
+        "lao động bất hợp pháp", "bỏ trốn", "cư trú", "thẻ cư trú", "quá hạn", "tự thú",
+        "ilegal", "kabur", "izin tinggal", "overstay", "menyerahkan diri", "หลบหนี", "ผิดกฎหมาย", "อยู่เกินกำหนด", "ใบถิ่นที่อยู่",
+        "residence", "illegal work", "runaway", "arc"]
+    },
+    {
+      "name": "人口販運與性騷擾",
+      "icon": "🚨",
+      "keywords": ["人口販運", "性騷擾", "性侵", "家暴", "113", "強迫勞動", "剝削",
+        "mua bán người", "quấy rối tình dục", "bạo lực gia đình", "lao động cưỡng bức",
+        "perdagangan orang", "pelecehan seksual", "kekerasan", "kerja paksa",
+        "ค้ามนุษย์", "ล่วงละเมิดทางเพศ", "ความรุนแรงในครอบครัว", "บังคับใช้แรงงาน",
+        "human trafficking", "sexual harassment", "forced labour", "forced labor", "domestic violence"]
+    },
+    {
+      "name": "女性與孕產",
+      "icon": "🤰",
+      "keywords": ["懷孕", "孕婦", "生產", "育兒", "女性移工", "產假", "避孕", "婦幼",
+        "mang thai", "thai sản", "sinh con", "hamil", "melahirkan", "cuti melahirkan", "ตั้งครรภ์", "คลอดบุตร",
+        "pregnant", "pregnancy", "maternity", "childbirth"]
+    },
+    {
+      "name": "法律扶助",
+      "icon": "📜",
+      "keywords": ["法律扶助", "法扶", "法院", "勞動事件法", "訴訟", "調解", "通譯",
+        "pháp luật", "tòa án", "trợ giúp pháp lý", "bantuan hukum", "pengadilan", "hukum",
+        "ช่วยเหลือทางกฎหมาย", "ศาล", "legal aid", "court", "labor incident act"]
+    },
+    {
+      "name": "生活適應",
+      "icon": "🏠",
+      "keywords": ["生活", "中文學習", "華語", "文化", "宗教", "節慶", "休閒", "垃圾分類", "宿舍", "租屋", "匯款", "銀行", "手機門號", "電子書",
+        "cuộc sống", "học tiếng trung", "ký túc xá", "chuyển tiền", "kehidupan", "belajar bahasa mandarin", "asrama", "kiriman uang",
+        "ชีวิต", "หอพัก", "โอนเงิน", "daily life", "dormitory", "remittance", "culture"]
+    }
+  ]
+}
