@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
 import { fetch, Agent } from 'undici';
 import iconv from 'iconv-lite';
-import { compileCategories, classify, detectLangs } from './classify.js';
+import { compileCategories, classify, detectLangs, fold } from './classify.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCES_FILE = process.env.SOURCES_FILE || path.join(ROOT, 'sources.json');
@@ -606,7 +606,9 @@ function assignGroups(items) {
       for (const u of mine) {
         for (const c of clusters) {
           if (c.members.has(lang)) continue;
-          const d = hamming(u[0].phash, c.anchor[0].phash);
+          // 標題完全相同（例如各語言都用中文標題）直接視為同一則；否則取與該組任何一個版本最像的距離
+          const d = [...c.members.values()].reduce((min, m) => Math.min(min,
+            fold(m[0].title) === fold(u[0].title) ? 0 : hamming(u[0].phash, m[0].phash)), 1);
           if (d <= PHASH_MAX) pairs.push({ u, c, d });
         }
       }
@@ -618,6 +620,25 @@ function assignGroups(items) {
         used.add(u);
       }
       for (const u of mine) if (!used.has(u)) clusters.push({ anchor: u, members: new Map([[lang, u]]) });
+    }
+    // 第二輪：兩組的語言不重複、且有任兩個版本夠像，就合併（例如中文版只跟越南文版像、跟英文版不像）
+    const dist = (a, b) => {
+      let min = 1;
+      for (const x of a.members.values()) for (const y of b.members.values())
+        min = Math.min(min, fold(x[0].title) === fold(y[0].title) ? 0 : hamming(x[0].phash, y[0].phash));
+      return min;
+    };
+    for (;;) {
+      let best = null;
+      for (let i = 0; i < clusters.length; i++) for (let j = i + 1; j < clusters.length; j++) {
+        const A = clusters[i], B = clusters[j];
+        if ([...A.members.keys()].some((l) => B.members.has(l))) continue;
+        const d = dist(A, B);
+        if (d <= PHASH_MAX && (!best || d < best.d)) best = { i, j, d };
+      }
+      if (!best) break;
+      const B = clusters.splice(best.j, 1)[0];
+      for (const [l, u] of B.members) clusters[best.i].members.set(l, u);
     }
     clusters.forEach((c, i) => {
       if (c.members.size < 2) return;

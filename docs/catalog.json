@@ -3421,7 +3421,7 @@
    "addedAt": "2026-11-08T00:47:13.944Z",
    "seriesOrder": 4,
    "photoNo": 0,
-   "group": "s:5caa5bcebdf2",
+   "group": "s:ad6a2bc6e436",
    "groupTitle": "機車駕訓補助宣導",
    "version": "越南文版"
   },
@@ -3483,7 +3483,7 @@
    "addedAt": "2026-11-08T00:50:35.388Z",
    "seriesOrder": 4,
    "photoNo": 0,
-   "group": "s:5caa5bcebdf2",
+   "group": "s:ad6a2bc6e436",
    "groupTitle": "機車駕訓補助宣導",
    "version": "泰文版"
   },
@@ -4228,7 +4228,10 @@
    "snippet": "",
    "addedAt": "2026-11-08T00:44:55.278Z",
    "seriesOrder": 11,
-   "photoNo": 0
+   "photoNo": 0,
+   "group": "s:5cb455b9a524",
+   "groupTitle": "職場性騷擾",
+   "version": "中文版"
   },
   {
    "id": "72415e95f02b",
@@ -4257,8 +4260,8 @@
    "addedAt": "2026-11-08T00:47:15.182Z",
    "seriesOrder": 5,
    "photoNo": 0,
-   "group": "s:f94cc2f0464d",
-   "groupTitle": "What is workplace sexual harassment?",
+   "group": "s:5cb455b9a524",
+   "groupTitle": "職場性騷擾",
    "version": "越南文版"
   },
   {
@@ -4288,8 +4291,8 @@
    "addedAt": "2026-11-08T00:48:57.725Z",
    "seriesOrder": 5,
    "photoNo": 0,
-   "group": "s:f94cc2f0464d",
-   "groupTitle": "What is workplace sexual harassment?",
+   "group": "s:5cb455b9a524",
+   "groupTitle": "職場性騷擾",
    "version": "印尼文版"
   },
   {
@@ -4319,8 +4322,8 @@
    "addedAt": "2026-11-08T00:50:36.544Z",
    "seriesOrder": 5,
    "photoNo": 0,
-   "group": "s:f94cc2f0464d",
-   "groupTitle": "What is workplace sexual harassment?",
+   "group": "s:5cb455b9a524",
+   "groupTitle": "職場性騷擾",
    "version": "泰文版"
   },
   {
@@ -4353,8 +4356,8 @@
    "altUrls": [
     "https://foreigners.chcg.gov.tw/Photo/ori/dbffb3cd-d084-4048-b753-639f071f112a"
    ],
-   "group": "s:f94cc2f0464d",
-   "groupTitle": "What is workplace sexual harassment?",
+   "group": "s:5cb455b9a524",
+   "groupTitle": "職場性騷擾",
    "version": "英文版"
   },
   {
@@ -4447,8 +4450,8 @@
    "addedAt": "2026-11-08T00:48:58.758Z",
    "seriesOrder": 6,
    "photoNo": 0,
-   "group": "s:e4c18fe51074",
-   "groupTitle": "The Ministry of Agriculture has activated emergency disease prevention response protocols",
+   "group": "s:4a0b164f1334",
+   "groupTitle": "【非洲豬瘟】農業部啟動緊急防疫應變作為",
    "version": "印尼文版"
   },
   {
@@ -4478,8 +4481,8 @@
    "addedAt": "2026-11-08T00:50:38.011Z",
    "seriesOrder": 6,
    "photoNo": 0,
-   "group": "s:e4c18fe51074",
-   "groupTitle": "The Ministry of Agriculture has activated emergency disease prevention response protocols",
+   "group": "s:4a0b164f1334",
+   "groupTitle": "【非洲豬瘟】農業部啟動緊急防疫應變作為",
    "version": "泰文版"
   },
   {
@@ -4509,8 +4512,8 @@
    "addedAt": "2026-11-08T00:52:21.621Z",
    "seriesOrder": 7,
    "photoNo": 0,
-   "group": "s:e4c18fe51074",
-   "groupTitle": "The Ministry of Agriculture has activated emergency disease prevention response protocols",
+   "group": "s:4a0b164f1334",
+   "groupTitle": "【非洲豬瘟】農業部啟動緊急防疫應變作為",
    "version": "英文版"
   },
   {
@@ -4600,8 +4603,8 @@
    "addedAt": "2026-11-08T00:47:17.553Z",
    "seriesOrder": 7,
    "photoNo": 0,
-   "group": "s:b09f844302cc",
-   "groupTitle": "Chuyển khoản thanh toán hộ phí Bảo hiểm Y tế Không cần ra ngoài, vô cùng tiện lợi",
+   "group": "s:10d65e681bc5",
+   "groupTitle": "轉帳代繳健保費 免出門真方便",
    "version": "越南文版"
   },
   {
@@ -4631,8 +4634,8 @@
    "addedAt": "2026-11-08T00:49:00.084Z",
    "seriesOrder": 7,
    "photoNo": 0,
-   "group": "s:b09f844302cc",
-   "groupTitle": "Chuyển khoản thanh toán hộ phí Bảo hiểm Y tế Không cần ra ngoài, vô cùng tiện lợi",
+   "group": "s:10d65e681bc5",
+   "groupTitle": "轉帳代繳健保費 免出門真方便",
    "version": "印尼文版"
   },
   {
@@ -4654,16 +4657,16 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:38.911Z",
    "seriesOrder": 7,
    "photoNo": 0,
-   "group": "s:b09f844302cc",
-   "groupTitle": "Chuyển khoản thanh toán hộ phí Bảo hiểm Y tế Không cần ra ngoài, vô cùng tiện lợi",
+   "group": "s:10d65e681bc5",
+   "groupTitle": "轉帳代繳健保費 免出門真方便",
    "version": "泰文版"
   },
   {
@@ -4685,9 +4688,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:52:23.095Z",
@@ -4716,9 +4719,9 @@
    "langs": [
     "zh"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:45:01.030Z",
@@ -4747,16 +4750,16 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:47:19.942Z",
    "seriesOrder": 8,
    "photoNo": 0,
-   "group": "s:7c9e7298b950",
-   "groupTitle": "There is training for license examination. Safety is visible!",
+   "group": "s:5f132e5f7d4b",
+   "groupTitle": "考照有訓練 安全看得見",
    "version": "越南文版"
   },
   {
@@ -4778,9 +4781,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:02.357Z",
@@ -4809,16 +4812,16 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:41.652Z",
    "seriesOrder": 8,
    "photoNo": 0,
-   "group": "s:7c9e7298b950",
-   "groupTitle": "There is training for license examination. Safety is visible!",
+   "group": "s:5f132e5f7d4b",
+   "groupTitle": "考照有訓練 安全看得見",
    "version": "泰文版"
   },
   {
@@ -4840,9 +4843,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:52:25.639Z",
@@ -5070,9 +5073,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:47:21.713Z",
@@ -5101,9 +5104,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:04.076Z",
@@ -5132,9 +5135,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:43.267Z",
@@ -5163,9 +5166,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:52:27.256Z",
@@ -5402,9 +5405,9 @@
    "langs": [
     "zh"
    ],
-   "primaryCategory": "防詐騙",
+   "primaryCategory": "其他",
    "categories": [
-    "防詐騙"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:45:19.985Z",
@@ -6216,8 +6219,8 @@
    "addedAt": "2026-11-08T00:47:40.191Z",
    "seriesOrder": 17,
    "photoNo": 0,
-   "group": "s:a75260fb3246",
-   "groupTitle": "Do not become a scam gang accomplice",
+   "group": "s:2a490cf7d320",
+   "groupTitle": "勿當詐騙集團幫兇",
    "version": "越南文版"
   },
   {
@@ -6247,8 +6250,8 @@
    "addedAt": "2026-11-08T00:49:21.858Z",
    "seriesOrder": 17,
    "photoNo": 0,
-   "group": "s:a75260fb3246",
-   "groupTitle": "Do not become a scam gang accomplice",
+   "group": "s:2a490cf7d320",
+   "groupTitle": "勿當詐騙集團幫兇",
    "version": "印尼文版"
   },
   {
@@ -6309,8 +6312,8 @@
    "addedAt": "2026-11-08T00:52:37.797Z",
    "seriesOrder": 18,
    "photoNo": 0,
-   "group": "s:a75260fb3246",
-   "groupTitle": "Do not become a scam gang accomplice",
+   "group": "s:2a490cf7d320",
+   "groupTitle": "勿當詐騙集團幫兇",
    "version": "英文版"
   },
   {
@@ -8435,9 +8438,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:47:51.724Z",
@@ -8466,9 +8469,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:33.823Z",
@@ -8497,9 +8500,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:13.898Z",
@@ -8528,9 +8531,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:54:41.442Z",
@@ -8770,9 +8773,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:47:54.463Z",
@@ -8925,9 +8928,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:36.709Z",
@@ -9049,9 +9052,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:44.071Z",
@@ -9204,9 +9207,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:25.344Z",
@@ -9235,9 +9238,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "防詐騙",
+   "primaryCategory": "其他",
    "categories": [
-    "防詐騙"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:54:55.126Z",
@@ -9266,9 +9269,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "防詐騙",
+   "primaryCategory": "其他",
    "categories": [
-    "防詐騙"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:55:02.084Z",
@@ -9297,9 +9300,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "防詐騙",
+   "primaryCategory": "其他",
    "categories": [
-    "防詐騙"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:55:11.730Z",
@@ -9328,9 +9331,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:55:28.860Z",
@@ -9359,9 +9362,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:55:47.030Z",
@@ -9752,9 +9755,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:49.078Z",
@@ -9783,9 +9786,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:29.803Z",
@@ -9814,9 +9817,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:35.066Z",
@@ -10512,9 +10515,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "人口販運與性騷擾",
+   "primaryCategory": "其他",
    "categories": [
-    "人口販運與性騷擾"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:12.801Z",
@@ -10543,9 +10546,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:14.001Z",
@@ -10574,9 +10577,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:54.901Z",
@@ -10605,9 +10608,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "人口販運與性騷擾",
+   "primaryCategory": "其他",
    "categories": [
-    "人口販運與性騷擾"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:56.193Z",
@@ -10667,9 +10670,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:36.904Z",
@@ -10729,9 +10732,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:42.446Z",
@@ -10878,9 +10881,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:49:59.259Z",
@@ -10999,9 +11002,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:18.328Z",
@@ -11030,9 +11033,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:00.237Z",
@@ -11061,9 +11064,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:40.196Z",
@@ -11092,9 +11095,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:48.007Z",
@@ -11614,7 +11617,10 @@
    "snippet": "",
    "addedAt": "2026-11-08T00:46:42.542Z",
    "seriesOrder": 66,
-   "photoNo": 0
+   "photoNo": 0,
+   "group": "s:6e3911c7199c",
+   "groupTitle": "遠離登革熱3重點",
+   "version": "中文版"
   },
   {
    "id": "02e666ebaf1e",
@@ -11643,7 +11649,7 @@
    "addedAt": "2026-11-08T00:48:22.681Z",
    "seriesOrder": 43,
    "photoNo": 0,
-   "group": "s:6705bc970884",
+   "group": "s:6e3911c7199c",
    "groupTitle": "遠離登革熱3重點",
    "version": "越南文版"
   },
@@ -11674,7 +11680,7 @@
    "addedAt": "2026-11-08T00:50:03.792Z",
    "seriesOrder": 43,
    "photoNo": 0,
-   "group": "s:6705bc970884",
+   "group": "s:6e3911c7199c",
    "groupTitle": "遠離登革熱3重點",
    "version": "印尼文版"
   },
@@ -11705,7 +11711,7 @@
    "addedAt": "2026-11-08T00:51:43.928Z",
    "seriesOrder": 43,
    "photoNo": 0,
-   "group": "s:6705bc970884",
+   "group": "s:6e3911c7199c",
    "groupTitle": "遠離登革熱3重點",
    "version": "泰文版"
   },
@@ -11736,7 +11742,7 @@
    "addedAt": "2026-11-08T00:56:50.879Z",
    "seriesOrder": 45,
    "photoNo": 0,
-   "group": "s:6705bc970884",
+   "group": "s:6e3911c7199c",
    "groupTitle": "遠離登革熱3重點",
    "version": "英文版"
   },
@@ -11883,9 +11889,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:24.181Z",
@@ -11914,9 +11920,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:25.019Z",
@@ -11945,16 +11951,16 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "動植物檢疫",
+   "primaryCategory": "其他",
    "categories": [
-    "動植物檢疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:26.345Z",
    "seriesOrder": 46,
    "photoNo": 0,
-   "group": "s:82c844ae46d1",
-   "groupTitle": "Tuyên truyền phòng chống dịch tả heo Châu Phi",
+   "group": "s:c3f70773d993",
+   "groupTitle": "防堵非洲豬瘟宣導",
    "version": "越南文版"
   },
   {
@@ -11976,11 +11982,11 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "女性與孕產",
+   "primaryCategory": "勞動權益",
    "categories": [
-    "女性與孕產",
     "勞動權益",
-    "消防防災"
+    "消防防災",
+    "女性與孕產"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:27.771Z",
@@ -12017,8 +12023,8 @@
    "addedAt": "2026-11-08T00:50:04.895Z",
    "seriesOrder": 44,
    "photoNo": 0,
-   "group": "s:82c844ae46d1",
-   "groupTitle": "Tuyên truyền phòng chống dịch tả heo Châu Phi",
+   "group": "s:c3f70773d993",
+   "groupTitle": "防堵非洲豬瘟宣導",
    "version": "印尼文版"
   },
   {
@@ -12040,9 +12046,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:06.226Z",
@@ -12102,9 +12108,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:08.627Z",
@@ -12133,10 +12139,10 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "女性與孕產",
+   "primaryCategory": "勞動權益",
    "categories": [
-    "女性與孕產",
-    "勞動權益"
+    "勞動權益",
+    "女性與孕產"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:44.947Z",
@@ -12173,8 +12179,8 @@
    "addedAt": "2026-11-08T00:51:46.403Z",
    "seriesOrder": 45,
    "photoNo": 0,
-   "group": "s:82c844ae46d1",
-   "groupTitle": "Tuyên truyền phòng chống dịch tả heo Châu Phi",
+   "group": "s:c3f70773d993",
+   "groupTitle": "防堵非洲豬瘟宣導",
    "version": "泰文版"
   },
   {
@@ -12196,9 +12202,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:47.423Z",
@@ -12227,9 +12233,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:48.979Z",
@@ -12258,9 +12264,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "交通安全",
+   "primaryCategory": "其他",
    "categories": [
-    "交通安全"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:51.796Z",
@@ -12289,9 +12295,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:53.288Z",
@@ -12351,10 +12357,10 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "女性與孕產",
+   "primaryCategory": "勞動權益",
    "categories": [
-    "女性與孕產",
-    "勞動權益"
+    "勞動權益",
+    "女性與孕產"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:56.239Z",
@@ -12414,9 +12420,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:28.568Z",
@@ -12445,9 +12451,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:09.826Z",
@@ -12476,9 +12482,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:49.832Z",
@@ -12507,9 +12513,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "生活適應",
+   "primaryCategory": "其他",
    "categories": [
-    "生活適應"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:56:57.442Z",
@@ -13031,9 +13037,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:34.076Z",
@@ -13062,9 +13068,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:14.722Z",
@@ -13093,9 +13099,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:54.721Z",
@@ -13124,9 +13130,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:57:02.603Z",
@@ -13404,9 +13410,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:18.381Z",
@@ -13466,9 +13472,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "法律扶助",
+   "primaryCategory": "其他",
    "categories": [
-    "法律扶助"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:57.110Z",
@@ -13776,9 +13782,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:39.960Z",
@@ -13838,9 +13844,9 @@
    "langs": [
     "vi"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:48:42.361Z",
@@ -13869,9 +13875,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:19.629Z",
@@ -13900,9 +13906,9 @@
    "langs": [
     "id"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:50:20.721Z",
@@ -13993,9 +13999,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:51:59.508Z",
@@ -14086,9 +14092,9 @@
    "langs": [
     "th"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:52:03.170Z",
@@ -14117,9 +14123,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "衛生防疫",
+   "primaryCategory": "其他",
    "categories": [
-    "衛生防疫"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:57:07.281Z",
@@ -14148,9 +14154,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:57:08.689Z",
@@ -14179,9 +14185,9 @@
    "langs": [
     "en"
    ],
-   "primaryCategory": "勞動權益",
+   "primaryCategory": "其他",
    "categories": [
-    "勞動權益"
+    "其他"
    ],
    "snippet": "",
    "addedAt": "2026-11-08T00:57:09.881Z",
@@ -14339,7 +14345,7 @@
    "version": "印尼語版（Indonesia）"
   }
  ],
- "updatedAt": "2026-11-08T00:57:11.030Z",
+ "updatedAt": "2026-11-08T00:58:14.646Z",
  "repo": "chung38/migrant-poster-hub",
  "branch": "main",
  "categories": [
