@@ -33,7 +33,7 @@ function coreTitle(title, source) {
   let t = clean(title);
   if (source && t.endsWith(` - ${source}`)) t = t.slice(0, -(source.length + 3));
   else t = t.replace(/\s[-–—|｜]\s[^-–—|｜]{1,20}$/, '');
-  t = t.split(/\s[|｜]\s/)[0];
+  t = t.split(/\s*[|｜]\s/)[0];
   return t.replace(/【[^】]{0,12}】|\[[^\]]{0,12}\]|〈[^〉]{0,12}〉|^(快訊|獨家|影|圖|影音|直播|更新)[／/｜|:：]/g, '').trim();
 }
 
