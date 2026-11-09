@@ -72,6 +72,15 @@ function similarity(a, b) {
   return inter / Math.min(sa, sb); // 用較短的標題當分母：短標題被長標題包含也算同一則
 }
 
+/** 長標題會稀釋相似度，所以另加一條：共用 4 個以上字詞（例如「中壢、車站、站前、帶回」）也算同一則 */
+function sameStory(a, b) {
+  const sim = similarity(a, b);
+  if (sim >= SIMILAR) return true;
+  let shared = 0;
+  for (const g of a) if (b.has(g)) shared++;
+  return shared >= 4 && sim >= 0.09;
+}
+
 async function fetchQuery(q) {
   const res = await fetch(rssUrl(q), { headers: { 'User-Agent': UA, 'Accept-Language': 'zh-TW' }, signal: AbortSignal.timeout(30000) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -130,7 +139,7 @@ async function main() {
   const find = (i) => (parent[i] === i ? i : (parent[i] = find(parent[i])));
   for (let i = 0; i < fresh.length; i++)
     for (let j = i + 1; j < fresh.length; j++)
-      if (similarity(G[i], G[j]) >= SIMILAR) parent[find(i)] = find(j);
+      if (sameStory(G[i], G[j])) parent[find(i)] = find(j);
   const groups = new Map();
   fresh.forEach((x, i) => {
     const r = find(i);
