@@ -19,7 +19,7 @@ const FROM_RAW = process.argv.includes('--from-raw'); // 不上網，直接用�
 const QUERIES = ['移工', '外籍勞工', '外籍看護', '外國人勞工 勞動部'];
 const DAYS = 3; // 只看最近幾天
 const TOP = 10;
-const SIMILAR = 0.4; // 標題相似度門檻（0–1），越低越容易合併
+const SIMILAR = 0.18; // 標題相似度門檻（0–1），越低越容易合併；以實際新聞調校過
 const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0)';
 
 const RSS_BASE = process.env.NEWS_RSS_BASE || 'https://news.google.com/rss/search';
@@ -34,8 +34,11 @@ function coreTitle(title, source) {
   if (source && t.endsWith(` - ${source}`)) t = t.slice(0, -(source.length + 3));
   else t = t.replace(/\s[-–—|｜]\s[^-–—|｜]{1,20}$/, '');
   t = t.split(/\s[|｜]\s/)[0];
-  return t.replace(/【[^】]{0,12}】|\[[^\]]{0,12}\]|〈[^〉]{0,12}〉|^(快訊|獨家|影|圖|影音)[｜|:：]/g, '').trim();
+  return t.replace(/【[^】]{0,12}】|\[[^\]]{0,12}\]|〈[^〉]{0,12}〉|^(快訊|獨家|影|圖|影音|直播|更新)[／/｜|:：]/g, '').trim();
 }
+
+// 幾乎每則都有的字，不拿來判斷是不是同一件事
+const STOP = new Set(['移工', '外籍', '籍移', '越籍', '泰籍', '菲籍', '印尼', '越南', '南籍', '尼籍', '勞工', '外勞', '看護']);
 
 /** 中文用「相鄰兩字」切片比較相似度（Dice 係數），英數字整個詞算一片 */
 function grams(t) {
@@ -43,7 +46,10 @@ function grams(t) {
   const set = new Set();
   for (const w of s.match(/[a-z0-9]+/g) || []) set.add(w);
   const han = s.replace(/[a-z0-9 ]+/g, '');
-  for (let i = 0; i < han.length - 1; i++) set.add(han.slice(i, i + 2));
+  for (let i = 0; i < han.length - 1; i++) {
+    const g = han.slice(i, i + 2);
+    if (!STOP.has(g)) set.add(g);
+  }
   return set;
 }
 /** 以 IDF 加權的重疊比例：常見字（移工、外籍…）權重低，專有名詞（汐止、熱炒店…）權重高 */
@@ -116,27 +122,22 @@ async function main() {
     .filter((x) => x.title && x.link && (FROM_RAW || new Date(x.pubDate).getTime() >= since))
     .filter((x) => RELEVANT.test(x.title) && !BAD_SOURCES.test(x.source))
     .filter((x) => !seenLink.has(x.link) && seenLink.add(x.link));
-  const idf = buildIdf(fresh.map((x) => grams(x.title)));
+  buildIdf(fresh.map((x) => grams(x.title)));
 
-  // 合併：同一則新聞（標題夠像）不管來自哪家媒體都併成一組
-  const clusters = [];
-  for (const it of fresh.sort((a, b) => b.pubDate.localeCompare(a.pubDate))) {
-    const g = grams(it.title);
-    let best = null;
-    let bestSim = 0;
-    for (const c of clusters) {
-      const s = Math.max(...c.grams.map((cg) => similarity(g, cg)));
-      if (s > bestSim) { bestSim = s; best = c; }
-    }
-    if (best && (bestSim >= SIMILAR || best.items.some((x) => x.link === it.link))) {
-      if (!best.items.some((x) => x.link === it.link || (x.source === it.source && similarity(grams(x.title), g) > 0.8))) {
-        best.items.push(it);
-        best.grams.push(g);
-      }
-    } else {
-      clusters.push({ items: [it], grams: [g] });
-    }
-  }
+  // 合併：任兩篇標題夠像就連在一起（同一件事的不同說法會串成一組），不管來自哪家媒體
+  const G = fresh.map((x) => grams(x.title));
+  const parent = fresh.map((_, i) => i);
+  const find = (i) => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  for (let i = 0; i < fresh.length; i++)
+    for (let j = i + 1; j < fresh.length; j++)
+      if (similarity(G[i], G[j]) >= SIMILAR) parent[find(i)] = find(j);
+  const groups = new Map();
+  fresh.forEach((x, i) => {
+    const r = find(i);
+    if (!groups.has(r)) groups.set(r, { items: [] });
+    groups.get(r).items.push(x);
+  });
+  const clusters = [...groups.values()];
 
   const ranked = clusters
     .map((c) => {
