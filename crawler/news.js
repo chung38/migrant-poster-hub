@@ -12,12 +12,14 @@ import { fetch } from 'undici';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'docs', 'news.json');
+const RAW = path.join(ROOT, 'data', 'news-raw.json'); // 原始抓到的全部新聞（調整合併規則用）
+const FROM_RAW = process.argv.includes('--from-raw'); // 不上網，直接用上次的原始資料重算
 
 // 可自行增減搜尋關鍵字
 const QUERIES = ['移工', '外籍勞工', '外籍看護', '外國人勞工 勞動部'];
 const DAYS = 3; // 只看最近幾天
 const TOP = 10;
-const SIMILAR = 0.45; // 標題相似度門檻（0–1），越低越容易合併
+const SIMILAR = 0.4; // 標題相似度門檻（0–1），越低越容易合併
 const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0)';
 
 const RSS_BASE = process.env.NEWS_RSS_BASE || 'https://news.google.com/rss/search';
@@ -31,6 +33,7 @@ function coreTitle(title, source) {
   let t = clean(title);
   if (source && t.endsWith(` - ${source}`)) t = t.slice(0, -(source.length + 3));
   else t = t.replace(/\s[-–—|｜]\s[^-–—|｜]{1,20}$/, '');
+  t = t.split(/\s[|｜]\s/)[0];
   return t.replace(/【[^】]{0,12}】|\[[^\]]{0,12}\]|〈[^〉]{0,12}〉|^(快訊|獨家|影|圖|影音)[｜|:：]/g, '').trim();
 }
 
@@ -43,11 +46,24 @@ function grams(t) {
   for (let i = 0; i < han.length - 1; i++) set.add(han.slice(i, i + 2));
   return set;
 }
+/** 以 IDF 加權的重疊比例：常見字（移工、外籍…）權重低，專有名詞（汐止、熱炒店…）權重高 */
+let IDF = new Map();
+function buildIdf(sets) {
+  const df = new Map();
+  for (const st of sets) for (const g of st) df.set(g, (df.get(g) || 0) + 1);
+  const N = sets.length || 1;
+  const m = new Map();
+  for (const [g, n] of df) m.set(g, Math.log((N + 1) / n));
+  IDF = m;
+  return m;
+}
+const w = (g) => IDF.get(g) ?? 1;
 function similarity(a, b) {
   if (!a.size || !b.size) return 0;
-  let n = 0;
-  for (const g of a) if (b.has(g)) n++;
-  return (2 * n) / (a.size + b.size);
+  let inter = 0, sa = 0, sb = 0;
+  for (const g of a) { sa += w(g); if (b.has(g)) inter += w(g); }
+  for (const g of b) sb += w(g);
+  return inter / Math.min(sa, sb); // 用較短的標題當分母：短標題被長標題包含也算同一則
 }
 
 async function fetchQuery(q) {
@@ -73,10 +89,14 @@ async function fetchQuery(q) {
   return items;
 }
 
+const RELEVANT = /移工|外籍|外勞|看護工|外國人|跨國勞動|勞動部|移民署|印尼籍|越南籍|越籍|泰籍|菲籍|菲律賓籍/;
+const BAD_SOURCES = /^(Facebook|YouTube|Instagram|X|Threads|PTT)$/i;
+
 async function main() {
   const all = [];
   const errors = [];
-  for (const q of QUERIES) {
+  if (FROM_RAW) all.push(...JSON.parse(await fs.readFile(RAW, 'utf8')));
+  else for (const q of QUERIES) {
     try {
       all.push(...(await fetchQuery(q)));
     } catch (e) {
@@ -86,7 +106,17 @@ async function main() {
   }
 
   const since = Date.now() - DAYS * 864e5;
-  const fresh = all.filter((x) => x.title && x.link && new Date(x.pubDate).getTime() >= since);
+  if (!FROM_RAW && all.length) {
+    await fs.mkdir(path.dirname(RAW), { recursive: true });
+    await fs.writeFile(RAW, JSON.stringify(all) + '\n');
+  }
+  const seenLink = new Set();
+  const fresh = all
+    .map((x) => ({ ...x, title: coreTitle(x.title, x.source) }))
+    .filter((x) => x.title && x.link && (FROM_RAW || new Date(x.pubDate).getTime() >= since))
+    .filter((x) => RELEVANT.test(x.title) && !BAD_SOURCES.test(x.source))
+    .filter((x) => !seenLink.has(x.link) && seenLink.add(x.link));
+  const idf = buildIdf(fresh.map((x) => grams(x.title)));
 
   // 合併：同一則新聞（標題夠像）不管來自哪家媒體都併成一組
   const clusters = [];
@@ -130,6 +160,10 @@ async function main() {
     .sort((a, b) => b.score - a.score || b.pubDate.localeCompare(a.pubDate))
     .slice(0, TOP);
 
+  if (FROM_RAW) {
+    for (const c of clusters.sort((a, b) => b.items.length - a.items.length)) console.log(`[${c.items.length}] ` + c.items.map((x) => x.title.slice(0, 26)).join('  ||  '));
+    return;
+  }
   if (!ranked.length && errors.length) {
     // 全部失敗時保留舊資料，不要把首頁清空
     console.log('新聞抓取失敗，保留舊資料：', errors.join('；'));
