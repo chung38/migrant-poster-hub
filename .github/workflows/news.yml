@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name "poster-bot"
           git config user.email "poster-bot@users.noreply.github.com"
-          git add docs/news.json
+          git add docs/news.json data/news-raw.json
           if git diff --cached --quiet; then echo "沒有變更"; else
             git commit -m "新聞更新 $(TZ=Asia/Taipei date +'%m-%d %H:%M')"
             git pull --rebase && git push
