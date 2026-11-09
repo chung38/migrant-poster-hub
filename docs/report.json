@@ -1,17 +1,24 @@
 {
- "startedAt": "2026-11-08T01:30:10.785Z",
- "finishedAt": "2026-11-08T01:30:25.916Z",
+ "startedAt": "2026-11-09T01:46:53.637Z",
+ "finishedAt": "2026-11-09T01:47:43.045Z",
  "sources": [
   {
    "id": "wda-file",
    "name": "勞動力發展署 跨國勞動力權益維護資訊網－宣導品",
    "agency": "勞動部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版－中文版",
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版－印尼文版",
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版－泰文版",
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版－英文版",
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版－越南文版",
+    "LINE@移點通-【M痘疫苗完成2劑，保護更完整】-多國語言版"
+   ],
    "errors": [],
    "listedDetails": 15,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 1,
+   "newCount": 6
   },
   {
    "id": "motc-168-vi",
