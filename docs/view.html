@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>檢視文宣</title>
+<title>檢視文宣｜移次搞定</title>
 <style>
   :root{--bg:#f6f3ec;--paper:#fffdf8;--ink:#1f2a2e;--muted:#6b7378;--line:#e4ddd0;--accent:#0f766e;--chip:#efe9dd}
   *{box-sizing:border-box}
@@ -54,7 +54,7 @@ const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;'
   if (!it) { document.getElementById('title').textContent = '找不到這份文宣'; main.innerHTML = '<div class="msg">可能已被移除，請回列表重新搜尋。</div>'; return; }
 
   const label = it.version || '';
-  document.title = it.title;
+  document.title = `${it.title}｜移次搞定`;
   document.getElementById('title').textContent = it.groupTitle ? `${it.groupTitle}${label ? '－' + label : ''}` : it.title;
   document.getElementById('meta').textContent = [it.agency, it.date || (it.addedAt||'').slice(0,10), (it.ext||'').toUpperCase()].filter(Boolean).join(' · ');
   document.getElementById('dl').href = it.fileUrl;
