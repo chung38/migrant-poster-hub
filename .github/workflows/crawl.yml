@@ -32,6 +32,9 @@ jobs:
       - name: 抓取並分類
         run: node crawler/crawl.js
 
+      - name: 熱門移工新聞
+        run: node crawler/news.js || true
+
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"

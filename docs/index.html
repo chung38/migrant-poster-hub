@@ -88,6 +88,22 @@
   .chip.home[aria-pressed="true"]{background:var(--warn);border-color:var(--warn)}
   .backbar{display:flex;align-items:center;gap:10px;margin:4px 0 14px;font-size:13px;color:var(--muted);flex-wrap:wrap}
   .backbar button{font:inherit;font-size:14px;border:1px solid var(--accent);color:var(--accent);background:var(--paper);border-radius:999px;padding:6px 14px;cursor:pointer}
+  .news{margin:18px 0 6px}
+  .news h2{font-size:18px;margin:0 0 10px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .news h2 .n{font-size:12.5px;color:var(--muted);font-weight:400}
+  .newslist{list-style:none;margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .newslist li{display:flex;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+  .newslist li:first-child{border-top:0}
+  .rank{flex:none;width:26px;height:26px;border-radius:8px;background:var(--chip);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--muted)}
+  .newslist li:nth-child(-n+3) .rank{background:var(--warn);color:#fff}
+  .nbody{flex:1;min-width:0}
+  .ntitle{color:var(--ink);text-decoration:none;font-weight:600;line-height:1.45}
+  .ntitle:hover{color:var(--accent)}
+  .nmeta{font-size:12px;color:var(--muted);margin-top:3px}
+  .ncount{color:var(--warn);font-weight:600}
+  .nbody details{font-size:12.5px;margin-top:4px}
+  .nbody summary{color:var(--accent);cursor:pointer}
+  .nbody details a{display:block;color:var(--muted);text-decoration:none;padding:3px 0}
 </style>
 </head>
 <body>
@@ -127,6 +143,7 @@ const HOME_PAGE = 12;
 const state = { q:'', cat:'', agency:'', lang:'', type:'', expanded:new Set(), homeLimit: HOME_PAGE };
 let DATA = { items:[], categories:[] };
 let GROUPS = [];
+let NEWS = null;
 
 const fold = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'')
   .replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().normalize('NFC');
@@ -256,6 +273,26 @@ function card(g){
     </div></article>`;
 }
 
+function ago(iso){
+  const m = Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 6e4));
+  if (m < 60) return `${m} 分鐘前`;
+  const h = Math.round(m / 60); if (h < 24) return `${h} 小時前`;
+  return `${Math.round(h / 24)} 天前`;
+}
+function newsHtml(){
+  const items = (NEWS && NEWS.items) || [];
+  if (!items.length) return '';
+  return `<section class="news"><h2>🔥 熱門移工新聞<span class="n">近 ${NEWS.days || 3} 天・依報導媒體數排序・${ago(NEWS.updatedAt)}更新</span></h2>
+    <ol class="newslist">${items.map((n, i) => `
+      <li>
+        <span class="rank">${i + 1}</span>
+        <div class="nbody">
+          <a class="ntitle" href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+          <div class="nmeta">${esc(n.source)} · ${ago(n.pubDate)}${n.count > 1 ? ` · <span class="ncount">${n.count} 家媒體報導</span>` : ''}</div>
+          ${n.sources.length > 1 ? `<details><summary>看其他媒體</summary>${n.sources.filter(x => x.link !== n.link).map(x => `<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.name)}：${esc(x.title)}</a>`).join('')}</details>` : ''}
+        </div>
+      </li>`).join('')}</ol></section>`;
+}
 function openSheet(g){
   const sheet = document.getElementById('sheet');
   document.getElementById('sheet-title').textContent = g.title;
@@ -312,6 +349,8 @@ function render(){
     html += `<div class="grid">${list.slice(0,300).map(card).join('')}</div>`;
     if (list.length > 300) html += `<p class="empty">只顯示前 300 則，請加關鍵字縮小範圍</p>`;
   } else {
+    // 首頁上方：熱門移工新聞（各家媒體同一則已合併）
+    html += newsHtml();
     // 沒有搜尋時：首頁只顯示最新發布的文宣（依發布日期），其他用搜尋或類別找
     const latest = [...list].sort((a,b) => b.date.localeCompare(a.date) || b.addedAt.localeCompare(a.addedAt));
     const shown = latest.slice(0, state.homeLimit);
@@ -378,6 +417,7 @@ window.addEventListener('hashchange', () => {
   document.getElementById('count').textContent = GROUPS.length ? `共 ${GROUPS.length} 則・${DATA.items.length} 個檔案` : '';
   document.getElementById('updated').textContent = DATA.updatedAt ? `每天自動更新，最後更新：${new Date(DATA.updatedAt).toLocaleString('zh-TW')}` : '尚未更新';
   update(false);
+  fetch('news.json?'+Date.now()).then(r=>r.json()).then(n=>{ NEWS = n; if (!(state.q.trim()||state.cat||state.agency||state.lang||state.type)) render(); }).catch(()=>{});
   fetch('report.json?'+Date.now()).then(r=>r.json()).then(renderReport).catch(()=>{});
 })();
 </script>
