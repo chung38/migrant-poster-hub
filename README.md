@@ -31,6 +31,23 @@ package.json
 
 ---
 
+## 哪些資料會自動更新
+
+| 資料 | 頻率 | 程式 |
+|---|---|---|
+| 宣導文宣 | 每天 | `crawler/crawl.js` |
+| 熱門移工新聞 | 每 4 小時 | `crawler/news.js` |
+| 最低工資、就安費新公告偵測 | 每 4 小時 | `crawler/watch.js` |
+| 移工相關法規清單與修正日期、各行業法條原文 | 每天 | `crawler/laws.js` |
+| 勞動部「政策法令」公告 | 每天 | `crawler/policy.js` |
+| 節日日期（農曆、伊斯蘭曆） | 網頁開啟時自動推算 | `docs/index.html` |
+
+聘僱指南的「重點整理」（`docs/guides.json`）是人工維護。法條有修正或勞動部有新公告時：
+
+1. 網頁該行業會顯示「有比這份整理更新的規定」提醒，並列出新公告與最新法條原文。
+2. GitHub 會自動開一個 Issue 通知你（記得在 repo 右上角 Watch 設為 All Activity，或至少保持預設，才會收到 Email／App 通知）。
+3. 確認後修改 `docs/guides.json` 內容，並把 `updated` 改成當天日期，提醒就會消失。
+
 ## 第一次設定（全部用 GitHub 網頁操作）
 
 1. **建立新的 repository**，例如 `migrant-posters`，選 **Public**（Pages 免費版要 public；文宣都是政府公開資料）。

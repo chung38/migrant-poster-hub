@@ -529,7 +529,11 @@ function upcomingEvents(days){
 }
 // 勞動部新公告偵測（crawler/watch.js 產生 watch.json）：比數字表更新日期還新的才顯示
 function newNotices(){
-  return (WATCH?.items || []).filter(n => (n.pubDate || '').slice(0, 10) > (INFO?.updated || ''));
+  const since = INFO?.updated || '';
+  // 勞動部「政策法令」公告裡跟這些數字有關的，也一起提醒
+  const pol = (POLICY?.items || []).filter(p => /就業安定費|最低工資|基本工資|薪資|工資/.test(p.title))
+    .map(p => ({ title: p.title, link: p.url, source: '勞動部政策法令', pubDate: p.date || p.seenAt || '' }));
+  return [...pol, ...(WATCH?.items || [])].filter(n => (n.pubDate || '').slice(0, 10) > since);
 }
 
 // ---------- 共用：區塊外框（依內容類型上色，一眼分出文宣／聘僱／新聞／工具） ----------
