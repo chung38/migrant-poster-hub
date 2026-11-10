@@ -36,7 +36,8 @@ package.json
 | 資料 | 頻率 | 程式 |
 |---|---|---|
 | 宣導文宣 | 每天 | `crawler/crawl.js` |
-| 熱門移工新聞 | 每 4 小時 | `crawler/news.js` |
+| 熱門移工新聞（台灣媒體） | 每 4 小時 | `crawler/news.js` |
+| 東南亞華文媒體移工新聞（越、菲、泰、印尼各 3 則） | 每天 2 次 | `crawler/sea-news.js` |
 | 最低工資、就安費新公告偵測 | 每 4 小時 | `crawler/watch.js` |
 | 移工相關法規清單與修正日期、各行業法條原文 | 每天 | `crawler/laws.js` |
 | 勞動部「政策法令」公告 | 每天 | `crawler/policy.js` |

@@ -123,6 +123,22 @@
   .atext{padding:0 12px 11px;font-size:13.5px;line-height:1.7;color:#2d3a40}
   .lawlink{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--k);text-decoration:none;font-weight:600}
 
+
+  /* 東南亞華文媒體 */
+  .seac{padding:10px 0;border-top:1px solid var(--line)}
+  .seac:first-of-type{border-top:0;padding-top:0}
+  .seah{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+  .seah .flag{font-size:20px}
+  .seah a{margin-left:auto;font-size:12px;color:var(--muted);text-decoration:none}
+  .sealist{margin:0;padding-left:22px}
+  .sealist li{margin:7px 0;font-size:14.5px;line-height:1.45}
+  .sealist a,.seamini a{color:var(--ink);text-decoration:none;font-weight:600}
+  .sealist small,.seamini small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:1px}
+  .seamini{list-style:none;margin:0;padding:0}
+  .seamini li{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
+  .seamini li:first-child{border-top:0}
+  .seamini .flag{font-size:18px;line-height:1.3}
+
   /* 工具箱 */
   .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
   .jump::-webkit-scrollbar{display:none}
@@ -321,7 +337,7 @@ const LANG_ORDER = ['zh','vi','id','th','en','multi'];
 const FILTER_KEYS = ['q','cat','agency','lang','type','fav'];
 const PAGE = 30;
 const state = { tab:'home', q:'', cat:'', agency:'', lang:'', type:'', fav:'', guide:'', limit:PAGE };
-let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null, GUIDES = null, LAWS = null, POLICY = null;
+let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null, GUIDES = null, LAWS = null, POLICY = null, SEA = null;
 
 const fold = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().normalize('NFC');
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -583,7 +599,8 @@ function homeView(){
     + (recentLaws.length ? sub('📜 最近修正的法規') + `<div class="list">${recentLaws.map(lawRow).join('')}</div>` : ''),
     goBtn('看流程', 'data-tab="hire"'));
 
-  const newsPanel = panel('news', '熱門移工新聞', newsList(5), goBtn('全部', 'data-tab="news"'));
+  const seaTop = seaCompact();
+  const newsPanel = panel('news', '熱門移工新聞', sub('🇹🇼 台灣媒體') + newsList(5) + (seaTop ? sub('🌏 東南亞華文媒體', goBtn('各國更多', 'data-tab="news" data-anchor="sea"')) + seaTop : ''), goBtn('全部', 'data-tab="news"'));
 
   const calls = (INFO?.hotlines || []).filter(h => h.top).map((h, i) => `<a class="call ${['','','orange','red'][i]||''}" href="tel:${h.tel}"><b>${esc(h.no)}</b><span>${esc(h.name)}</span></a>`).join('');
   const toolPanel = panel('tool', '求助專線', `<div class="calls">${calls}</div>`, goBtn('全部', 'data-tab="tools"'));
@@ -688,9 +705,23 @@ function hireView(){
 }
 
 // ---------- 新聞 ----------
+// 東南亞各國華文媒體（crawler/sea-news.js，每天兩次）
+const seaItems = () => (SEA?.countries || []).flatMap(c => c.items.map(n => ({ ...n, flag: c.flag, country: c.country, source: n.source || c.source })));
+function seaCompact(){
+  const rows = (SEA?.countries || []).filter(c => c.items.length).map(c => { const n = c.items[0];
+    return `<li><span class="flag">${c.flag}</span><div><a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a><small>${esc(n.source || c.source)}${n.date ? '・' + slash(n.date) : ''}</small></div></li>`; });
+  return rows.length ? `<ul class="seamini">${rows.join('')}</ul>` : '';
+}
+function seaHtml(){
+  if (!SEA?.countries?.length) return '<p class="lead">東南亞新聞更新中…</p>';
+  return SEA.countries.map(c => `<div class="seac"><div class="seah"><span class="flag">${c.flag}</span><b>${esc(c.country)}</b><a href="${esc(c.home)}" target="_blank" rel="noopener">${esc(c.source)} ›</a></div>`
+    + (c.items.length ? `<ol class="sealist">${c.items.map(n => `<li><a href="${esc(n.url)}" target="_blank" rel="noopener">${hl(n.title)}</a><small>${[n.source && n.source !== c.source ? esc(n.source) : '', n.date ? slash(n.date) : '', n.desc ? esc(n.desc.slice(0, 70)) + '…' : ''].filter(Boolean).join('・')}</small></li>`).join('')}</ol>` : `<p class="lead">近期沒有移工相關報導</p>`) + '</div>').join('');
+}
 function newsView(){
-  return `<div class="pagehead" style="--k:${KIND.news.color}"><span class="kind">新聞</span><b>熱門移工新聞</b><span class="n">近 ${NEWS?.days || 3} 天・依報導媒體數排序${NEWS?.updatedAt ? '・' + ago(NEWS.updatedAt) + '更新' : ''}</span></div>`
-    + newsList(50) + '<p class="src-note">新聞由 Google 新聞彙整各家媒體，同一事件合併為一則；點標題會開啟原媒體網頁。</p>';
+  return `<div class="pagehead" style="--k:${KIND.news.color}"><span class="kind">新聞</span><b>移工新聞</b></div>
+    <div class="jump"><a href="#" data-anchor-only="tw">🇹🇼 台灣媒體</a><a href="#" data-anchor-only="sea">🌏 東南亞媒體</a></div>`
+    + `<div id="tw">${panel('news', '🇹🇼 台灣熱門移工新聞', newsList(50) + '<p class="src-note">由 Google 新聞彙整各家媒體，同一事件合併為一則，依報導媒體數排序；點標題開啟原媒體網頁。</p>', `<span class="n">近 ${NEWS?.days || 3} 天${NEWS?.updatedAt ? '・' + ago(NEWS.updatedAt) + '更新' : ''}</span>`)}</div>`
+    + `<div id="sea">${panel('news', '🌏 東南亞華文媒體', '<p class="lead">越南、菲律賓、泰國、印尼當地華文報的移工相關報導，每國挑最重要的 3 則（越新越前面）。</p>' + seaHtml() + '<p class="src-note">依報導與移工的相關程度、新鮮度自動挑選；簡體字已轉為繁體。點標題開啟原媒體網頁。</p>', `<span class="n">${SEA?.updatedAt ? ago(SEA.updatedAt) + '更新' : ''}</span>`)}</div>`;
 }
 
 // ---------- 工具箱（專線、辦事處、行事曆、數字） ----------
@@ -730,6 +761,7 @@ function searchView(){
   const guides = (GUIDES?.industries || []).filter(g => hit([g.name, g.short, ...g.who, ...g.quota, ...g.fee, ...g.wage, ...(g.notes||[])].join(' ')));
   const steps = (GUIDES?.commonSteps || []).filter(s => hit(s.t + ' ' + s.d));
   const news = (NEWS?.items || []).filter(n => hit(n.title + ' ' + n.sources.map(s => s.title).join(' ')));
+  const sea = seaItems().filter(n => hit(n.title + ' ' + (n.desc || '')));
   const tools = [
     ...(INFO?.hotlines || []).filter(h => hit(`${h.no} ${h.name} ${h.desc}`)).map(h => `<a class="li" href="tel:${h.tel}"><span class="ic">${h.icon}</span><span class="tx"><b>${esc(h.name)}</b><small>${esc(h.desc)}</small></span><span class="no">${esc(h.no)}</span></a>`),
     ...(INFO?.offices || []).filter(o => hit(`${o.name} ${o.addr} ${o.tel}`)).map(o => `<a class="li" href="tel:${o.tel.replace(/-/g,'')}"><span class="ic">${o.flag}</span><span class="tx"><b>${esc(o.name)}</b><small>${esc(o.addr)}</small></span><span class="no">${esc(o.tel)}</span></a>`),
@@ -745,7 +777,7 @@ function searchView(){
   }
   const snip = t => { const f = fold(t), i = Math.max(0, f.indexOf(terms[0]) - 14); return (i ? '…' : '') + t.slice(i, i + 60).replace(/\n/g, ' ') + '…'; };
   const artRows = arts.slice(0, 8).map(({ id, pt, a }) => `<button class="li btnli" data-guide="${id}"><span class="ic">📖</span><span class="tx"><b>${esc(pt.law.length > 24 ? pt.heading : pt.law)} 第 ${esc(a.no)} 條</b><small>${hl(snip(a.text))}</small></span><span class="no">›</span></button>`);
-  const total = posters.length + guides.length + steps.length + news.length + tools.length + laws.length + pols.length + arts.length;
+  const total = posters.length + guides.length + steps.length + news.length + sea.length + tools.length + laws.length + pols.length + arts.length;
   const rc = relatedCats(q);
   let html = `<div class="pagehead" style="--k:#475569"><span class="kind" style="background:#475569">搜尋</span><b>「${esc(q)}」</b><span class="n">共 ${total} 筆</span></div>`;
   if (!total) return html + '<div class="empty">找不到相關內容，換個關鍵字試試<br><small>可以搜尋文宣主題、行業（製造業、看護）、新聞、專線號碼</small></div>';
@@ -755,7 +787,7 @@ function searchView(){
   if (posters.length) html += panel('poster', `宣導文宣<span class="n">${posters.length}</span>`,
     (rc.length ? `<p class="lead">也帶出類別：<b>${rc.map(esc).join('、')}</b>（含各國語言版本）</p>` : '') + `<div class="row">${posters.slice(0, 10).map(card).join('')}</div>`,
     posters.length > 0 ? goBtn(`看全部 ${posters.length} 則`, 'data-search-posters') : '');
-  if (news.length) html += panel('news', `移工新聞<span class="n">${news.length}</span>`, `<ol class="newslist">${news.slice(0, 5).map((n, i) => `<li><span class="rank">${i+1}</span><div class="nbody"><a class="ntitle" href="${esc(n.link)}" target="_blank" rel="noopener">${hl(n.title)}</a><div class="nmeta">${esc(n.source)} · ${ago(n.pubDate)}</div></div></li>`).join('')}</ol>`);
+  if (news.length || sea.length) html += panel('news', `移工新聞<span class="n">${news.length + sea.length}</span>`, (sea.length ? `<ul class="seamini">${sea.slice(0, 6).map(n => `<li><span class="flag">${n.flag}</span><div><a href="${esc(n.url)}" target="_blank" rel="noopener">${hl(n.title)}</a><small>${esc(n.source)}${n.date ? '・' + slash(n.date) : ''}</small></div></li>`).join('')}</ul>` : '') + `<ol class="newslist">${news.slice(0, 5).map((n, i) => `<li><span class="rank">${i+1}</span><div class="nbody"><a class="ntitle" href="${esc(n.link)}" target="_blank" rel="noopener">${hl(n.title)}</a><div class="nmeta">${esc(n.source)} · ${ago(n.pubDate)}</div></div></li>`).join('')}</ol>`);
   if (tools.length) html += panel('tool', `專線與數字<span class="n">${tools.length}</span>`, `<div class="list">${tools.join('')}</div>`);
   if (laws.length || pols.length || arts.length) html += panel('hire', `法規與公告<span class="n">${laws.length + pols.length + arts.length}</span>`,
     `<div class="list">${[...pols.slice(0, 5).map(policyRow), ...laws.map(lawRow), ...artRows].join('')}</div>`);
@@ -868,10 +900,10 @@ function renderReport(rep){
   const open = readHash();
   renderFilters(); render();
   const j = u => fetch(u + '?' + Date.now()).then(r => r.json());
-  const res = await Promise.allSettled(['catalog.json', 'info.json', 'news.json', 'watch.json', 'guides.json', 'laws.json', 'policy.json'].map(j));
+  const res = await Promise.allSettled(['catalog.json', 'info.json', 'news.json', 'watch.json', 'guides.json', 'laws.json', 'policy.json', 'sea-news.json'].map(j));
   const val = i => res[i].status === 'fulfilled' ? res[i].value : null;
   DATA = val(0) || DATA; DATA.items ||= []; DATA.categories ||= [];
-  INFO = val(1); NEWS = val(2); WATCH = val(3); GUIDES = val(4); LAWS = val(5); POLICY = val(6);
+  INFO = val(1); NEWS = val(2); WATCH = val(3); GUIDES = val(4); LAWS = val(5); POLICY = val(6); SEA = val(7);
   GROUPS = buildGroups(DATA.items);
   document.getElementById('updated').innerHTML = DATA.updatedAt ? `${GROUPS.length} 則文宣<br>${new Date(DATA.updatedAt).toLocaleDateString('zh-TW')} 更新` : '';
   document.getElementById('toolsdot').hidden = !newNotices().length;

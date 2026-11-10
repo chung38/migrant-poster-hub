@@ -25,13 +25,12 @@ jobs:
       - name: 安裝套件
         run: npm install --no-audit --no-fund
       - name: 抓越南、菲律賓、泰國、印尼華文媒體的移工新聞
-        run: node crawler/sea-news.js --debug
+        run: node crawler/sea-news.js
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"
           git config user.email "poster-bot@users.noreply.github.com"
           git add docs/sea-news.json data/sea-raw.json
-          git add data/debug 2>/dev/null || true
           if git diff --cached --quiet; then echo "沒有變更"; else
             git commit -m "東南亞新聞更新 $(TZ=Asia/Taipei date +'%m-%d %H:%M')"
             git pull --rebase && git push
