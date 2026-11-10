@@ -520,7 +520,14 @@ function helpView(){
   const m = new Date().getMonth() + 1;
   const hot = INFO.hotlines.map(h => `<a class="li" href="tel:${h.tel}"><span class="ic">${h.icon}</span><span class="tx"><b>${esc(h.name)}</b><small>${esc(h.desc)}</small></span><span class="no">${esc(h.no)}</span></a>`).join('');
   const off = INFO.offices.map(o => `<a class="li" href="tel:${o.tel.replace(/-/g,'')}"><span class="ic">${o.flag}</span><span class="tx"><b>${esc(o.name)}</b><small>${esc(o.addr)}</small></span><span class="no">${esc(o.tel)}</span></a>`).join('');
-  const nums = INFO.numbers.map(gr => `<tr><th colspan="2">${esc(gr.group)}</th></tr>` + gr.items.map(x => `<tr><td>${esc(x.label)}${x.note ? `<small>${esc(x.note)}</small>` : ''}</td><td class="v">${esc(x.value)}</td></tr>`).join('')).join('');
+  // 有「next」的數字（例如明年最低工資）：生效日一到自動換成新數字，之前先預告
+  const todayStr = ymd(new Date());
+  const numRow = x => {
+    const live = x.next && todayStr >= x.next.from ? { ...x, ...x.next } : x;
+    const soon = x.next && todayStr < x.next.from ? `<small style="color:var(--warn);font-weight:600">${x.next.from.split('-').map(Number).join('/')} 起調為 ${esc(x.next.value)}</small>` : '';
+    return `<tr><td>${esc(live.label)}${live.note ? `<small>${esc(live.note)}</small>` : ''}${soon}</td><td class="v">${esc(live.value)}</td></tr>`;
+  };
+  const nums = INFO.numbers.map(gr => `<tr><th colspan="2">${esc(gr.group)}</th></tr>` + gr.items.map(numRow).join('')).join('');
   const evs = upcomingEvents(370).map(e => { const d = new Date(e.date + 'T00:00:00');
     return `<div class="li"><span class="ev-date"><b>${d.getMonth()+1}/${d.getDate()}</b><small>${e.left === 0 ? '今天' : `${e.left} 天後`}</small></span><span class="tx"><b>${e.icon} ${esc(e.name)}${e.approx ? ' <small style="display:inline;color:var(--warn)">預估</small>' : ''}</b><small>${e.note ? esc(e.note) + '・' : ''}${e.approx ? '實際日期依印尼宗教部公告，可能差 1 天・' : ''}建議宣導：${e.cats.map(esc).join('、')}</small></span></div>`; }).join('');
   const sea = INFO.seasons.filter(s => s.months.length < 12).map(s => `<button class="li" style="width:100%;border-left:0;border-right:0;border-bottom:0;background:none;text-align:left;cursor:pointer" data-go-cat="${esc(s.cats[0])}"><span class="ic">${s.icon}</span><span class="tx"><b>${esc(s.name)}</b><small>${s.months.join('、')} 月・${s.cats.map(esc).join('、')}</small><span class="months">${Array.from({length:12},(_,i)=>`<i class="${s.months.includes(i+1)?'on':''} ${i+1===m?'now':''}"></i>`).join('')}</span></span></button>`).join('');
