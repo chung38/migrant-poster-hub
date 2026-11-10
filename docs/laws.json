@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-10T13:19:43.349Z",
+ "checkedAt": "2026-11-10T13:28:12.838Z",
  "items": [
   {
    "pcode": "N0090023",
@@ -30,6 +30,12 @@
    "title": "雇主聘僱外國人許可及管理辦法",
    "amended": "2025-12-30",
    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090027"
+  },
+  {
+   "pcode": "N0090064",
+   "title": "外國技術人力工作資格及許可管理辦法",
+   "amended": "2025-12-30",
+   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090064"
   },
   {
    "pcode": "N0090001",
@@ -68,10 +74,10 @@
    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090002"
   },
   {
-   "pcode": "N0090054",
-   "title": "短期補習班聘僱外國專業人才從事教師工作資格及審查標準",
-   "amended": "2022-10-27",
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090054"
+   "pcode": "N0030028",
+   "title": "最低工資法",
+   "amended": "2023-12-27",
+   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030028"
   },
   {
    "pcode": "N0090049",
@@ -84,36 +90,6 @@
    "title": "私立就業服務機構收費項目及金額標準",
    "amended": "2017-04-06",
    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090028"
-  },
-  {
-   "pcode": "N0090003",
-   "title": "外國人聘僱許可及管理辦法",
-   "amended": null,
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090003"
-  },
-  {
-   "pcode": "N0090004",
-   "title": "就業安定費繳納辦法",
-   "amended": null,
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090004"
-  },
-  {
-   "pcode": "N0090015",
-   "title": "雇主聘僱外國人從事演藝工作許可及管理辦法",
-   "amended": null,
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090015"
-  },
-  {
-   "pcode": "N0090032",
-   "title": "私立就業服務機構電腦處理個人資料管理辦法",
-   "amended": null,
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0090032"
-  },
-  {
-   "pcode": "N0030028",
-   "title": "最低工資法（112.12.27制定）",
-   "amended": null,
-   "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030028"
   }
  ]
 }
