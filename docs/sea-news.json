@@ -1,0 +1,57 @@
+{
+ "updatedAt": "2026-11-10T23:17:16.693Z",
+ "days": 45,
+ "countries": [
+  {
+   "id": "vn",
+   "country": "越南",
+   "flag": "🇻🇳",
+   "source": "西貢解放日報（華文版）",
+   "home": "https://cn.sggp.org.vn/",
+   "items": []
+  },
+  {
+   "id": "ph",
+   "country": "菲律賓",
+   "flag": "🇵🇭",
+   "source": "菲律賓商報",
+   "home": "https://www.shangbao.com.ph/",
+   "items": []
+  },
+  {
+   "id": "th",
+   "country": "泰國",
+   "flag": "🇹🇭",
+   "source": "TCN 泰國新聞",
+   "home": "https://thaichinesenews.com/",
+   "items": []
+  },
+  {
+   "id": "id",
+   "country": "印尼",
+   "flag": "🇮🇩",
+   "source": "印尼商報",
+   "home": "https://shangbaoindonesia.com/",
+   "items": [
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/09/hukum-1794222338",
+     "title": "印尼政府已正式頒佈《勞動保護法》 公眾以及企業主可登錄官網進行查閱",
+     "date": "2026-11-09",
+     "desc": "【本報訊】印尼總統普拉博沃已正式簽署並頒佈了2026年第27號《勞動保護法》，該法案於2026年10月28日正式生效。"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/10/06/society-1791294106",
+     "title": "勞工部長稱勞工法案 以公平方式加強勞工保護",
+     "date": "2026-10-06",
+     "desc": "【本報訊】勞工部長亞西爾利（Yassierli）強調，勞工法案（RUU Ketenagakerjaan）通過一個更加公正、適應性更強、能夠應對未來勞動世界挑戰的體系，加強對勞工的保"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/09/28/kesra-1790603023",
+     "title": "SMK Go Global第二批開放 KP2MI提升移民工人能力",
+     "date": "2026-09-28",
+     "desc": "【本報訊】印尼移民工人保護部（KP2MI）於9月28日至10月31日開放2026年第二批“SMK走向全球” 提升移民工人能力項目報名。 印尼移民工人保護部部長穆赫塔魯丁表示：“我"
+    }
+   ]
+  }
+ ]
+}
