@@ -20,8 +20,17 @@
   main iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
   .tip{font-size:12px;color:var(--muted);text-align:center;padding:6px 12px}
   footer{display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
-  footer a{flex:1;text-align:center;text-decoration:none;border-radius:10px;padding:10px 0;border:1px solid var(--line);color:var(--accent);font-size:14px}
+  footer a,footer button{flex:1;text-align:center;text-decoration:none;border-radius:10px;padding:10px 0;border:1px solid var(--line);color:var(--accent);font:inherit;font-size:14px;background:var(--paper);cursor:pointer}
   footer a.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  footer .line{color:#06c755;font-weight:700}
+  /* 列印：只印海報本身，滿版 */
+  @media print{
+    @page{margin:8mm}
+    html,body{height:auto;background:#fff;display:block}
+    header,footer,.tip{display:none!important}
+    main{overflow:visible;position:static}
+    main img{max-width:100%;max-height:100vh;width:auto;margin:0 auto;page-break-inside:avoid}
+  }
   .msg{padding:60px 20px;text-align:center;color:var(--muted)}
 </style>
 </head>
@@ -33,7 +42,9 @@
 <div class="tip" id="tip" hidden></div>
 <main id="main"></main>
 <footer id="foot" hidden>
-  <a class="primary" id="dl" target="_blank" rel="noopener">下載原檔</a>
+  <button id="print" type="button">🖨️ 列印</button>
+  <button id="share" class="line" type="button">LINE 分享</button>
+  <a id="dl" target="_blank" rel="noopener">⬇️ 原檔</a>
   <a id="src" target="_blank" rel="noopener">原網頁</a>
 </footer>
 <script>
@@ -60,6 +71,14 @@ const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;'
   document.getElementById('dl').href = it.fileUrl;
   document.getElementById('src').href = it.sourcePage;
   document.getElementById('foot').hidden = false;
+  const shareTitle = `${document.getElementById('title').textContent}｜移次搞定`;
+  document.getElementById('share').onclick = async () => {
+    if (navigator.share) { try { await navigator.share({ title: shareTitle, url: location.href }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+    window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(shareTitle)}`, '_blank', 'noopener');
+  };
+  const isImage = ['jpg','jpeg','png','gif','webp'].includes(it.ext);
+  // 圖片：直接列印這一頁（只會印出海報）；PDF：Google 檢視器無法從這裡列印，改開原檔用手機內建列印
+  document.getElementById('print').onclick = () => isImage ? window.print() : window.open(it.fileUrl, '_blank', 'noopener');
   const tip = document.getElementById('tip');
 
   if (['jpg','jpeg','png','gif','webp'].includes(it.ext)) {
