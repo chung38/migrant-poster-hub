@@ -1,13 +1,14 @@
-name: 更新移工相關法規
+name: 更新移工相關法規與政策公告
 
 on:
   schedule:
-    # 每天台灣時間約 03:37 檢查全國法規資料庫的最新修正日期
+    # 每天台灣時間約 03:37：同步全國法規資料庫的法條、勞動部政策法令公告
     - cron: '37 19 * * *'
   workflow_dispatch: {}
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: crawl
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   laws:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,14 +25,25 @@ jobs:
           node-version: 20
       - name: 安裝套件
         run: npm install --no-audit --no-fund
-      - name: 讀取法規
+      - name: 讀取法規與法條原文
         run: node crawler/laws.js
+      - name: 讀取勞動部政策法令公告
+        run: node crawler/policy.js || true
+      - name: 有變動就開 Issue 通知
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s data/changes.md ]; then
+            printf '\n---\n網站已自動顯示最新法條與公告，並在相關行業頁面標示「可能需更新」。確認後請修改 `docs/guides.json` 的內容與 `updated` 日期，提醒就會消失。\n' >> data/changes.md
+            gh issue create --title "聘僱指南需確認：法規或公告有更新（$(TZ=Asia/Taipei date +'%Y-%m-%d')）" --body-file data/changes.md || echo "開 Issue 失敗（可能沒開啟 Issues 功能）"
+            rm data/changes.md
+          fi
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"
           git config user.email "poster-bot@users.noreply.github.com"
-          git add -A docs
+          git add -A docs data/debug 2>/dev/null || git add -A docs
           if git diff --cached --quiet; then echo "沒有變更"; else
-            git commit -m "法規更新 $(TZ=Asia/Taipei date +'%Y-%m-%d')"
+            git commit -m "法規與公告更新 $(TZ=Asia/Taipei date +'%Y-%m-%d')"
             git pull --rebase && git push
           fi
