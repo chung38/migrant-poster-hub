@@ -338,11 +338,20 @@ async function crawlSource(src, oldItems) {
     const date = l.date || found.get(u)?.date || null;
     if (title.length < 6 || title.length > 60 || HEAD_SKIP.test(title)) continue;
     if (date && ageDays(date) > HEAD_DAYS) continue;
-    if (headlines.some((h) => h.url === u || h.title === title)) continue;
+    // 同一事件的多篇報導（例如領導人出訪系列）只留一則，讓頭條多樣一點
+    if (headlines.some((h) => h.url === u || similar(h.title, title))) continue;
     headlines.push({ url: u, title, date, source: src.name });
     if (headlines.length >= 8) break;
   }
   return { items, log, total: found.size, headlines };
+}
+
+// 兩個標題是否講同一件事：相鄰兩字重疊比例
+function similar(a, b) {
+  const g = (t) => { const x = t.replace(/[\s\p{P}\p{S}]/gu, ''); const st = new Set(); for (let i = 0; i < x.length - 1; i++) st.add(x.slice(i, i + 2)); return st; };
+  const A = g(a), B = g(b);
+  let n = 0; for (const x of A) if (B.has(x)) n++;
+  return n / Math.max(1, Math.min(A.size, B.size)) >= 0.5;
 }
 
 // 同一則新聞不同網址（標題幾乎一樣）只留一則
