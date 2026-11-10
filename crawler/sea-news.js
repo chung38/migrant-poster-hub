@@ -26,6 +26,10 @@ const DEBUG_DIR = path.join(ROOT, 'data', 'debug');
 const DAYS = 180;         // 保存與挑選的時間範圍（移工新聞不是天天有，放寬到半年，排序時越新越前面）
 const HALF_LIFE = 30;     // 新鮮度：每 30 天分數減半
 const PER_COUNTRY = 3;    // 每國顯示幾則
+const SHOW_DAYS = 90;     // 移工新聞在這個天數內才優先列出；不足 3 則時改補該網站首頁頭條
+const HEAD_DAYS = 3;      // 首頁頭條只取最近幾天的
+// 首頁頭條排除這些（訃告、社團、廣告、星座等）
+const HEAD_SKIP = /訃|逝世|設靈|殯儀|出殯|星座|運程|賀詞|恭賀|廣告|招聘|同鄉會|宗親會|校友會|聯誼會|總會訊|會訊|本會|華教中心|^\(|^（|中新社|中新網|編者按|社論|評論/;
 const MIN_SCORE = 5;      // 至少幾分才算「移工新聞」（標題本身要有移工字眼，或內文大量提到）
 const MAX_DETAIL = 25;    // 每站每次最多打開幾篇內文
 const DELAY = 900;
@@ -257,7 +261,8 @@ async function crawlSource(src, oldItems) {
   const isPage = new Set();
   let wpOk = false;
   if (src.wordpress) { const wp = await wordpressLinks(src, log); wp.forEach((x) => add(x, x.hint)); wpOk = wp.length > 0; }
-  for (let i = 0; i < lists.length && i < 20 && !wpOk; i++) {
+  let homeLinks = [];
+  for (let i = 0; i < lists.length && i < 20 && (!wpOk || i === 0); i++) {
     const url = lists[i];
     if (visited.has(url)) continue;
     visited.add(url);
@@ -267,6 +272,7 @@ async function crawlSource(src, oldItems) {
       const { links, nav, pages } = extractLinks(src, html, url);
       if (DEBUG && i === 1) { const $d = cheerio.load(html); log.push('頁尾連結：' + $d('a[href]').toArray().slice(-40).map((a) => `${clean($d(a).text()).slice(0, 12)}=${$d(a).attr('href')}`).join(' ')); }
       links.forEach((x) => add(x));
+      if (i === 0) homeLinks = links; // 第一個列表頁（首頁或要聞頁）的文章順序＝網站排的重點
       log.push(`${url} → ${links.length} 篇${nav.length ? `，選單 ${nav.length}` : ''}${pages.length ? `，下一頁 ${pages[0]}` : ''}`);
       if (i === 0) for (const n of nav.slice(0, 8)) if (!lists.includes(n)) lists.push(n);
       // 每個列表再往下翻一頁（只翻一層）
@@ -324,7 +330,19 @@ async function crawlSource(src, oldItems) {
     await fs.mkdir(DEBUG_DIR, { recursive: true });
     await fs.writeFile(path.join(DEBUG_DIR, `sea-${src.id}.json`), JSON.stringify({ log, total: found.size, sample: cands.slice(0, 30).map((x) => `${x.s0} ${x.date || '-'} ${x.title} | ${x.url}`), hints: cands.filter((x) => x.hint || x.s0 >= 2).map((x) => `${x.s0}${read.has(x.url) ? '+' + (score(x.title, read.get(x.url).body) - x.s0) : ''} ${x.via || ''} ${x.date || '-'} ${x.title}`).slice(0, 120), matched: items.map((x) => `${x.score} ${x.date} ${x.title}`) }, null, 1));
   }
-  return { items, log, total: found.size };
+  // 首頁頭條：依網站排列順序，取最近幾天、非社團訃告類的新聞（WordPress 網站用 REST 取得的乾淨標題）
+  const headlines = [];
+  for (const l of homeLinks) {
+    const u = norm(l.url);
+    const title = tw(found.get(u)?.title || l.title).replace(/^(?:0[1-9]|10)(?=[^\d])\s*/, '');
+    const date = l.date || found.get(u)?.date || null;
+    if (title.length < 6 || title.length > 60 || HEAD_SKIP.test(title)) continue;
+    if (date && ageDays(date) > HEAD_DAYS) continue;
+    if (headlines.some((h) => h.url === u || h.title === title)) continue;
+    headlines.push({ url: u, title, date, source: src.name });
+    if (headlines.length >= 8) break;
+  }
+  return { items, log, total: found.size, headlines };
 }
 
 // 同一則新聞不同網址（標題幾乎一樣）只留一則
@@ -340,21 +358,26 @@ function dedupe(items) {
 async function main() {
   let raw = { sources: {} };
   try { raw = JSON.parse(await fs.readFile(RAW, 'utf8')); } catch {}
-  const result = { updatedAt: new Date(now).toISOString(), days: DAYS, countries: [] };
+  const result = { updatedAt: new Date(now).toISOString(), days: SHOW_DAYS, countries: [] };
   const groups = new Map();
   for (const src of SOURCES) {
     const old = (raw.sources[src.id] || []).filter((x) => ageDays(x.date || x.firstSeen?.slice(0, 10)) <= DAYS);
     let res;
     try { res = await crawlSource(src, old); }
-    catch (e) { res = { items: [], log: [`✘ ${e.message}`], total: 0 }; }
+    catch (e) { res = { items: [], log: [`✘ ${e.message}`], total: 0, headlines: [] }; }
+    // 這次沒抓到首頁時沿用上次的頭條
+    raw.headlines ||= {};
+    if (res.headlines?.length) raw.headlines[src.id] = res.headlines;
+    const heads = raw.headlines[src.id] || [];
     // 新抓到的與累積的合併
     const map = new Map(old.map((x) => [x.url, x]));
     for (const x of res.items) map.set(x.url, { ...map.get(x.url), ...x });
     const all = [...map.values()].map((x) => ({ ...x, source: x.source || src.name })).sort((a, b) => b.score - a.score);
     raw.sources[src.id] = all;
     const gid = src.group || src.id;
-    if (!groups.has(gid)) groups.set(gid, { primary: src, items: [] });
+    if (!groups.has(gid)) groups.set(gid, { primary: src, items: [], heads: [] });
     groups.get(gid).items.push(...all);
+    groups.get(gid).heads.push(...heads);
     console.log(`${src.flag} ${src.country} ${src.name}：列表 ${res.total} 篇，相關 ${res.items.length}，累積 ${all.length}`);
     for (const l of res.log) console.log(`    ${l.slice(0, 300)}`);
   }
@@ -362,11 +385,17 @@ async function main() {
     const src = g.primary;
     // 重要度：相關分數 × 新鮮度（每 HALF_LIFE 天減半），主要網站略加權
     const rank = (x) => x.score * (x.source === src.name ? 1.3 : 1) * Math.pow(0.5, ageDays(x.date || x.firstSeen?.slice(0, 10)) / HALF_LIFE);
-    const top = dedupe([...g.items].sort((a, b) => rank(b) - rank(a))).slice(0, PER_COUNTRY);
-    result.countries.push({ id: gid, country: src.country, flag: src.flag, source: src.name, home: src.home,
-      items: top.map(({ url, title, date, desc, source }) => ({ url, title, date, desc, source })) });
+    const recent = g.items.filter((x) => ageDays(x.date || x.firstSeen?.slice(0, 10)) <= SHOW_DAYS);
+    const top = dedupe([...recent].sort((a, b) => rank(b) - rank(a))).slice(0, PER_COUNTRY)
+      .map(({ url, title, date, desc, source }) => ({ kind: 'migrant', url, title, date, desc, source }));
+    // 移工新聞不足 3 則：補該國媒體首頁頭條
+    for (const h of g.heads) {
+      if (top.length >= PER_COUNTRY) break;
+      if (!top.some((x) => x.url === h.url || x.title === h.title)) top.push({ kind: 'headline', ...h });
+    }
+    result.countries.push({ id: gid, country: src.country, flag: src.flag, source: src.name, home: src.home, items: top });
     console.log(`${src.flag} ${src.country} 精選：`);
-    for (const x of top) console.log(`    ★ ${x.date || '----'} (${x.score}) ${x.title}【${x.source}】`);
+    for (const x of top) console.log(`    ${x.kind === 'migrant' ? '★' : '◇'} ${x.date || '----'} ${x.title}【${x.source}】`);
   }
   await fs.mkdir(path.dirname(RAW), { recursive: true });
   await fs.writeFile(RAW, JSON.stringify(raw, null, 1) + '\n');
