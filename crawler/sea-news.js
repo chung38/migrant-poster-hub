@@ -42,11 +42,22 @@ const SOURCES = [
     // 主要網站相關報導不足時，用 Google 新聞補同國其他華文媒體
     extra: [{ host: 'zh.vietnamplus.vn', name: '越通社（華文）' }, { host: 'cn.nhandan.vn', name: '人民報（華文）' }],
   },
+  // 同國的第二家媒體：主要網站相關報導不夠時補上（group 相同的會合併成一國）
+  {
+    id: 'vn2', group: 'vn', country: '越南', flag: '🇻🇳', name: '越通社（華文）', home: 'https://zh.vietnamplus.vn/',
+    lists: ['https://zh.vietnamplus.vn/'],
+    discover: /社会|社會|经济|經濟|时政|時政|越南/,
+  },
   {
     id: 'ph', country: '菲律賓', flag: '🇵🇭', name: '菲律賓商報', home: 'https://www.shangbao.com.ph/',
     lists: ['https://www.shangbao.com.ph/m/more/fgyw.html', 'https://www.shangbao.com.ph/fgyw/', 'https://www.shangbao.com.ph/'],
     discover: /菲國要聞|菲国要闻|要聞|要闻|社會|社会|時事|时事/,
     extra: [{ host: 'worldnews.net.ph', name: '菲律賓世界日報' }],
+  },
+  {
+    id: 'ph2', group: 'ph', country: '菲律賓', flag: '🇵🇭', name: '菲律賓世界日報', home: 'https://www.worldnews.net.ph/',
+    lists: ['https://www.worldnews.net.ph/'],
+    discover: /菲律賓|菲律濱|菲國|要聞|要闻|社會|社会|僑社/,
   },
   {
     id: 'th', country: '泰國', flag: '🇹🇭', name: 'TCN 泰國新聞', home: 'https://thaichinesenews.com/',
@@ -55,6 +66,11 @@ const SOURCES = [
     wordpress: 'https://thaichinesenews.com',
     searchWords: ['外勞', '移工', '勞工', '外籍', '勞動部'],
     extra: [{ host: 'udnbkk.com', name: '泰國世界日報' }, { host: 'singsianyerpao.com', name: '星暹日報' }],
+  },
+  {
+    id: 'th2', group: 'th', country: '泰國', flag: '🇹🇭', name: '泰國世界日報', home: 'https://www.udnbkk.com/',
+    lists: ['https://www.udnbkk.com/'],
+    discover: /泰國|泰国|社會|社会|要聞|要闻|新聞|新闻/,
   },
   {
     id: 'id', country: '印尼', flag: '🇮🇩', name: '印尼商報', home: 'https://shangbaoindonesia.com/',
@@ -164,7 +180,7 @@ function extractLinks(src, html, base) {
     try { href = new URL($(a).attr('href'), base).href.replace(/#.*$/, ''); } catch { return; }
     const head = clean($(a).find('h1,h2,h3,h4,h5,.title,[class*="title"]').first().text());
     const text = clean($(a).attr('title') || head || $(a).text());
-    if (isArticle(src, href, text) && text.length >= 6) {
+    if (isArticle(src, href, text) && text.length >= 6 && text.length <= 70) {
       const cur = out.get(href);
       if (!cur || text.length > cur.title.length) out.set(href, { url: href, title: text, date: dateFrom(href) || dateFrom($(a).closest('li,article,div').first().text().slice(0, 300)) });
     } else if (src.discover && text.length <= 8 && src.discover.test(text) && new URL(href).host === new URL(src.home).host) {
@@ -298,8 +314,8 @@ async function crawlSource(src, oldItems) {
     const bonus = r ? score(x.title, (r.body || '') + ' ' + desc) - score(x.title, desc) : (old?.bonus || 0);
     const s = score(x.title, desc) + bonus;
     // Google 搜尋來的（打不開內文）：只要標題有移工字眼就收
-    const t = score(x.title);
-    const ok = x.via === 'google' ? t >= 4 : (t >= 4 && s >= MIN_SCORE) || s >= 8;
+    const strongTitle = new RegExp(STRONG.source, 'i').test(x.title);
+    const ok = x.title.length <= 80 && (x.via === 'google' ? strongTitle : (strongTitle && s >= MIN_SCORE) || (MEDIUM.test(x.title) && s >= 10));
     if (ok && (!date || ageDays(date) <= DAYS)) items.push({ url: x.url, title: x.title, date, desc: desc.slice(0, 160), score: s, bonus, via: x.via || 'site', source: x.source || src.name, firstSeen: old?.firstSeen || new Date(now).toISOString() });
   }
   if (DEBUG) {
@@ -323,6 +339,7 @@ async function main() {
   let raw = { sources: {} };
   try { raw = JSON.parse(await fs.readFile(RAW, 'utf8')); } catch {}
   const result = { updatedAt: new Date(now).toISOString(), days: DAYS, countries: [] };
+  const groups = new Map();
   for (const src of SOURCES) {
     const old = (raw.sources[src.id] || []).filter((x) => ageDays(x.date || x.firstSeen?.slice(0, 10)) <= DAYS);
     let res;
@@ -331,16 +348,23 @@ async function main() {
     // 新抓到的與累積的合併
     const map = new Map(old.map((x) => [x.url, x]));
     for (const x of res.items) map.set(x.url, { ...map.get(x.url), ...x });
-    const all = dedupe([...map.values()].sort((a, b) => b.score - a.score));
+    const all = [...map.values()].map((x) => ({ ...x, source: x.source || src.name })).sort((a, b) => b.score - a.score);
     raw.sources[src.id] = all;
-    // 重要度：相關分數 × 新鮮度（兩週減半）
-    const rank = (x) => x.score * (x.source === src.name ? 1.3 : 1) * Math.pow(0.5, ageDays(x.date || x.firstSeen?.slice(0, 10)) / HALF_LIFE);
-    const top = [...all].sort((a, b) => rank(b) - rank(a)).slice(0, PER_COUNTRY);
-    result.countries.push({ id: src.id, country: src.country, flag: src.flag, source: src.name, home: src.home,
-      items: top.map(({ url, title, date, desc, source }) => ({ url, title, date, desc, source: source || src.name })) });
+    const gid = src.group || src.id;
+    if (!groups.has(gid)) groups.set(gid, { primary: src, items: [] });
+    groups.get(gid).items.push(...all);
     console.log(`${src.flag} ${src.country} ${src.name}：列表 ${res.total} 篇，相關 ${res.items.length}，累積 ${all.length}`);
-    for (const l of res.log) console.log(`    ${l}`);
-    for (const x of top) console.log(`    ★ ${x.date || '----'} (${x.score}) ${x.title}【${x.source || src.name}】`);
+    for (const l of res.log) console.log(`    ${l.slice(0, 300)}`);
+  }
+  for (const [gid, g] of groups) {
+    const src = g.primary;
+    // 重要度：相關分數 × 新鮮度（每 HALF_LIFE 天減半），主要網站略加權
+    const rank = (x) => x.score * (x.source === src.name ? 1.3 : 1) * Math.pow(0.5, ageDays(x.date || x.firstSeen?.slice(0, 10)) / HALF_LIFE);
+    const top = dedupe([...g.items].sort((a, b) => rank(b) - rank(a))).slice(0, PER_COUNTRY);
+    result.countries.push({ id: gid, country: src.country, flag: src.flag, source: src.name, home: src.home,
+      items: top.map(({ url, title, date, desc, source }) => ({ url, title, date, desc, source })) });
+    console.log(`${src.flag} ${src.country} 精選：`);
+    for (const x of top) console.log(`    ★ ${x.date || '----'} (${x.score}) ${x.title}【${x.source}】`);
   }
   await fs.mkdir(path.dirname(RAW), { recursive: true });
   await fs.writeFile(RAW, JSON.stringify(raw, null, 1) + '\n');
