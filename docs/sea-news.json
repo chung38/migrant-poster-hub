@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-10T23:35:22.660Z",
- "days": 180,
+ "updatedAt": "2026-11-10T23:53:24.851Z",
+ "days": 90,
  "countries": [
   {
    "id": "vn",
@@ -8,7 +8,29 @@
    "flag": "🇻🇳",
    "source": "西貢解放日報（華文版）",
    "home": "https://cn.sggp.org.vn/",
-   "items": []
+   "items": [
+    {
+     "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%8E%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E9%AB%98%E5%B8%82%E6%97%A9%E8%8B%97%E4%B8%BE%E8%A1%8C%E4%BC%9A%E8%B0%88-post146094.html",
+     "title": "越南黨中央總書記、國家主席蘇林與日本首相高市早苗舉行會談",
+     "date": null,
+     "source": "西貢解放日報（華文版）"
+    },
+    {
+     "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E4%B8%BE%E8%A1%8C%E4%BB%AA%E5%BC%8F-%E6%AC%A2%E8%BF%8E%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%80%E8%A1%8C%E8%AE%BF%E6%97%A5-post146086.html",
+     "title": "日本首相舉行儀式 歡迎黨中央總書記、國家主席蘇林一行訪日",
+     "date": null,
+     "source": "西貢解放日報（華文版）"
+    },
+    {
+     "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%87%BA%E5%B8%AD%E8%B6%8A%E5%8D%97%E8%88%AA%E7%A9%BA%E4%B8%8E%E6%97%A5%E6%9C%ACana%E6%8E%A7%E8%82%A1%E9%9B%86%E5%9B%A2%E6%88%98%E7%95%A5%E5%90%88%E4%BD%9C10%E5%91%A8%E5%B9%B4%E7%BA%AA%E5%BF%B5%E4%BB%AA%E5%BC%8F-post146073.html",
+     "title": "黨中央總書記、國家主席蘇林出席越南航空與日本ANA控股集團戰略合作10週年紀念儀式",
+     "date": null,
+     "source": "西貢解放日報（華文版）"
+    }
+   ]
   },
   {
    "id": "ph",
@@ -18,10 +40,25 @@
    "home": "https://www.shangbao.com.ph/",
    "items": [
     {
+     "kind": "migrant",
      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5ua1hOMGlkcEcyeW54UTJCWEt0SUd2NU5icHNYaEswd1ZvSVg0anM4N3daaHpYM05TaWk2RThVRGZfMDVUYVRqZVhSQnU5YURUX0M5emdLVDNBR2JBTTd2YldHN2w0M0k?oc=5",
      "title": "菲持續調查三佳鋼鐵廠 指中國曾警告報復菲勞",
      "date": "2026-08-14",
      "desc": "",
+     "source": "菲律賓商報"
+    },
+    {
+     "kind": "headline",
+     "url": "https://www.shangbao.com.ph/fgyw/2026/11-11/208182.shtml",
+     "title": "小馬促官員談中國問題需謹慎",
+     "date": "2026-11-11",
+     "source": "菲律賓商報"
+    },
+    {
+     "kind": "headline",
+     "url": "https://www.shangbao.com.ph/fgyw/2026/11-11/208181.shtml",
+     "title": "防長趙多洛警告國人 去中國旅遊恐被洗腦",
+     "date": "2026-11-11",
      "source": "菲律賓商報"
     }
    ]
@@ -34,6 +71,7 @@
    "home": "https://thaichinesenews.com/",
    "items": [
     {
+     "kind": "migrant",
      "url": "https://thaichinesenews.com/society/34329/",
      "title": "泰勞工在以色列宿舍身亡待驗屍",
      "date": "2026-08-19",
@@ -41,10 +79,18 @@
      "source": "TCN 泰國新聞"
     },
     {
+     "kind": "migrant",
      "url": "https://thaichinesenews.com/politics/34149/",
      "title": "民主黨籲嚴查外資外勞搶工",
      "date": "2026-08-17",
      "desc": "【泰國新聞報導】泰國民主黨副發言人威於8月16日就外國資本與勞工湧入議題發聲，呼籲政府嚴格審查資金來源與經營合 […]",
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "kind": "headline",
+     "url": "https://thaichinesenews.com/finance/39469/",
+     "title": "央行發行紀念鈔 12月21日開放兌換",
+     "date": "2026-11-10",
      "source": "TCN 泰國新聞"
     }
    ]
@@ -57,6 +103,7 @@
    "home": "https://shangbaoindonesia.com/",
    "items": [
     {
+     "kind": "migrant",
      "url": "https://shangbaoindonesia.com/read/2026/09/28/kesra-1790603023",
      "title": "SMK Go Global第二批開放 KP2MI提升移民工人能力",
      "date": "2026-09-28",
@@ -64,6 +111,7 @@
      "source": "印尼商報"
     },
     {
+     "kind": "migrant",
      "url": "https://shangbaoindonesia.com/read/2026/09/09/politics-1788961503",
      "title": "政府通過整合OSS 簡化外籍勞工許可流程",
      "date": "2026-09-09",
@@ -71,10 +119,10 @@
      "source": "印尼商報"
     },
     {
-     "url": "https://shangbaoindonesia.com/read/2026/08/11/politics-1786455848",
-     "title": "KP2MI與IOM準備更新 移民工人保護合作協議",
-     "date": "2026-08-11",
-     "desc": "【本報訊】印尼移民工人保護部（KP2MI）與國際移民組織（IOM）正在籌備更新合作協議，以加強對海外印尼移民工人（PMI）的保護。 印尼移民工人保護部副部長克里斯蒂娜·阿里亞尼（",
+     "kind": "headline",
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794346016",
+     "title": "煤炭供應緩慢導致SIG水泥廠 蒙受170萬噸潛在產量損失",
+     "date": "2026-11-11",
      "source": "印尼商報"
     }
    ]
