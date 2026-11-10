@@ -1,15 +1,18 @@
 {
  "log": [
-  "https://cn.sggp.org.vn/ → 69 篇，選單 5",
-  "https://cn.sggp.org.vn/%E5%8D%8E%E4%BA%BA%E5%8A%A8%E6%80%81/ → 58 篇，選單 5",
-  "https://cn.sggp.org.vn/%E5%9B%BD%E9%99%85/ → 60 篇，選單 6",
-  "https://cn.sggp.org.vn/%E7%A4%BE%E4%BC%9A/ → 49 篇，選單 5",
-  "https://cn.sggp.org.vn/%E6%97%B6%E4%BA%8B%E7%85%A7%E7%89%87/ → 60 篇，選單 5",
-  "https://cn.sggp.org.vn/%E6%B3%95%E5%BE%8B/ → 61 篇，選單 7",
+  "https://cn.sggp.org.vn/ → 69 篇，選單 7",
+  "https://cn.sggp.org.vn/%E6%97%B6%E6%94%BF/ → 57 篇，選單 7",
+  "https://cn.sggp.org.vn/%E5%8D%8E%E4%BA%BA%E5%8A%A8%E6%80%81/ → 58 篇，選單 7",
+  "https://cn.sggp.org.vn/%E7%BB%8F%E6%B5%8E/ → 65 篇，選單 8",
+  "https://cn.sggp.org.vn/%E5%9B%BD%E9%99%85/ → 60 篇，選單 8",
+  "https://cn.sggp.org.vn/%E7%A4%BE%E4%BC%9A/ → 49 篇，選單 7",
+  "https://cn.sggp.org.vn/%E6%97%B6%E4%BA%8B%E7%85%A7%E7%89%87/ → 60 篇，選單 7",
+  "https://cn.sggp.org.vn/%E6%B3%95%E5%BE%8B/ → 61 篇，選單 9",
   "robots 不允許 https://cn.sggp.org.vn/search/?q=%E5%8A%B3%E5%8A%A1",
-  "robots 不允許 https://cn.sggp.org.vn/tim-kiem/?q=%E5%8A%B3%E5%8A%A1"
+  "robots 不允許 https://cn.sggp.org.vn/tim-kiem/?q=%E5%8A%B3%E5%8A%A1",
+  "google site: 0"
  ],
- "total": 210,
+ "total": 272,
  "sample": [
   "0 - 越南黨中央總書記、國家主席蘇林與日本首相高市早苗舉行會談 | https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%8E%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E9%AB%98%E5%B8%82%E6%97%A9%E8%8B%97%E4%B8%BE%E8%A1%8C%E4%BC%9A%E8%B0%88-post146094.html",
   "0 - 日本首相舉行儀式 歡迎黨中央總書記、國家主席蘇林一行訪日 | https://cn.sggp.org.vn/%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E4%B8%BE%E8%A1%8C%E4%BB%AA%E5%BC%8F-%E6%AC%A2%E8%BF%8E%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%80%E8%A1%8C%E8%AE%BF%E6%97%A5-post146086.html",
