@@ -35,7 +35,7 @@ const SOURCES = [
   {
     id: 'vn', country: '越南', flag: '🇻🇳', name: '西貢解放日報（華文版）', home: 'https://cn.sggp.org.vn/',
     lists: ['https://cn.sggp.org.vn/'],
-    discover: /時政|法律|經濟|国际|國際|社會|社会|華人|华人|時事|时事/, // 從首頁選單自動找分類頁
+    discover: /時政|时政|法律|經濟|经济|国际|國際|社會|社会|華人|华人|時事|时事/, // 從首頁選單自動找分類頁
     search: ['https://cn.sggp.org.vn/search/?q={q}', 'https://cn.sggp.org.vn/tim-kiem/?q={q}'],
     searchWords: ['劳务', '劳工', '务工'],
   },
@@ -61,7 +61,7 @@ const SOURCES = [
 ];
 
 // ---------- 關鍵字與分數（標題、內文都先轉成繁體再比對） ----------
-const STRONG = /移工|外勞|外籍勞工|外籍工人|外國工人|外國勞工|移民工人|移徙工人|移住勞工|海外勞工|海外務工|出國務工|出國勞務|勞務輸出|勞務出口|勞動輸出|輸出勞工|出國工作|赴台工作|赴臺工作|菲勞|菲傭|印傭|越勞|泰勞|印勞|OFW|海外菲律賓勞工|海外菲人|技能實習生|女傭|幫傭|看護工|家務助理|勞務人員|勞務派遣|仲介費|非法勞工|非法務工|非法打工|黑工|外籍員工|跨國勞工|勞工權益|勞工部長|移工部|移民工人保護|(?:緬甸|柬埔寨|寮國|越南|印尼|菲律賓|泰國)籍?(?:勞工|工人|移工|員工)/i;
+const STRONG = /移工|外勞|外籍勞工|外籍工人|外國工人|外國勞工|移民工人|移徙工人|移住勞工|海外勞工|海外務工|出國務工|出國勞務|勞務輸出|勞務出口|勞動輸出|輸出勞工|出國工作|赴台工作|赴臺工作|菲勞|菲傭|印傭|越勞|泰勞|印勞|OFW|海外菲律賓勞工|海外菲人|技能實習生|女傭|幫傭|看護工|家務助理|勞務人員|勞務派遣|仲介費|非法勞工|非法務工|非法打工|黑工|外籍員工|跨國勞工|移工部長|移工部|移民工人保護|(?:緬甸|柬埔寨|寮國|越南|印尼|菲律賓|泰國)籍?(?:勞工|工人|移工|員工)/i;
 const MEDIUM = /勞工|務工|勞務|工人|就業|打工|僱主|雇主|人力仲介|仲介|簽證|遣返|匯款|勞動部|勞動、榮軍|人口販運|詐騙園區|保護|權益/;
 const DEST = /台灣|臺灣|台北|日本|韓國|南韓|以色列|中東|沙烏地|沙特|卡達|阿聯|科威特|香港|澳門|馬來西亞|新加坡|汶萊|歐洲|德國|澳洲|美國|加拿大/;
 const TAIWAN = /台灣|臺灣|台北|台中|高雄|桃園|台南/;
@@ -152,18 +152,22 @@ function extractLinks(src, html, base) {
   const $ = cheerio.load(html);
   const out = new Map();
   const nav = new Map();
+  const pages = new Set();
   $('a[href]').each((_, a) => {
     let href;
     try { href = new URL($(a).attr('href'), base).href.replace(/#.*$/, ''); } catch { return; }
-    const text = clean($(a).attr('title') || $(a).text());
+    const head = clean($(a).find('h1,h2,h3,h4,h5,.title,[class*="title"]').first().text());
+    const text = clean($(a).attr('title') || head || $(a).text());
     if (isArticle(src, href, text) && text.length >= 6) {
       const cur = out.get(href);
       if (!cur || text.length > cur.title.length) out.set(href, { url: href, title: text, date: dateFrom(href) || dateFrom($(a).closest('li,article,div').first().text().slice(0, 300)) });
     } else if (src.discover && text.length <= 8 && src.discover.test(text) && new URL(href).host === new URL(src.home).host) {
       nav.set(href, text);
+    } else if (/^(?:2|下一?[页頁]|下[页頁]|next|›|»|>)$/i.test(text) && new URL(href).host === new URL(src.home).host && href !== base) {
+      pages.add(href);
     }
   });
-  return { links: [...out.values()], nav: [...nav.keys()] };
+  return { links: [...out.values()], nav: [...nav.keys()], pages: [...pages].slice(0, 1) };
 }
 
 // WordPress：RSS 與站內 REST 搜尋（可找到較舊的相關文章）
@@ -175,14 +179,14 @@ async function wordpressLinks(src, log) {
     $('item').each((_, it) => res.push({ url: $(it).find('link').text().trim(), title: clean($(it).find('title').text()), date: dateFrom(new Date($(it).find('pubDate').text()).toISOString()), desc: clean(cheerio.load($(it).find('description').text()).text()).slice(0, 300) }));
     log.push(`feed ok ${res.length}`);
   } catch (e) { log.push(`feed ✘ ${e.message}`); }
-  for (const w of src.searchWords || []) {
-    const url = `${src.wordpress}/wp-json/wp/v2/posts?search=${encodeURIComponent(w)}&per_page=20&_fields=date,link,title,excerpt`;
+  for (const w of ['', ...(src.searchWords || [])]) {
+    const url = `${src.wordpress}/wp-json/wp/v2/posts?${w ? `search=${encodeURIComponent(w)}&` : ''}orderby=date&per_page=${w ? 30 : 100}&_fields=date,link,title,excerpt`;
     try {
       if (!(await allowed(url))) { log.push(`robots 不允許 ${url}`); break; }
       const arr = JSON.parse(await get(url, 'application/json'));
       for (const p of arr) res.push({ url: p.link, title: clean(cheerio.load(p.title?.rendered || '').text()), date: (p.date || '').slice(0, 10), desc: clean(cheerio.load(p.excerpt?.rendered || '').text()).slice(0, 300) });
-      log.push(`wp-search ${w} ${arr.length}`);
-    } catch (e) { log.push(`wp-search ${w} ✘ ${e.message}`); break; }
+      log.push(`wp ${w || '最新'} ${arr.length}`);
+    } catch (e) { log.push(`wp ${w || '最新'} ✘ ${e.message}`); break; }
     await sleep(DELAY);
   }
   return res;
@@ -222,17 +226,22 @@ async function crawlSource(src, oldItems) {
   const add = (x) => { if (x.url && x.title && !found.has(x.url)) found.set(x.url, x); };
   const lists = [...src.lists];
   const visited = new Set();
-  for (let i = 0; i < lists.length && i < 12; i++) {
+  const isPage = new Set();
+  let wpOk = false;
+  if (src.wordpress) { const wp = await wordpressLinks(src, log); wp.forEach(add); wpOk = wp.length > 0; }
+  for (let i = 0; i < lists.length && i < 20 && !wpOk; i++) {
     const url = lists[i];
     if (visited.has(url)) continue;
     visited.add(url);
     if (!(await allowed(url))) { log.push(`robots 不允許 ${url}`); continue; }
     try {
       const html = await get(url);
-      const { links, nav } = extractLinks(src, html, url);
+      const { links, nav, pages } = extractLinks(src, html, url);
       links.forEach(add);
-      log.push(`${url} → ${links.length} 篇${nav.length ? `，選單 ${nav.length}` : ''}`);
+      log.push(`${url} → ${links.length} 篇${nav.length ? `，選單 ${nav.length}` : ''}${pages.length ? `，下一頁 ${pages[0]}` : ''}`);
       if (i === 0) for (const n of nav.slice(0, 8)) if (!lists.includes(n)) lists.push(n);
+      // 每個列表再往下翻一頁（只翻一層）
+      if (!isPage.has(url)) for (const pg of pages) if (!lists.includes(pg)) { lists.push(pg); isPage.add(pg); }
     } catch (e) { log.push(`${url} ✘ ${e.message}`); }
     await sleep(DELAY);
   }
@@ -249,8 +258,7 @@ async function crawlSource(src, oldItems) {
       await sleep(DELAY);
     }
   }
-  if (src.wordpress) (await wordpressLinks(src, log)).forEach(add);
-  if (found.size < 5) (await googleSite(src, log)).forEach(add);
+  (await googleSite(src, log)).forEach(add);
 
   // 轉繁體、打分數
   const cands = [...found.values()].map((x) => ({ ...x, title: tw(x.title), desc: tw(x.desc || '') }))
