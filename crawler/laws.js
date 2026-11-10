@@ -19,12 +19,12 @@ const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0)';
 
 // 要掃描的法規代碼範圍
 const RANGES = [
-  { prefix: 'N009', from: 1, to: 60 },  // 就業服務類
+  { prefix: 'N009', from: 1, to: 99 },  // 就業服務類
   { prefix: 'N003', from: 1, to: 60 },  // 勞動條件類（勞基法、最低工資法等）
 ];
 // 標題符合這些字才收錄
 const KEEP = /外國人|外國技術人力|移工|就業服務法|就業安定|轉換雇主|私立就業服務機構|勞動基準法$|最低工資法|聘僱/;
-const SKIP = /大陸地區|香港|澳門|專業人才延攬|身心障礙|獎勵|補助|津貼/;
+const SKIP = /大陸地區|香港|澳門|專業人才|身心障礙|獎勵|補助|津貼|補習班|演藝|個人資料/;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const roc = (y, m, d) => `${Number(y) + 1911}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -35,10 +35,12 @@ async function readLaw(pcode) {
   if (!res.ok) return null;
   const $ = cheerio.load(await res.text());
   const text = $('body').text().replace(/\s+/g, ' ');
-  const title = ($('#hlLawName').text() || (text.match(/法規名稱[：:]\s*(.+?)\s+(?:EN\s+)?(?:修正日期|公發布日|制定日期)/) || [])[1] || $('title').text().split(/[-|－]/)[0]).trim();
+  let title = ($('#hlLawName').text() || (text.match(/法規名稱[：:]\s*(.+?)\s+(?:EN\s+)?(?:修正日期|公布日期|發布日期|公發布日|制定日期|廢止日期)/) || [])[1] || $('title').text().split(/[-|－]/)[0]).trim();
   if (!title || /查無|錯誤|Error/i.test(title)) return null;
-  if (/廢止日期|已廢止/.test(text.slice(0, 600))) return null;
-  const m = text.match(/修正日期[：:]\s*民國\s*(\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日/) || text.match(/(?:公發布日|制定日期)[：:]\s*民國\s*(\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日/);
+  // 已廢止：標題前面有「廢」、或有廢止日期、或類別是廢止法規
+  if (/^廢\s/.test(title) || /廢止日期[：:]|廢止法規\s*＞/.test(text)) return null;
+  title = title.replace(/（[\d.]+(?:制定|修正)）$/, '').trim();
+  const m = text.match(/修正日期[：:]\s*民國\s*(\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日/) || text.match(/(?:公布日期|發布日期|公發布日|制定日期)[：:]\s*民國\s*(\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日/);
   return { pcode, title, amended: m ? roc(m[1], m[2], m[3]) : null, url };
 }
 

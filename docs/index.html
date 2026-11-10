@@ -36,6 +36,8 @@
   .search input{flex:1;min-width:0;font:inherit;font-size:16px;padding:12px 15px;border:1.5px solid var(--line);
     border-radius:var(--radius);background:var(--paper);outline:none;box-shadow:var(--shadow)}
   .search input:focus{border-color:var(--accent)}
+  .search input::-webkit-search-cancel-button{display:none}
+  main [id]{scroll-margin-top:80px}
   .search button{border:0;border-radius:var(--radius);padding:0 15px;background:var(--chip);cursor:pointer}
 
   /* 篩選 */
@@ -57,13 +59,60 @@
   .hint{background:var(--accent-soft);border-radius:10px;padding:8px 12px;font-size:13px;margin:6px 0 12px}
   .empty{text-align:center;color:var(--muted);padding:50px 10px}
 
-  /* 國旗按鈕 */
-  .flags{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
-  .flag{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px 8px;background:var(--paper);border:1px solid var(--line);border-radius:16px;cursor:pointer;box-shadow:var(--shadow)}
-  .flag b{font-size:28px;line-height:1.1}
-  .flag span{font-size:12.5px;font-weight:600}
-  .flag small{font-size:11px;color:var(--muted)}
-  .flag:active{transform:scale(.97)}
+
+  /* 內容區塊：依類型上色，文宣／聘僱／新聞／工具一眼分開 */
+  .pn{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--k);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 14px 14px;margin:16px 0}
+  .pn h2{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pn h2 .n,.pagehead .n{font-size:12.5px;color:var(--muted);font-weight:400}
+  .kind{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--k);border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+  .go{margin-left:auto;font-size:13px;font-weight:600;border:0;background:none;color:var(--k,var(--accent));cursor:pointer;padding:0}
+  h3.sub{font-size:14px;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+  .pn h2 + h3.sub{margin-top:0}
+  .pn .list,.pn .newslist{border:0;border-radius:0;box-shadow:none;margin:0 -14px;background:none}
+  .pn .card{box-shadow:none;background:#fff}
+  .pn .steps + .list{margin-top:6px}
+  .lead{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .pagehead{--k:var(--accent);display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0 6px;font-size:17px}
+  .pagehead .back{border:0;background:var(--chip);width:32px;height:32px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;padding:0 0 3px}
+
+  /* 首頁快速選單 */
+  .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .mi{display:flex;flex-direction:column;align-items:center;gap:1px;padding:12px 2px 10px;border:0;border-radius:16px;background:var(--k);color:#fff;cursor:pointer;box-shadow:var(--shadow)}
+  .mi b{font-size:26px;line-height:1.15}
+  .mi span{font-size:13px;font-weight:700}
+  .mi small{font-size:11px;opacity:.85}
+  .mi:active,.tile:active,.ind:active,.indcard:active{transform:scale(.97)}
+
+  /* 聘僱 */
+  .inds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ind{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 2px;background:#fff;border:1px solid #dcdcf7;border-radius:12px;cursor:pointer}
+  .ind b{font-size:24px;line-height:1.15}
+  .ind span{font-size:12.5px;font-weight:600;line-height:1.25;text-align:center}
+  .indlist{display:grid;gap:8px}
+  @media (min-width:700px){ .indlist{grid-template-columns:1fr 1fr} .inds{grid-template-columns:repeat(8,1fr)} }
+  .indcard{display:flex;align-items:center;gap:12px;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
+  .indcard b{font-size:28px;line-height:1}
+  .indcard span{flex:1;min-width:0;display:flex;flex-direction:column}
+  .indcard small{color:var(--muted);font-size:12.5px;line-height:1.4}
+  .indcard i{font-style:normal;color:var(--k);font-size:22px}
+  ul.pts{margin:0;padding-left:20px}
+  ul.pts li{margin:5px 0;font-size:14px}
+  ol.steps{list-style:none;counter-reset:s;margin:0;padding:0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 14px 40px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--k);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  ol.steps li::after{content:"";position:absolute;left:13px;top:31px;bottom:3px;width:2px;background:var(--line)}
+  ol.steps li:last-child{padding-bottom:0}
+  ol.steps li:last-child::after{display:none}
+  ol.steps b{display:block;line-height:1.5}
+  ol.steps span{display:block;font-size:13.5px;color:#3d4a50}
+  .newb{display:inline-block;font-size:11px;font-weight:700;background:#e11d48;color:#fff;border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:1px}
+
+  /* 工具箱 */
+  .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
+  .jump::-webkit-scrollbar{display:none}
+  .jump a,.jump button{flex:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:13px;text-decoration:none;color:var(--ink);cursor:pointer}
+  .btnli{width:100%;border:0;border-top:1px solid var(--line);background:none;text-align:left;cursor:pointer}
+  .chip.fav[aria-pressed="true"]{background:#e11d48;border-color:#e11d48}
 
   /* 本月宣導 */
   .season{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
@@ -209,12 +258,12 @@
       <a class="brand" href="#" data-tab="home"><span class="logo">移</span><span>移次<em>搞定</em></span></a>
       <small id="updated"></small>
     </div>
-    <p class="tagline">移工文宣・新聞・專線，一次找齊 ✌️</p>
+    <p class="tagline">移工文宣・聘僱指南・新聞・專線，一次找齊 ✌️</p>
   </header>
 
   <div class="bar">
     <form class="search" id="form" role="search">
-      <input id="q" type="search" placeholder="搜尋：毒品、交通、詐騙、ma túy、narkoba…" autocomplete="off" enterkeyhint="search">
+      <input id="q" type="search" placeholder="全站搜尋：毒品、製造業、看護、1955…" autocomplete="off" enterkeyhint="search">
       <button type="button" id="clear" title="清除">✕</button>
     </form>
     <div class="filters" id="filters" hidden></div>
@@ -231,9 +280,9 @@
   <div class="tabs">
     <button class="tab" data-tab="home"><b>🏠</b>首頁</button>
     <button class="tab" data-tab="posters"><b>🗂️</b>文宣</button>
+    <button class="tab" data-tab="hire"><b>📋</b>聘僱</button>
     <button class="tab" data-tab="news"><b>📰</b>新聞</button>
-    <button class="tab" data-tab="help"><b>☎️</b>專線<span class="dot" id="helpdot" hidden>!</span></button>
-    <button class="tab" data-tab="fav"><b>❤️</b>收藏<span class="dot" id="favdot" hidden></span></button>
+    <button class="tab" data-tab="tools"><b>🧰</b>工具箱<span class="dot" id="toolsdot" hidden>!</span></button>
   </div>
 </nav>
 
@@ -253,10 +302,10 @@
 const LANG_NAMES = { zh:'中文', vi:'越南', id:'印尼', th:'泰國', en:'英/菲', multi:'多國語' };
 const FLAGS = { zh:'🇹🇼', vi:'🇻🇳', id:'🇮🇩', th:'🇹🇭', en:'🇵🇭', multi:'🌐' };
 const LANG_ORDER = ['zh','vi','id','th','en','multi'];
-const FILTER_KEYS = ['q','cat','agency','lang','type'];
+const FILTER_KEYS = ['q','cat','agency','lang','type','fav'];
 const PAGE = 30;
-const state = { tab:'home', q:'', cat:'', agency:'', lang:'', type:'', limit:PAGE };
-let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null;
+const state = { tab:'home', q:'', cat:'', agency:'', lang:'', type:'', fav:'', guide:'', limit:PAGE };
+let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null, GUIDES = null, LAWS = null;
 
 const fold = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().normalize('NFC');
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -272,7 +321,7 @@ try { FAV = JSON.parse(localStorage.getItem('yici-fav') || '[]'); } catch { FAV 
 function saveFav(){ try { localStorage.setItem('yici-fav', JSON.stringify(FAV)); } catch {} updateFavDot(); }
 const isFav = gid => FAV.includes(gid);
 function toggleFav(gid){ FAV = isFav(gid) ? FAV.filter(x => x !== gid) : [gid, ...FAV]; saveFav(); toast(isFav(gid) ? '已加入收藏 ❤️' : '已取消收藏'); }
-function updateFavDot(){ const d = document.getElementById('favdot'); d.hidden = !FAV.length; d.textContent = FAV.length; }
+function updateFavDot(){}
 
 // ---------- 把各語言版本合成一組 ----------
 function baseTitle(t){ return String(t).split('－')[0].trim(); }
@@ -329,6 +378,7 @@ function score(g, terms, cats){
 function filtered(){
   const terms = fold(state.q).split(/\s+/).filter(Boolean), cats = relatedCats(state.q);
   return GROUPS
+    .filter(g => !state.fav || FAV.includes(g.gid))
     .filter(g => !state.cat || g.categories.includes(state.cat))
     .filter(g => !state.agency || g.agency === state.agency)
     .filter(g => !state.lang || g.langs.includes(state.lang))
@@ -466,61 +516,123 @@ function newNotices(){
   return (WATCH?.items || []).filter(n => (n.pubDate || '').slice(0, 10) > (INFO?.updated || ''));
 }
 
-// ---------- 各分頁畫面 ----------
+// ---------- 共用：區塊外框（依內容類型上色，一眼分出文宣／聘僱／新聞／工具） ----------
+const KIND = {
+  poster: { label: '文宣', color: '#0f766e' },
+  hire:   { label: '聘僱', color: '#4f46e5' },
+  news:   { label: '新聞', color: '#c2410c' },
+  tool:   { label: '工具', color: '#b91c1c' },
+};
+let PANEL_TAG = true; // 首頁與搜尋結果混合多種內容時，才在每個區塊標上類型
+function panel(kind, title, body, extra = '') {
+  const k = KIND[kind];
+  return `<section class="pn" style="--k:${k.color}"><h2>${PANEL_TAG ? `<span class="kind">${k.label}</span>` : ''}${title}${extra}</h2>${body}</section>`;
+}
+const sub = (title, extra = '') => `<h3 class="sub">${title}${extra}</h3>`;
+const goBtn = (label, attrs) => `<button class="go" ${attrs}>${label} ›</button>`;
+
+// ---------- 首頁 ----------
 function homeView(){
-  const langCount = l => GROUPS.filter(g => g.langs.includes(l)).length;
-  const flags = ['vi','id','th','en','zh'].map(l => `<button class="flag" data-go-lang="${l}"><b>${FLAGS[l]}</b><span>${LANG_NAMES[l]}</span><small>${langCount(l)} 則</small></button>`).join('');
+  const menu = `<div class="menu">
+    <button class="mi" style="--k:${KIND.poster.color}" data-tab="posters"><b>🗂️</b><span>宣導文宣</span><small>${GROUPS.length} 則</small></button>
+    <button class="mi" style="--k:${KIND.hire.color}" data-tab="hire"><b>📋</b><span>聘僱指南</span><small>${GUIDES?.industries?.length || 0} 種行業</small></button>
+    <button class="mi" style="--k:${KIND.news.color}" data-tab="news"><b>📰</b><span>移工新聞</span><small>${NEWS?.items?.length || 0} 則熱門</small></button>
+    <button class="mi" style="--k:${KIND.tool.color}" data-tab="tools"><b>🧰</b><span>專線工具</span><small>專線・行事曆</small></button>
+  </div>`;
 
+  // 文宣：本月重點、最新、主題
   const seasons = nowSeasons(), events = upcomingEvents(60);
-  const focusCats = [...new Set([...seasons.flatMap(s => s.cats), ...events.flatMap(e => e.cats)])].filter(c => c !== '生活適應' || events.length);
-  const focus = GROUPS.filter(g => g.categories.some(c => focusCats.filter(x => x !== '交通安全').includes(c))).slice(0, 10);
+  const focusCats = [...new Set([...seasons.flatMap(s => s.cats), ...events.flatMap(e => e.cats)])].filter(c => c !== '交通安全' && (c !== '生活適應' || events.length));
+  const focus = GROUPS.filter(g => g.categories.some(c => focusCats.includes(c))).slice(0, 10);
   const pills = seasons.filter(s => s.months.length < 12).map(s => `<span class="pill" data-go-cat="${esc(s.cats[0])}">${s.icon} ${esc(s.name)}</span>`).join('')
-    + upcomingEvents(120).slice(0, 2).map(e => `<span class="pill ev" data-tab="help" data-anchor="cal">${e.icon} ${esc(e.name.split('（')[0])} · ${e.left === 0 ? '今天' : `${e.approx ? '約' : ''}還有 ${e.left} 天`}</span>`).join('');
-
-  const latest = GROUPS.slice(0, 10);
+    + upcomingEvents(120).slice(0, 2).map(e => `<span class="pill ev" data-tab="tools" data-anchor="cal">${e.icon} ${esc(e.name.split('（')[0])} · ${e.left === 0 ? '今天' : `${e.approx ? '約' : ''}還有 ${e.left} 天`}</span>`).join('');
   const tiles = DATA.categories.map(c => ({ c, n: GROUPS.filter(g => g.categories.includes(c.name)).length })).filter(x => x.n)
-    .map(({ c, n }) => `<button class="tile" data-go-cat="${esc(c.name)}"><b>${c.icon||'📁'}</b><span>${esc(c.name)}</span><small>${n} 則</small></button>`).join('');
-  const calls = (INFO?.hotlines || []).filter(h => h.top).map((h, i) => `<a class="call ${['','','orange','red'][i]||''}" href="tel:${h.tel}"><b>${esc(h.no)}</b><span>${esc(h.name)}</span></a>`).join('');
+    .map(({ c, n }) => `<button class="tile" data-go-cat="${esc(c.name)}"><b>${c.icon||'📁'}</b><span>${esc(c.name)}</span><small>${n}</small></button>`).join('');
+  const posterPanel = panel('poster', '宣導文宣',
+    sub(`📅 ${new Date().getMonth()+1} 月宣導重點`) + `<div class="season">${pills}</div>` + (focus.length ? `<div class="row">${focus.map(card).join('')}</div>` : '')
+    + sub('🆕 最新文宣', goBtn('全部', 'data-tab="posters"')) + `<div class="row">${GROUPS.slice(0, 10).map(card).join('')}</div>`
+    + sub('🧭 依主題找') + `<div class="tiles">${tiles}</div>`);
 
-  return `
-    <div class="flags">${flags}</div>
-    <section class="blk"><h2>📅 本月宣導重點<span class="n">${new Date().getMonth()+1} 月</span><button class="go" data-tab="help" data-anchor="cal">行事曆 ›</button></h2>
-      <div class="season">${pills}</div>
-      ${focus.length ? `<div class="row">${focus.map(card).join('')}</div>` : ''}
-    </section>
-    <section class="blk"><h2>🔥 熱門移工新聞<span class="n">${NEWS?.updatedAt ? ago(NEWS.updatedAt) + '更新' : ''}</span><button class="go" data-tab="news">看全部 ›</button></h2>${newsList(5)}</section>
-    <section class="blk"><h2>🆕 最新文宣<button class="go" data-tab="posters">看全部 ›</button></h2><div class="row">${latest.map(card).join('')}</div></section>
-    <section class="blk"><h2>🧭 依主題找</h2><div class="tiles">${tiles}</div></section>
-    <section class="blk"><h2>☎️ 求助專線<button class="go" data-tab="help">全部專線 ›</button></h2><div class="calls">${calls}</div></section>`;
+  // 聘僱
+  const inds = (GUIDES?.industries || []).map(g => `<button class="ind" data-guide="${g.id}"><b>${g.icon}</b><span>${esc(g.name)}</span></button>`).join('');
+  const recentLaws = (LAWS?.items || []).filter(l => l.amended && daysAgo(l.amended) <= 120).slice(0, 2);
+  const hirePanel = panel('hire', '聘僱指南',
+    `<p class="lead">各行業聘僱移工的條件、名額、費用與申請流程</p><div class="inds">${inds}</div>`
+    + (recentLaws.length ? sub('📜 最近修正的法規') + `<div class="list">${recentLaws.map(lawRow).join('')}</div>` : ''),
+    goBtn('看流程', 'data-tab="hire"'));
+
+  const newsPanel = panel('news', '熱門移工新聞', newsList(5), goBtn('全部', 'data-tab="news"'));
+
+  const calls = (INFO?.hotlines || []).filter(h => h.top).map((h, i) => `<a class="call ${['','','orange','red'][i]||''}" href="tel:${h.tel}"><b>${esc(h.no)}</b><span>${esc(h.name)}</span></a>`).join('');
+  const toolPanel = panel('tool', '求助專線', `<div class="calls">${calls}</div>`, goBtn('全部', 'data-tab="tools"'));
+
+  return menu + posterPanel + hirePanel + newsPanel + toolPanel;
 }
 
+// ---------- 文宣 ----------
 function postersView(){
   const list = filtered();
   let html = '';
-  const rc = relatedCats(state.q);
-  const what = [state.q.trim() && `「${esc(state.q.trim())}」`, state.cat, state.lang && LANG_NAMES[state.lang], state.type && {img:'圖片',pdf:'PDF',other:'其他檔'}[state.type], state.agency].filter(Boolean).join('・');
-  if (state.q.trim() && rc.length){
-    const kw = DATA.categories.filter(c => rc.includes(c.name)).flatMap(c => c.keywords).filter(k => !/[一-鿿]|^\d+$/.test(k)).slice(0, 6);
-    html += `<div class="hint">也帶出類別：<b>${rc.map(esc).join('、')}</b>${kw.length ? `（含外語文宣，如 ${kw.map(esc).join('、')}）` : ''}</div>`;
-  }
-  html += `<section class="blk"><h2>${what ? esc(what).replace(/&lt;|&gt;/g,'') : '全部文宣'}<span class="n">${list.length} 則</span>${what ? '<button class="go" data-reset>清除條件</button>' : ''}</h2>`;
-  if (!list.length) return html + `<div class="empty">找不到符合的文宣，換個關鍵字或清除條件試試</div></section>`;
+  const what = [state.fav && '❤️ 收藏', state.q.trim() && `「${state.q.trim()}」`, state.cat, state.lang && LANG_NAMES[state.lang], state.type && {img:'圖片',pdf:'PDF'}[state.type], state.agency].filter(Boolean).join('・');
+  html += `<div class="pagehead" style="--k:${KIND.poster.color}"><span class="kind">文宣</span><b>${what ? esc(what) : '全部宣導文宣'}</b><span class="n">${list.length} 則</span>${what ? '<button class="go" data-reset>清除條件</button>' : ''}</div>`;
+  if (state.fav && !FAV.length) return html + '<div class="empty">還沒有收藏。<br>在文宣卡片按 ♡，常用的文宣就會出現在這裡。</div>';
+  if (!list.length) return html + '<div class="empty">找不到符合的文宣，換個條件試試</div>';
   html += `<div class="grid">${list.slice(0, state.limit).map(card).join('')}</div>`;
   if (list.length > state.limit) html += `<div class="more"><button data-more>再看 ${Math.min(PAGE, list.length - state.limit)} 則</button></div>`;
-  return html + '</section>';
+  return html;
 }
 
+// ---------- 聘僱指南 ----------
+const daysAgo = d => Math.round((Date.now() - new Date(d + 'T00:00:00').getTime()) / 864e5);
+const rocDate = d => { const [y, m, dd] = d.split('-').map(Number); return `${y - 1911}/${m}/${dd}`; };
+function lawRow(l){
+  const fresh = l.amended && daysAgo(l.amended) <= 90;
+  return `<a class="li" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="ic">📜</span><span class="tx"><b>${esc(l.title)}${fresh ? ' <span class="newb">最新修正</span>' : ''}</b><small>${l.amended ? `最新修正：民國 ${rocDate(l.amended)}（${l.amended}）` : ''}</small></span><span class="no">›</span></a>`;
+}
+function lawsFor(names){
+  const items = LAWS?.items || [];
+  return names.map(n => items.find(l => l.title === n) || items.find(l => l.title.includes(n)) || { title: n, url: `https://law.moj.gov.tw/Law/LawSearchResult.aspx?ty=ONEBAR&kw=${encodeURIComponent(n)}` });
+}
+const ul = arr => arr?.length ? `<ul class="pts">${arr.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+function stepsHtml(){
+  return `<ol class="steps">${(GUIDES?.commonSteps || []).map(s => `<li><b>${esc(s.t)}</b><span>${esc(s.d)}</span></li>`).join('')}</ol>`;
+}
+function hireView(){
+  if (!GUIDES) return '<div class="empty">載入中…</div>';
+  const g = GUIDES.industries.find(x => x.id === state.guide);
+  const links = `<div class="list">${GUIDES.links.map(l => `<a class="li" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="ic">🔗</span><span class="tx"><b>${esc(l.name)}</b></span><span class="no">›</span></a>`).join('')}</div>`;
+  const note = `<p class="src-note">⚠️ ${esc(GUIDES.disclaimer)}（整理日期 ${esc(GUIDES.updated)}）</p>`;
+  if (g) {
+    return `<div class="pagehead" style="--k:${KIND.hire.color}"><button class="back" data-guide="">‹</button><span class="kind">聘僱</span><b>${g.icon} ${esc(g.name)}</b></div>`
+      + panel('hire', '誰可以申請', ul(g.who))
+      + panel('hire', '名額怎麼算', ul(g.quota))
+      + panel('hire', '費用與薪資', sub('就業安定費') + ul(g.fee) + sub('薪資') + ul(g.wage))
+      + (g.notes?.length ? panel('hire', '注意事項', ul(g.notes)) : '')
+      + panel('hire', '申請流程', stepsHtml())
+      + panel('hire', '相關法規', `<div class="list">${lawsFor(g.laws).map(lawRow).join('')}</div><p class="src-note">修正日期每天自動從全國法規資料庫更新</p>`)
+      + panel('hire', '官方網站', links) + note;
+  }
+  const inds = GUIDES.industries.map(x => `<button class="indcard" data-guide="${x.id}"><b>${x.icon}</b><span><strong>${esc(x.name)}</strong><small>${esc(x.short)}</small></span><i>›</i></button>`).join('');
+  const laws = (LAWS?.items || []).slice(0, 12);
+  return `<div class="pagehead" style="--k:${KIND.hire.color}"><span class="kind">聘僱</span><b>聘僱移工指南</b></div>`
+    + panel('hire', '選擇行業', `<div class="indlist">${inds}</div>`)
+    + panel('hire', '共通申請流程', stepsHtml())
+    + panel('hire', '移工相關法規', laws.length ? `<div class="list">${laws.map(lawRow).join('')}</div><p class="src-note">每天自動檢查最新修正日期，${LAWS?.checkedAt ? new Date(LAWS.checkedAt).toLocaleDateString('zh-TW') + ' 更新' : ''}</p>` : '<div class="empty">法規清單更新中…</div>')
+    + panel('hire', '官方網站', links) + note;
+}
+
+// ---------- 新聞 ----------
 function newsView(){
-  return `<section class="blk"><h2>📰 熱門移工新聞<span class="n">近 ${NEWS?.days || 3} 天・依報導媒體數排序${NEWS?.updatedAt ? '・' + ago(NEWS.updatedAt) + '更新' : ''}</span></h2>${newsList(50)}
-    <p class="src-note">新聞由 Google 新聞彙整各家媒體，同一事件合併為一則；點標題會開啟原媒體網頁。</p></section>`;
+  return `<div class="pagehead" style="--k:${KIND.news.color}"><span class="kind">新聞</span><b>熱門移工新聞</b><span class="n">近 ${NEWS?.days || 3} 天・依報導媒體數排序${NEWS?.updatedAt ? '・' + ago(NEWS.updatedAt) + '更新' : ''}</span></div>`
+    + newsList(50) + '<p class="src-note">新聞由 Google 新聞彙整各家媒體，同一事件合併為一則；點標題會開啟原媒體網頁。</p>';
 }
 
-function helpView(){
+// ---------- 工具箱（專線、辦事處、行事曆、數字） ----------
+function toolsView(){
   if (!INFO) return '<div class="empty">載入中…</div>';
   const m = new Date().getMonth() + 1;
   const hot = INFO.hotlines.map(h => `<a class="li" href="tel:${h.tel}"><span class="ic">${h.icon}</span><span class="tx"><b>${esc(h.name)}</b><small>${esc(h.desc)}</small></span><span class="no">${esc(h.no)}</span></a>`).join('');
   const off = INFO.offices.map(o => `<a class="li" href="tel:${o.tel.replace(/-/g,'')}"><span class="ic">${o.flag}</span><span class="tx"><b>${esc(o.name)}</b><small>${esc(o.addr)}</small></span><span class="no">${esc(o.tel)}</span></a>`).join('');
-  // 有「next」的數字（例如明年最低工資）：生效日一到自動換成新數字，之前先預告
   const todayStr = ymd(new Date());
   const numRow = x => {
     const live = x.next && todayStr >= x.next.from ? { ...x, ...x.next } : x;
@@ -530,35 +642,61 @@ function helpView(){
   const nums = INFO.numbers.map(gr => `<tr><th colspan="2">${esc(gr.group)}</th></tr>` + gr.items.map(numRow).join('')).join('');
   const evs = upcomingEvents(370).map(e => { const d = new Date(e.date + 'T00:00:00');
     return `<div class="li"><span class="ev-date"><b>${d.getMonth()+1}/${d.getDate()}</b><small>${e.left === 0 ? '今天' : `${e.left} 天後`}</small></span><span class="tx"><b>${e.icon} ${esc(e.name)}${e.approx ? ' <small style="display:inline;color:var(--warn)">預估</small>' : ''}</b><small>${e.note ? esc(e.note) + '・' : ''}${e.approx ? '實際日期依印尼宗教部公告，可能差 1 天・' : ''}建議宣導：${e.cats.map(esc).join('、')}</small></span></div>`; }).join('');
-  const sea = INFO.seasons.filter(s => s.months.length < 12).map(s => `<button class="li" style="width:100%;border-left:0;border-right:0;border-bottom:0;background:none;text-align:left;cursor:pointer" data-go-cat="${esc(s.cats[0])}"><span class="ic">${s.icon}</span><span class="tx"><b>${esc(s.name)}</b><small>${s.months.join('、')} 月・${s.cats.map(esc).join('、')}</small><span class="months">${Array.from({length:12},(_,i)=>`<i class="${s.months.includes(i+1)?'on':''} ${i+1===m?'now':''}"></i>`).join('')}</span></span></button>`).join('');
-  return `
-    <section class="blk"><h2>☎️ 求助專線<span class="n">點一下直接撥打</span></h2><div class="list">${hot}</div></section>
-    <section class="blk"><h2>🏳️ 各國駐台辦事處</h2><div class="list">${off}</div>
-      <p class="src-note">資料來源：<a href="${esc(INFO.officesSource)}" target="_blank" rel="noopener">移民署 各國駐華辦事處聯絡資訊表</a></p></section>
-    <section class="blk" id="cal"><h2>📅 宣導行事曆<span class="n">節慶前後是宣導好時機</span></h2><div class="list">${evs}</div>
-      <h2 style="margin-top:16px">🌦️ 季節宣導重點<span class="n">點一下看相關文宣</span></h2><div class="list">${sea}</div></section>
-    <section class="blk" id="nums"><h2>🔢 重要數字速查<span class="n">${esc(INFO.updated)} 更新</span></h2>
-      ${newNotices().length ? `<div class="notice"><b>📢 勞動部有新公告，下列數字可能已調整，待確認更新</b>${newNotices().slice(0,4).map(n => `<a href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.title)}<small>${esc(n.source)}・${esc((n.pubDate||'').slice(0,10))}</small></a>`).join('')}</div>` : ''}
-      <div class="list"><table class="nums">${nums}</table></div>
-      <p class="src-note">數字以勞動部最新公告為準：${INFO.numbersSources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join('、')}</p></section>`;
+  const sea = INFO.seasons.filter(s => s.months.length < 12).map(s => `<button class="li btnli" data-go-cat="${esc(s.cats[0])}"><span class="ic">${s.icon}</span><span class="tx"><b>${esc(s.name)}</b><small>${s.months.join('、')} 月・${s.cats.map(esc).join('、')}</small><span class="months">${Array.from({length:12},(_,i)=>`<i class="${s.months.includes(i+1)?'on':''} ${i+1===m?'now':''}"></i>`).join('')}</span></span></button>`).join('');
+  const notices = newNotices();
+  return `<div class="pagehead" style="--k:${KIND.tool.color}"><span class="kind">工具</span><b>專線與工具箱</b></div>
+    <div class="jump"><a href="#" data-anchor-only="hot">☎️ 專線</a><a href="#" data-anchor-only="off">🏳️ 辦事處</a><a href="#" data-anchor-only="cal">📅 行事曆</a><a href="#" data-anchor-only="nums">🔢 數字</a><button data-to-posters>❤️ 收藏 ${FAV.length}</button></div>`
+    + `<div id="hot">${panel('tool', '求助專線', `<div class="list">${hot}</div>`, '<span class="n">點一下直接撥打</span>')}</div>`
+    + `<div id="off">${panel('tool', '各國駐台辦事處', `<div class="list">${off}</div><p class="src-note">資料來源：<a href="${esc(INFO.officesSource)}" target="_blank" rel="noopener">移民署 各國駐華辦事處聯絡資訊表</a></p>`)}</div>`
+    + `<div id="cal">${panel('tool', '宣導行事曆', `<div class="list">${evs}</div>` + sub('🌦️ 季節宣導重點') + `<div class="list">${sea}</div>`, '<span class="n">日期每年自動推算</span>')}</div>`
+    + `<div id="nums">${panel('tool', '重要數字速查',
+        (notices.length ? `<div class="notice"><b>📢 勞動部有新公告，下列數字可能已調整，待確認更新</b>${notices.slice(0,4).map(n => `<a href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.title)}<small>${esc(n.source)}・${esc((n.pubDate||'').slice(0,10))}</small></a>`).join('')}</div>` : '')
+        + `<div class="list"><table class="nums">${nums}</table></div><p class="src-note">數字以勞動部最新公告為準：${INFO.numbersSources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join('、')}</p>`,
+        `<span class="n">${esc(INFO.updated)} 更新</span>`)}</div>`;
 }
 
-function favView(){
-  const gs = FAV.map(id => GROUPS.find(g => g.gid === id)).filter(Boolean);
-  return `<section class="blk"><h2>❤️ 我的收藏<span class="n">${gs.length} 則・存在這支手機</span></h2>
-    ${gs.length ? `<div class="grid">${gs.map(card).join('')}</div>` : '<div class="empty">還沒有收藏。<br>在文宣卡片按 ♡，常用的文宣就會出現在這裡。</div>'}</section>`;
+// ---------- 全站搜尋：文宣、聘僱、新聞、專線、法規一起找 ----------
+function searchView(){
+  const q = state.q.trim();
+  const terms = fold(q).split(/\s+/).filter(Boolean);
+  const hit = text => { const t = fold(text); return terms.every(x => t.includes(x)); };
+  const posters = filtered();
+  const guides = (GUIDES?.industries || []).filter(g => hit([g.name, g.short, ...g.who, ...g.quota, ...g.fee, ...g.wage, ...(g.notes||[])].join(' ')));
+  const steps = (GUIDES?.commonSteps || []).filter(s => hit(s.t + ' ' + s.d));
+  const news = (NEWS?.items || []).filter(n => hit(n.title + ' ' + n.sources.map(s => s.title).join(' ')));
+  const tools = [
+    ...(INFO?.hotlines || []).filter(h => hit(`${h.no} ${h.name} ${h.desc}`)).map(h => `<a class="li" href="tel:${h.tel}"><span class="ic">${h.icon}</span><span class="tx"><b>${esc(h.name)}</b><small>${esc(h.desc)}</small></span><span class="no">${esc(h.no)}</span></a>`),
+    ...(INFO?.offices || []).filter(o => hit(`${o.name} ${o.addr} ${o.tel}`)).map(o => `<a class="li" href="tel:${o.tel.replace(/-/g,'')}"><span class="ic">${o.flag}</span><span class="tx"><b>${esc(o.name)}</b><small>${esc(o.addr)}</small></span><span class="no">${esc(o.tel)}</span></a>`),
+    ...(INFO?.numbers || []).flatMap(g => g.items).filter(x => hit(`${x.label} ${x.note} ${x.value}`)).map(x => `<button class="li btnli" data-tab="tools" data-anchor="nums"><span class="ic">🔢</span><span class="tx"><b>${esc(x.label)}</b><small>${esc(x.note || '')}</small></span><span class="no">${esc(x.next && ymd(new Date()) >= x.next.from ? x.next.value : x.value)}</span></button>`),
+  ];
+  const laws = (LAWS?.items || []).filter(l => hit(l.title));
+  const total = posters.length + guides.length + steps.length + news.length + tools.length + laws.length;
+  const rc = relatedCats(q);
+  let html = `<div class="pagehead" style="--k:#475569"><span class="kind" style="background:#475569">搜尋</span><b>「${esc(q)}」</b><span class="n">共 ${total} 筆</span></div>`;
+  if (!total) return html + '<div class="empty">找不到相關內容，換個關鍵字試試<br><small>可以搜尋文宣主題、行業（製造業、看護）、新聞、專線號碼</small></div>';
+  if (guides.length || steps.length) html += panel('hire', `聘僱指南<span class="n">${guides.length + steps.length}</span>`,
+    `<div class="indlist">${guides.map(x => `<button class="indcard" data-guide="${x.id}"><b>${x.icon}</b><span><strong>${esc(x.name)}</strong><small>${esc(x.short)}</small></span><i>›</i></button>`).join('')}</div>`
+    + (steps.length ? `<ol class="steps">${steps.map(s => `<li><b>${hl(s.t)}</b><span>${hl(s.d)}</span></li>`).join('')}</ol>` : ''));
+  if (posters.length) html += panel('poster', `宣導文宣<span class="n">${posters.length}</span>`,
+    (rc.length ? `<p class="lead">也帶出類別：<b>${rc.map(esc).join('、')}</b>（含各國語言版本）</p>` : '') + `<div class="row">${posters.slice(0, 10).map(card).join('')}</div>`,
+    posters.length > 0 ? goBtn(`看全部 ${posters.length} 則`, 'data-search-posters') : '');
+  if (news.length) html += panel('news', `移工新聞<span class="n">${news.length}</span>`, `<ol class="newslist">${news.slice(0, 5).map((n, i) => `<li><span class="rank">${i+1}</span><div class="nbody"><a class="ntitle" href="${esc(n.link)}" target="_blank" rel="noopener">${hl(n.title)}</a><div class="nmeta">${esc(n.source)} · ${ago(n.pubDate)}</div></div></li>`).join('')}</ol>`);
+  if (tools.length) html += panel('tool', `專線與數字<span class="n">${tools.length}</span>`, `<div class="list">${tools.join('')}</div>`);
+  if (laws.length) html += panel('hire', `法規<span class="n">${laws.length}</span>`, `<div class="list">${laws.map(lawRow).join('')}</div>`);
+  return html;
 }
 
-// ---------- 篩選列 ----------
+// ---------- 篩選列（只在文宣分頁出現） ----------
 function renderFilters(){
   const el = document.getElementById('filters');
   el.hidden = state.tab !== 'posters';
   if (el.hidden) return;
   const count = fn => GROUPS.filter(fn).length;
   const agencies = [...new Set(GROUPS.map(g => g.agency))].sort();
-  el.innerHTML = LANG_ORDER.filter(l => l !== 'multi' && count(g => g.langs.includes(l))).map(l => `<span class="chip" data-k="lang" data-v="${l}" aria-pressed="${state.lang===l}">${FLAGS[l]} ${LANG_NAMES[l]}</span>`).join('')
-    + '<span class="sep"></span>'
+  el.innerHTML = `<span class="chip fav" data-k="fav" data-v="1" aria-pressed="${!!state.fav}">❤️ 收藏 ${FAV.length}</span><span class="sep"></span>`
     + DATA.categories.map(c => { const n = count(g => g.categories.includes(c.name)); return n ? `<span class="chip" data-k="cat" data-v="${esc(c.name)}" aria-pressed="${state.cat===c.name}">${c.icon||''} ${esc(c.name)}<span class="n">${n}</span></span>` : ''; }).join('')
+    + '<span class="sep"></span>'
+    + LANG_ORDER.filter(l => l !== 'multi' && count(g => g.langs.includes(l))).map(l => `<span class="chip" data-k="lang" data-v="${l}" aria-pressed="${state.lang===l}">${FLAGS[l]} ${LANG_NAMES[l]}</span>`).join('')
     + '<span class="sep"></span>'
     + [['img','圖片'],['pdf','PDF']].map(([v,t]) => `<span class="chip" data-k="type" data-v="${v}" aria-pressed="${state.type===v}">${t}</span>`).join('')
     + `<select class="chip" id="agency" aria-label="機關"><option value="">全部機關</option>${agencies.map(a => `<option ${state.agency===a?'selected':''}>${esc(a)}</option>`).join('')}</select>`;
@@ -566,61 +704,81 @@ function renderFilters(){
 }
 
 // ---------- 畫面更新與網址 ----------
+const VIEWS = { home: homeView, posters: postersView, hire: hireView, news: newsView, tools: toolsView, search: searchView };
 function render(){
   const out = document.getElementById('out');
-  if (!GROUPS.length && ['home','posters','fav'].includes(state.tab)) { out.innerHTML = '<div class="empty">載入中…</div>'; return; }
-  out.innerHTML = ({ home: homeView, posters: postersView, news: newsView, help: helpView, fav: favView }[state.tab] || homeView)();
+  if (!GROUPS.length && ['home','posters'].includes(state.tab)) { out.innerHTML = '<div class="empty">載入中…</div>'; return; }
+  PANEL_TAG = ['home', 'search'].includes(state.tab);
+  out.innerHTML = (VIEWS[state.tab] || homeView)();
   document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.tab === state.tab ? 'page' : 'false'));
   document.getElementById('foot').hidden = state.tab !== 'posters';
 }
 function update(mode){
   renderFilters(); render();
+  if (mode === 'none') return;
   const p = new URLSearchParams();
   if (state.tab !== 'home') p.set('tab', state.tab);
   if (state.tab === 'posters') for (const k of FILTER_KEYS) if (state[k]) p.set(k, state[k]);
+  if (state.tab === 'search' && state.q) p.set('q', state.q);
+  if (state.tab === 'hire' && state.guide) p.set('g', state.guide);
   const url = p.toString() ? `#${p}` : location.pathname + location.search;
-  if (mode === 'none') return;
   if (url !== (location.hash || location.pathname + location.search)) history[mode === 'replace' ? 'replaceState' : 'pushState'](null, '', url);
 }
 function go(tab, filters = {}, anchor){
-  Object.assign(state, { tab, limit: PAGE }, tab === 'posters' ? {} : {});
-  if (tab === 'posters') { for (const k of FILTER_KEYS) if (k !== 'q') state[k] = ''; Object.assign(state, filters); }
+  state.tab = tab; state.limit = PAGE;
+  if (tab === 'posters') { for (const k of FILTER_KEYS) state[k] = ''; Object.assign(state, filters); }
+  else if (tab !== 'search') state.q = '';
+  if (tab === 'hire') state.guide = filters.guide || '';
+  if (tab !== 'search') document.getElementById('q').value = '';
   update();
-  if (anchor) setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' }), 30);
+  if (anchor) setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
   else window.scrollTo({ top: 0 });
 }
 function readHash(){
   const p = new URLSearchParams(location.hash.slice(1));
-  state.tab = p.get('tab') || (p.get('q') || p.get('cat') || p.get('lang') ? 'posters' : 'home');
+  state.tab = p.get('tab') || (p.get('q') ? 'search' : 'home');
+  if (state.tab === 'fav') { state.tab = 'posters'; p.set('fav', '1'); }
+  if (state.tab === 'help') state.tab = 'tools';
   for (const k of FILTER_KEYS) state[k] = p.get(k) || '';
-  document.getElementById('q').value = state.q;
+  state.guide = p.get('g') || '';
+  document.getElementById('q').value = state.tab === 'search' ? state.q : '';
   return p.get('open');
 }
 
 // ---------- 事件 ----------
 document.addEventListener('click', e => {
-  const t = e.target;
-  const el = s => t.closest(s);
+  const el = s => e.target.closest(s);
   let x;
   if ((x = el('[data-open]'))) { e.preventDefault(); openSheet(GROUPS.find(g => g.gid === x.dataset.open)); return; }
   if (el('[data-close]')) { closeSheet(); return; }
   if ((x = el('[data-share]'))) { e.preventDefault(); share(GROUPS.find(g => g.gid === x.dataset.share)); return; }
-  if ((x = el('[data-fav]'))) { e.preventDefault(); toggleFav(x.dataset.fav); if (!document.getElementById('sheet').hidden) openSheet(GROUPS.find(g => g.gid === x.dataset.fav)); render(); return; }
-  if ((x = el('[data-go-lang]'))) { go('posters', { lang: x.dataset.goLang }); return; }
+  if ((x = el('[data-fav]'))) { e.preventDefault(); toggleFav(x.dataset.fav); if (!document.getElementById('sheet').hidden) openSheet(GROUPS.find(g => g.gid === x.dataset.fav)); render(); renderFilters(); return; }
   if ((x = el('[data-go-cat]'))) { go('posters', { cat: x.dataset.goCat }); return; }
-  if ((x = el('[data-tab]'))) { e.preventDefault(); if (x.dataset.tab === 'home') { state.q = ''; document.getElementById('q').value = ''; } go(x.dataset.tab, {}, x.dataset.anchor); return; }
+  if ((x = el('[data-guide]'))) { go('hire', { guide: x.dataset.guide }); return; }
+  if (el('[data-search-posters]')) { const q = state.q; go('posters', { q }); return; }
+  if ((x = el('[data-to-posters]'))) { go('posters', { fav: '1' }); return; }
+  if ((x = el('[data-anchor-only]'))) { e.preventDefault(); document.getElementById(x.dataset.anchorOnly)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+  if ((x = el('[data-tab]'))) { e.preventDefault(); go(x.dataset.tab, {}, x.dataset.anchor); return; }
   if ((x = el('.chip[data-k]'))) { state[x.dataset.k] = state[x.dataset.k] === x.dataset.v ? '' : x.dataset.v; state.limit = PAGE; update(); return; }
   if (el('[data-more]')) { state.limit += PAGE; render(); return; }
-  if (el('[data-reset]')) { for (const k of FILTER_KEYS) state[k] = ''; document.getElementById('q').value = ''; update(); return; }
+  if (el('[data-reset]')) { for (const k of FILTER_KEYS) state[k] = ''; update(); return; }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
-let typing;
+let typing, beforeSearch = 'home';
 document.getElementById('q').addEventListener('input', e => {
   clearTimeout(typing);
-  typing = setTimeout(() => { const wasPosters = state.tab === 'posters'; state.q = e.target.value; state.tab = 'posters'; state.limit = PAGE; update(wasPosters ? 'replace' : 'push'); }, 200);
+  typing = setTimeout(() => {
+    const v = e.target.value;
+    if (!v.trim()) { state.q = ''; if (state.tab === 'search') { state.tab = beforeSearch; update('replace'); } return; }
+    const first = state.tab !== 'search';
+    if (first) beforeSearch = state.tab;
+    if (first) for (const k of FILTER_KEYS) state[k] = '';
+    state.q = v; state.tab = 'search';
+    update(first ? 'push' : 'replace');
+  }, 220);
 });
 document.getElementById('form').addEventListener('submit', e => { e.preventDefault(); document.getElementById('q').blur(); });
-document.getElementById('clear').onclick = () => { document.getElementById('q').value = ''; state.q = ''; update('replace'); };
+document.getElementById('clear').onclick = () => { document.getElementById('q').value = ''; state.q = ''; if (state.tab === 'search') state.tab = beforeSearch; update('replace'); };
 window.addEventListener('popstate', () => { closeSheet(); const open = readHash(); update('none'); if (open) openSheet(GROUPS.find(g => g.gid === open)); });
 
 function renderReport(rep){
@@ -631,18 +789,16 @@ function renderReport(rep){
 }
 
 (async () => {
-  updateFavDot();
   const open = readHash();
   renderFilters(); render();
   const j = u => fetch(u + '?' + Date.now()).then(r => r.json());
-  const [cat, info, news, watch] = await Promise.allSettled([j('catalog.json'), j('info.json'), j('news.json'), j('watch.json')]);
-  if (cat.status === 'fulfilled') { DATA = cat.value; DATA.items ||= []; DATA.categories ||= []; }
-  if (info.status === 'fulfilled') INFO = info.value;
-  if (news.status === 'fulfilled') NEWS = news.value;
-  if (watch.status === 'fulfilled') WATCH = watch.value;
-  document.getElementById('helpdot').hidden = !newNotices().length;
+  const res = await Promise.allSettled(['catalog.json', 'info.json', 'news.json', 'watch.json', 'guides.json', 'laws.json'].map(j));
+  const val = i => res[i].status === 'fulfilled' ? res[i].value : null;
+  DATA = val(0) || DATA; DATA.items ||= []; DATA.categories ||= [];
+  INFO = val(1); NEWS = val(2); WATCH = val(3); GUIDES = val(4); LAWS = val(5);
   GROUPS = buildGroups(DATA.items);
   document.getElementById('updated').innerHTML = DATA.updatedAt ? `${GROUPS.length} 則文宣<br>${new Date(DATA.updatedAt).toLocaleDateString('zh-TW')} 更新` : '';
+  document.getElementById('toolsdot').hidden = !newNotices().length;
   update('none');
   if (open) openSheet(GROUPS.find(g => g.gid === open));
   j('report.json').then(renderReport).catch(() => {});
