@@ -62,27 +62,34 @@ const ART_RE = /^第\s*(\d+(?:\s*-\s*\d+)?)\s*條$/;
 function splitLaw(html) {
   const $ = cheerio.load(html);
   const out = [];
-  // 方法一：依網頁結構（章節標題 div.h3、條文 div.row > .col-no / .col-data）
+  // 方法一：依網頁結構（條文 div.row > .col-no / .col-data；章節標題是 .row 以外、文字為「第 N 章 名稱」的元素）
   const box = $('.law-reg-content').first();
   if (box.length) {
-    box.find('.h3, .row').each((_, el) => {
+    box.find('*').each((_, el) => {
       const $el = $(el);
-      if ($el.hasClass('row')) {
+      if ($el.hasClass('row') && $el.find('.col-no').length) {
         const no = clean($el.find('.col-no').first().text());
         const m = no.match(/第\s*(\d+(?:\s*-\s*\d+)?)\s*條/);
         if (!m) return;
         const lines = $el.find('.col-data [class^="line-"], .col-data [class*=" line-"]').map((_, l) => clean($(l).text())).get().filter(Boolean);
         out.push({ type: 'art', no: m[1].replace(/\s/g, ''), text: lines.length ? lines.join('\n') : clean($el.find('.col-data').text()) });
-      } else {
-        const h = clean($el.text()).replace(/\n/g, ' ');
-        const m = h.match(HEAD_RE);
-        if (m) out.push({ type: m[1], name: m[2].trim() });
+        return;
       }
+      if ($el.closest('.row').length) return;
+      if ($el.children().length && !$el.children().toArray().every((c) => /^(?:a|span|b|strong|font)$/i.test(c.tagName))) return;
+      const h = clean($el.text()).replace(/\n/g, ' ');
+      if (h.length > 60) return;
+      const m = h.match(HEAD_RE);
+      if (m && m[2] && out.at(-1)?.name !== m[2].trim()) out.push({ type: m[1], name: m[2].trim() });
     });
   }
   if (out.some((x) => x.type === 'art')) return out;
+  return splitText(html);
+}
 
-  // 方法二：網頁結構改了的備案——從純文字依「第 N 章／第 N 條」切開
+// 方法二：網頁結構改了的備案——從純文字依「第 N 章／第 N 條」切開
+function splitText(html) {
+  const $ = cheerio.load(html);
   $('script,style,noscript').remove();
   $('br').replaceWith('\n');
   $('div,p,li,tr,h1,h2,h3,h4,h5,a').each((_, el) => { $(el).append('\n'); });
@@ -105,7 +112,7 @@ function pickChapter(seq, chapter, section) {
   const arts = [];
   let inCh = false, inSec = !section;
   for (const x of seq) {
-    if (x.type === '章') { inCh = norm(x.name) === norm(chapter); inSec = !section; continue; }
+    if (x.type === '章') { inCh = norm(x.name) === norm(chapter) || norm(x.name).replace(/[（(].*$/, '') === norm(chapter); inSec = !section; continue; }
     if (x.type === '節') { if (section) inSec = inCh && norm(x.name) === norm(section); continue; }
     if (x.type === 'art' && inCh && inSec) arts.push({ no: x.no, text: x.text });
   }
@@ -152,12 +159,16 @@ async function main() {
       const html = htmlOf[s.pcode];
       if (!html) continue;
       seqOf[s.pcode] ||= splitLaw(html);
-      const arts = pickChapter(seqOf[s.pcode], s.chapter, s.section);
+      let arts = pickChapter(seqOf[s.pcode], s.chapter, s.section);
+      if (!arts.length) arts = pickChapter(splitText(html), s.chapter, s.section);
       const law = items.find((l) => l.pcode === s.pcode);
       if (!arts.length) {
         console.log(`  ⚠ ${g.name}：找不到「${s.chapter}${s.section ? '／' + s.section : ''}」（${s.pcode}）`);
         await fs.mkdir(DEBUG_DIR, { recursive: true });
-        await fs.writeFile(path.join(DEBUG_DIR, `${s.pcode}.txt`), JSON.stringify(seqOf[s.pcode].slice(0, 80), null, 1).slice(0, 40000));
+        const heads = seqOf[s.pcode].filter((x) => x.type !== 'art').map((x) => `${x.type} ${x.name}`).join('\n');
+        const at = html.indexOf(s.chapter);
+        const raw = at >= 0 ? html.slice(Math.max(0, at - 1500), at + 1500) : html.slice(html.indexOf('law-reg-content'), html.indexOf('law-reg-content') + 3000);
+        await fs.writeFile(path.join(DEBUG_DIR, `${s.pcode}-${g.id}.txt`), `找不到：${s.chapter} ${s.section || ''}\n\n偵測到的章節：\n${heads}\n\n原始 HTML 片段：\n${raw}`);
         continue;
       }
       parts.push({ pcode: s.pcode, law: law?.title || '', amended: law?.amended || null, url: `https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=${s.pcode}`, heading: s.section ? `${s.chapter}・${s.section}` : s.chapter, articles: arts });

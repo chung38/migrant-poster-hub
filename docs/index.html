@@ -107,6 +107,22 @@
   ol.steps span{display:block;font-size:13.5px;color:#3d4a50}
   .newb{display:inline-block;font-size:11px;font-weight:700;background:#e11d48;color:#fff;border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:1px}
 
+  .auto{margin-left:auto;font-size:11.5px;font-weight:600;color:#047857;background:#d1fae5;border-radius:999px;padding:2px 8px}
+  .notice.stale{background:#fff7ed;border-color:#fdba74;margin-top:10px}
+  .notice.stale span{display:block;font-size:12.5px;line-height:1.5;padding:2px 0}
+  .notice.stale small{margin-top:4px;color:#9a3412;font-weight:600}
+  .lawpart{margin:0 0 12px}
+  .lawpart > b{display:block;font-size:14px;line-height:1.45}
+  .lawpart > small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}
+  details.art{border:1px solid var(--line);border-radius:10px;margin-top:6px;background:#fff}
+  details.art summary{list-style:none;cursor:pointer;padding:9px 12px;display:flex;gap:8px;align-items:baseline;font-size:13.5px}
+  details.art summary::-webkit-details-marker{display:none}
+  details.art summary b{flex:none;color:var(--k)}
+  details.art summary span{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  details.art[open] summary span{display:none}
+  .atext{padding:0 12px 11px;font-size:13.5px;line-height:1.7;color:#2d3a40}
+  .lawlink{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--k);text-decoration:none;font-weight:600}
+
   /* 工具箱 */
   .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
   .jump::-webkit-scrollbar{display:none}
@@ -305,7 +321,7 @@ const LANG_ORDER = ['zh','vi','id','th','en','multi'];
 const FILTER_KEYS = ['q','cat','agency','lang','type','fav'];
 const PAGE = 30;
 const state = { tab:'home', q:'', cat:'', agency:'', lang:'', type:'', fav:'', guide:'', limit:PAGE };
-let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null, GUIDES = null, LAWS = null;
+let DATA = { items:[], categories:[] }, GROUPS = [], NEWS = null, INFO = null, WATCH = null, GUIDES = null, LAWS = null, POLICY = null;
 
 const fold = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().normalize('NFC');
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -556,8 +572,10 @@ function homeView(){
   // 聘僱
   const inds = (GUIDES?.industries || []).map(g => `<button class="ind" data-guide="${g.id}"><b>${g.icon}</b><span>${esc(g.name)}</span></button>`).join('');
   const recentLaws = (LAWS?.items || []).filter(l => l.amended && daysAgo(l.amended) <= 120).slice(0, 2);
+  const recentPolicy = (POLICY?.items || []).slice(0, 2);
   const hirePanel = panel('hire', '聘僱指南',
     `<p class="lead">各行業聘僱移工的條件、名額、費用與申請流程</p><div class="inds">${inds}</div>`
+    + (recentPolicy.length ? sub('📢 勞動部最新政策公告') + `<div class="list">${recentPolicy.map(policyRow).join('')}</div>` : '')
     + (recentLaws.length ? sub('📜 最近修正的法規') + `<div class="list">${recentLaws.map(lawRow).join('')}</div>` : ''),
     goBtn('看流程', 'data-tab="hire"'));
 
@@ -597,27 +615,71 @@ const ul = arr => arr?.length ? `<ul class="pts">${arr.map(x => `<li>${esc(x)}</
 function stepsHtml(){
   return `<ol class="steps">${(GUIDES?.commonSteps || []).map(s => `<li><b>${esc(s.t)}</b><span>${esc(s.d)}</span></li>`).join('')}</ol>`;
 }
+// 勞動部「政策法令」公告（crawler/policy.js 每天更新），依行業關鍵字分類
+const pDate = p => p.date || (p.seenAt || '').slice(0, 10);
+const slash = d => d.replace(/-/g, '/');
+const indsOfPolicy = p => (GUIDES?.industries || []).filter(g => g.kw && new RegExp(g.kw).test(p.title)).map(g => g.id);
+function policyFor(g){
+  const all = POLICY?.items || [];
+  return { mine: all.filter(p => new RegExp(g.kw).test(p.title)), general: all.filter(p => !indsOfPolicy(p).length) };
+}
+function policyRow(p){
+  const d = pDate(p), fresh = d && daysAgo(d) <= 30;
+  return `<a class="li" href="${esc(p.url)}" target="_blank" rel="noopener"><span class="ic">📢</span><span class="tx"><b>${hl(p.title)}${fresh ? ' <span class="newb">NEW</span>' : ''}</b><small>${d ? slash(d) + ' 勞動部公告' : ''}</small></span><span class="no">›</span></a>`;
+}
+// 比重點整理日期還新的法條修正或公告 → 提醒「重點整理可能過期」
+function staleFor(g){
+  const since = GUIDES.updated, out = [];
+  const ch = LAWS?.chapters?.[g.id];
+  if (ch?.changedAt && ch.changedAt > since) out.push(`${slash(ch.changedAt)} 偵測到法條內容變動`);
+  const laws = [...lawsFor(g.laws), ...(ch?.parts || []).map(x => ({ title: x.law, amended: x.amended }))];
+  for (const l of laws) if (l.amended && l.amended > since) out.push(`${slash(l.amended)} 修正「${l.title}」`);
+  const pf = policyFor(g);
+  for (const p of [...pf.mine, ...pf.general]) { const d = pDate(p); if (d && d > since) out.push(`${slash(d)} 勞動部公告：${p.title}`); }
+  return [...new Set(out)];
+}
+function staleBox(list){
+  if (!list.length) return '';
+  return `<div class="notice stale"><b>⚠️ 有比這份整理更新的規定，下方重點可能還沒跟上</b>${list.slice(0, 4).map(x => `<span>・${esc(x)}</span>`).join('')}<small>請以「官方最新公告」和「法條原文」為準</small></div>`;
+}
+function articlesHtml(ch){
+  return ch.parts.map(pt => `<div class="lawpart"><b>${esc(pt.law)}</b><small>${esc(pt.heading)}・${pt.articles.length} 條${pt.amended ? `・最新修正 ${slash(pt.amended)}` : ''}</small>
+    ${pt.articles.map(a => `<details class="art"><summary><b>第 ${esc(a.no)} 條</b><span>${esc(a.text.split('\n')[0].slice(0, 40))}</span></summary><div class="atext">${esc(a.text).replace(/\n/g, '<br>')}</div></details>`).join('')}
+    <a class="lawlink" href="${esc(pt.url)}" target="_blank" rel="noopener">到全國法規資料庫看全文 ›</a></div>`).join('');
+}
 function hireView(){
   if (!GUIDES) return '<div class="empty">載入中…</div>';
   const g = GUIDES.industries.find(x => x.id === state.guide);
   const links = `<div class="list">${GUIDES.links.map(l => `<a class="li" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="ic">🔗</span><span class="tx"><b>${esc(l.name)}</b></span><span class="no">›</span></a>`).join('')}</div>`;
-  const note = `<p class="src-note">⚠️ ${esc(GUIDES.disclaimer)}（整理日期 ${esc(GUIDES.updated)}）</p>`;
+  const note = `<p class="src-note">⚠️ ${esc(GUIDES.disclaimer)}（重點整理日期 ${esc(GUIDES.updated)}）</p>`;
+  const auto = when => `<span class="auto">🔄 自動更新${when ? '・' + when : ''}</span>`;
+  const lawWhen = LAWS?.checkedAt ? new Date(LAWS.checkedAt).toLocaleDateString('zh-TW') : '';
+  const polWhen = POLICY?.checkedAt ? new Date(POLICY.checkedAt).toLocaleDateString('zh-TW') : '';
   if (g) {
+    const pf = policyFor(g), ch = LAWS?.chapters?.[g.id];
+    const pol = [...pf.mine.slice(0, 5), ...pf.general.slice(0, 3)];
     return `<div class="pagehead" style="--k:${KIND.hire.color}"><button class="back" data-guide="">‹</button><span class="kind">聘僱</span><b>${g.icon} ${esc(g.name)}</b></div>`
+      + staleBox(staleFor(g))
+      + `<p class="lead">📝 前面是重點整理（${esc(GUIDES.updated)}）；最下面的「官方最新公告」與「法條原文」每天自動更新。</p>`
       + panel('hire', '誰可以申請', ul(g.who))
       + panel('hire', '名額怎麼算', ul(g.quota))
       + panel('hire', '費用與薪資', sub('就業安定費') + ul(g.fee) + sub('薪資') + ul(g.wage))
       + (g.notes?.length ? panel('hire', '注意事項', ul(g.notes)) : '')
       + panel('hire', '申請流程', stepsHtml())
-      + panel('hire', '相關法規', `<div class="list">${lawsFor(g.laws).map(lawRow).join('')}</div><p class="src-note">修正日期每天自動從全國法規資料庫更新</p>`)
+      + panel('hire', '官方最新公告', pol.length ? `<div class="list">${pol.map(policyRow).join('')}</div>` : '<p class="lead">公告資料更新中…</p>', auto(polWhen))
+      + (ch?.parts?.length ? panel('hire', '法條原文', `<p class="lead">直接從全國法規資料庫同步，點條號展開全文。</p>${articlesHtml(ch)}`, auto(lawWhen)) : '')
+      + panel('hire', '相關法規', `<div class="list">${lawsFor(g.laws).map(lawRow).join('')}</div>`, auto(lawWhen))
       + panel('hire', '官方網站', links) + note;
   }
-  const inds = GUIDES.industries.map(x => `<button class="indcard" data-guide="${x.id}"><b>${x.icon}</b><span><strong>${esc(x.name)}</strong><small>${esc(x.short)}</small></span><i>›</i></button>`).join('');
+  const inds = GUIDES.industries.map(x => { const st = staleFor(x).length;
+    return `<button class="indcard" data-guide="${x.id}"><b>${x.icon}</b><span><strong>${esc(x.name)}${st ? ' <span class="newb">有新規定</span>' : ''}</strong><small>${esc(x.short)}</small></span><i>›</i></button>`; }).join('');
   const laws = (LAWS?.items || []).slice(0, 12);
+  const pol = (POLICY?.items || []).slice(0, 8);
   return `<div class="pagehead" style="--k:${KIND.hire.color}"><span class="kind">聘僱</span><b>聘僱移工指南</b></div>`
     + panel('hire', '選擇行業', `<div class="indlist">${inds}</div>`)
+    + (pol.length ? panel('hire', '勞動部最新政策公告', `<div class="list">${pol.map(policyRow).join('')}</div>`, auto(polWhen)) : '')
     + panel('hire', '共通申請流程', stepsHtml())
-    + panel('hire', '移工相關法規', laws.length ? `<div class="list">${laws.map(lawRow).join('')}</div><p class="src-note">每天自動檢查最新修正日期，${LAWS?.checkedAt ? new Date(LAWS.checkedAt).toLocaleDateString('zh-TW') + ' 更新' : ''}</p>` : '<div class="empty">法規清單更新中…</div>')
+    + panel('hire', '移工相關法規', laws.length ? `<div class="list">${laws.map(lawRow).join('')}</div>` : '<div class="empty">法規清單更新中…</div>', auto(lawWhen))
     + panel('hire', '官方網站', links) + note;
 }
 
@@ -670,7 +732,16 @@ function searchView(){
     ...(INFO?.numbers || []).flatMap(g => g.items).filter(x => hit(`${x.label} ${x.note} ${x.value}`)).map(x => `<button class="li btnli" data-tab="tools" data-anchor="nums"><span class="ic">🔢</span><span class="tx"><b>${esc(x.label)}</b><small>${esc(x.note || '')}</small></span><span class="no">${esc(x.next && ymd(new Date()) >= x.next.from ? x.next.value : x.value)}</span></button>`),
   ];
   const laws = (LAWS?.items || []).filter(l => hit(l.title));
-  const total = posters.length + guides.length + steps.length + news.length + tools.length + laws.length;
+  const pols = (POLICY?.items || []).filter(p => hit(p.title));
+  const seenArt = new Set(), arts = [];
+  for (const [id, ch] of Object.entries(LAWS?.chapters || {})) for (const pt of ch.parts || []) for (const a of pt.articles) {
+    const key = pt.pcode + '#' + a.no;
+    if (seenArt.has(key) || !hit(a.text)) continue;
+    seenArt.add(key); arts.push({ id, pt, a });
+  }
+  const snip = t => { const f = fold(t), i = Math.max(0, f.indexOf(terms[0]) - 14); return (i ? '…' : '') + t.slice(i, i + 60).replace(/\n/g, ' ') + '…'; };
+  const artRows = arts.slice(0, 8).map(({ id, pt, a }) => `<button class="li btnli" data-guide="${id}"><span class="ic">📖</span><span class="tx"><b>${esc(pt.law.length > 24 ? pt.heading : pt.law)} 第 ${esc(a.no)} 條</b><small>${hl(snip(a.text))}</small></span><span class="no">›</span></button>`);
+  const total = posters.length + guides.length + steps.length + news.length + tools.length + laws.length + pols.length + arts.length;
   const rc = relatedCats(q);
   let html = `<div class="pagehead" style="--k:#475569"><span class="kind" style="background:#475569">搜尋</span><b>「${esc(q)}」</b><span class="n">共 ${total} 筆</span></div>`;
   if (!total) return html + '<div class="empty">找不到相關內容，換個關鍵字試試<br><small>可以搜尋文宣主題、行業（製造業、看護）、新聞、專線號碼</small></div>';
@@ -682,7 +753,8 @@ function searchView(){
     posters.length > 0 ? goBtn(`看全部 ${posters.length} 則`, 'data-search-posters') : '');
   if (news.length) html += panel('news', `移工新聞<span class="n">${news.length}</span>`, `<ol class="newslist">${news.slice(0, 5).map((n, i) => `<li><span class="rank">${i+1}</span><div class="nbody"><a class="ntitle" href="${esc(n.link)}" target="_blank" rel="noopener">${hl(n.title)}</a><div class="nmeta">${esc(n.source)} · ${ago(n.pubDate)}</div></div></li>`).join('')}</ol>`);
   if (tools.length) html += panel('tool', `專線與數字<span class="n">${tools.length}</span>`, `<div class="list">${tools.join('')}</div>`);
-  if (laws.length) html += panel('hire', `法規<span class="n">${laws.length}</span>`, `<div class="list">${laws.map(lawRow).join('')}</div>`);
+  if (laws.length || pols.length || arts.length) html += panel('hire', `法規與公告<span class="n">${laws.length + pols.length + arts.length}</span>`,
+    `<div class="list">${[...pols.slice(0, 5).map(policyRow), ...laws.map(lawRow), ...artRows].join('')}</div>`);
   return html;
 }
 
@@ -792,10 +864,10 @@ function renderReport(rep){
   const open = readHash();
   renderFilters(); render();
   const j = u => fetch(u + '?' + Date.now()).then(r => r.json());
-  const res = await Promise.allSettled(['catalog.json', 'info.json', 'news.json', 'watch.json', 'guides.json', 'laws.json'].map(j));
+  const res = await Promise.allSettled(['catalog.json', 'info.json', 'news.json', 'watch.json', 'guides.json', 'laws.json', 'policy.json'].map(j));
   const val = i => res[i].status === 'fulfilled' ? res[i].value : null;
   DATA = val(0) || DATA; DATA.items ||= []; DATA.categories ||= [];
-  INFO = val(1); NEWS = val(2); WATCH = val(3); GUIDES = val(4); LAWS = val(5);
+  INFO = val(1); NEWS = val(2); WATCH = val(3); GUIDES = val(4); LAWS = val(5); POLICY = val(6);
   GROUPS = buildGroups(DATA.items);
   document.getElementById('updated').innerHTML = DATA.updatedAt ? `${GROUPS.length} 則文宣<br>${new Date(DATA.updatedAt).toLocaleDateString('zh-TW')} 更新` : '';
   document.getElementById('toolsdot').hidden = !newNotices().length;
