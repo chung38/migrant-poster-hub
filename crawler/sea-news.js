@@ -23,9 +23,10 @@ const RAW = path.join(ROOT, 'data', 'sea-raw.json');
 const DEBUG = process.argv.includes('--debug');
 const DEBUG_DIR = path.join(ROOT, 'data', 'debug');
 
-const DAYS = 45;          // 保存與挑選的時間範圍
+const DAYS = 180;         // 保存與挑選的時間範圍（移工新聞不是天天有，放寬到半年，排序時越新越前面）
+const HALF_LIFE = 30;     // 新鮮度：每 30 天分數減半
 const PER_COUNTRY = 3;    // 每國顯示幾則
-const MIN_SCORE = 4;      // 至少幾分才算「移工新聞」
+const MIN_SCORE = 5;      // 至少幾分才算「移工新聞」（標題本身要有移工字眼，或內文大量提到）
 const MAX_DETAIL = 25;    // 每站每次最多打開幾篇內文
 const DELAY = 900;
 const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0; +https://chung38.github.io/migrant-poster-hub/)';
@@ -38,11 +39,14 @@ const SOURCES = [
     discover: /時政|时政|法律|經濟|经济|国际|國際|社會|社会|華人|华人|時事|时事/, // 從首頁選單自動找分類頁
     search: ['https://cn.sggp.org.vn/search/?q={q}', 'https://cn.sggp.org.vn/tim-kiem/?q={q}'],
     searchWords: ['劳务', '劳工', '务工'],
+    // 主要網站相關報導不足時，用 Google 新聞補同國其他華文媒體
+    extra: [{ host: 'zh.vietnamplus.vn', name: '越通社（華文）' }, { host: 'cn.nhandan.vn', name: '人民報（華文）' }],
   },
   {
     id: 'ph', country: '菲律賓', flag: '🇵🇭', name: '菲律賓商報', home: 'https://www.shangbao.com.ph/',
     lists: ['https://www.shangbao.com.ph/m/more/fgyw.html', 'https://www.shangbao.com.ph/fgyw/', 'https://www.shangbao.com.ph/'],
     discover: /菲國要聞|菲国要闻|要聞|要闻|社會|社会|時事|时事/,
+    extra: [{ host: 'worldnews.net.ph', name: '菲律賓世界日報' }],
   },
   {
     id: 'th', country: '泰國', flag: '🇹🇭', name: 'TCN 泰國新聞', home: 'https://thaichinesenews.com/',
@@ -50,6 +54,7 @@ const SOURCES = [
     article: /^https?:\/\/thaichinesenews\.com\/[a-z_]+\/\d+\/?$/,
     wordpress: 'https://thaichinesenews.com',
     searchWords: ['外勞', '移工', '勞工', '外籍', '勞動部'],
+    extra: [{ host: 'udnbkk.com', name: '泰國世界日報' }, { host: 'singsianyerpao.com', name: '星暹日報' }],
   },
   {
     id: 'id', country: '印尼', flag: '🇮🇩', name: '印尼商報', home: 'https://shangbaoindonesia.com/',
@@ -57,6 +62,7 @@ const SOURCES = [
     article: /^https?:\/\/(?:www\.)?shangbaoindonesia\.com\/read\/\d{4}\/\d{2}\/\d{2}\/[a-z0-9-]+-\d+/,
     search: ['https://shangbaoindonesia.com/search?q={q}'],
     searchWords: ['移民工人', '劳工', '外劳'],
+    extra: [{ host: 'guojiribao.com', name: '國際日報' }, { host: 'qiandaoribao.com', name: '千島日報' }],
   },
 ];
 
@@ -206,18 +212,21 @@ async function readArticle(url) {
   return { date, body, desc, title };
 }
 
-// Google 新聞 site: 搜尋（某站直接抓不到時的備案）
-async function googleSite(src, log) {
-  const host = new URL(src.home).host.replace(/^www\./, '');
-  const q = `site:${host} (勞工 OR 移工 OR 外勞 OR 劳工 OR 劳务 OR 务工) when:${DAYS}d`;
+// Google 新聞 site: 搜尋（主要網站的補充，以及同國其他華文媒體）
+async function googleSite(host, name, log) {
+  const q = `site:${host} (勞工 OR 移工 OR 外勞 OR 菲勞 OR 劳工 OR 劳务 OR 务工 OR 外劳 OR 移民工人) when:${DAYS}d`;
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`;
   try {
     const $ = cheerio.load(await get(url, 'application/rss+xml'), { xmlMode: true });
     const res = [];
-    $('item').each((_, it) => res.push({ url: $(it).find('link').text().trim(), title: clean($(it).find('title').text()).replace(/\s+-\s+[^-]+$/, ''), date: dateFrom(new Date($(it).find('pubDate').text()).toISOString()), via: 'google' }));
-    log.push(`google site: ${res.length}`);
+    $('item').each((_, it) => {
+      const src = clean($(it).find('source').text()) || name;
+      const title = clean($(it).find('title').text()).replace(new RegExp(`\\s+[-–]\\s+${src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`), '').replace(/\s+[-–]\s+[^-–]{1,20}$/, '');
+      res.push({ url: $(it).find('link').text().trim(), title, date: dateFrom(new Date($(it).find('pubDate').text()).toISOString()), via: 'google', source: name });
+    });
+    log.push(`google site:${host} ${res.length}`);
     return res;
-  } catch (e) { log.push(`google ✘ ${e.message}`); return []; }
+  } catch (e) { log.push(`google site:${host} ✘ ${e.message}`); return []; }
 }
 
 async function crawlSource(src, oldItems) {
@@ -238,7 +247,8 @@ async function crawlSource(src, oldItems) {
     try {
       const html = await get(url);
       const { links, nav, pages } = extractLinks(src, html, url);
-      links.forEach(add);
+      if (DEBUG && i === 1) { const $d = cheerio.load(html); log.push('頁尾連結：' + $d('a[href]').toArray().slice(-40).map((a) => `${clean($d(a).text()).slice(0, 12)}=${$d(a).attr('href')}`).join(' ')); }
+      links.forEach((x) => add(x));
       log.push(`${url} → ${links.length} 篇${nav.length ? `，選單 ${nav.length}` : ''}${pages.length ? `，下一頁 ${pages[0]}` : ''}`);
       if (i === 0) for (const n of nav.slice(0, 8)) if (!lists.includes(n)) lists.push(n);
       // 每個列表再往下翻一頁（只翻一層）
@@ -259,7 +269,10 @@ async function crawlSource(src, oldItems) {
       await sleep(DELAY);
     }
   }
-  (await googleSite(src, log)).forEach((x) => add(x, true));
+  for (const g of [{ host: new URL(src.home).host.replace(/^www\./, ''), name: src.name }, ...(src.extra || [])]) {
+    (await googleSite(g.host, g.name, log)).forEach((x) => add(x, true));
+    await sleep(DELAY);
+  }
 
   // 轉繁體、打分數
   const cands = [...found.values()].map((x) => ({ ...x, title: tw(x.title), desc: tw(x.desc || '') }))
@@ -285,8 +298,9 @@ async function crawlSource(src, oldItems) {
     const bonus = r ? score(x.title, (r.body || '') + ' ' + desc) - score(x.title, desc) : (old?.bonus || 0);
     const s = score(x.title, desc) + bonus;
     // Google 搜尋來的（打不開內文）：只要標題有移工字眼就收
-    const ok = s >= MIN_SCORE || (x.via === 'google' && s >= 3);
-    if (ok && (!date || ageDays(date) <= DAYS)) items.push({ url: x.url, title: x.title, date, desc: desc.slice(0, 160), score: s, bonus, via: x.via || 'site', firstSeen: old?.firstSeen || new Date(now).toISOString() });
+    const t = score(x.title);
+    const ok = x.via === 'google' ? t >= 4 : (t >= 4 && s >= MIN_SCORE) || s >= 8;
+    if (ok && (!date || ageDays(date) <= DAYS)) items.push({ url: x.url, title: x.title, date, desc: desc.slice(0, 160), score: s, bonus, via: x.via || 'site', source: x.source || src.name, firstSeen: old?.firstSeen || new Date(now).toISOString() });
   }
   if (DEBUG) {
     await fs.mkdir(DEBUG_DIR, { recursive: true });
@@ -320,13 +334,13 @@ async function main() {
     const all = dedupe([...map.values()].sort((a, b) => b.score - a.score));
     raw.sources[src.id] = all;
     // 重要度：相關分數 × 新鮮度（兩週減半）
-    const rank = (x) => x.score * Math.pow(0.5, ageDays(x.date || x.firstSeen?.slice(0, 10)) / 14);
+    const rank = (x) => x.score * (x.source === src.name ? 1.3 : 1) * Math.pow(0.5, ageDays(x.date || x.firstSeen?.slice(0, 10)) / HALF_LIFE);
     const top = [...all].sort((a, b) => rank(b) - rank(a)).slice(0, PER_COUNTRY);
     result.countries.push({ id: src.id, country: src.country, flag: src.flag, source: src.name, home: src.home,
-      items: top.map(({ url, title, date, desc }) => ({ url, title, date, desc })) });
+      items: top.map(({ url, title, date, desc, source }) => ({ url, title, date, desc, source: source || src.name })) });
     console.log(`${src.flag} ${src.country} ${src.name}：列表 ${res.total} 篇，相關 ${res.items.length}，累積 ${all.length}`);
     for (const l of res.log) console.log(`    ${l}`);
-    for (const x of top) console.log(`    ★ ${x.date || '----'} (${x.score}) ${x.title}`);
+    for (const x of top) console.log(`    ★ ${x.date || '----'} (${x.score}) ${x.title}【${x.source || src.name}】`);
   }
   await fs.mkdir(path.dirname(RAW), { recursive: true });
   await fs.writeFile(RAW, JSON.stringify(raw, null, 1) + '\n');
