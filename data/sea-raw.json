@@ -1,0 +1,102 @@
+{
+ "sources": {
+  "vn": [],
+  "vn2": [],
+  "ph": [
+   {
+    "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5ua1hOMGlkcEcyeW54UTJCWEt0SUd2NU5icHNYaEswd1ZvSVg0anM4N3daaHpYM05TaWk2RThVRGZfMDVUYVRqZVhSQnU5YURUX0M5emdLVDNBR2JBTTd2YldHN2w0M0k?oc=5",
+    "title": "菲持續調查三佳鋼鐵廠 指中國曾警告報復菲勞",
+    "date": "2026-08-14",
+    "desc": "",
+    "score": 4,
+    "bonus": 0,
+    "via": "google",
+    "source": "菲律賓商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   }
+  ],
+  "ph2": [],
+  "th": [
+   {
+    "url": "https://thaichinesenews.com/society/34329/",
+    "title": "泰勞工在以色列宿舍身亡待驗屍",
+    "date": "2026-08-19",
+    "desc": "【泰國新聞報導】一名在以色列工作的泰國勞工8月18日被發現死於住處，死因尚未確認，其武裡南府家屬正等待解剖結果 […]",
+    "score": 12,
+    "bonus": 4,
+    "via": "site",
+    "source": "TCN 泰國新聞",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   },
+   {
+    "url": "https://thaichinesenews.com/politics/34149/",
+    "title": "民主黨籲嚴查外資外勞搶工",
+    "date": "2026-08-17",
+    "desc": "【泰國新聞報導】泰國民主黨副發言人威於8月16日就外國資本與勞工湧入議題發聲，呼籲政府嚴格審查資金來源與經營合 […]",
+    "score": 6,
+    "bonus": 2,
+    "via": "site",
+    "source": "TCN 泰國新聞",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   }
+  ],
+  "th2": [],
+  "id": [
+   {
+    "url": "https://shangbaoindonesia.com/read/2026/09/28/kesra-1790603023",
+    "title": "SMK Go Global第二批開放 KP2MI提升移民工人能力",
+    "date": "2026-09-28",
+    "desc": "【本報訊】印尼移民工人保護部（KP2MI）於9月28日至10月31日開放2026年第二批“SMK走向全球” 提升移民工人能力項目報名。 印尼移民工人保護部部長穆赫塔魯丁表示：“我",
+    "score": 11,
+    "bonus": 2,
+    "via": "site",
+    "source": "印尼商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   },
+   {
+    "url": "https://shangbaoindonesia.com/read/2026/08/11/politics-1786455848",
+    "title": "KP2MI與IOM準備更新 移民工人保護合作協議",
+    "date": "2026-08-11",
+    "desc": "【本報訊】印尼移民工人保護部（KP2MI）與國際移民組織（IOM）正在籌備更新合作協議，以加強對海外印尼移民工人（PMI）的保護。 印尼移民工人保護部副部長克里斯蒂娜·阿里亞尼（",
+    "score": 11,
+    "bonus": 2,
+    "via": "site",
+    "source": "印尼商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   },
+   {
+    "url": "https://shangbaoindonesia.com/read/2026/07/24/society-1784898243",
+    "title": "印尼駐吉隆坡大使館 將198名移民工人遣返回國",
+    "date": "2026-07-24",
+    "desc": "【本報訊】印尼駐吉隆坡大使館（KBRI）協助將198名在馬來西亞半島多個移民倉庫的印尼移民工人（PMI）遣送回國。 印尼駐吉隆坡大使館禮賓與領事事務協調員維文（Octavin D",
+    "score": 11,
+    "bonus": 4,
+    "via": "site",
+    "source": "印尼商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   },
+   {
+    "url": "https://shangbaoindonesia.com/read/2026/09/09/politics-1788961503",
+    "title": "政府通過整合OSS 簡化外籍勞工許可流程",
+    "date": "2026-09-09",
+    "desc": "【本報訊】政府通過整合在線單一提交系統（OSS）作為統一入口，將外國勞工（TKA）的許可審批流程縮短至最多五天。 這一整合使企業能夠通過單一系統訪問的外國勞工許可服務，從而使審批",
+    "score": 11,
+    "bonus": 3,
+    "via": "site",
+    "source": "印尼商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   },
+   {
+    "url": "https://shangbaoindonesia.com/read/2026/07/24/metropolitan-1784904898",
+    "title": "雅加達警方破獲一起人口販賣案 已將至少105名印尼非法移民工人前往利比亞",
+    "date": "2026-07-24",
+    "desc": "【本報訊】雅加達都會警察廳刑事調查總局破獲一起涉嫌非法派遣印尼移民工人前往利比亞的販賣人口案件，犯罪網絡從中獲利高達116億盾。 “根據調查和賬戶交易追蹤，我們發現資金流水總額達",
+    "score": 10,
+    "bonus": 3,
+    "via": "site",
+    "source": "印尼商報",
+    "firstSeen": "2026-11-10T23:31:52.965Z"
+   }
+  ]
+ }
+}
