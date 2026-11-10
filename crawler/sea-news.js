@@ -184,7 +184,7 @@ async function wordpressLinks(src, log) {
     try {
       if (!(await allowed(url))) { log.push(`robots 不允許 ${url}`); break; }
       const arr = JSON.parse(await get(url, 'application/json'));
-      for (const p of arr) res.push({ url: p.link, title: clean(cheerio.load(p.title?.rendered || '').text()), date: (p.date || '').slice(0, 10), desc: clean(cheerio.load(p.excerpt?.rendered || '').text()).slice(0, 300) });
+      for (const p of arr) res.push({ url: p.link, title: clean(cheerio.load(p.title?.rendered || '').text()), date: (p.date || '').slice(0, 10), desc: clean(cheerio.load(p.excerpt?.rendered || '').text()).slice(0, 300), hint: !!w });
       log.push(`wp ${w || '最新'} ${arr.length}`);
     } catch (e) { log.push(`wp ${w || '最新'} ✘ ${e.message}`); break; }
     await sleep(DELAY);
@@ -223,12 +223,13 @@ async function googleSite(src, log) {
 async function crawlSource(src, oldItems) {
   const log = [];
   const found = new Map();
-  const add = (x) => { if (x.url && x.title && !found.has(x.url)) found.set(x.url, x); };
+  const norm = (u) => { try { const x = new URL(u); [...x.searchParams.keys()].filter((k) => /^utm_|^fbclid$/.test(k)).forEach((k) => x.searchParams.delete(k)); return x.href; } catch { return u; } };
+  const add = (x, hint = false) => { if (!x.url || !x.title) return; x.url = norm(x.url); if (!found.has(x.url)) found.set(x.url, { ...x, hint }); else if (hint) found.get(x.url).hint = true; };
   const lists = [...src.lists];
   const visited = new Set();
   const isPage = new Set();
   let wpOk = false;
-  if (src.wordpress) { const wp = await wordpressLinks(src, log); wp.forEach(add); wpOk = wp.length > 0; }
+  if (src.wordpress) { const wp = await wordpressLinks(src, log); wp.forEach((x) => add(x, x.hint)); wpOk = wp.length > 0; }
   for (let i = 0; i < lists.length && i < 20 && !wpOk; i++) {
     const url = lists[i];
     if (visited.has(url)) continue;
@@ -251,21 +252,22 @@ async function crawlSource(src, oldItems) {
       if (!(await allowed(url))) { log.push(`robots 不允許 ${url}`); break; }
       try {
         const { links } = extractLinks(src, await get(url), url);
-        links.forEach(add);
+        links.forEach((x) => add(x, true));
         log.push(`search ${w} → ${links.length}`);
         if (!links.length) break;
       } catch (e) { log.push(`search ${url} ✘ ${e.message}`); break; }
       await sleep(DELAY);
     }
   }
-  (await googleSite(src, log)).forEach(add);
+  (await googleSite(src, log)).forEach((x) => add(x, true));
 
   // 轉繁體、打分數
   const cands = [...found.values()].map((x) => ({ ...x, title: tw(x.title), desc: tw(x.desc || '') }))
     .map((x) => ({ ...x, s0: score(x.title, x.desc) }));
   const oldByUrl = new Map(oldItems.map((x) => [x.url, x]));
   // 標題就很相關、或標題普通但有台灣／勞工字眼的，打開內文確認
-  const toRead = cands.filter((x) => x.s0 >= 2 && !oldByUrl.has(x.url) && x.via !== 'google').sort((a, b) => b.s0 - a.s0).slice(0, MAX_DETAIL);
+  const toRead = cands.filter((x) => (x.s0 >= 2 || x.hint) && !oldByUrl.has(x.url) && x.via !== 'google' && (!x.date || ageDays(x.date) <= DAYS))
+    .sort((a, b) => b.s0 - a.s0 || (b.date || '').localeCompare(a.date || '')).slice(0, MAX_DETAIL);
   const read = new Map();
   for (const x of toRead) {
     if (!(await allowed(x.url))) continue;
@@ -279,12 +281,16 @@ async function crawlSource(src, oldItems) {
     const r = read.get(x.url);
     const date = x.date || r?.date || old?.date || null;
     const desc = x.desc || r?.desc || old?.desc || '';
-    const s = old && !r ? Math.max(old.score, score(x.title, desc)) : score(x.title, (r?.body || '') + ' ' + desc);
-    if (s >= MIN_SCORE && (!date || ageDays(date) <= DAYS)) items.push({ url: x.url, title: x.title, date, desc: desc.slice(0, 160), score: s, via: x.via || 'site', firstSeen: old?.firstSeen || new Date(now).toISOString() });
+    // 內文加分另外存起來，之後重算分數不必再打開內文
+    const bonus = r ? score(x.title, (r.body || '') + ' ' + desc) - score(x.title, desc) : (old?.bonus || 0);
+    const s = score(x.title, desc) + bonus;
+    // Google 搜尋來的（打不開內文）：只要標題有移工字眼就收
+    const ok = s >= MIN_SCORE || (x.via === 'google' && s >= 3);
+    if (ok && (!date || ageDays(date) <= DAYS)) items.push({ url: x.url, title: x.title, date, desc: desc.slice(0, 160), score: s, bonus, via: x.via || 'site', firstSeen: old?.firstSeen || new Date(now).toISOString() });
   }
   if (DEBUG) {
     await fs.mkdir(DEBUG_DIR, { recursive: true });
-    await fs.writeFile(path.join(DEBUG_DIR, `sea-${src.id}.json`), JSON.stringify({ log, total: found.size, sample: cands.slice(0, 60).map((x) => `${x.s0} ${x.date || '-'} ${x.title} | ${x.url}`), matched: items.map((x) => `${x.score} ${x.date} ${x.title}`) }, null, 1));
+    await fs.writeFile(path.join(DEBUG_DIR, `sea-${src.id}.json`), JSON.stringify({ log, total: found.size, sample: cands.slice(0, 30).map((x) => `${x.s0} ${x.date || '-'} ${x.title} | ${x.url}`), hints: cands.filter((x) => x.hint || x.s0 >= 2).map((x) => `${x.s0}${read.has(x.url) ? '+' + (score(x.title, read.get(x.url).body) - x.s0) : ''} ${x.via || ''} ${x.date || '-'} ${x.title}`).slice(0, 120), matched: items.map((x) => `${x.score} ${x.date} ${x.title}`) }, null, 1));
   }
   return { items, log, total: found.size };
 }
