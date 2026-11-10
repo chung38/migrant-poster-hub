@@ -19,6 +19,8 @@ const GUIDES = path.join(ROOT, 'docs', 'guides.json');
 const CHANGES = path.join(ROOT, 'data', 'changes.md');
 const DEBUG_DIR = path.join(ROOT, 'data', 'debug');
 const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0)';
+// 條文擷取方式改版時加 1：改版後第一次執行只建立比對基準，不會誤報「法條有修正」
+const PARSER = 2;
 
 // 要掃描的法規代碼範圍
 const RANGES = [
@@ -179,7 +181,7 @@ async function main() {
     if (!parts.length) { if (old) chapters[g.id] = old; continue; }
     const hash = sha(JSON.stringify(parts.map((p) => p.articles)));
     let changedAt = old?.changedAt || null;
-    if (old?.hash && old.hash !== hash) {
+    if (old?.hash && old.hash !== hash && prev.parser === PARSER) {
       changedAt = today();
       const before = new Map((old.parts || []).flatMap((p) => p.articles.map((a) => [`${p.pcode}#${a.no}`, a.text])));
       const diff = parts.flatMap((p) => p.articles.filter((a) => before.get(`${p.pcode}#${a.no}`) !== a.text).map((a) => `- ${p.law} 第 ${a.no} 條${before.has(`${p.pcode}#${a.no}`) ? '（內容修改）' : '（新增）'}`));
@@ -188,7 +190,7 @@ async function main() {
     chapters[g.id] = { hash, changedAt, parts };
   }
 
-  await fs.writeFile(OUT, JSON.stringify({ checkedAt: new Date().toISOString(), items, chapters }, null, 1) + '\n');
+  await fs.writeFile(OUT, JSON.stringify({ checkedAt: new Date().toISOString(), parser: PARSER, items, chapters }, null, 1) + '\n');
   console.log(`法規：收錄 ${items.length} 部（讀取成功 ${ok}、失敗 ${fail}）`);
   for (const l of items) console.log(`  ${l.amended}  ${l.title}  (${l.pcode})`);
   for (const [id, c] of Object.entries(chapters)) console.log(`  條文 ${id}：${c.parts.map((p) => `${p.heading} ${p.articles.length} 條`).join('、')}${c.changedAt ? `（${c.changedAt} 變動）` : ''}`);
