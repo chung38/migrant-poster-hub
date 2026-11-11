@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-11-11T17:52:44.077Z",
- "days": 90,
+ "updatedAt": "2026-11-11T23:23:13.878Z",
+ "mode": "headline",
  "countries": [
   {
    "id": "vn",
@@ -11,24 +11,27 @@
    "items": [
     {
      "kind": "headline",
-     "url": "https://cn.sggp.org.vn/%E8%8B%8F%E6%9E%97%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E5%8F%8A%E5%A4%AB%E4%BA%BA%E4%BC%9A%E8%A7%81%E6%97%A5%E6%9C%AC%E5%A4%A9%E7%9A%87%E5%92%8C%E7%9A%87%E5%90%8E-post146171.html",
-     "title": "蘇林總書記、國家主席及夫人會見日本天皇和皇后",
+     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%8F%8A%E5%A4%AB%E4%BA%BA%E5%9C%86%E6%BB%A1%E7%BB%93%E6%9D%9F%E5%AF%B9%E6%97%A5%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%BC%8F%E8%AE%BF%E9%97%AE-post146179.html",
+     "title": "越南黨中央總書記、國家主席蘇林及夫人圓滿結束對日本的正式訪問",
      "date": null,
-     "source": "西貢解放日報（華文版）"
+     "source": "西貢解放日報（華文版）",
+     "hot": true
     },
     {
      "kind": "headline",
-     "url": "https://cn.sggp.org.vn/%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%92%8C%E5%A4%AB%E4%BA%BA%E5%8F%82%E8%A7%82%E8%B6%8A%E6%97%A5%E5%B0%8F%E5%9E%8B%E9%9B%95%E5%A1%91%E5%B1%95%E5%AF%B9%E8%AF%9D-post146145.html",
-     "title": "黨中央總書記、國家主席蘇林和夫人參觀越日小型雕塑展“對話”",
+     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E6%94%BF%E5%BA%9C%E6%80%BB%E7%90%86%E9%BB%8E%E6%98%8E%E5%85%B4%E5%B0%86%E5%87%BA%E5%B8%AD%E5%9C%A8%E8%8F%B2%E5%BE%8B%E5%AE%BE%E4%B8%BE%E8%A1%8C%E7%9A%84%E4%B8%9C%E7%9B%9F%E7%B3%BB%E5%88%97%E5%B3%B0%E4%BC%9A-post146183.html",
+     "title": "越南政府總理黎明興將出席在菲律賓舉行的東盟系列峰會",
      "date": null,
-     "source": "西貢解放日報（華文版）"
+     "source": "西貢解放日報（華文版）",
+     "hot": true
     },
     {
      "kind": "headline",
-     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%8E%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E9%AB%98%E5%B8%82%E6%97%A9%E8%8B%97%E4%B8%BE%E8%A1%8C%E4%BC%9A%E8%B0%88-post146094.html",
-     "title": "越南黨中央總書記、國家主席蘇林與日本首相高市早苗舉行會談",
+     "url": "https://cn.sggp.org.vn/%E8%83%A1%E5%BF%97%E6%98%8E%E5%B8%82%E4%B8%8E%E4%BF%84%E7%BD%97%E6%96%AF%E5%9C%A3%E5%BD%BC%E5%BE%97%E5%A0%A1%E5%B8%82%E7%BB%A7%E7%BB%AD%E6%B7%B1%E5%8C%96%E5%8F%8B%E5%A5%BD%E5%85%B3%E7%B3%BB%E4%B8%8E%E5%85%A8%E9%9D%A2%E5%90%88%E4%BD%9C-post146187.html",
+     "title": "胡志明市與俄羅斯聖彼得堡市繼續深化友好關係與全面合作",
      "date": null,
-     "source": "西貢解放日報（華文版）"
+     "source": "西貢解放日報（華文版）",
+     "hot": true
     }
    ]
   },
@@ -39,14 +42,6 @@
    "source": "菲律賓商報",
    "home": "https://www.shangbao.com.ph/",
    "items": [
-    {
-     "kind": "migrant",
-     "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5ua1hOMGlkcEcyeW54UTJCWEt0SUd2NU5icHNYaEswd1ZvSVg0anM4N3daaHpYM05TaWk2RThVRGZfMDVUYVRqZVhSQnU5YURUX0M5emdLVDNBR2JBTTd2YldHN2w0M0k?oc=5",
-     "title": "菲持續調查三佳鋼鐵廠 指中國曾警告報復菲勞",
-     "date": "2026-08-14",
-     "desc": "",
-     "source": "菲律賓商報"
-    },
     {
      "kind": "headline",
      "url": "https://www.shangbao.com.ph/fgyw/2026/11-12/208254.shtml",
@@ -60,6 +55,13 @@
      "title": "東盟與中國談判有進展 南海準則年底前難定案",
      "date": "2026-11-12",
      "source": "菲律賓商報"
+    },
+    {
+     "kind": "headline",
+     "url": "https://www.shangbao.com.ph/fgyw/2026/11-12/208252.shtml",
+     "title": "莎拉涉從GenCorp收取 214萬披索「資本返還」",
+     "date": "2026-11-12",
+     "source": "菲律賓商報"
     }
    ]
   },
@@ -71,25 +73,23 @@
    "home": "https://thaichinesenews.com/",
    "items": [
     {
-     "kind": "migrant",
-     "url": "https://thaichinesenews.com/society/34329/",
-     "title": "泰勞工在以色列宿舍身亡待驗屍",
-     "date": "2026-08-19",
-     "desc": "【泰國新聞報導】一名在以色列工作的泰國勞工8月18日被發現死於住處，死因尚未確認，其武裡南府家屬正等待解剖結果 […]",
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "kind": "migrant",
-     "url": "https://thaichinesenews.com/politics/34149/",
-     "title": "民主黨籲嚴查外資外勞搶工",
-     "date": "2026-08-17",
-     "desc": "【泰國新聞報導】泰國民主黨副發言人威於8月16日就外國資本與勞工湧入議題發聲，呼籲政府嚴格審查資金來源與經營合 […]",
+     "kind": "headline",
+     "url": "https://thaichinesenews.com/finance/39545/",
+     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
+     "date": "2026-11-11",
      "source": "TCN 泰國新聞"
     },
     {
      "kind": "headline",
-     "url": "https://thaichinesenews.com/finance/39545/",
-     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
+     "url": "https://thaichinesenews.com/finance/39532/",
+     "title": "7大家族聯手 打造曼谷東部新經濟中心",
+     "date": "2026-11-11",
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "kind": "headline",
+     "url": "https://thaichinesenews.com/society/39521/",
+     "title": "泰國《米其林指南》10年慶 入選餐廳破500家",
      "date": "2026-11-11",
      "source": "TCN 泰國新聞"
     }
@@ -103,25 +103,25 @@
    "home": "https://shangbaoindonesia.com/",
    "items": [
     {
-     "kind": "migrant",
-     "url": "https://shangbaoindonesia.com/read/2026/09/28/kesra-1790603023",
-     "title": "SMK Go Global第二批開放 KP2MI提升移民工人能力",
-     "date": "2026-09-28",
-     "desc": "【本報訊】印尼移民工人保護部（KP2MI）於9月28日至10月31日開放2026年第二批“SMK走向全球” 提升移民工人能力項目報名。 印尼移民工人保護部部長穆赫塔魯丁表示：“我",
-     "source": "印尼商報"
-    },
-    {
-     "kind": "migrant",
-     "url": "https://shangbaoindonesia.com/read/2026/09/09/politics-1788961503",
-     "title": "政府通過整合OSS 簡化外籍勞工許可流程",
-     "date": "2026-09-09",
-     "desc": "【本報訊】政府通過整合在線單一提交系統（OSS）作為統一入口，將外國勞工（TKA）的許可審批流程縮短至最多五天。 這一整合使企業能夠通過單一系統訪問的外國勞工許可服務，從而使審批",
-     "source": "印尼商報"
+     "kind": "headline",
+     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432443",
+     "title": "截至 2026 年第三季度 MYOH利潤增長 53%",
+     "date": "2026-11-12",
+     "source": "印尼商報",
+     "hot": true
     },
     {
      "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794404065",
-     "title": "印尼投資統籌機構承諾 30天內辦結中爪哇12個擬建工業園區的許可手續",
+     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432511",
+     "title": "WBSA瞄準多式聯運服務整合 帶來增長機遇",
+     "date": "2026-11-12",
+     "source": "印尼商報",
+     "hot": true
+    },
+    {
+     "kind": "headline",
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/hukum-1794413229",
+     "title": "沃諾索博銷燬非法應徵消費稅貨物 總價值達30.8億盾",
      "date": "2026-11-11",
      "source": "印尼商報"
     }
