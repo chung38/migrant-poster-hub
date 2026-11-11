@@ -181,6 +181,22 @@
   .calc-t tr.sum td{font-weight:700;border-top:1px solid var(--line)}
   .calc-t tr.net td{font-size:17px;font-weight:800;color:var(--k);border-top:2px solid var(--k)}
 
+
+  /* 卡片列左右移動 */
+  .rowwrap{position:relative}
+  .rowbtn{position:absolute;top:58px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.95);box-shadow:0 2px 10px rgba(0,0,0,.15);font-size:26px;line-height:1;padding:0 0 4px;cursor:pointer;color:var(--ink);display:none}
+  .rowbtn.l{left:-6px}
+  .rowbtn.r{right:-6px}
+  .rowbtn[hidden]{display:none!important}
+  .rowwrap::after{content:"";position:absolute;top:0;bottom:8px;right:0;width:28px;pointer-events:none;background:linear-gradient(90deg,transparent,var(--paper));opacity:0;transition:opacity .2s}
+  .rowwrap.more-r::after{opacity:1}
+  .row.dragging{scroll-snap-type:none;scroll-behavior:auto;cursor:grabbing;user-select:none}
+  .row img,.row a{-webkit-user-drag:none}
+  @media (hover:hover) and (pointer:fine){
+    .rowbtn{display:block}
+    .row{cursor:grab}
+  }
+
   /* 工具箱 */
   .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
   .jump::-webkit-scrollbar{display:none}
@@ -1054,7 +1070,48 @@ function render(){
   out.innerHTML = (VIEWS[state.tab] || homeView)();
   document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-current', t.dataset.tab === state.tab ? 'page' : 'false'));
   document.getElementById('foot').hidden = state.tab !== 'posters';
+  enhanceRows();
 }
+// 左右滑動的卡片列：電腦上加 ‹ › 按鈕，也可以用滑鼠按住拖曳（手機直接用手指滑）
+function enhanceRows(){
+  document.querySelectorAll('#out .row').forEach(row => {
+    if (row.parentElement.classList.contains('rowwrap')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'rowwrap';
+    row.before(wrap); wrap.append(row);
+    const mk = dir => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'rowbtn ' + (dir < 0 ? 'l' : 'r');
+      b.setAttribute('aria-label', dir < 0 ? '往左看' : '往右看'); b.textContent = dir < 0 ? '‹' : '›';
+      b.onclick = () => row.scrollBy({ left: dir * Math.max(160, row.clientWidth * 0.85), behavior: 'smooth' });
+      wrap.append(b); return b;
+    };
+    const l = mk(-1), r = mk(1);
+    const upd = () => {
+      const max = row.scrollWidth - row.clientWidth;
+      l.hidden = row.scrollLeft < 8; r.hidden = row.scrollLeft >= max - 8;
+      wrap.classList.toggle('more-l', !l.hidden); wrap.classList.toggle('more-r', !r.hidden);
+    };
+    row._upd = upd;
+    row.addEventListener('scroll', upd, { passive: true });
+    upd(); setTimeout(upd, 300);
+    // 滑鼠拖曳捲動（拖過就不觸發點擊）
+    let down = null, moved = false;
+    row.querySelectorAll('img,a').forEach(x => x.setAttribute('draggable', 'false'));
+    row.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = { x: e.clientX, left: row.scrollLeft }; moved = false; });
+    row.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - down.x;
+      if (Math.abs(dx) > 5) { moved = true; row.classList.add('dragging'); }
+      if (moved) row.scrollLeft = down.left - dx;
+    });
+    const end = () => { down = null; setTimeout(() => row.classList.remove('dragging'), 0); };
+    row.addEventListener('pointerup', end); row.addEventListener('pointerleave', end);
+    row.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    row.addEventListener('dragstart', e => e.preventDefault());
+  });
+}
+window.addEventListener('resize', () => document.querySelectorAll('#out .row').forEach(r => r._upd?.()));
 function update(mode){
   renderFilters(); render();
   if (mode === 'none') return;
