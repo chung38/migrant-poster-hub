@@ -140,6 +140,21 @@
   .seamini li:first-child{border-top:0}
   .seamini .flag{font-size:18px;line-height:1.3}
 
+
+  /* 應備文件清單 */
+  .ckbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+  .ckn{font-size:13px;color:var(--muted);margin-right:auto}
+  .ckn b{color:var(--k);font-size:15px}
+  .mini{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink)}
+  .mini.line{background:#06c755;border-color:#06c755;color:#fff}
+  .cks{display:grid;gap:6px}
+  .ck{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+  .ck input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--k)}
+  .ck b{display:block;font-size:14px;font-weight:600;line-height:1.45}
+  .ck small{display:block;font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:2px}
+  .ck:has(input:checked){background:#f1f5f9;border-color:#e2e8f0}
+  .ck:has(input:checked) b{text-decoration:line-through;color:var(--muted)}
+
   /* 工具箱 */
   .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
   .jump::-webkit-scrollbar{display:none}
@@ -669,6 +684,36 @@ function articlesHtml(ch){
     ${pt.articles.map(a => `<details class="art"><summary><b>第 ${esc(a.no)} 條</b><span>${esc(a.text.split('\n')[0].slice(0, 40))}</span></summary><div class="atext">${esc(a.text).replace(/\n/g, '<br>')}</div></details>`).join('')}
     <a class="lawlink" href="${esc(pt.url)}" target="_blank" rel="noopener">到全國法規資料庫看全文 ›</a></div>`).join('');
 }
+// ---------- 申請應備文件清單（可勾選、複製、LINE 傳送） ----------
+const CN = '一二三四五六七八九十';
+const cnNum = n => n <= 10 ? CN[n - 1] : n < 20 ? '十' + CN[n - 11] : String(n);
+let DOCS_DONE = {};
+try { DOCS_DONE = JSON.parse(localStorage.getItem('yici-docs') || '{}') || {}; } catch {}
+const saveDocs = () => { try { localStorage.setItem('yici-docs', JSON.stringify(DOCS_DONE)); } catch {} };
+const docKeys = g => g.docs.flatMap((grp, gi) => grp.items.map((_, ii) => `${g.id}:${gi}:${ii}`));
+function docsHtml(g){
+  const keys = docKeys(g), done = keys.filter(k => DOCS_DONE[k]).length;
+  const groups = g.docs.map((grp, gi) => sub(esc(grp.g)) + `<div class="cks">${grp.items.map((x, ii) => { const k = `${g.id}:${gi}:${ii}`;
+    return `<label class="ck"><input type="checkbox" data-ck="${k}" ${DOCS_DONE[k] ? 'checked' : ''}><span><b>${cnNum(ii + 1)}、${esc(x.t)}</b>${x.d ? `<small>${esc(x.d)}</small>` : ''}</span></label>`; }).join('')}</div>`).join('');
+  return `<div class="ckbar"><span class="ckn">已備齊 <b id="ckdone">${done}</b> / ${keys.length} 項</span><button class="mini" data-docs-copy="${g.id}">📋 複製清單</button><button class="mini line" data-docs-line="${g.id}">LINE 傳送</button><button class="mini" data-docs-reset="${g.id}" ${done ? '' : 'hidden'}>清除勾選</button></div>`
+    + groups + `<p class="src-note">${esc(GUIDES.docsNote || '')}</p>`;
+}
+function docsText(g){
+  const lines = [`申請${g.name}移工所需準備資料`];
+  g.docs.forEach(grp => { lines.push('', `【${grp.g}】`); grp.items.forEach((x, i) => lines.push(`${cnNum(i + 1)}、${x.t}${x.d ? `（${x.d}）` : ''}`)); });
+  lines.push('', `資料來源：移次搞定 ${location.origin}${location.pathname}#tab=hire&g=${g.id}`);
+  return lines.join('\n');
+}
+async function copyText(text){
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch {
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch {}
+    ta.remove(); return ok;
+  }
+}
+
 function hireView(){
   if (!GUIDES) return '<div class="empty">載入中…</div>';
   const g = GUIDES.industries.find(x => x.id === state.guide);
@@ -682,12 +727,14 @@ function hireView(){
     const pol = [...pf.mine.slice(0, 5), ...pf.general.slice(0, 3)];
     return `<div class="pagehead" style="--k:${KIND.hire.color}"><button class="back" data-guide="">‹</button><span class="kind">聘僱</span><b>${g.icon} ${esc(g.name)}</b></div>`
       + staleBox(staleFor(g))
+      + (g.docs?.length ? `<div class="jump"><a href="#" data-anchor-only="docs">📁 申請要準備的資料</a><a href="#" data-anchor-only="steps">🧭 申請流程</a></div>` : '')
       + `<p class="lead">📝 前面是重點整理（${esc(GUIDES.updated)}）；最下面的「官方最新公告」與「法條原文」每天自動更新。</p>`
       + panel('hire', '誰可以申請', ul(g.who))
       + panel('hire', '名額怎麼算', ul(g.quota))
       + panel('hire', '費用與薪資', sub('就業安定費') + ul(g.fee) + sub('薪資') + ul(g.wage))
       + (g.notes?.length ? panel('hire', '注意事項', ul(g.notes)) : '')
-      + panel('hire', '申請流程', stepsHtml())
+      + (g.docs?.length ? `<div id="docs">${panel('hire', '申請要準備的資料', docsHtml(g))}</div>` : '')
+      + `<div id="steps">${panel('hire', '申請流程', stepsHtml())}</div>`
       + panel('hire', '官方最新公告', pol.length ? `<div class="list">${pol.map(policyRow).join('')}</div>` : '<p class="lead">公告資料更新中…</p>', auto(polWhen))
       + (ch?.parts?.length ? panel('hire', '法條原文', `<p class="lead">直接從全國法規資料庫同步，點條號展開全文。</p>${articlesHtml(ch)}`, auto(lawWhen)) : '')
       + panel('hire', '相關法規', `<div class="list">${lawsFor(g.laws).map(lawRow).join('')}</div>`, auto(lawWhen))
@@ -759,7 +806,7 @@ function searchView(){
   const terms = fold(q).split(/\s+/).filter(Boolean);
   const hit = text => { const t = fold(text); return terms.every(x => t.includes(x)); };
   const posters = filtered();
-  const guides = (GUIDES?.industries || []).filter(g => hit([g.name, g.short, ...g.who, ...g.quota, ...g.fee, ...g.wage, ...(g.notes||[])].join(' ')));
+  const guides = (GUIDES?.industries || []).filter(g => hit([g.name, g.short, ...g.who, ...g.quota, ...g.fee, ...g.wage, ...(g.notes||[]), ...(g.docs||[]).flatMap(d => [d.g, ...d.items.map(x => x.t + ' ' + (x.d || ''))])].join(' ')));
   const steps = (GUIDES?.commonSteps || []).filter(s => hit(s.t + ' ' + s.d));
   const news = (NEWS?.items || []).filter(n => hit(n.title + ' ' + n.sources.map(s => s.title).join(' ')));
   const sea = seaItems().filter(n => hit(n.title + ' ' + (n.desc || '')));
@@ -873,6 +920,30 @@ document.addEventListener('click', e => {
   if (el('[data-reset]')) { for (const k of FILTER_KEYS) state[k] = ''; update(); return; }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+// 應備文件：勾選、複製、LINE 傳送、清除
+document.addEventListener('change', e => {
+  const k = e.target.dataset?.ck;
+  if (!k) return;
+  if (e.target.checked) DOCS_DONE[k] = 1; else delete DOCS_DONE[k];
+  saveDocs();
+  const g = GUIDES?.industries.find(x => x.id === k.split(':')[0]);
+  if (g) {
+    const n = docKeys(g).filter(x => DOCS_DONE[x]).length;
+    document.getElementById('ckdone').textContent = n;
+    document.querySelector('[data-docs-reset]').hidden = !n;
+    if (n === docKeys(g).length) toast('資料都備齊了 🎉');
+  }
+});
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-docs-copy],[data-docs-line],[data-docs-reset]');
+  if (!b) return;
+  const id = b.dataset.docsCopy || b.dataset.docsLine || b.dataset.docsReset;
+  const g = GUIDES?.industries.find(x => x.id === id);
+  if (!g) return;
+  if (b.dataset.docsCopy) toast(await copyText(docsText(g)) ? '已複製，可以直接貼到 LINE' : '複製失敗，請長按文字自行複製');
+  else if (b.dataset.docsLine) window.open('https://line.me/R/share?text=' + encodeURIComponent(docsText(g)), '_blank', 'noopener');
+  else { docKeys(g).forEach(k => delete DOCS_DONE[k]); saveDocs(); render(); setTimeout(() => document.getElementById('docs')?.scrollIntoView({ block: 'start' }), 0); }
+});
 let typing, beforeSearch = 'home';
 document.getElementById('q').addEventListener('input', e => {
   clearTimeout(typing);
