@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-10T23:56:56.787Z",
+ "updatedAt": "2026-11-11T06:08:37.133Z",
  "days": 90,
  "countries": [
   {
@@ -11,6 +11,13 @@
    "items": [
     {
      "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%92%8C%E5%A4%AB%E4%BA%BA%E5%8F%82%E8%A7%82%E8%B6%8A%E6%97%A5%E5%B0%8F%E5%9E%8B%E9%9B%95%E5%A1%91%E5%B1%95%E5%AF%B9%E8%AF%9D-post146145.html",
+     "title": "黨中央總書記、國家主席蘇林和夫人參觀越日小型雕塑展“對話”",
+     "date": null,
+     "source": "西貢解放日報（華文版）"
+    },
+    {
+     "kind": "headline",
      "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%8E%E6%97%A5%E6%9C%AC%E9%A6%96%E7%9B%B8%E9%AB%98%E5%B8%82%E6%97%A9%E8%8B%97%E4%B8%BE%E8%A1%8C%E4%BC%9A%E8%B0%88-post146094.html",
      "title": "越南黨中央總書記、國家主席蘇林與日本首相高市早苗舉行會談",
      "date": null,
@@ -20,13 +27,6 @@
      "kind": "headline",
      "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E9%99%85%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%B0%8A%E5%B4%87%E5%AE%AA%E6%B3%95%E5%92%8C%E6%B3%95%E5%BE%8B%E6%8E%A8%E5%8A%A8%E5%9B%BD%E5%AE%B6%E5%8F%91%E5%B1%95%E7%9A%84%E5%BB%BA%E8%AE%BE%E6%80%A7%E5%8A%A8%E5%8A%9B-post146022.html",
      "title": "越南黨中央總書記、國際主席蘇林：尊崇憲法和法律——推動國家發展的建設性動力",
-     "date": null,
-     "source": "西貢解放日報（華文版）"
-    },
-    {
-     "kind": "headline",
-     "url": "https://cn.sggp.org.vn/post-146009.html",
-     "title": "黨中央總書記、國家主席蘇林：建設現代化、安全、高效的煤炭行業",
      "date": null,
      "source": "西貢解放日報（華文版）"
     }
@@ -88,9 +88,9 @@
     },
     {
      "kind": "headline",
-     "url": "https://thaichinesenews.com/finance/39469/",
-     "title": "央行發行紀念鈔 12月21日開放兌換",
-     "date": "2026-11-10",
+     "url": "https://thaichinesenews.com/finance/39545/",
+     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
+     "date": "2026-11-11",
      "source": "TCN 泰國新聞"
     }
    ]
@@ -120,8 +120,8 @@
     },
     {
      "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794346016",
-     "title": "煤炭供應緩慢導致SIG水泥廠 蒙受170萬噸潛在產量損失",
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/financial-1794375111",
+     "title": "印尼交易所將300只HSC股票 剔除出綜合股價指數計算",
      "date": "2026-11-11",
      "source": "印尼商報"
     }
