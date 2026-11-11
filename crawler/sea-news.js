@@ -26,7 +26,7 @@ const DEBUG_DIR = path.join(ROOT, 'data', 'debug');
 
 const PER_COUNTRY = 3;    // 每國顯示幾則
 const HEAD_DAYS = 3;      // 只取最近幾天的（知道日期時）
-const PER_CATEGORY = 2;   // 同一分類最多幾則，讓頭條多樣一點
+const PER_CATEGORY = 1;   // 先每個分類各挑 1 則讓頭條多樣，不夠再補
 const DELAY = 900;
 const UA = 'Mozilla/5.0 (compatible; MigrantPosterHub/1.0; +https://chung38.github.io/migrant-poster-hub/)';
 
@@ -40,10 +40,13 @@ const SOURCES = [
     pages: ['https://www.shangbao.com.ph/m/more/fgyw.html'] },   // 菲國要聞
   { id: 'th', country: '泰國', flag: '🇹🇭', name: 'TCN 泰國新聞', home: 'https://thaichinesenews.com/',
     pages: ['https://thaichinesenews.com/'],
+    prefer: ['politics', 'society', 'finance'],   // 分類優先順序（網址裡的分類）
     article: /^https?:\/\/thaichinesenews\.com\/[a-z_]+\/\d+\/?$/,
     wordpress: 'https://thaichinesenews.com' },
   { id: 'id', country: '印尼', flag: '🇮🇩', name: '印尼商報', home: 'https://shangbaoindonesia.com/',
     pages: ['https://shangbaoindonesia.com/'],
+    prefer: ['politics', 'hukum', 'society', 'kesra', 'economy', 'metropolitan'],
+    useHot: false,   // 首頁的排行區塊是個股財經快訊，不當頭條
     article: /^https?:\/\/(?:www\.)?shangbaoindonesia\.com\/read\/\d{4}\/\d{2}\/\d{2}\/[a-z0-9-]+-\d+/ },
 ];
 
@@ -198,8 +201,11 @@ async function crawlSource(src) {
     const cat = categoryOf(l.url);
     return { url: l.url, title, date, cat, hot: l.hot, order: l.order, why: headSkip(title, cat, date) };
   });
-  // 熱門區塊優先，其次依頁面順序（＝網站編輯排的頭條）
-  const ok = cands.filter((x) => !x.why).sort((a, b) => (b.hot - a.hot) || (a.order - b.order));
+  // 排序：設定的分類優先順序 → 熱門區塊 → 頁面順序（＝網站編輯排的頭條）
+  const useHot = src.useHot !== false;
+  const pref = (x) => { const i = (src.prefer || []).findIndex((c) => x.cat.startsWith(c)); return i < 0 ? 99 : i; };
+  const ok = cands.filter((x) => !x.why).map((x) => ({ ...x, hot: useHot && x.hot }))
+    .sort((a, b) => (pref(a) - pref(b)) || (b.hot - a.hot) || (a.order - b.order));
   if (DEBUG) {
     await fs.mkdir(DEBUG_DIR, { recursive: true });
     await fs.writeFile(path.join(DEBUG_DIR, `sea-${src.id}.json`), JSON.stringify({ log, cands: cands.slice(0, 80).map((x) => `${x.hot ? '🔥' : '  '} ${x.why || 'OK'} ${x.date || '-'} [${x.cat}] ${x.title}`) }, null, 1));
