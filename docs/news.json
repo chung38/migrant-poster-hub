@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-11T08:19:13.650Z",
+ "updatedAt": "2026-11-11T17:25:37.389Z",
  "days": 3,
  "items": [
   {
@@ -20,6 +20,11 @@
      "title": "中壢火車站前3泰籍移工碰撞起衝突 警以優勢警力到場處置 2天查獲失聯移工3人"
     },
     {
+     "name": "UDN",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5XcHBRZ2tWOFVqVFItSmt6MjRrNGhFTlc5T281Uk5YQkR6X1FTSXdjNlNmb0RmX01YVjZvU1Jfc0J4YUNwdUsxZlI5OHpBcXgz?oc=5",
+     "title": "怎麼了？中壢火車站周邊爆衝突3泰籍移工遭警方帶回"
+    },
+    {
      "name": "自由時報",
      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1ncGs3ZUpaZFMxNUNDTzdoVHRrSXZDM3pOLTJjWnlTd0d6dHB1M0p3cVMzSFJXOWR5ZDl1bE1pd19yM2tIQmJLenl6QXJ1d0N6NDhFMGJJdzA3d1ZQTWVlbktfMmNLNkdF0gFuQVVfeXFMT0k4RnYxTnA3LVhlb2RCMndfdVFwYVc0Z2RYTWpTRzdpTEZUaEk4aUFjZGNvTG1HQW4xWnRvUU9LMVU2VlVwRnY3SjNhWXNTbXg5TDJUQ0dfYW5vRzVaTFF6SXRvUkRVWEY4X3N6WHc?oc=5",
      "title": "3泰籍移工互不相識 中壢站前因碰撞打起來！警速帶回"
@@ -28,11 +33,6 @@
      "name": "Yahoo新聞",
      "link": "https://news.google.com/rss/articles/CBMixAJBVV95cUxOc1NTS2ZvNThLWExoRVR0cFZKYTdMRE41b0RJNU1EcV9PNDB3TGhXSHlHcVd6N3BLZzFMZmllMVB0LWJzLWFmcjROV3l3Snl5clRldW9iaUpxem9xM0g0REdIbVMwVTJrOWpXNkhMSGI3MVk0d0pwTlo2bUFqcE1LNEZxb2ZQWnREZDhFOVhFNE1Ud2JieFlUQ0UtVlJ2X1pyUkV4UjhPUFRZbWdYdzA1MG9hNURETzAwOHVQNDdFV0kyTl9lcGc0eTk2aXlVQzdOdGpKSXkyblpnaHkxamJISEJYRDR6STlDQ19fak5kVWx2dE9KTURQX2tSTlJka21yd19HdVpIR013bkxSYUFNdDRkcmNham9aTmo4eDE0RHEwaWQwNGk4b2s3RUVoc2tMSWE1azVEbEtxY2FUcDhmYjRhWHk?oc=5",
      "title": "中壢火車站外泰籍移工互撞爆衝突 警壓制送辦"
-    },
-    {
-     "name": "PChome Online新聞",
-     "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNWmh0NlI4QlBfMnlfWTREWkR6UTRFS0M1SGlTMVZYdUhMVEFiMEhUUEZWNHB5VGtoTDFRMkZTT2NBN0N5NlNocVZoWjRRLUNqYzFYRFlBYzBCTzZsZTd1UHJvS3NWTFZILVBpRmlDMWp3bGVycENjYTdfZnZ1bHNFcGx5Zk1ycEE0eGc?oc=5",
-     "title": "中壢車站前擦撞變全武行！3泰籍移工當街開打警強勢壓制帶回- 社會新聞"
     }
    ],
    "score": 50
@@ -55,54 +55,29 @@
      "title": "聘外籍看護也能申請長照！奇美醫院推日照喘息服務 減輕家庭照顧壓力"
     },
     {
-     "name": "台灣民眾電子報",
-     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1FNmVaQUJVeWxkTVZCaFZtaGtpMlRJaEc2WFVhM24wRTFsOGl0NlJobU9ZdjMwMGpGR0hPWEtnZFA4aU1OZk1KUA?oc=5",
-     "title": "奇美復華日間照顧中心用心 外籍看護獲得喘息 譫妄阿嬤不再天天打罵人"
-    },
-    {
      "name": "樂上新聞網",
      "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5BX0NDMWQzQ0dnQ21EbndLdmE2czNnQThNUFYwbWJGYkpSVmpVZlM1b0MweWZLYVl2S05XbWZVaExVRDVkUnNLNFpNV1I?oc=5",
      "title": "86歲阿嬤一年換5名外籍看護 日照介入改善躁動、照顧不再孤軍奮戰"
-    }
-   ],
-   "score": 43.8
-  },
-  {
-   "title": "桃園龜山7移工遭警攔查跳車 4人落網3人逃逸",
-   "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE01QVFFMGVEU3hOOFlIcWFLN1lCQ2hqQWJoRWdvY0NzNzJkOFNmTElUMmdjM2oxaC1McG40aEVCcXZSb0ZDbE9GYnBibE1pU3YySGRIYThZTWZGbUltem42TtIBZkFVX3lxTFBJRi1GaXZadkpLODF3Y0w2M1NkcGFEd0F0Zk5vcHQ0dTBhYU93UGxnTVZqUnRILUNUMHY0RTF3aGp5bmdBWkp4UFdKMzF0MEZvNFBaZC1hQXVJellrMzVKNjJMdjU3QQ?oc=5",
-   "source": "新唐人電視台",
-   "pubDate": "2026-11-09T09:52:13.000Z",
-   "count": 3,
-   "sources": [
-    {
-     "name": "新唐人電視台",
-     "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE01QVFFMGVEU3hOOFlIcWFLN1lCQ2hqQWJoRWdvY0NzNzJkOFNmTElUMmdjM2oxaC1McG40aEVCcXZSb0ZDbE9GYnBibE1pU3YySGRIYThZTWZGbUltem42TtIBZkFVX3lxTFBJRi1GaXZadkpLODF3Y0w2M1NkcGFEd0F0Zk5vcHQ0dTBhYU93UGxnTVZqUnRILUNUMHY0RTF3aGp5bmdBWkp4UFdKMzF0MEZvNFBaZC1hQXVJellrMzVKNjJMdjU3QQ?oc=5",
-     "title": "桃園龜山7移工遭警攔查跳車 4人落網3人逃逸"
     },
     {
-     "name": "民視新聞網",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5zamFGRTZQSW5IWnZVSDlMQzI4NGgySkRXMHhWSGs5Z0czNFNyMHUySkhiTjBvMkdGdDBKSlFLZ1F2c2pfTGlIbTREWGUwNjlVMnNDdURGTTFIanVnZHpjMGVhYS04QzA?oc=5",
-     "title": "桃園廂型車滿載非法移工警上前攔查\"7人跳車狂逃\"－民視新聞- 民視新聞網"
-    },
-    {
-     "name": "年代電視",
-     "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNcFlESldyRDZFZVJoOGlkNXZSX3k3VjZpQUdhRk00aGFCaVR3T1dlY1pndkR5Q2dWWHRCeFVhNVN0c0hYVE8yaWxIMGY5WkRZRnRhQlYzSEZpd2ZsYVNrREVCRV8wX2tzM08wNmp2U19yQTFSMjNwb1BKSFRWWnJFZzY1NGVDSmM5Y19PTHY2OG1rWEotS0VMeXpVbWpuVi1rV1BwVG84cTlYOVI0ZXRwQjB1UkRpQUw4MHpsVVNUVnpjSVk?oc=5",
-     "title": "桃園逃逸移工塞廂型車遭警攔查...下秒鳥獸散光"
+     "name": "台灣民眾電子報",
+     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1FNmVaQUJVeWxkTVZCaFZtaGtpMlRJaEc2WFVhM24wRTFsOGl0NlJobU9ZdjMwMGpGR0hPWEtnZFA4aU1OZk1KUA?oc=5",
+     "title": "奇美復華日間照顧中心用心 外籍看護獲得喘息 譫妄阿嬤不再天天打罵人"
     }
    ],
-   "score": 30
+   "score": 42.3
   },
   {
-   "title": "116全國模範移工選拔開跑！邀雇主、仲介推薦優秀移工- 生活新聞",
-   "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxObnI4c01jWHAxdDdpcnNCY3AyV0thOF9keGg1VVRjczRZYnBmZjV3TTQweDdkbHREdG90c1M0ckNmOGxNVktzdWxpeFdRNzh6WVBJeVcteWU0SEwtc2ZMWnkydTUxamxnZmszcHpBaVFYNGUwVzN0ME5nd0luZkJJSUl0cVFyXzF0WHgw?oc=5",
-   "source": "PChome Online 新聞",
-   "pubDate": "2026-11-11T07:45:31.000Z",
+   "title": "[116全國模範移工選拔開跑邀雇主仲介推薦優秀移工]",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5aT2xOZHUwUWdoTzUta1QyWi1KZEtpUkxsVks3WUJGRUY0ZmVmS1dhTjlwdGVYcGxUbl9qYXhnX2FjMU1VcWhKcUg4ZWVvc3ZvQ1HSAVJBVV95cUxOWk9sTmR1MFFnaE81LWtUMlotSmRLaVJMbFZLN1lCRkVGNGZlZktXYU45cHRlWHBsVG5famF4Z19hYzFNVXFoSnFIOGVlb3N2b0NR?oc=5",
+   "source": "1111人力銀行-找工作",
+   "pubDate": "2026-11-11T07:45:00.000Z",
    "count": 2,
    "sources": [
     {
-     "name": "PChome Online 新聞",
-     "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxObnI4c01jWHAxdDdpcnNCY3AyV0thOF9keGg1VVRjczRZYnBmZjV3TTQweDdkbHREdG90c1M0ckNmOGxNVktzdWxpeFdRNzh6WVBJeVcteWU0SEwtc2ZMWnkydTUxamxnZmszcHpBaVFYNGUwVzN0ME5nd0luZkJJSUl0cVFyXzF0WHgw?oc=5",
-     "title": "116全國模範移工選拔開跑！邀雇主、仲介推薦優秀移工- 生活新聞"
+     "name": "1111人力銀行-找工作",
+     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5aT2xOZHUwUWdoTzUta1QyWi1KZEtpUkxsVks3WUJGRUY0ZmVmS1dhTjlwdGVYcGxUbl9qYXhnX2FjMU1VcWhKcUg4ZWVvc3ZvQ1HSAVJBVV95cUxOWk9sTmR1MFFnaE81LWtUMlotSmRLaVJMbFZLN1lCRkVGNGZlZktXYU45cHRlWHBsVG5famF4Z19hYzFNVXFoSnFIOGVlb3N2b0NR?oc=5",
+     "title": "[116全國模範移工選拔開跑邀雇主仲介推薦優秀移工]"
     },
     {
      "name": "勞動部勞動力發展署全球資訊網",
@@ -110,7 +85,7 @@
      "title": "看見移工的努力，也讓這份肯定被更多人看見 116年度全國模範移工選拔開跑"
     }
    ],
-   "score": 23.9
+   "score": 22.4
   },
   {
    "title": "開車載妻看台灣燈會撞死外籍移工！志願役士兵「無照害命」竟肇逃、拔牌",
@@ -130,7 +105,7 @@
      "title": "無照載妻看燈會竟撞死泰籍移工 志願役士兵肇逃拆車牌下場曝光"
     }
    ],
-   "score": 22.3
+   "score": 20.8
   },
   {
    "title": "嘉榮11月起新增週六移工健檢服務 打造多國語言友善醫療環境",
@@ -150,7 +125,7 @@
      "title": "嘉榮11月起 增週六的移工健檢服務"
     }
    ],
-   "score": 20.6
+   "score": 20
   },
   {
    "title": "看護移工失聯、懷孕誰來顧？雇主協會籲就業安定基金直接補助",
@@ -170,7 +145,7 @@
      "title": "看護移工失聯、懷孕誰來顧？雇主協會籲就業安定基金直接補助"
     }
    ],
-   "score": 20.2
+   "score": 20
   },
   {
    "title": "軍人駕車撞死違規穿越馬路移工嘉檢依肇逃罪嫌起訴",
@@ -190,13 +165,13 @@
      "title": "軍人無照駕駛撞違規穿越馬路移工 涉肇事逃逸被起訴"
     }
    ],
-   "score": 20.1
+   "score": 20
   },
   {
    "title": "聘僱移工前國內求才 線上申請優先審核！桃園籲雇主及仲介提前使用",
    "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB3eXFoMU5jQm53VDFNbWpfYUh5TGs4RC1rUmp2dE1FcTNab1JzN2dRdFVCNmtVYjItejlLWTJ3Z1BaQXYtdEdHb3NPSG91TkFMdFHSAVJBVV95cUxQd3lxaDFOY0Jud1QxTW1qX2FIeUxrOEQta1JqdnRNRXEzWm9SczdnUXRVQjZrVWIyLXo5S1kyd2dQWkF2LXRHR29zT0hvdU5BTHRR?oc=5",
    "source": "今傳媒 JNEWS",
-   "pubDate": "2026-11-09T12:32:09.000Z",
+   "pubDate": "2026-11-09T13:33:33.000Z",
    "count": 2,
    "sources": [
     {
@@ -205,8 +180,8 @@
      "title": "聘僱移工前國內求才 線上申請優先審核！桃園籲雇主及仲介提前使用"
     },
     {
-     "name": "觀傳媒",
-     "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE02V0Y0ODVWa0EtWnlwd1hGTUhya1lrX1NCcVNCVmloTlI3WlJ4NHpTZkhwSWpVTERna1YxSV85SXZrdWJRZ1F1a3pHVHZHNkI1VHFYbEdROA?oc=5",
+     "name": "LINE TODAY",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GSk9ja2lhZUJ3bVVoMlFWbWVwbi1HZlZNeWpubm4tYTh1NWk3cERtcWtYRTRkLTlhbGhxOXg5UUJzRENmbFhoVkxEeGN3OTg4RHU2MGxR?oc=5",
      "title": "桃園推移工求才數位化 線上申辦更便捷享優先審核"
     }
    ],
@@ -225,7 +200,22 @@
      "title": "少子化衝擊科技業人才供給 勞動部多管齊下：職訓、產學合作、國際攬才擴大人才庫"
     }
    ],
-   "score": 13.7
+   "score": 12.2
+  },
+  {
+   "title": "模範移工現身說法 見證公私攜手打造友善職場",
+   "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5QUXpJVGlxVU9Vd3FHdWY2VU9PbmttNXN1eTBZeFZ6Rjlsd2JXVjhHaVhQS0hMYl96Z25yU19PTmc2VDJNZlJUYlkzUk93TVZJY0t0TnI3Zk45bUdSbTd6VHAxckJyTDIxVWRlYTdGTlE?oc=5",
+   "source": "勞動部勞動力發展署全球資訊網",
+   "pubDate": "2026-11-11T06:38:45.000Z",
+   "count": 1,
+   "sources": [
+    {
+     "name": "勞動部勞動力發展署全球資訊網",
+     "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5QUXpJVGlxVU9Vd3FHdWY2VU9PbmttNXN1eTBZeFZ6Rjlsd2JXVjhHaVhQS0hMYl96Z25yU19PTmc2VDJNZlJUYlkzUk93TVZJY0t0TnI3Zk45bUdSbTd6VHAxckJyTDIxVWRlYTdGTlE?oc=5",
+     "title": "模範移工現身說法 見證公私攜手打造友善職場"
+    }
+   ],
+   "score": 12.2
   }
  ],
  "errors": []
