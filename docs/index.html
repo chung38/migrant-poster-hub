@@ -155,6 +155,32 @@
   .ck:has(input:checked){background:#f1f5f9;border-color:#e2e8f0}
   .ck:has(input:checked) b{text-decoration:line-through;color:var(--muted)}
 
+
+  /* 薪資試算 */
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+  .seg button{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px 6px;font-size:14px;font-weight:700;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:1px}
+  .seg button small{font-size:11.5px;font-weight:400;color:var(--muted)}
+  .seg button[aria-pressed="true"]{border-color:var(--k);background:color-mix(in srgb,var(--k) 8%,#fff);color:var(--k)}
+  .fields{display:grid;gap:8px}
+  .fld{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .fld > span{font-size:14px;font-weight:600;line-height:1.35}
+  .fld > span small{display:block;font-size:11.5px;font-weight:400;color:var(--muted)}
+  .fld em{font-style:normal;font-size:13.5px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:4px}
+  .fld input,.fld select{font:inherit;font-size:16px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--bg);color:var(--ink);min-width:0}
+  .fld > input{width:120px;text-align:right}
+  .fld em input{width:56px;text-align:right}
+  .fld > select{max-width:58%}
+  details.ded,details.rules{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;background:#fff}
+  details.ded summary,details.rules summary{cursor:pointer;font-size:14px;font-weight:700}
+  details.ded .fields{margin-top:8px}
+  details.rules ul{margin-top:8px}
+  .calc-base{font-size:13px;color:var(--muted);margin:12px 0 6px}
+  .calc-base b{color:var(--ink)}
+  .calc-t{width:100%;margin-bottom:8px}
+  .calc-t td small{display:block;font-size:11.5px;color:var(--muted);font-weight:400;line-height:1.45}
+  .calc-t tr.sum td{font-weight:700;border-top:1px solid var(--line)}
+  .calc-t tr.net td{font-size:17px;font-weight:800;color:var(--k);border-top:2px solid var(--k)}
+
   /* 工具箱 */
   .jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}
   .jump::-webkit-scrollbar{display:none}
@@ -773,6 +799,164 @@ function newsView(){
 }
 
 // ---------- 工具箱（專線、辦事處、行事曆、數字） ----------
+// ---------- 薪資與加班費試算（工具箱） ----------
+const CALC_DEF = { kind: 'ind', base: '', allow: '', wdH: '2', wdN: '', rdH: '8', rdN: '', hdH: '8', hdN: '', offN: '', tax: 'nr', board: '', svc: '0', other: '' };
+let CALC = { ...CALC_DEF };
+try { Object.assign(CALC, JSON.parse(localStorage.getItem('yici-calc') || '{}')); } catch {}
+const saveCalc = () => { try { localStorage.setItem('yici-calc', JSON.stringify(CALC)); } catch {} };
+// 從「重要數字速查」取目前適用的數字（到了生效日自動換新值）
+function numVal(label){
+  const today = ymd(new Date());
+  for (const gr of INFO?.numbers || []) for (const x of gr.items) if (x.label.includes(label)) {
+    const v = x.next && today >= x.next.from ? x.next.value : x.value;
+    return Number(String(v).replace(/[^\d.]/g, '')) || 0;
+  }
+  return 0;
+}
+const minWage = () => numVal('最低工資（月薪）') || 29500;
+const fmt = n => Math.round(n).toLocaleString('zh-TW');
+const MULT = { [4/3]: '1⅓', [5/3]: '1⅔', [8/3]: '2⅔' };
+// 投保級距：第一級＝最低工資，取「大於等於月薪」的最低一級
+function insured(amount, list){ const min = minWage(); const gs = [min, ...(list || []).filter(x => x > min)]; return gs.find(x => x >= amount) || gs[gs.length - 1]; }
+// 依時段倍數計算：tiers = [[到第幾小時, 倍數], ...]
+function tiered(hr, hours, tiers){
+  let prev = 0, sum = 0; const parts = [];
+  for (const [upto, mult] of tiers) {
+    const h = Math.max(0, Math.min(hours, upto) - prev);
+    if (h > 0) { sum += hr * mult * h; parts.push(`${h} 小時 ×${MULT[mult]}`); }
+    prev = upto;
+  }
+  return { sum, parts };
+}
+function calcResult(){
+  const P = INFO?.payroll || {};
+  const c = CALC, ind = c.kind === 'ind', n = v => Math.max(0, Number(v) || 0);
+  const mw = minWage();
+  const base = n(c.base) || (ind ? mw : (P.domBase || 20000));
+  const allow = ind ? n(c.allow) : 0;
+  const monthly = base + allow, hr = monthly / 240, day = monthly / 30;
+  const pay = [], ded = [], warn = [];
+  pay.push({ t: '月薪', d: allow ? `底薪 ${fmt(base)} ＋ 固定津貼 ${fmt(allow)}` : '', v: monthly });
+  let otPay = 0, otHours = 0, holidayDayPay = 0;
+  if (ind) {
+    const wdN = n(c.wdN), rdN = n(c.rdN), hdN = n(c.hdN);
+    if (wdN) {
+      const t = tiered(hr, n(c.wdH), [[2, 4/3], [4, 5/3]]), per = Math.ceil(t.sum);
+      pay.push({ t: '平日加班費', d: `每天 ${t.parts.join('＋')}，${fmt(per)} 元 × ${wdN} 天`, v: per * wdN });
+      otPay += per * wdN; otHours += n(c.wdH) * wdN;
+    }
+    if (rdN) {
+      const t = tiered(hr, n(c.rdH), [[2, 4/3], [8, 5/3], [12, 8/3]]), per = Math.ceil(t.sum);
+      pay.push({ t: '休息日加班費', d: `每次 ${t.parts.join('＋')}，${fmt(per)} 元 × ${rdN} 次`, v: per * rdN });
+      otPay += per * rdN; otHours += n(c.rdH) * rdN;
+    }
+    if (hdN) {
+      const extra = Math.max(0, n(c.hdH) - 8), t = tiered(hr, extra, [[2, 4/3], [4, 5/3]]), per = Math.ceil(day + t.sum);
+      pay.push({ t: '國定假日出勤', d: `每天加發 1 日工資 ${fmt(Math.ceil(day))}${extra ? `＋超過 8 小時 ${t.parts.join('＋')}` : ''}，× ${hdN} 天`, v: per * hdN });
+      holidayDayPay += Math.ceil(day) * hdN; otPay += (per - Math.ceil(day)) * hdN; otHours += extra * hdN;
+    }
+    if (base < mw) warn.push(`底薪低於最低工資 ${fmt(mw)} 元`);
+    if (otHours > (P.otMonthMax || 54)) warn.push(`本月加班 ${otHours} 小時，超過法定上限（每月 46 小時；經工會或勞資會議同意最多 54 小時）`);
+    else if (otHours > (P.otMonth || 46)) warn.push(`本月加班 ${otHours} 小時，超過 46 小時，須經工會或勞資會議同意（最多 54 小時、每 3 個月 138 小時）`);
+  } else {
+    const offN = n(c.offN);
+    if (offN) { const per = Math.ceil(day); pay.push({ t: '休假日出勤', d: `每天加發 1 日工資 ${fmt(per)}（月薪 ÷ 30）× ${offN} 天`, v: per * offN }); holidayDayPay += per * offN; }
+    if (base < (P.domBase || 20000)) warn.push(`低於家事移工新聘、續聘薪資 ${fmt(P.domBase || 20000)} 元`);
+  }
+  const gross = pay.reduce((s, x) => s + x.v, 0);
+  // 扣款
+  if (ind) { const ins = insured(monthly, P.liGrades); ded.push({ t: '勞保（自付）', d: `投保 ${fmt(ins)} × ${(P.liRate * 100).toFixed(1)}% × ${P.liEmp * 100}%；移工不適用就業保險`, v: Math.round(ins * P.liRate * P.liEmp) }); }
+  { const ins = ind ? insured(monthly, P.nhiGrades) : mw; ded.push({ t: '健保（自付）', d: `投保 ${fmt(ins)} × ${(P.nhiRate * 100).toFixed(2)}% × ${P.nhiEmp * 100}%`, v: Math.round(ins * P.nhiRate * P.nhiEmp) }); }
+  if (c.tax === 'nr') {
+    // 依法延長工時的加班費每月 46 小時內免稅；國定假日加發的 1 日工資要課稅
+    const freeRatio = otHours ? Math.min(1, (P.otMonth || 46) / otHours) : 1;
+    const taxable = monthly + holidayDayPay + otPay * (1 - freeRatio);
+    const rate = taxable <= mw * 1.5 ? P.taxLow : P.taxHigh;
+    ded.push({ t: '所得稅', d: `居留未滿 183 天：${fmt(taxable)} × ${rate * 100}%${rate === P.taxLow ? `（未超過最低工資 1.5 倍 ${fmt(mw * 1.5)}）` : ''}`, v: Math.round(taxable * rate) });
+  } else if (c.tax === 'res') ded.push({ t: '所得稅', d: '居留滿 183 天：依薪資扣繳稅額表，移工薪資多數不必扣', v: 0 });
+  else ded.push({ t: '所得稅', d: '雇主為個人（家庭類）不代扣，移工自行申報', v: 0 });
+  if (n(c.board)) ded.push({ t: '膳宿費', d: '依「入國工作費用及工資切結書」約定', v: n(c.board) });
+  if (n(c.svc)) ded.push({ t: '仲介服務費', d: '第 1／2／3 年起每月上限 1,800／1,700／1,500 元', v: n(c.svc) });
+  if (n(c.other)) ded.push({ t: '其他扣款', d: '', v: n(c.other) });
+  const dsum = ded.reduce((s, x) => s + x.v, 0);
+  return { ind, hr, day, pay, ded, gross, dsum, net: gross - dsum, warn, otHours };
+}
+function calcOutHtml(){
+  const r = calcResult();
+  const row = x => `<tr><td>${esc(x.t)}${x.d ? `<small>${esc(x.d)}</small>` : ''}</td><td class="v">${fmt(x.v)}</td></tr>`;
+  return (r.warn.length ? `<div class="notice stale">${r.warn.map(w => `<span>⚠️ ${esc(w)}</span>`).join('')}</div>` : '')
+    + `<div class="calc-base">${r.ind ? `時薪基準 <b>${r.hr.toFixed(2)}</b> 元（月薪 ÷ 240）・日薪 <b>${fmt(Math.ceil(r.day))}</b> 元・本月加班 <b>${r.otHours}</b> 小時` : `日薪 <b>${fmt(Math.ceil(r.day))}</b> 元（月薪 ÷ 30）`}</div>`
+    + `<table class="nums calc-t"><tr><th colspan="2">應發</th></tr>${r.pay.map(row).join('')}<tr class="sum"><td>應發合計</td><td class="v">${fmt(r.gross)}</td></tr>`
+    + `<tr><th colspan="2">扣款</th></tr>${r.ded.map(row).join('')}<tr class="sum"><td>扣款合計</td><td class="v">−${fmt(r.dsum)}</td></tr>`
+    + `<tr class="net"><td>實領</td><td class="v">${fmt(r.net)} 元</td></tr></table>`;
+}
+function calcText(){
+  const r = calcResult();
+  const L = [`【${r.ind ? '產業移工' : '家事移工'}薪資試算】`, r.ind ? `時薪基準 ${r.hr.toFixed(2)} 元（月薪÷240）` : `日薪 ${fmt(Math.ceil(r.day))} 元（月薪÷30）`, ''];
+  r.pay.forEach(x => L.push(`${x.t}：${fmt(x.v)}${x.d ? `（${x.d}）` : ''}`));
+  L.push(`應發合計：${fmt(r.gross)}`, '');
+  r.ded.forEach(x => L.push(`${x.t}：−${fmt(x.v)}`));
+  L.push(`扣款合計：−${fmt(r.dsum)}`, `實領：${fmt(r.net)} 元`);
+  if (r.warn.length) L.push('', ...r.warn.map(w => '⚠️ ' + w));
+  L.push('', `試算結果僅供參考｜移次搞定 ${location.origin}${location.pathname}#tab=tools`);
+  return L.join('\n');
+}
+function calcHtml(){
+  const c = CALC, ind = c.kind === 'ind', P = INFO?.payroll || {};
+  const opt = (k, list, fmtL = x => x) => `<select data-c="${k}">${list.map(v => `<option value="${v}" ${String(c[k]) === String(v) ? 'selected' : ''}>${fmtL(v)}</option>`).join('')}</select>`;
+  const num = (k, ph) => `<input type="number" inputmode="numeric" min="0" data-c="${k}" value="${esc(c[k] ?? '')}" placeholder="${ph}">`;
+  const hours = (from, to, step = 1) => Array.from({ length: Math.round((to - from) / step) + 1 }, (_, i) => +(from + i * step).toFixed(1));
+  const svc = P.svcFee || [1800, 1700, 1500];
+  return `<div class="seg"><button data-calc-kind="ind" aria-pressed="${ind}">🏭 產業移工<small>製造、營造、農漁等</small></button><button data-calc-kind="dom" aria-pressed="${!ind}">🏠 家事移工<small>家庭看護、幫傭</small></button></div>
+    <div class="fields">
+      <label class="fld"><span>月薪（底薪）</span>${num('base', ind ? fmt(minWage()) : fmt(P.domBase || 20000))}</label>
+      ${ind ? `<label class="fld"><span>固定津貼<small>全勤獎金、伙食津貼等每月固定發的，會算進加班費基準</small></span>${num('allow', '0')}</label>
+      <div class="fld ot"><span>平日加班</span><em>每天 ${opt('wdH', hours(0.5, 4, 0.5))} 小時 × ${num('wdN', '0')} 天</em></div>
+      <div class="fld ot"><span>休息日出勤<small>通常是週六</small></span><em>每次 ${opt('rdH', hours(1, 12))} 小時 × ${num('rdN', '0')} 次</em></div>
+      <div class="fld ot"><span>國定假日出勤</span><em>每次 ${opt('hdH', hours(1, 12))} 小時 × ${num('hdN', '0')} 天</em></div>`
+      : `<div class="fld ot"><span>休假日出勤<small>放棄休假在家工作的天數</small></span><em>${num('offN', '0')} 天</em></div>`}
+    </div>
+    <details class="ded"><summary>扣款設定（算實領）</summary><div class="fields">
+      <label class="fld"><span>所得稅</span>${opt('tax', ['nr', 'res', 'none'], v => ({ nr: '居留未滿 183 天（6%／18%）', res: '居留滿 183 天（多數免扣）', none: '雇主為個人，不代扣' })[v])}</label>
+      <label class="fld"><span>膳宿費<small>依切結書約定</small></span>${num('board', '0')}</label>
+      <label class="fld"><span>仲介服務費</span>${opt('svc', [0, ...svc], v => v ? `${fmt(v)} 元（第 ${svc.indexOf(v) + 1}${svc.indexOf(v) === svc.length - 1 ? ' 年起' : ' 年'}）` : '無')}</label>
+      <label class="fld"><span>其他扣款</span>${num('other', '0')}</label>
+    </div></details>
+    <div id="calcOut">${calcOutHtml()}</div>
+    <div class="ckbar"><span class="ckn">結果僅供參考</span><button class="mini" data-calc-copy>📋 複製結果</button><button class="mini line" data-calc-line>LINE 傳送</button><button class="mini" data-calc-reset>重設</button></div>
+    <details class="rules"><summary>📖 算法說明</summary><ul class="pts">
+      <li><b>時薪基準</b>＝月薪（含固定津貼等經常性給與）÷ 240（30 天 × 8 小時）</li>
+      <li><b>平日加班</b>：前 2 小時 ×1⅓，第 3～4 小時 ×1⅔；正常工時加加班每天最多 12 小時</li>
+      <li><b>休息日出勤</b>：前 2 小時 ×1⅓，第 3～8 小時 ×1⅔，第 9～12 小時 ×2⅔，工作時數全部算加班</li>
+      <li><b>國定假日出勤</b>：8 小時內加發 1 日工資（月薪 ÷ 30）；超過 8 小時，前 2 小時 ×1⅓、再 2 小時 ×1⅔</li>
+      <li><b>例假日</b>：除天災、事變或突發事件不得出勤；出勤要加發 1 日工資並補假</li>
+      <li><b>加班上限</b>：每月 46 小時；經工會或勞資會議同意，每月最多 54 小時、每 3 個月 138 小時</li>
+      <li><b>勞保</b>：移工不適用就業保險，自付＝投保薪資 × 11.5% × 20%；<b>健保</b>自付＝投保金額 × 5.17% × 30%；家事移工健保依最低工資投保</li>
+      <li><b>所得稅</b>：居留未滿 183 天，月薪總額未超過最低工資 1.5 倍扣 6%、超過扣 18%；依法加班的加班費每月 46 小時內免稅</li>
+      <li><b>家事移工</b>不適用勞基法，薪資、休假依勞動契約；休假日出勤通常加發 1 日工資</li>
+      <li>本試算依法定倍數（1⅓、1⅔）計算並無條件進位；不少公司以 1.34、1.67 計，金額會略高。實際以勞動契約與勞動部試算為準</li>
+    </ul></details>`;
+}
+document.addEventListener('input', e => {
+  const k = e.target.dataset?.c;
+  if (!k) return;
+  CALC[k] = e.target.value; saveCalc();
+  const out = document.getElementById('calcOut');
+  if (out) out.innerHTML = calcOutHtml();
+});
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-calc-kind],[data-calc-copy],[data-calc-line],[data-calc-reset]');
+  if (!b) return;
+  if (b.dataset.calcKind) {
+    if (CALC.kind === b.dataset.calcKind) return;
+    CALC.kind = b.dataset.calcKind; CALC.base = ''; CALC.board = '';
+    CALC.tax = CALC.kind === 'dom' ? 'none' : 'nr';
+    saveCalc(); document.getElementById('calcBox').innerHTML = calcHtml();
+  } else if (b.hasAttribute('data-calc-copy')) toast(await copyText(calcText()) ? '已複製試算結果' : '複製失敗，請長按文字自行複製');
+  else if (b.hasAttribute('data-calc-line')) window.open('https://line.me/R/share?text=' + encodeURIComponent(calcText()), '_blank', 'noopener');
+  else { CALC = { ...CALC_DEF }; saveCalc(); document.getElementById('calcBox').innerHTML = calcHtml(); }
+});
+
 function toolsView(){
   if (!INFO) return '<div class="empty">載入中…</div>';
   const m = new Date().getMonth() + 1;
@@ -790,8 +974,9 @@ function toolsView(){
   const sea = INFO.seasons.filter(s => s.months.length < 12).map(s => `<button class="li btnli" data-go-cat="${esc(s.cats[0])}"><span class="ic">${s.icon}</span><span class="tx"><b>${esc(s.name)}</b><small>${s.months.join('、')} 月・${s.cats.map(esc).join('、')}</small><span class="months">${Array.from({length:12},(_,i)=>`<i class="${s.months.includes(i+1)?'on':''} ${i+1===m?'now':''}"></i>`).join('')}</span></span></button>`).join('');
   const notices = newNotices();
   return `<div class="pagehead" style="--k:${KIND.tool.color}"><span class="kind">工具</span><b>專線與工具箱</b></div>
-    <div class="jump"><a href="#" data-anchor-only="hot">☎️ 專線</a><a href="#" data-anchor-only="off">🏳️ 辦事處</a><a href="#" data-anchor-only="cal">📅 行事曆</a><a href="#" data-anchor-only="nums">🔢 數字</a><button data-to-posters>❤️ 收藏 ${FAV.length}</button></div>`
+    <div class="jump"><a href="#" data-anchor-only="hot">☎️ 專線</a><a href="#" data-anchor-only="calc">🧮 薪資試算</a><a href="#" data-anchor-only="off">🏳️ 辦事處</a><a href="#" data-anchor-only="cal">📅 行事曆</a><a href="#" data-anchor-only="nums">🔢 數字</a><button data-to-posters>❤️ 收藏 ${FAV.length}</button></div>`
     + `<div id="hot">${panel('tool', '求助專線', `<div class="list">${hot}</div>`, '<span class="n">點一下直接撥打</span>')}</div>`
+    + `<div id="calc">${panel('tool', '薪資與加班費試算', `<div class="calc" id="calcBox">${calcHtml()}</div>`, '<span class="n">依勞基法自動計算</span>')}</div>`
     + `<div id="off">${panel('tool', '各國駐台辦事處', `<div class="list">${off}</div><p class="src-note">資料來源：<a href="${esc(INFO.officesSource)}" target="_blank" rel="noopener">移民署 各國駐華辦事處聯絡資訊表</a></p>`)}</div>`
     + `<div id="cal">${panel('tool', '宣導行事曆', `<div class="list">${evs}</div>` + sub('🌦️ 季節宣導重點') + `<div class="list">${sea}</div>`, '<span class="n">日期每年自動推算</span>')}</div>`
     + `<div id="nums">${panel('tool', '重要數字速查',
@@ -811,6 +996,7 @@ function searchView(){
   const news = (NEWS?.items || []).filter(n => hit(n.title + ' ' + n.sources.map(s => s.title).join(' ')));
   const sea = seaItems().filter(n => hit(n.title + ' ' + (n.desc || '')));
   const tools = [
+    ...(hit('薪資 加班 加班費 試算 實領 時薪 勞保 健保 所得稅 扣款 國定假日 休息日 計算') ? [`<button class="li btnli" data-tab="tools" data-anchor="calc"><span class="ic">🧮</span><span class="tx"><b>薪資與加班費試算</b><small>輸入月薪與加班時數，算出加班費、勞健保、所得稅與實領</small></span><span class="no">›</span></button>`] : []),
     ...(INFO?.hotlines || []).filter(h => hit(`${h.no} ${h.name} ${h.desc}`)).map(h => `<a class="li" href="tel:${h.tel}"><span class="ic">${h.icon}</span><span class="tx"><b>${esc(h.name)}</b><small>${esc(h.desc)}</small></span><span class="no">${esc(h.no)}</span></a>`),
     ...(INFO?.offices || []).filter(o => hit(`${o.name} ${o.addr} ${o.tel}`)).map(o => `<a class="li" href="tel:${o.tel.replace(/-/g,'')}"><span class="ic">${o.flag}</span><span class="tx"><b>${esc(o.name)}</b><small>${esc(o.addr)}</small></span><span class="no">${esc(o.tel)}</span></a>`),
     ...(INFO?.numbers || []).flatMap(g => g.items).filter(x => hit(`${x.label} ${x.note} ${x.value}`)).map(x => `<button class="li btnli" data-tab="tools" data-anchor="nums"><span class="ic">🔢</span><span class="tx"><b>${esc(x.label)}</b><small>${esc(x.note || '')}</small></span><span class="no">${esc(x.next && ymd(new Date()) >= x.next.from ? x.next.value : x.value)}</span></button>`),
