@@ -1,7 +1,7 @@
 {
  "lists": {
   "vn": {
-   "at": "2026-11-11T23:23:13.878Z",
+   "at": "2026-11-11T23:27:28.971Z",
    "list": [
     {
      "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E5%8F%8A%E5%A4%AB%E4%BA%BA%E5%9C%86%E6%BB%A1%E7%BB%93%E6%9D%9F%E5%AF%B9%E6%97%A5%E6%9C%AC%E7%9A%84%E6%AD%A3%E5%BC%8F%E8%AE%BF%E9%97%AE-post146179.html",
@@ -246,7 +246,7 @@
    ]
   },
   "vn2": {
-   "at": "2026-11-11T23:23:13.878Z",
+   "at": "2026-11-11T23:27:28.971Z",
    "list": [
     {
      "url": "https://zh.vietnamplus.vn/article-post269773.vnp",
@@ -491,7 +491,7 @@
    ]
   },
   "ph": {
-   "at": "2026-11-11T23:23:13.878Z",
+   "at": "2026-11-11T23:27:28.971Z",
    "list": [
     {
      "url": "https://www.shangbao.com.ph/fgyw/2026/11-12/208254.shtml",
@@ -576,61 +576,13 @@
    ]
   },
   "th": {
-   "at": "2026-11-11T23:23:13.878Z",
+   "at": "2026-11-11T23:27:28.971Z",
    "list": [
-    {
-     "url": "https://thaichinesenews.com/finance/39545/",
-     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
-     "date": "2026-11-11",
-     "cat": "finance",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "url": "https://thaichinesenews.com/finance/39532/",
-     "title": "7大家族聯手 打造曼谷東部新經濟中心",
-     "date": "2026-11-11",
-     "cat": "finance",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "url": "https://thaichinesenews.com/society/39521/",
-     "title": "泰國《米其林指南》10年慶 入選餐廳破500家",
-     "date": "2026-11-11",
-     "cat": "society",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "url": "https://thaichinesenews.com/finance/39518/",
-     "title": "政府治理落後 泰國AI競爭力排名第43位",
-     "date": "2026-11-11",
-     "cat": "finance",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
     {
      "url": "https://thaichinesenews.com/politics/39498/",
      "title": "西哈薩透露中國總理13日訪泰",
      "date": "2026-11-11",
      "cat": "politics",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "url": "https://thaichinesenews.com/finance/39469/",
-     "title": "央行發行紀念鈔 12月21日開放兌換",
-     "date": "2026-11-10",
-     "cat": "finance",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "url": "https://thaichinesenews.com/society/39432/",
-     "title": "也拉府擊斃三通緝令要犯",
-     "date": "2026-11-10",
-     "cat": "society",
      "hot": false,
      "source": "TCN 泰國新聞"
     },
@@ -643,14 +595,6 @@
      "source": "TCN 泰國新聞"
     },
     {
-     "url": "https://thaichinesenews.com/society/39512/",
-     "title": "內閣批准12月16日為特別假日",
-     "date": "2026-11-11",
-     "cat": "society",
-     "hot": false,
-     "source": "TCN 泰國新聞"
-    },
-    {
      "url": "https://thaichinesenews.com/politics/39497/",
      "title": "內閣任命18府尹5稽查官",
      "date": "2026-11-11",
@@ -659,18 +603,26 @@
      "source": "TCN 泰國新聞"
     },
     {
-     "url": "https://thaichinesenews.com/finance/39496/",
-     "title": "內閣通過泰中汽車產業MOU",
+     "url": "https://thaichinesenews.com/society/39521/",
+     "title": "泰國《米其林指南》10年慶 入選餐廳破500家",
      "date": "2026-11-11",
-     "cat": "finance",
+     "cat": "society",
      "hot": false,
      "source": "TCN 泰國新聞"
     },
     {
-     "url": "https://thaichinesenews.com/finance/39495/",
-     "title": "Sansiri推普吉一站式房產服務",
+     "url": "https://thaichinesenews.com/society/39432/",
+     "title": "也拉府擊斃三通緝令要犯",
+     "date": "2026-11-10",
+     "cat": "society",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/society/39512/",
+     "title": "內閣批准12月16日為特別假日",
      "date": "2026-11-11",
-     "cat": "finance",
+     "cat": "society",
      "hot": false,
      "source": "TCN 泰國新聞"
     },
@@ -691,6 +643,54 @@
      "source": "TCN 泰國新聞"
     },
     {
+     "url": "https://thaichinesenews.com/finance/39545/",
+     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
+     "date": "2026-11-11",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/finance/39532/",
+     "title": "7大家族聯手 打造曼谷東部新經濟中心",
+     "date": "2026-11-11",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/finance/39518/",
+     "title": "政府治理落後 泰國AI競爭力排名第43位",
+     "date": "2026-11-11",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/finance/39469/",
+     "title": "央行發行紀念鈔 12月21日開放兌換",
+     "date": "2026-11-10",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/finance/39496/",
+     "title": "內閣通過泰中汽車產業MOU",
+     "date": "2026-11-11",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "url": "https://thaichinesenews.com/finance/39495/",
+     "title": "Sansiri推普吉一站式房產服務",
+     "date": "2026-11-11",
+     "cat": "finance",
+     "hot": false,
+     "source": "TCN 泰國新聞"
+    },
+    {
      "url": "https://thaichinesenews.com/finance/39491/",
      "title": "BOI前9月申請達1.71兆銖 年增28%",
      "date": "2026-11-10",
@@ -701,72 +701,8 @@
    ]
   },
   "id": {
-   "at": "2026-11-11T23:23:13.878Z",
+   "at": "2026-11-11T23:27:28.971Z",
    "list": [
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432443",
-     "title": "截至 2026 年第三季度 MYOH利潤增長 53%",
-     "date": "2026-11-12",
-     "cat": "economy",
-     "hot": true,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432511",
-     "title": "WBSA瞄準多式聯運服務整合 帶來增長機遇",
-     "date": "2026-11-12",
-     "cat": "economy",
-     "hot": true,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432558",
-     "title": "PGE推動地熱擴張 至2028年實現1吉瓦裝機容量",
-     "date": "2026-11-12",
-     "cat": "economy",
-     "hot": true,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/09/economy-1794158863",
-     "title": "截至 2026 年第三季度 SMCB收入增長 8.3%",
-     "date": "2026-11-09",
-     "cat": "economy",
-     "hot": true,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794404065",
-     "title": "印尼投資統籌機構承諾 30天內辦結中爪哇12個擬建工業園區的許可手續",
-     "date": "2026-11-11",
-     "cat": "economy",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794403904",
-     "title": "比亞迪印尼蘇邦工廠 6000名員工中約九成為印尼籍",
-     "date": "2026-11-11",
-     "cat": "economy",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/hukum-1794413229",
-     "title": "沃諾索博銷燬非法應徵消費稅貨物 總價值達30.8億盾",
-     "date": "2026-11-11",
-     "cat": "hukum",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/11/metropolitan-1794407872",
-     "title": "雅加達省政府於烈士節 為MT.哈里約諾故居博物館揭幕",
-     "date": "2026-11-11",
-     "cat": "metropolitan",
-     "hot": false,
-     "source": "印尼商報"
-    },
     {
      "url": "https://shangbaoindonesia.com/read/2026/11/11/politics-1794395310",
      "title": "印尼國會八個政黨黨團議員提交動議 以啟動針對吉布蘭副總統的彈劾程序",
@@ -808,6 +744,14 @@
      "source": "印尼商報"
     },
     {
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/hukum-1794413229",
+     "title": "沃諾索博銷燬非法應徵消費稅貨物 總價值達30.8億盾",
+     "date": "2026-11-11",
+     "cat": "hukum",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
      "url": "https://shangbaoindonesia.com/read/2026/11/11/hukum-1794404543",
      "title": "日惹地方議會發生騷亂 警方逮捕154人",
      "date": "2026-11-11",
@@ -840,30 +784,6 @@
      "source": "印尼商報"
     },
     {
-     "url": "https://shangbaoindonesia.com/read/2026/11/10/metropolitan-1794321823",
-     "title": "雅加達公路局改造人行道 並拓寬ITC Fatmawati附近Sawo路",
-     "date": "2026-11-10",
-     "cat": "metropolitan",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/10/metropolitan-1794286782",
-     "title": "紀念英雄日 雅加達民眾示威遊行 普拉莫諾希望活動安全進行",
-     "date": "2026-11-10",
-     "cat": "metropolitan",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
-     "url": "https://shangbaoindonesia.com/read/2026/11/09/metropolitan-1794234542",
-     "title": "普拉莫諾在塔拉坎公立醫院 啟動三項旗艦醫療服務造福廣大民眾",
-     "date": "2026-11-09",
-     "cat": "metropolitan",
-     "hot": false,
-     "source": "印尼商報"
-    },
-    {
      "url": "https://shangbaoindonesia.com/read/2026/11/11/society-1794404629",
      "title": "政府即將發放 總額為90萬盾2026年工資補貼援助金",
      "date": "2026-11-11",
@@ -884,6 +804,86 @@
      "title": "衛生部長聲稱 印尼是全球災害風險最高的三國家之一",
      "date": "2026-11-10",
      "cat": "society",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432443",
+     "title": "截至 2026 年第三季度 MYOH利潤增長 53%",
+     "date": "2026-11-12",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432511",
+     "title": "WBSA瞄準多式聯運服務整合 帶來增長機遇",
+     "date": "2026-11-12",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432558",
+     "title": "PGE推動地熱擴張 至2028年實現1吉瓦裝機容量",
+     "date": "2026-11-12",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794404065",
+     "title": "印尼投資統籌機構承諾 30天內辦結中爪哇12個擬建工業園區的許可手續",
+     "date": "2026-11-11",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/economy-1794403904",
+     "title": "比亞迪印尼蘇邦工廠 6000名員工中約九成為印尼籍",
+     "date": "2026-11-11",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/09/economy-1794158863",
+     "title": "截至 2026 年第三季度 SMCB收入增長 8.3%",
+     "date": "2026-11-09",
+     "cat": "economy",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/metropolitan-1794407872",
+     "title": "雅加達省政府於烈士節 為MT.哈里約諾故居博物館揭幕",
+     "date": "2026-11-11",
+     "cat": "metropolitan",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/10/metropolitan-1794321823",
+     "title": "雅加達公路局改造人行道 並拓寬ITC Fatmawati附近Sawo路",
+     "date": "2026-11-10",
+     "cat": "metropolitan",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/10/metropolitan-1794286782",
+     "title": "紀念英雄日 雅加達民眾示威遊行 普拉莫諾希望活動安全進行",
+     "date": "2026-11-10",
+     "cat": "metropolitan",
+     "hot": false,
+     "source": "印尼商報"
+    },
+    {
+     "url": "https://shangbaoindonesia.com/read/2026/11/09/metropolitan-1794234542",
+     "title": "普拉莫諾在塔拉坎公立醫院 啟動三項旗艦醫療服務造福廣大民眾",
+     "date": "2026-11-09",
+     "cat": "metropolitan",
      "hot": false,
      "source": "印尼商報"
     },

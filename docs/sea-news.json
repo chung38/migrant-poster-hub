@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-11T23:23:13.878Z",
+ "updatedAt": "2026-11-11T23:27:28.971Z",
  "mode": "headline",
  "countries": [
   {
@@ -74,15 +74,8 @@
    "items": [
     {
      "kind": "headline",
-     "url": "https://thaichinesenews.com/finance/39545/",
-     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
-     "date": "2026-11-11",
-     "source": "TCN 泰國新聞"
-    },
-    {
-     "kind": "headline",
-     "url": "https://thaichinesenews.com/finance/39532/",
-     "title": "7大家族聯手 打造曼谷東部新經濟中心",
+     "url": "https://thaichinesenews.com/politics/39498/",
+     "title": "西哈薩透露中國總理13日訪泰",
      "date": "2026-11-11",
      "source": "TCN 泰國新聞"
     },
@@ -90,6 +83,13 @@
      "kind": "headline",
      "url": "https://thaichinesenews.com/society/39521/",
      "title": "泰國《米其林指南》10年慶 入選餐廳破500家",
+     "date": "2026-11-11",
+     "source": "TCN 泰國新聞"
+    },
+    {
+     "kind": "headline",
+     "url": "https://thaichinesenews.com/finance/39545/",
+     "title": "減稅推動消費轉型 葡萄酒市場大有可為",
      "date": "2026-11-11",
      "source": "TCN 泰國新聞"
     }
@@ -104,24 +104,22 @@
    "items": [
     {
      "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432443",
-     "title": "截至 2026 年第三季度 MYOH利潤增長 53%",
-     "date": "2026-11-12",
-     "source": "印尼商報",
-     "hot": true
-    },
-    {
-     "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/12/economy-1794432511",
-     "title": "WBSA瞄準多式聯運服務整合 帶來增長機遇",
-     "date": "2026-11-12",
-     "source": "印尼商報",
-     "hot": true
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/politics-1794395310",
+     "title": "印尼國會八個政黨黨團議員提交動議 以啟動針對吉布蘭副總統的彈劾程序",
+     "date": "2026-11-11",
+     "source": "印尼商報"
     },
     {
      "kind": "headline",
      "url": "https://shangbaoindonesia.com/read/2026/11/11/hukum-1794413229",
      "title": "沃諾索博銷燬非法應徵消費稅貨物 總價值達30.8億盾",
+     "date": "2026-11-11",
+     "source": "印尼商報"
+    },
+    {
+     "kind": "headline",
+     "url": "https://shangbaoindonesia.com/read/2026/11/11/society-1794404629",
+     "title": "政府即將發放 總額為90萬盾2026年工資補貼援助金",
      "date": "2026-11-11",
      "source": "印尼商報"
     }
