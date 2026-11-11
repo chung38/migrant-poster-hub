@@ -1,10 +1,15 @@
-name: 更新東南亞華文媒體移工新聞
+name: 更新東南亞當地頭條新聞
 
 on:
   schedule:
     # 每天兩次（台灣時間約 08:13、18:13）
     - cron: '13 0,10 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: '輸出除錯資料到 data/debug'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -24,13 +29,14 @@ jobs:
           node-version: 20
       - name: 安裝套件
         run: npm install --no-audit --no-fund
-      - name: 抓越南、菲律賓、泰國、印尼華文媒體的移工新聞
-        run: node crawler/sea-news.js
+      - name: 抓越南、菲律賓、泰國、印尼華文報的熱門與頭條
+        run: node crawler/sea-news.js ${{ inputs.debug && '--debug' || '' }}
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"
           git config user.email "poster-bot@users.noreply.github.com"
           git add docs/sea-news.json data/sea-raw.json
+          if [ -d data/debug ]; then git add data/debug; fi
           if git diff --cached --quiet; then echo "沒有變更"; else
             git commit -m "東南亞新聞更新 $(TZ=Asia/Taipei date +'%m-%d %H:%M')"
             git pull --rebase && git push

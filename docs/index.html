@@ -135,6 +135,8 @@
   .sealist a,.seamini a{color:var(--ink);text-decoration:none;font-weight:600}
   .sealist small,.seamini small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:1px}
   .hlb{display:inline-block;font-size:11px;font-weight:700;color:#475569;background:#e2e8f0;border-radius:6px;padding:0 6px;margin-right:6px;vertical-align:1px}
+  .hlb.hot{color:#b91c1c;background:#fee2e2}
+  .hlb.mig{color:#0f766e;background:#ccfbf1}
   .seamini{list-style:none;margin:0;padding:0}
   .seamini li{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
   .seamini li:first-child{border-top:0}
@@ -658,7 +660,7 @@ function homeView(){
     goBtn('看流程', 'data-tab="hire"'));
 
   const seaTop = seaCompact();
-  const newsPanel = panel('news', '熱門移工新聞', sub('🇹🇼 台灣媒體') + newsList(5) + (seaTop ? sub('🌏 東南亞華文媒體', goBtn('各國更多', 'data-tab="news" data-anchor="sea"')) + seaTop : ''), goBtn('全部', 'data-tab="news"'));
+  const newsPanel = panel('news', '熱門移工新聞', sub('🇹🇼 台灣媒體') + newsList(5) + (seaTop ? sub('🌏 東南亞當地頭條', goBtn('各國更多', 'data-tab="news" data-anchor="sea"')) + seaTop : ''), goBtn('全部', 'data-tab="news"'));
 
   const calls = (INFO?.hotlines || []).filter(h => h.top).map((h, i) => `<a class="call ${['','','orange','red'][i]||''}" href="tel:${h.tel}"><b>${esc(h.no)}</b><span>${esc(h.name)}</span></a>`).join('');
   const toolPanel = panel('tool', '求助專線', `<div class="calls">${calls}</div>`, goBtn('全部', 'data-tab="tools"'));
@@ -797,21 +799,23 @@ function hireView(){
 // ---------- 新聞 ----------
 // 東南亞各國華文媒體（crawler/sea-news.js，每天兩次）
 const seaItems = () => (SEA?.countries || []).flatMap(c => c.items.map(n => ({ ...n, flag: c.flag, country: c.country, source: n.source || c.source })));
+// 熱門（網站熱門／排行區塊）與移工相關的標籤
+const seaTags = n => (n.hot ? '<span class="hlb hot">🔥 熱門</span>' : '') + (n.migrant ? '<span class="hlb mig">移工</span>' : '');
 function seaCompact(){
   const rows = (SEA?.countries || []).filter(c => c.items.length).map(c => { const n = c.items[0];
-    return `<li><span class="flag">${c.flag}</span><div>${n.kind === 'headline' ? '<span class="hlb">當地頭條</span>' : ''}<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a><small>${esc(n.source || c.source)}${n.date ? '・' + slash(n.date) : ''}</small></div></li>`; });
+    return `<li><span class="flag">${c.flag}</span><div>${seaTags(n)}<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a><small>${esc(n.source || c.source)}${n.date ? '・' + slash(n.date) : ''}</small></div></li>`; });
   return rows.length ? `<ul class="seamini">${rows.join('')}</ul>` : '';
 }
 function seaHtml(){
   if (!SEA?.countries?.length) return '<p class="lead">東南亞新聞更新中…</p>';
   return SEA.countries.map(c => `<div class="seac"><div class="seah"><span class="flag">${c.flag}</span><b>${esc(c.country)}</b><a href="${esc(c.home)}" target="_blank" rel="noopener">${esc(c.source)} ›</a></div>`
-    + (c.items.length ? `<ol class="sealist">${c.items.map(n => `<li>${n.kind === 'headline' ? '<span class="hlb">當地頭條</span>' : ''}<a href="${esc(n.url)}" target="_blank" rel="noopener">${hl(n.title)}</a><small>${[n.source && n.source !== c.source ? esc(n.source) : '', n.date ? slash(n.date) : '', n.desc ? esc(n.desc.slice(0, 70)) + '…' : ''].filter(Boolean).join('・')}</small></li>`).join('')}</ol>` : `<p class="lead">近期沒有移工相關報導</p>`) + '</div>').join('');
+    + (c.items.length ? `<ol class="sealist">${c.items.map(n => `<li>${seaTags(n)}<a href="${esc(n.url)}" target="_blank" rel="noopener">${hl(n.title)}</a><small>${[n.source && n.source !== c.source ? esc(n.source) : '', n.date ? slash(n.date) : '', n.desc ? esc(n.desc.slice(0, 70)) + '…' : ''].filter(Boolean).join('・')}</small></li>`).join('')}</ol>` : `<p class="lead">暫時抓不到這家報紙的新聞</p>`) + '</div>').join('');
 }
 function newsView(){
   return `<div class="pagehead" style="--k:${KIND.news.color}"><span class="kind">新聞</span><b>移工新聞</b></div>
-    <div class="jump"><a href="#" data-anchor-only="tw">🇹🇼 台灣媒體</a><a href="#" data-anchor-only="sea">🌏 東南亞媒體</a></div>`
+    <div class="jump"><a href="#" data-anchor-only="tw">🇹🇼 台灣媒體</a><a href="#" data-anchor-only="sea">🌏 東南亞頭條</a></div>`
     + `<div id="tw">${panel('news', '🇹🇼 台灣熱門移工新聞', newsList(50) + '<p class="src-note">由 Google 新聞彙整各家媒體，同一事件合併為一則，依報導媒體數排序；點標題開啟原媒體網頁。</p>', `<span class="n">近 ${NEWS?.days || 3} 天${NEWS?.updatedAt ? '・' + ago(NEWS.updatedAt) + '更新' : ''}</span>`)}</div>`
-    + `<div id="sea">${panel('news', '🌏 東南亞華文媒體', '<p class="lead">越南、菲律賓、泰國、印尼當地華文報，每國 3 則：優先列近 3 個月的移工相關報導，不足時補該報首頁的「當地頭條」。</p>' + seaHtml() + '<p class="src-note">依報導與移工的相關程度、新鮮度自動挑選；簡體字已轉為繁體。點標題開啟原媒體網頁。</p>', `<span class="n">${SEA?.updatedAt ? ago(SEA.updatedAt) + '更新' : ''}</span>`)}</div>`;
+    + `<div id="sea">${panel('news', '🌏 東南亞當地頭條', '<p class="lead">越南、菲律賓、泰國、印尼當地華文報的熱門與頭條新聞，每國 3 則；同一事件只列一次，各國之間也不重複。</p>' + seaHtml() + '<p class="src-note">依各報首頁的熱門排行與頭條順序自動挑選，排除娛樂、體育、國際及社團訃告；簡體字已轉為繁體。點標題開啟原媒體網頁。</p>', `<span class="n">${SEA?.updatedAt ? ago(SEA.updatedAt) + '更新' : ''}</span>`)}</div>`;
 }
 
 // ---------- 工具箱（專線、辦事處、行事曆、數字） ----------
