@@ -1,6 +1,6 @@
 {
- "startedAt": "2026-11-11T01:59:02.325Z",
- "finishedAt": "2026-11-11T01:59:23.595Z",
+ "startedAt": "2026-11-12T03:08:32.782Z",
+ "finishedAt": "2026-11-12T03:09:18.602Z",
  "sources": [
   {
    "id": "wda-file",
@@ -18,44 +18,56 @@
    "name": "168交通安全入口網－越南文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Người đi xe máy xin lưu ý Chở quá số người quy định vừa nguy hiểm vừa vi phạm pháp luật",
+    "Đi xe đạp sau khi uống rượu bia là hành vi vi phạm nồng độ cồn"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 2,
+   "newCount": 2
   },
   {
    "id": "motc-168-id",
    "name": "168交通安全入口網－印尼文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Perhatian untuk Pengendara Sepeda Motor Membonceng Penumpang Melebihi Kapasitas Berbahaya dan Melanggar Aturan",
+    "Bersepeda Setelah Minum Minuman Beralkohol Termasuk Pelanggaran Berkendara Saat Mabuk"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 2,
+   "newCount": 2
   },
   {
    "id": "motc-168-th",
    "name": "168交通安全入口網－泰文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "ผู้ขับขี่รถจักรยานยนต์โปรดระวัง คนซ้อนท้ายเกิน 1 คน อันตรายและผิดกฎหมาย",
+    "ดื่มสุราแล้วขี่จักรยาน ถือว่าเมาแล้วขับ"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 2,
+   "newCount": 2
   },
   {
    "id": "motc-168-en",
    "name": "168交通安全入口網－英文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+    "Riding a bicycle under the influence is still drunk driving"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 2,
+   "newCount": 2
   },
   {
    "id": "judicial-labor",

@@ -1,6 +1,240 @@
 {
  "items": [
   {
+   "id": "cd63f009b963",
+   "title": "Người đi xe máy xin lưu ý Chở quá số người quy định vừa nguy hiểm vừa vi phạm pháp luật",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-vi"
+   ],
+   "sourceName": "168交通安全入口網－越南文文宣",
+   "sourcePage": "https://168.motc.gov.tw/vn/theme/poster/post/2611121021138",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261112/10210238.jpg",
+   "ext": "jpg",
+   "size": 729951,
+   "sha256": "1117a5e3d2d5c302a68a44c374678f0b9460b78d86b2452353752da71d33c0d9",
+   "thumb": "thumbs/cd63f009b963.webp",
+   "phash": "0000001010111101100000110111001100011100111110010000010010010101001001001101011001011000110100100101000011110110010001000110110000001101011010001100110000101011110101101110100011000001110000000001110101101001001001010011101100111110111100110000111010110000",
+   "date": "2026-11-12",
+   "langs": [
+    "vi"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全",
+    "法律扶助"
+   ],
+   "snippet": "Về trang đầu＞ Ấn phẩm tuyên truyền＞ Người đi xe máy xin lưu ý Chở quá số người quy định vừa nguy hiểm vừa vi phạm pháp luật Ấn phẩm tuyên truyền Người đi xe máy xin lưu ý Chở quá số người quy định vừa",
+   "addedAt": "2026-11-12T03:08:40.199Z",
+   "group": "s:736c9f342e70",
+   "groupTitle": "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+   "version": "越南文版"
+  },
+  {
+   "id": "ed4e15419cbb",
+   "title": "Perhatian untuk Pengendara Sepeda Motor Membonceng Penumpang Melebihi Kapasitas Berbahaya dan Melanggar Aturan",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-id"
+   ],
+   "sourceName": "168交通安全入口網－印尼文文宣",
+   "sourcePage": "https://168.motc.gov.tw/id/theme/poster/post/2611121058992",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261112/10580371.jpg",
+   "ext": "jpg",
+   "size": 737068,
+   "sha256": "9d73380f8f94f20a37d4fd1b6f58047c7d809b6e8ede1bb65a0f34fdf8a59ea6",
+   "thumb": "thumbs/ed4e15419cbb.webp",
+   "phash": "0000001010111101100000110111001100011100111110010000010010010101001001001101011001011000110100100101000011110110010001000110110000001101011010001100110000101001110101101110100011000001110000000001011101101011001010110010101100111101010111010000110010110000",
+   "date": "2026-11-12",
+   "langs": [
+    "id"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Kembali ke Beranda＞ Poster＞ Perhatian untuk Pengendara Sepeda Motor Membonceng Penumpang Melebihi Kapasitas Berbahaya dan Melanggar Aturan Poster Perhatian untuk Pengendara Sepeda Motor Membonceng Pen",
+   "addedAt": "2026-11-12T03:08:45.872Z",
+   "group": "s:736c9f342e70",
+   "groupTitle": "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+   "version": "印尼文版"
+  },
+  {
+   "id": "3cd340926beb",
+   "title": "ผู้ขับขี่รถจักรยานยนต์โปรดระวัง คนซ้อนท้ายเกิน 1 คน อันตรายและผิดกฎหมาย",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-th"
+   ],
+   "sourceName": "168交通安全入口網－泰文文宣",
+   "sourcePage": "https://168.motc.gov.tw/th/theme/poster/post/2611121016218",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261112/10154920.jpg",
+   "ext": "jpg",
+   "size": 704654,
+   "sha256": "269fdbf138185fb6e6124a73b0e79c72c20e02f42c72a93b334070ff8612f189",
+   "thumb": "thumbs/3cd340926beb.webp",
+   "phash": "0000000010111101100000110111001100001100111110010000010010010101001001001101011001011000110100100100000011110110010001000110110000001101011010001100110000101011110101101110100011000001110000000011110110100000000000101011101101101110000001111000110000100000",
+   "date": "2026-11-12",
+   "langs": [
+    "th"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全",
+    "居留與合法工作"
+   ],
+   "snippet": "กลับหน้าแรก＞ ข้อมูลทั่วไป＞ ผู้ขับขี่รถจักรยานยนต์โปรดระวัง คนซ้อนท้ายเกิน 1 คน อันตรายและผิดกฎหมาย ข้อมูลทั่วไป ผู้ขับขี่รถจักรยานยนต์โปรดระวัง คนซ้อนท้ายเกิน 1 คน อันตรายและผิดกฎหมาย เวลาประกาศ：2026.",
+   "addedAt": "2026-11-12T03:08:51.640Z",
+   "group": "s:736c9f342e70",
+   "groupTitle": "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+   "version": "泰文版"
+  },
+  {
+   "id": "44b53d22edb8",
+   "title": "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-en"
+   ],
+   "sourceName": "168交通安全入口網－英文文宣",
+   "sourcePage": "https://168.motc.gov.tw/en/theme/poster/post/2611121009612",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261112/10092358.jpg",
+   "ext": "jpg",
+   "size": 724019,
+   "sha256": "54ef2acd78ecd5088cff518ba8e42ae28d6ebd0fccc7f164eb9baa6d30992235",
+   "thumb": "thumbs/44b53d22edb8.webp",
+   "phash": "0000001010111101100000110111001100011100111110010000010010010101001001001101011001011000110100100101000011110110010001000110110000001101011010001100110000101001110101101110100011000001110000000001101001100011011010010011111100110111010111010000111100100000",
+   "date": "2026-11-12",
+   "langs": [
+    "en"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Home＞ Propaganda Materials＞ Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law Propaganda Materials Attention, motorcycle riders Carrying an extra passenger is d",
+   "addedAt": "2026-11-12T03:08:57.639Z",
+   "group": "s:736c9f342e70",
+   "groupTitle": "Attention, motorcycle riders Carrying an extra passenger is dangerous and against the law",
+   "version": "英文版"
+  },
+  {
+   "id": "1f542e4259ab",
+   "title": "Đi xe đạp sau khi uống rượu bia là hành vi vi phạm nồng độ cồn",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-vi"
+   ],
+   "sourceName": "168交通安全入口網－越南文文宣",
+   "sourcePage": "https://168.motc.gov.tw/vn/theme/poster/post/2611111044787",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261111/10442968.jpg",
+   "ext": "jpg",
+   "size": 863053,
+   "sha256": "c0b54808352ddecf70987587a610ecd5d91b8a17d14f3f6aa1c8854407f51932",
+   "thumb": "thumbs/1f542e4259ab.webp",
+   "phash": "1100001000000001001100100100011000101110101110000000101000010111000101000100101110010010101110111110100001110111110110010110110011001001011100001000111011010010101110101101101011101101011101101100110111100001001111001010010001101100100100100100110010011011",
+   "date": "2026-11-11",
+   "langs": [
+    "vi"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Về trang đầu＞ Ấn phẩm tuyên truyền＞ Đi xe đạp sau khi uống rượu bia là hành vi vi phạm nồng độ cồn Ấn phẩm tuyên truyền Đi xe đạp sau khi uống rượu bia là hành vi vi phạm nồng độ cồn Thời gian phát hà",
+   "addedAt": "2026-11-12T03:08:41.043Z",
+   "group": "s:74369733bd0f",
+   "groupTitle": "Riding a bicycle under the influence is still drunk driving",
+   "version": "越南文版"
+  },
+  {
+   "id": "fd40423ed3b4",
+   "title": "Bersepeda Setelah Minum Minuman Beralkohol Termasuk Pelanggaran Berkendara Saat Mabuk",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-id"
+   ],
+   "sourceName": "168交通安全入口網－印尼文文宣",
+   "sourcePage": "https://168.motc.gov.tw/id/theme/poster/post/2611110957891",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261111/09561373.jpg",
+   "ext": "jpg",
+   "size": 892941,
+   "sha256": "1e460241ac1856acd1d0e981df7e83a416cf711e729537628b11a0951551f1d2",
+   "thumb": "thumbs/fd40423ed3b4.webp",
+   "phash": "1100001010000001000101010100011000100000110010000001101101100011000100110000101110010000111110111110100001110111110110010110110011001001011100001000111011010010101110101101101011101101011101101100110111000001001111001010010001101100100100100100110010011011",
+   "date": "2026-11-11",
+   "langs": [
+    "id"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Kembali ke Beranda＞ Poster＞ Bersepeda Setelah Minum Minuman Beralkohol Termasuk Pelanggaran Berkendara Saat Mabuk Poster Bersepeda Setelah Minum Minuman Beralkohol Termasuk Pelanggaran Berkendara Saat",
+   "addedAt": "2026-11-12T03:08:47.041Z",
+   "group": "s:74369733bd0f",
+   "groupTitle": "Riding a bicycle under the influence is still drunk driving",
+   "version": "印尼文版"
+  },
+  {
+   "id": "d72fba4d30e9",
+   "title": "ดื่มสุราแล้วขี่จักรยาน ถือว่าเมาแล้วขับ",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-th"
+   ],
+   "sourceName": "168交通安全入口網－泰文文宣",
+   "sourcePage": "https://168.motc.gov.tw/th/theme/poster/post/2611111022697",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261111/10222698.jpg",
+   "ext": "jpg",
+   "size": 828513,
+   "sha256": "3c12e07cc981dae979ee13286004fa99065bbecb9c8669e392b972329799bee7",
+   "thumb": "thumbs/d72fba4d30e9.webp",
+   "phash": "1100000000000001000000000000011000100010001110000001000010010110000101110100101110010010101110111110100001110111110110010110110011001001011100001000111011010010001110101101101011101101011101101100100111100001001111001010010001101100100100100100110010011011",
+   "date": "2026-11-11",
+   "langs": [
+    "th"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "กลับหน้าแรก＞ ข้อมูลทั่วไป＞ ดื่มสุราแล้วขี่จักรยาน ถือว่าเมาแล้วขับ ข้อมูลทั่วไป ดื่มสุราแล้วขี่จักรยาน ถือว่าเมาแล้วขับ เวลาประกาศ：2026.11.11 จำนวนการค้นหา：2次 ภาพที่เกี่ยวข้อง： แชร์ให้เพื่อน：",
+   "addedAt": "2026-11-12T03:08:53.032Z",
+   "group": "s:74369733bd0f",
+   "groupTitle": "Riding a bicycle under the influence is still drunk driving",
+   "version": "泰文版"
+  },
+  {
+   "id": "697f6df5211e",
+   "title": "Riding a bicycle under the influence is still drunk driving",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-en"
+   ],
+   "sourceName": "168交通安全入口網－英文文宣",
+   "sourcePage": "https://168.motc.gov.tw/en/theme/poster/post/2611111004362",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261111/10051733.jpg",
+   "ext": "jpg",
+   "size": 853210,
+   "sha256": "be36e3c5a2429e966c76cdf5d748af64e2c16582cc2778c1710e1d5a5d901ec0",
+   "thumb": "thumbs/697f6df5211e.webp",
+   "phash": "1100000001000001000000001000011000110000110010110000000110010111000101000000101110010010101110111110100001110111110110010110110011001001011100001000111011010010101110101101101011101101011101101100100111100001001111001010010001101100100100100100110010011011",
+   "date": "2026-11-11",
+   "langs": [
+    "en"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Home＞ Propaganda Materials＞ Riding a bicycle under the influence is still drunk driving Propaganda Materials Riding a bicycle under the influence is still drunk driving Last Updated：2026.11.11 Visits：",
+   "addedAt": "2026-11-12T03:08:59.035Z",
+   "group": "s:74369733bd0f",
+   "groupTitle": "Riding a bicycle under the influence is still drunk driving",
+   "version": "英文版"
+  },
+  {
    "id": "58ba02aec999",
    "title": "LINE@移點通-【移工失聯，雇主應注意什麼？】",
    "agency": "勞動部",
@@ -14698,7 +14932,7 @@
    "version": "印尼語版（Indonesia）"
   }
  ],
- "updatedAt": "2026-11-11T01:59:23.589Z",
+ "updatedAt": "2026-11-12T03:09:18.587Z",
  "repo": "chung38/migrant-poster-hub",
  "branch": "main",
  "categories": [
