@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-12T17:43:37.344Z",
+ "updatedAt": "2026-11-13T02:06:00.745Z",
  "days": 3,
  "items": [
   {
@@ -7,13 +7,8 @@
    "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1sYktIcy1ETGpwUmctNzhSM0F1MGZRTERpZC1IRnRwZE83R1hBYlJLckMyMUNCb0tvdWhha2p5MkRRRk9qUTN2MURoMVRGd3FxdEFIUWxrSzhSRFFySjdV?oc=5",
    "source": "中央社 CNA",
    "pubDate": "2026-11-12T14:58:27.000Z",
-   "count": 10,
+   "count": 12,
    "sources": [
-    {
-     "name": "Yahoo新聞",
-     "link": "https://news.google.com/rss/articles/CBMi_AJBVV95cUxPLWh3REpVMDFNcTF3VnZCbk1nNHN6STE0ZDNERWZ5MnNCeERwMHk2bmtjT0RjSldhcUNvaW9Qa0ExaXBrajl4Z1d4V1BhSkcwTnFja3BjOVNGSmpDUllWTDRUOWtzaDF5SmZKTVdPbWk2MmJwczE1eC1Va056RENOZm1Yd3RkMVE3ZVNmcnJwZTdrdTFOQTJOZkdzYXA5SWZoWHFrXzRScXZYQmRLUHRPQjhEeV95YkJ1enNsY2Z5NmQ5ZDVwNlJNTVJoTWEwYWhadklHV0hobFdGX1dVaEhyQW1fSjZzTE9BNHlJdmNhMVIxRmtlM3R5Yk9wMXN3UlRIRWRuVE5YLW5DY3J5cWF0Mm9ZLVF4Q1BYbjU1TTNrbzRjM2hhTlRGeDhJeDVFMEk3WDU3UzRtaVd3UGZqZU56ZXVaRTZKcmpBWWxVdTVVMXZtQVY0dWJQZmNUSFpGdDg4WnZtaDdUcm1lRWZxV2tIQ3Byd1FUdlVhaXV3UQ?oc=5",
-     "title": "知名國慶煙火廠爆燃！印尼移工「全身100%三度燒燙傷」送醫搶救"
-    },
     {
      "name": "中央社 CNA",
      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1sYktIcy1ETGpwUmctNzhSM0F1MGZRTERpZC1IRnRwZE83R1hBYlJLckMyMUNCb0tvdWhha2p5MkRRRk9qUTN2MURoMVRGd3FxdEFIUWxrSzhSRFFySjdV?oc=5",
@@ -25,14 +20,29 @@
      "title": "國慶焰火廠驚傳爆炸！嘉義東石震動「移工100%三度燒燙傷」命危"
     },
     {
+     "name": "Yahoo新聞",
+     "link": "https://news.google.com/rss/articles/CBMi_AJBVV95cUxPLWh3REpVMDFNcTF3VnZCbk1nNHN6STE0ZDNERWZ5MnNCeERwMHk2bmtjT0RjSldhcUNvaW9Qa0ExaXBrajl4Z1d4V1BhSkcwTnFja3BjOVNGSmpDUllWTDRUOWtzaDF5SmZKTVdPbWk2MmJwczE1eC1Va056RENOZm1Yd3RkMVE3ZVNmcnJwZTdrdTFOQTJOZkdzYXA5SWZoWHFrXzRScXZYQmRLUHRPQjhEeV95YkJ1enNsY2Z5NmQ5ZDVwNlJNTVJoTWEwYWhadklHV0hobFdGX1dVaEhyQW1fSjZzTE9BNHlJdmNhMVIxRmtlM3R5Yk9wMXN3UlRIRWRuVE5YLW5DY3J5cWF0Mm9ZLVF4Q1BYbjU1TTNrbzRjM2hhTlRGeDhJeDVFMEk3WDU3UzRtaVd3UGZqZU56ZXVaRTZKcmpBWWxVdTVVMXZtQVY0dWJQZmNUSFpGdDg4WnZtaDdUcm1lRWZxV2tIQ3Byd1FUdlVhaXV3UQ?oc=5",
+     "title": "知名國慶煙火廠爆燃！印尼移工「全身100%三度燒燙傷」送醫搶救"
+    },
+    {
+     "name": "民視新聞網",
+     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9oQjlWTUw2cnVFUXk1NGFBTm9zRjNVdDRVaTJkWG5NMHRWZ1RCTjUxaGhtRlBRRFEtWU1kR1lUb012RE41NHhSWWplRHloVEhsZ3JVaDlGRmE0Y2NVWjZnbUZYR0tHYW8?oc=5",
+     "title": "嘉義煙火工廠爆炸! \"房屋.玻璃震動\"移工三度燒燙傷－民視新聞- 民視新聞網"
+    },
+    {
      "name": "UDN",
-     "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQZUY3OHI4OE1uOEo4T3ZhaTNNR19HdG9MR1JoQUFHbG1LaVgxeHZrU3lsTU1OcEYtRGYtNkVveGZPWDEtNGFxN3c2U1BYMkNwWG4wbklaVm9aVnoxS21UdE10LXFSVHpSXzJxeTZ2cUhoVzU0eEFncDUtY1hpX2Ewbw?oc=5",
-     "title": "嘉義東石煙火工廠火藥爆炸36歲印尼移工全身100%三級燒燙傷"
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE8xZEg4czFYTGhjdm5NSzE0bVpsNEk0dF9OVFF6NkRlbzItNVhzenVBcHFibG1NM21Sc3l1aGgtblAtVmdJSkNpa2QwNEphNF9N0gFWQVVfeXFMTkhkZW0taWNjVGcyY21HdnJVUGhTMzA2bFpnVTZLekk2SkpzcUJsZFB6OWFYLTNXekUzbnZaUDBaSWM1VkhONVlla1FjN0tONm5TamxkT1E?oc=5",
+     "title": "裝填火藥出意外！嘉義東石煙火工廠爆炸 印尼移工全身100%三級燒燙傷"
     },
     {
      "name": "TVBS新聞網",
      "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5aWG5LRzVZbnhnVnFmd2VQdzcxdUxHRVIwaVRqLXVyLUxfTWF0bWE2cGUyMFB4b0RObk5XNy1fT1l5ZEIwMnB0bm1IbV9vZGc?oc=5",
      "title": "嘉義東石煙火工廠爆炸！鄰近房屋震動 1移工嚴重燙傷送醫"
+    },
+    {
+     "name": "Newtalk新聞",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4yd0l2QURiZ1ktOVZoNEpqd2EwSW91TFBjX0JBUXRPMW1pRlJDVy1MMlVDaC00Sm9ScmhCS0NhVzJSVEZLZDRqcjBpQUhoNG9rNDhnbTU4SXVNSDQ?oc=5",
+     "title": "嘉義知名煙火廠發生爆炸！印尼移工全身100%三級燒燙傷"
     },
     {
      "name": "鏡週刊Mirror Media",
@@ -60,20 +70,15 @@
      "title": "嘉義知名煙火廠又爆了！印尼移工遭火藥炸傷 全身嚴重燒燙傷"
     }
    ],
-   "score": 103.5
+   "score": 122.1
   },
   {
-   "title": "有外籍看護仍能用長照！符合資格可用30%額度折抵日照",
-   "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBOSUJVcTA0cldtNEhxbVpoYVVTRjhKUU16dlBFdU1xLXF6dUtDZExpVVlXVl9xbGxsY2xubzNJV0x2UURvbktVSjZvNG5RaHcyd21z?oc=5",
-   "source": "中天新聞網",
-   "pubDate": "2026-11-12T05:53:47.000Z",
+   "title": "有外籍看護不等於長照喊卡！30%給付額度有機會用在日照奇美復華日間照顧中心三步驟讓長輩增加社交、看護獲得喘息",
+   "link": "https://news.google.com/rss/articles/CBMiREFVX3lxTE5OdDlGTTVibExuRlFvcWk3S3Z4Q29HT3A4T05TRV9oQnZOTkNqWEhJZU91T3NkazI3aEhFZ2k3X1NnNUo0?oc=5",
+   "source": "全國旅遊時報",
+   "pubDate": "2026-11-12T06:02:43.000Z",
    "count": 5,
    "sources": [
-    {
-     "name": "中天新聞網",
-     "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBOSUJVcTA0cldtNEhxbVpoYVVTRjhKUU16dlBFdU1xLXF6dUtDZExpVVlXVl9xbGxsY2xubzNJV0x2UURvbktVSjZvNG5RaHcyd21z?oc=5",
-     "title": "有外籍看護仍能用長照！符合資格可用30%額度折抵日照"
-    },
     {
      "name": "全國旅遊時報",
      "link": "https://news.google.com/rss/articles/CBMiREFVX3lxTE5OdDlGTTVibExuRlFvcWk3S3Z4Q29HT3A4T05TRV9oQnZOTkNqWEhJZU91T3NkazI3aEhFZ2k3X1NnNUo0?oc=5",
@@ -93,29 +98,34 @@
      "name": "蕃新聞",
      "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBhY3p2NXpmUjlGeVk2NWl3MWkwcU5kZ3pJQXJveF9oTldVek9oREg3cFdNZzN0UlVSQU9PNUFZX3VFQU9VSWVyYUZIMFhDQ3BEOXc?oc=5",
      "title": "聘外籍看護也能申請長照！奇美醫院推日照喘息服務 減輕家庭照顧壓力"
+    },
+    {
+     "name": "Yahoo新聞",
+     "link": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxPYnVfTTcyVEc5QVNiRWFySUFHcG1Cb1k5eWRsY3V6a1RfZVEyVTBJUTJUR0VGLURtWkJpM19IUXFPY0pOeTl6M1J5eUVMcHIyWU1LZmZXeGZDampTaFlFdWRsdy1Rdm5xLUZONnZ5cG5PQS0yb3MtYnJhTC15X1FCdWxYbi1rLVUtU2R3VWFkV2h1amJHQmNCTW9VOFJ0dUZTWWVFZjhYd1gzS0NSYmFqb3RrRHJzUWU2WXNLU2xYMndzcjRCZGtNSkM2S2lZVFJlaFV5c0V6eTl6UDJBVE81cjhhODZSc0ZoQklPYzJpdmFOYTdWOGRuc0UyLVBmOFFhd0F4U0Z6T0E1anpDZDhMQlJtV2x5bno0QkRmQWRYSDRIZlRLZzc2TTgxR0NjMmo5SWJLYk1TWTRkVkVCNlAxUjdCMXBvdC1nZ1NsMnZFYVlrQkcwSFVPV0N6WUhoUW1C?oc=5",
+     "title": "有外籍看護仍能用長照！符合資格可用30%額度折抵日照"
     }
    ],
-   "score": 52
+   "score": 50.7
   },
   {
-   "title": "加拿大放鬆外籍勞工政策 居留期加倍",
-   "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1ZeXhYVHgyQjJfVDIzek9HdnMyNG1UWXpuWF9XZlhaNnBTelRMdDZsQWtvbVVtWTBWWWEwUThKM09ULVdtemRkUDhUcVFhdElDdEFqdlhidEc0VktnMHZ4c3FLbVlFSjjSAWdBVV95cUxNWXl4WFR4MkIyX1QyM3pPR3ZzMjRtVFl6blhfV2ZYWjZwU3pUTHQ2bEFrb21VbVkwVllhMFE4SjNPVC1XbXpkZFA4VHFRYXRJQ3RBanZYYnRHNFZLZzB2eHNxS21ZRUo4?oc=5",
-   "source": "大紀元",
-   "pubDate": "2026-11-12T00:10:00.000Z",
+   "title": "加拿大移民新政：低薪外籍勞工工作期限延長一倍；鄉村社區移民試點項目變永久",
+   "link": "https://news.google.com/rss/articles/CBMikARBVV95cUxOdnJxbTZWTndNekJwck5mZ3JXbVRRU2FXOEI2Y1JXSThwdkR0MTM2bnRBWlJkRzBxelF5SFRPVWk5c1FLckFYTmdUNTRaRVlsYVR3VG41b0tyTnI0YnY0R296dDlzVzRTNlJVZzFoZ2pjczVTY2QtUEMwZ3ctMHk1ZjhfU2tYdUc3UFY4blVZS1hCSDFLeUdfSF8xcVExbTJWX0w2MTkzeHUtMUJobFpaZ1NZdDAwSHNIWUViWDhzV3Y3Q0NMMHJoVzdxbEFEVGQ4SUVxdXN1ekZ2aWQzVEZuTUtlZk90S1RoVzRSYURUNk5FZDktUjBTQkZaREwxODJzZ18zeGc1c29YN2dnUnpaamREZ1RzSGIyUDJtZnZaM3FFLVJveXFRcWMxa1FhS0pjTGxzcFZ0MG45ZGlDd245a3JhZkh2N3l4QjEwTnVkSEhneGpzbllCRlNPSWp3N1NVRnNBb2pWY3dHNi16d213X3piWFV6ZnBBWGFveTFlRXFuTEFXaWRsTHJjWHV0bExLTzlfS2t6ZWxFMHV2dndkTUpSYkNDM0lRZzFEdGg0ZWExTlVZV0pHX25rZTF2ek9OVElOUzgyUUtzcEZnV2c0VG8wUFpYMzZNRzl5SjFaN3M5MXBiaWdFQUFrazBzSjJaeWlHdWlCRFNNSWloZXU5R2NTYXRpM1FlNEFibE9pWWw?oc=5",
+   "source": "Radio-Canada",
+   "pubDate": "2026-11-12T20:35:19.000Z",
    "count": 2,
    "sources": [
-    {
-     "name": "大紀元",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1ZeXhYVHgyQjJfVDIzek9HdnMyNG1UWXpuWF9XZlhaNnBTelRMdDZsQWtvbVVtWTBWWWEwUThKM09ULVdtemRkUDhUcVFhdElDdEFqdlhidEc0VktnMHZ4c3FLbVlFSjjSAWdBVV95cUxNWXl4WFR4MkIyX1QyM3pPR3ZzMjRtVFl6blhfV2ZYWjZwU3pUTHQ2bEFrb21VbVkwVllhMFE4SjNPVC1XbXpkZFA4VHFRYXRJQ3RBanZYYnRHNFZLZzB2eHNxS21ZRUo4?oc=5",
-     "title": "加拿大放鬆外籍勞工政策 居留期加倍"
-    },
     {
      "name": "Radio-Canada",
      "link": "https://news.google.com/rss/articles/CBMikARBVV95cUxOdnJxbTZWTndNekJwck5mZ3JXbVRRU2FXOEI2Y1JXSThwdkR0MTM2bnRBWlJkRzBxelF5SFRPVWk5c1FLckFYTmdUNTRaRVlsYVR3VG41b0tyTnI0YnY0R296dDlzVzRTNlJVZzFoZ2pjczVTY2QtUEMwZ3ctMHk1ZjhfU2tYdUc3UFY4blVZS1hCSDFLeUdfSF8xcVExbTJWX0w2MTkzeHUtMUJobFpaZ1NZdDAwSHNIWUViWDhzV3Y3Q0NMMHJoVzdxbEFEVGQ4SUVxdXN1ekZ2aWQzVEZuTUtlZk90S1RoVzRSYURUNk5FZDktUjBTQkZaREwxODJzZ18zeGc1c29YN2dnUnpaamREZ1RzSGIyUDJtZnZaM3FFLVJveXFRcWMxa1FhS0pjTGxzcFZ0MG45ZGlDd245a3JhZkh2N3l4QjEwTnVkSEhneGpzbllCRlNPSWp3N1NVRnNBb2pWY3dHNi16d213X3piWFV6ZnBBWGFveTFlRXFuTEFXaWRsTHJjWHV0bExLTzlfS2t6ZWxFMHV2dndkTUpSYkNDM0lRZzFEdGg0ZWExTlVZV0pHX25rZTF2ek9OVElOUzgyUUtzcEZnV2c0VG8wUFpYMzZNRzl5SjFaN3M5MXBiaWdFQUFrazBzSjJaeWlHdWlCRFNNSWloZXU5R2NTYXRpM1FlNEFibE9pWWw?oc=5",
      "title": "加拿大移民新政：低薪外籍勞工工作期限延長一倍；鄉村社區移民試點項目變永久"
+    },
+    {
+     "name": "大紀元",
+     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1ZeXhYVHgyQjJfVDIzek9HdnMyNG1UWXpuWF9XZlhaNnBTelRMdDZsQWtvbVVtWTBWWWEwUThKM09ULVdtemRkUDhUcVFhdElDdEFqdlhidEc0VktnMHZ4c3FLbVlFSjjSAWdBVV95cUxNWXl4WFR4MkIyX1QyM3pPR3ZzMjRtVFl6blhfV2ZYWjZwU3pUTHQ2bEFrb21VbVkwVllhMFE4SjNPVC1XbXpkZFA4VHFRYXRJQ3RBanZYYnRHNFZLZzB2eHNxS21ZRUo4?oc=5",
+     "title": "加拿大放鬆外籍勞工政策 居留期加倍"
     }
    ],
-   "score": 21.1
+   "score": 23.1
   },
   {
    "title": "移工消失21天照樣領薪? 科技企業痛訴淪為提款機",
@@ -133,46 +143,6 @@
      "name": "民視新聞網",
      "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE54bjktMDNBQ0tkUjJ1eFNTamxwSUNfVEFnYm5Ud09URnhWSGEzUmtvbGRNeDh5ODRERVg0eEFaa0gxTGFxQmVlLXJCanFaRkU5ZXBSSGZoY0dmNExYM0QxUQ?oc=5",
      "title": "移工消失21天照樣領薪？ 科技企業痛訴淪為提款機"
-    }
-   ],
-   "score": 20
-  },
-  {
-   "title": "看見移工的努力，也讓這份肯定被更多人看見 116年度全國模範移工選拔開跑",
-   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBwQm92anFCUklndXAzeVBDR181Vm1tSk4xUmpUa1dRNzFUaUNTanFOMVJnMktBc2MyR095Z2gtb2VBcmxaV0ttMWI0amt2eTN2MjZ6YmZqSU42TXFaWW5aS3pjUQ?oc=5",
-   "source": "勞動部勞動力發展署全球資訊網",
-   "pubDate": "2026-11-11T07:45:00.000Z",
-   "count": 2,
-   "sources": [
-    {
-     "name": "勞動部勞動力發展署全球資訊網",
-     "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBwQm92anFCUklndXAzeVBDR181Vm1tSk4xUmpUa1dRNzFUaUNTanFOMVJnMktBc2MyR095Z2gtb2VBcmxaV0ttMWI0amt2eTN2MjZ6YmZqSU42TXFaWW5aS3pjUQ?oc=5",
-     "title": "看見移工的努力，也讓這份肯定被更多人看見 116年度全國模範移工選拔開跑"
-    },
-    {
-     "name": "1111人力銀行-找工作",
-     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5aT2xOZHUwUWdoTzUta1QyWi1KZEtpUkxsVks3WUJGRUY0ZmVmS1dhTjlwdGVYcGxUbl9qYXhnX2FjMU1VcWhKcUg4ZWVvc3ZvQ1HSAVJBVV95cUxOWk9sTmR1MFFnaE81LWtUMlotSmRLaVJMbFZLN1lCRkVGNGZlZktXYU45cHRlWHBsVG5famF4Z19hYzFNVXFoSnFIOGVlb3N2b0NR?oc=5",
-     "title": "[116全國模範移工選拔開跑邀雇主仲介推薦優秀移工]"
-    }
-   ],
-   "score": 20
-  },
-  {
-   "title": "嘉榮11月起新增週六移工健檢服務 打造多國語言友善醫療環境",
-   "link": "https://news.google.com/rss/articles/CBMipgNBVV95cUxPaFVmUFJ3MkUxdU9rVWFGWnpPcFVhaEhLUmRxcGxXNnZtTWRfV1pWSjNXWVoyOXlZaWtaRThzcDMya1ZJNDdIQTNaOGVzQ2FZNU5TMldfSFpFVWJNRTA3NGQ0Q0pqVGNBblVSZ0pqRDlYUGV3MmRqQTBsQWVMbnp5dG1sLXRXYmxjX05DTkozSjBwT0VraWo0b2VseFdDLXNGa05OU0x5SjNSajlQUmlOX01fWTgwWnNnWUgyYWxVSEEwMGxMYTR0WVVlNlMzZTRsS3pwZzZLVzNYY2V4cTVGa1dXZEpTYkpfcEpPaXJuaFJPZmk0ekhfb0tncl91TzFSV3BzVDFaTlh1b3FOWTU5VWRjcFVsOVgyNmdDX3c5OVFvaC1DbURKenhoRHBMOW5HaTZkempvaTFpcGYwSm4tbHRvVW1YRDNlV29sNjloUzk2YmVYNDdhVFphZm1qUFFNYndfdU9iUTV6cDRXbWFWNFprNVlkanlYQVBxc3BMV2JMV05MbnhzUE1wTURnN0lhZzdzQnZjMDRseEtmY01DV05XOFphQQ?oc=5",
-   "source": "三星傳媒",
-   "pubDate": "2026-11-10T12:01:10.000Z",
-   "count": 2,
-   "sources": [
-    {
-     "name": "三星傳媒",
-     "link": "https://news.google.com/rss/articles/CBMipgNBVV95cUxPaFVmUFJ3MkUxdU9rVWFGWnpPcFVhaEhLUmRxcGxXNnZtTWRfV1pWSjNXWVoyOXlZaWtaRThzcDMya1ZJNDdIQTNaOGVzQ2FZNU5TMldfSFpFVWJNRTA3NGQ0Q0pqVGNBblVSZ0pqRDlYUGV3MmRqQTBsQWVMbnp5dG1sLXRXYmxjX05DTkozSjBwT0VraWo0b2VseFdDLXNGa05OU0x5SjNSajlQUmlOX01fWTgwWnNnWUgyYWxVSEEwMGxMYTR0WVVlNlMzZTRsS3pwZzZLVzNYY2V4cTVGa1dXZEpTYkpfcEpPaXJuaFJPZmk0ekhfb0tncl91TzFSV3BzVDFaTlh1b3FOWTU5VWRjcFVsOVgyNmdDX3c5OVFvaC1DbURKenhoRHBMOW5HaTZkempvaTFpcGYwSm4tbHRvVW1YRDNlV29sNjloUzk2YmVYNDdhVFphZm1qUFFNYndfdU9iUTV6cDRXbWFWNFprNVlkanlYQVBxc3BMV2JMV05MbnhzUE1wTURnN0lhZzdzQnZjMDRseEtmY01DV05XOFphQQ?oc=5",
-     "title": "嘉榮11月起新增週六移工健檢服務 打造多國語言友善醫療環境"
-    },
-    {
-     "name": "蕃新聞",
-     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4wWGNnNkg0R1AyLU9nVXdfNno0a3l3bUtONlhSQkFIR2FhSzZtWldMYXVrVHlMSFpCLWdCVURBbFVVTFVpUFpFT1JlRWoxRXI2YXc?oc=5",
-     "title": "嘉榮11月起 增週六的移工健檢服務"
     }
    ],
    "score": 20
@@ -230,7 +200,7 @@
      "title": "印尼就業保護法解讀｜委外、資遣準備金與外籍勞工"
     }
    ],
-   "score": 14
+   "score": 12.6
   },
   {
    "title": "歲末年終缺工潮！桃祭「查核問」：誤聘非法移工最高重罰75萬",
@@ -245,7 +215,37 @@
      "title": "歲末年終缺工潮！桃祭「查核問」：誤聘非法移工最高重罰75萬"
     }
    ],
-   "score": 12.3
+   "score": 10.9
+  },
+  {
+   "title": "外籍看護也進投票所？游盈隆一句話嚇壞政院官員 原來是擔心看護變「狗仔」",
+   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBBWmw0emU0S18tZ2VHZy1hal8yVFNzNnpnd0EtcVR4RGVEMXQ5OVltenZWV1R5Rlhfa1NHcFpYamh5S0Jaa3k1M0tqM09udFg0am9CNGxzR2paZw?oc=5",
+   "source": "信傳媒",
+   "pubDate": "2026-11-12T05:57:10.000Z",
+   "count": 1,
+   "sources": [
+    {
+     "name": "信傳媒",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBBWmw0emU0S18tZ2VHZy1hal8yVFNzNnpnd0EtcVR4RGVEMXQ5OVltenZWV1R5Rlhfa1NHcFpYamh5S0Jaa3k1M0tqM09udFg0am9CNGxzR2paZw?oc=5",
+     "title": "外籍看護也進投票所？游盈隆一句話嚇壞政院官員 原來是擔心看護變「狗仔」"
+    }
+   ],
+   "score": 10.6
+  },
+  {
+   "title": "失聯逾8年移工毒駕！ 假意配合後竟「跑給警追」",
+   "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBLUU4wRWIyTVI5dGVKSnR2UmpqNDJNRDVHTldmMWJVMkxEOVNkbDYtWkJYT2tEd0NRRDd2UlBRV3E3eVo5NDFHLTczVnhVY0ZyTW1qX1FweUY4RXRESFhGd2FOYjZoUVFTUDlLTkV3cFlYSUhMR1RPR3U5djA?oc=5",
+   "source": "台視全球資訊網",
+   "pubDate": "2026-11-12T04:26:54.000Z",
+   "count": 1,
+   "sources": [
+    {
+     "name": "台視全球資訊網",
+     "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBLUU4wRWIyTVI5dGVKSnR2UmpqNDJNRDVHTldmMWJVMkxEOVNkbDYtWkJYT2tEd0NRRDd2UlBRV3E3eVo5NDFHLTczVnhVY0ZyTW1qX1FweUY4RXRESFhGd2FOYjZoUVFTUDlLTkV3cFlYSUhMR1RPR3U5djA?oc=5",
+     "title": "失聯逾8年移工毒駕！ 假意配合後竟「跑給警追」"
+    }
+   ],
+   "score": 10.4
   }
  ],
  "errors": []
