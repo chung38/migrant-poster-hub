@@ -31,6 +31,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: 抓越南、菲律賓、泰國、印尼華文報的熱門與頭條
         run: node crawler/sea-news.js ${{ inputs.debug && '--debug' || '' }}
+      - name: 檢查資料格式（不合格就保留上一版）
+        run: node crawler/check-data.js --restore docs/sea-news.json data/sea-raw.json || echo "DATA_BAD=1" >> "$GITHUB_ENV"
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"
@@ -41,3 +43,9 @@ jobs:
             git commit -m "東南亞新聞更新 $(TZ=Asia/Taipei date +'%m-%d %H:%M')"
             git pull --rebase && git push
           fi
+
+      - name: 有資料沒通過檢查就標成失敗（GitHub 會寄信通知）
+        if: ${{ env.DATA_BAD == '1' }}
+        run: |
+          echo "有資料沒通過檢查，已保留上一版的資料，原因請看上面「檢查」步驟的說明。"
+          exit 1

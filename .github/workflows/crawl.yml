@@ -38,6 +38,12 @@ jobs:
       - name: 監看最低工資、就業安定費新公告
         run: node crawler/watch.js || true
 
+      - name: 檢查資料格式（不合格就保留上一版）
+        run: |
+          node crawler/check-data.js --restore --clean docs/thumbs docs/catalog.json docs/report.json data/state.json || echo "DATA_BAD=1" >> "$GITHUB_ENV"
+          node crawler/check-data.js --restore docs/news.json data/news-raw.json || echo "DATA_BAD=1" >> "$GITHUB_ENV"
+          node crawler/check-data.js --restore docs/watch.json || echo "DATA_BAD=1" >> "$GITHUB_ENV"
+
       - name: 存回 GitHub
         run: |
           git config user.name "poster-bot"
@@ -49,3 +55,9 @@ jobs:
             git commit -m "文宣更新 $(TZ=Asia/Taipei date +'%Y-%m-%d')"
             git push
           fi
+
+      - name: 有資料沒通過檢查就標成失敗（GitHub 會寄信通知）
+        if: ${{ env.DATA_BAD == '1' }}
+        run: |
+          echo "有資料沒通過檢查，已保留上一版的資料，原因請看上面「檢查」步驟的說明。"
+          exit 1

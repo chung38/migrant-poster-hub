@@ -1,32 +1,41 @@
-# 移次搞定｜移工文宣・新聞一次找齊
+# 移次搞定｜移工文宣・新聞一次找齊（資料與爬蟲）
 
-每天早上 06:23（台灣時間）自動到各政府機關網站抓最新的移工宣導文宣，
-依類別整理，並提供一個可以搜尋的網頁。
+> **網站已搬到 https://translate-1up.pages.dev**（和文件翻譯「移件翻」合併）。
+> 這個 repo 現在專門放**爬蟲與資料**：GitHub Actions 每天抓資料，存成 JSON 給網站讀取。
+> 網站畫面的程式在 [chung38/translate](https://github.com/chung38/translate)。
+> 兩邊怎麼分工、各檔案的用途，請看 **[ARCHITECTURE.md](ARCHITECTURE.md)**。
+
+每天早上 06:23（台灣時間）自動到各政府機關網站抓最新的移工宣導文宣，依類別整理。
 **不保存原始檔**：只記錄政府網站上的檔案連結，另存一張約 10–30KB 的小縮圖，repo 幾乎不會變大。
 
 - 搜「毒品」→ 列出所有反毒類文宣，連越南文（ma túy）、印尼文（narkoba）、泰文（ยาเสพติด）的都一起出來
-- 沒有搜尋時，網頁會依類別分區顯示（反毒、交通安全、防詐騙、勞動權益、衛生防疫、消防防災…）
+- 文宣依類別分區顯示（反毒、交通安全、防詐騙、勞動權益、衛生防疫、消防防災…）
 - 每份文宣都有縮圖；「開啟檔案」直接連到政府網站上的原始檔，「原網頁」回到該則公告頁
 
-全部跑在 GitHub 上（GitHub Actions 排程 + GitHub Pages 網頁），**免費、不需要自己的伺服器**。
+爬蟲全部跑在 GitHub 上（GitHub Actions 排程 + GitHub Pages 放資料），**免費、不需要自己的伺服器**。
 
 ---
 
 ## 檔案結構
 
 ```
-.github/workflows/crawl.yml   每日排程（GitHub Actions）
-crawler/crawl.js              爬蟲主程式：抓取 → 下載 → 分類 → 寫入目錄
-crawler/classify.js           類別與語言判斷
-sources.json                  要抓哪些政府網站（可自行新增）
-categories.json               類別與多國語關鍵字（可自行增減）
-docs/index.html               搜尋網頁
-docs/catalog.json             文宣目錄（程式自動產生，首次可不上傳）
-docs/report.json              每次抓取的結果報告（自動產生）
-docs/thumbs/*.webp            縮圖（自動產生）
-data/state.json               已看過的網頁紀錄（自動產生）
-package.json
-.gitignore
+.github/workflows/crawl.yml     每天抓文宣（順便更新新聞）
+.github/workflows/news.yml      每 4 小時更新新聞
+.github/workflows/sea-news.yml  每天 2 次更新東南亞頭條
+.github/workflows/laws.yml      每天檢查法規與勞動部公告，有變動就開 Issue
+.github/workflows/check.yml     手動修改資料檔後自動檢查格式
+crawler/crawl.js                文宣爬蟲：抓取 → 縮圖 → 分類 → 寫入目錄
+crawler/classify.js             類別與語言判斷
+crawler/news.js、watch.js       台灣移工新聞、最低工資／就安費公告
+crawler/sea-news.js             東南亞華文報頭條
+crawler/laws.js、policy.js      法規、法條原文、勞動部政策法令
+crawler/check-data.js           檢查所有資料檔格式，不合格就保留上一版
+sources.json                    要抓哪些政府網站（可自行新增）
+categories.json                 類別與多國語關鍵字（可自行增減）
+docs/*.json                     給網站讀的資料（程式自動產生；guides.json、info.json 是人工維護）
+docs/thumbs/*.webp              文宣縮圖（自動產生）
+docs/index.html、view.html      舊網址轉到新站用
+data/                           爬蟲自己用的紀錄（自動產生）
 ```
 
 ---
@@ -41,7 +50,7 @@ package.json
 | 最低工資、就安費新公告偵測 | 每 4 小時 | `crawler/watch.js` |
 | 移工相關法規清單與修正日期、各行業法條原文 | 每天 | `crawler/laws.js` |
 | 勞動部「政策法令」公告 | 每天 | `crawler/policy.js` |
-| 節日日期（農曆、伊斯蘭曆） | 網頁開啟時自動推算 | `docs/index.html` |
+| 節日日期（農曆、伊斯蘭曆） | 網頁開啟時自動推算 | translate repo 的 `index.html` |
 
 聘僱指南的「重點整理」（`docs/guides.json`）是人工維護。法條有修正或勞動部有新公告時：
 
@@ -59,7 +68,7 @@ package.json
 4. **開網頁**：`Settings → Pages → Build and deployment`
    Source 選 **Deploy from a branch**，Branch 選 **main**、資料夾選 **/docs** → Save。
 5. **先手動跑一次**：`Actions → 每日抓取文宣 → Run workflow`。跑完約 5–15 分鐘。
-6. 打開 `https://<你的帳號>.github.io/migrant-posters/` 就能搜尋了。之後每天自動更新。
+6. 跑完後 `https://<你的帳號>.github.io/migrant-posters/catalog.json` 就有資料了，之後每天自動更新。網站（translate repo 的 `index.html`）裡的 `DATA` 網址要指向這裡。
 
 ---
 
@@ -97,7 +106,8 @@ package.json
 
 ## 常見問題
 
-- **某個機關一直抓不到**：網頁底下「各來源最近一次抓取狀態」會顯示原因。
+- **某個機關一直抓不到**：網站文宣頁底下「各來源最近一次抓取狀態」會顯示原因。
+- **Action 變紅色、收到失敗通知**：多半是資料沒通過 `check-data.js` 檢查，舊資料會保留。打開那次 Action 的「檢查」步驟看原因。
   有些政府網站會擋國外 IP（GitHub 的主機在國外），這種情況可以在自己公司電腦上跑：
   安裝 Node.js 20 → `npm install` → `npm run crawl`，再用 GitHub Desktop 把變更推上去。
 - **縮圖怎麼來的**：程式會暫時下載檔案做縮圖（PDF 取第一頁），做完就丟掉。超過 20MB 的檔案（`maxFileMB`）不做縮圖，只留連結。

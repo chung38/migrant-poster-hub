@@ -27,8 +27,23 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: 讀取法規與法條原文
         run: node crawler/laws.js
+      - name: 檢查法規資料（不合格就保留上一版、不發通知）
+        run: |
+          if ! node crawler/check-data.js --restore docs/laws.json; then
+            rm -f data/changes.md
+            echo "DATA_BAD=1" >> "$GITHUB_ENV"
+          fi
       - name: 讀取勞動部政策法令公告
-        run: node crawler/policy.js || true
+        run: |
+          # 先記下法規那段通知，公告資料若沒通過檢查，只撤掉公告那段
+          if [ -f data/changes.md ]; then cp data/changes.md "$RUNNER_TEMP/changes-laws.md"; fi
+          node crawler/policy.js || true
+      - name: 檢查公告資料（不合格就保留上一版、不發通知）
+        run: |
+          if ! node crawler/check-data.js --restore docs/policy.json; then
+            if [ -f "$RUNNER_TEMP/changes-laws.md" ]; then cp "$RUNNER_TEMP/changes-laws.md" data/changes.md; else rm -f data/changes.md; fi
+            echo "DATA_BAD=1" >> "$GITHUB_ENV"
+          fi
       - name: 有變動就開 Issue 通知
         env:
           GH_TOKEN: ${{ github.token }}
@@ -47,3 +62,9 @@ jobs:
             git commit -m "法規與公告更新 $(TZ=Asia/Taipei date +'%Y-%m-%d')"
             git pull --rebase && git push
           fi
+
+      - name: 有資料沒通過檢查就標成失敗（GitHub 會寄信通知）
+        if: ${{ env.DATA_BAD == '1' }}
+        run: |
+          echo "有資料沒通過檢查，已保留上一版的資料，原因請看上面「檢查」步驟的說明。"
+          exit 1
