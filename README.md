@@ -1,6 +1,6 @@
 # 移次搞定｜移工文宣・新聞一次找齊（資料與爬蟲）
 
-> **網站已搬到 https://translate-1up.pages.dev**（和文件翻譯「移件翻」合併）。
+> **網站已搬到 https://yicipass.com**（和文件翻譯「移件翻」合併）。
 > 這個 repo 現在專門放**爬蟲與資料**：GitHub Actions 每天抓資料，存成 JSON 給網站讀取。
 > 網站畫面的程式在 [chung38/translate](https://github.com/chung38/translate)。
 > 兩邊怎麼分工、各檔案的用途，請看 **[ARCHITECTURE.md](ARCHITECTURE.md)**。

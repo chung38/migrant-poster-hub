@@ -2,7 +2,7 @@
 
 「移次搞定」網站分成兩個 repo：
 
-- **chung38/translate**：網站畫面加翻譯 API，放在 Cloudflare Pages。正式網址：https://translate-1up.pages.dev
+- **chung38/translate**：網站畫面加翻譯 API，放在 Cloudflare Pages。正式網址：https://yicipass.com
 - **chung38/migrant-poster-hub**（這個）：爬蟲與資料。GitHub Actions 依排程抓資料，存成 JSON 放在 `docs/`，再由 GitHub Pages 公開。
 
 網站每次開啟都會直接讀 `https://chung38.github.io/migrant-poster-hub/` 底下的 JSON 和縮圖，所以資料更新後不需要重新部署網站。
