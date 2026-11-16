@@ -167,6 +167,122 @@
    "addedAt": "2026-11-16T02:15:35.140Z"
   },
   {
+   "id": "413f672ae11a",
+   "title": "Không tập trung khi lái xe Cẩn thận bị phạt tiền",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-vi"
+   ],
+   "sourceName": "168交通安全入口網－越南文文宣",
+   "sourcePage": "https://168.motc.gov.tw/vn/theme/poster/post/2611161341967",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261116/13411927.jpg",
+   "ext": "jpg",
+   "size": 691863,
+   "sha256": "59e6063ab4e4e50442e2181851bf8347699cf37142f7ac969de381b68de08852",
+   "thumb": "thumbs/413f672ae11a.webp",
+   "phash": "0001001010011100100001010101101010010100001001001101010011011100000010100101101001011010000000010010001100100011001101110000100111100101011010110100010001110001110100000110100010110010011000001100101001100000110000101100000111100011110000000110000010110000",
+   "date": "2026-11-16",
+   "langs": [
+    "vi"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Về trang đầu＞ Ấn phẩm tuyên truyền＞ Không tập trung khi lái xe Cẩn thận bị phạt tiền Ấn phẩm tuyên truyền Không tập trung khi lái xe Cẩn thận bị phạt tiền Thời gian phát hành：2026.11.16 Số lượt xem：4 ",
+   "addedAt": "2026-11-16T15:21:00.754Z",
+   "group": "s:1182f246465d",
+   "groupTitle": "Riding while distracted could earn you a ticket",
+   "version": "越南文版"
+  },
+  {
+   "id": "da79bd8f2616",
+   "title": "Berkendara Tidak Fokus Hati-Hati, Bisa Kena Tilang",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-id"
+   ],
+   "sourceName": "168交通安全入口網－印尼文文宣",
+   "sourcePage": "https://168.motc.gov.tw/id/theme/poster/post/2611161131247",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261116/11312562.jpg",
+   "ext": "jpg",
+   "size": 725428,
+   "sha256": "c0e3211d6b2bc1da8a859fbd67ed9bc3f26a9ea925b7b8e38c71d4f496fc2ff4",
+   "thumb": "thumbs/da79bd8f2616.webp",
+   "phash": "0001011010011100100001010101101010010100001001001100010001010100000010100101100010111010000110010000101100101011001001110010011111100101011000110100010001110001110100000110010010110010011000001100101001100000110000101100000111100011110000000110000010110000",
+   "date": "2026-11-16",
+   "langs": [
+    "id"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Kembali ke Beranda＞ Poster＞ Berkendara Tidak Fokus Hati-Hati, Bisa Kena Tilang Poster Berkendara Tidak Fokus Hati-Hati, Bisa Kena Tilang Waktu rilis：2026.11.16 Jumlah kunjungan：10 Gambar terkait： Bagi",
+   "addedAt": "2026-11-16T15:21:03.734Z",
+   "group": "s:1182f246465d",
+   "groupTitle": "Riding while distracted could earn you a ticket",
+   "version": "印尼文版"
+  },
+  {
+   "id": "bdbb42e66987",
+   "title": "ขับขี่โดยประมาท ระวังโดนใบสั่ง",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-th"
+   ],
+   "sourceName": "168交通安全入口網－泰文文宣",
+   "sourcePage": "https://168.motc.gov.tw/th/theme/poster/post/2611161147325",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261116/11464151.jpg",
+   "ext": "jpg",
+   "size": 711070,
+   "sha256": "a94111c6df188c2832bc1688094eba2006a8f2e1d0c2c0b18827a3ffec28a48a",
+   "thumb": "thumbs/bdbb42e66987.webp",
+   "phash": "0001011010011000100001000101101010000101010001001110010000001000001100000010011001011011000100011000110000111011001001010010011111100101011000110100010001110001110100000110010110110010011000001100101001100000110000101100000111100011110000000110000010110000",
+   "date": "2026-11-16",
+   "langs": [
+    "th"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "กลับหน้าแรก＞ ข้อมูลทั่วไป＞ ขับขี่โดยประมาท ระวังโดนใบสั่ง ข้อมูลทั่วไป ขับขี่โดยประมาท ระวังโดนใบสั่ง เวลาประกาศ：2026.11.16 จำนวนการค้นหา：2次 ภาพที่เกี่ยวข้อง： แชร์ให้เพื่อน：",
+   "addedAt": "2026-11-16T15:21:07.301Z",
+   "group": "s:1182f246465d",
+   "groupTitle": "Riding while distracted could earn you a ticket",
+   "version": "泰文版"
+  },
+  {
+   "id": "55ec618348e0",
+   "title": "Riding while distracted could earn you a ticket",
+   "agency": "交通部",
+   "sources": [
+    "motc-168-en"
+   ],
+   "sourceName": "168交通安全入口網－英文文宣",
+   "sourcePage": "https://168.motc.gov.tw/en/theme/poster/post/2611161140359",
+   "fileUrl": "https://168.motc.gov.tw/data/img/20261116/11373959.jpg",
+   "ext": "jpg",
+   "size": 715863,
+   "sha256": "3c9943ef0bf6a243901b15f5d22f55ed4f1c6ac0297887dad5b00ece80c94923",
+   "thumb": "thumbs/55ec618348e0.webp",
+   "phash": "0001001010011000100001010101101010010100010001011101010001011000001010100001100010011010000110010001101100101111001001110010111111100101011000110100010001110001110100000110010010110010011000001100101001100000110000101100000111100011110000000110000010110000",
+   "date": "2026-11-16",
+   "langs": [
+    "en"
+   ],
+   "primaryCategory": "交通安全",
+   "categories": [
+    "交通安全"
+   ],
+   "snippet": "Home＞ Propaganda Materials＞ Riding while distracted could earn you a ticket Propaganda Materials Riding while distracted could earn you a ticket Last Updated：2026.11.16 Visits：5次 Images： Share：",
+   "addedAt": "2026-11-16T15:21:11.072Z",
+   "group": "s:1182f246465d",
+   "groupTitle": "Riding while distracted could earn you a ticket",
+   "version": "英文版"
+  },
+  {
    "id": "b2f776afe642",
    "title": "LINE@移點通-【流感、新冠別輕忽！出現呼吸道症狀要注意】-多國語言版－中文版",
    "agency": "勞動部",
@@ -15264,7 +15380,7 @@
    "version": "印尼語版（Indonesia）"
   }
  ],
- "updatedAt": "2026-11-16T02:15:51.348Z",
+ "updatedAt": "2026-11-16T15:21:27.724Z",
  "repo": "chung38/migrant-poster-hub",
  "branch": "main",
  "categories": [

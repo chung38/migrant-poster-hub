@@ -1,68 +1,69 @@
 {
- "startedAt": "2026-11-16T02:15:01.503Z",
- "finishedAt": "2026-11-16T02:15:51.354Z",
+ "startedAt": "2026-11-16T15:20:55.132Z",
+ "finishedAt": "2026-11-16T15:21:27.729Z",
  "sources": [
   {
    "id": "wda-file",
    "name": "勞動力發展署 跨國勞動力權益維護資訊網－宣導品",
    "agency": "勞動部",
    "ok": true,
-   "newItems": [
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版－中文版",
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版－印尼文版",
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版－泰文版",
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版－英文版",
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版－越南文版",
-    "LINE@移點通-【喝酒後不可以騎乘微型電動二輪車及腳踏車】-多國語言版"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 15,
-   "fetchedDetails": 1,
-   "newCount": 6
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "motc-168-vi",
    "name": "168交通安全入口網－越南文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Không tập trung khi lái xe Cẩn thận bị phạt tiền"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 1,
+   "newCount": 1
   },
   {
    "id": "motc-168-id",
    "name": "168交通安全入口網－印尼文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Berkendara Tidak Fokus Hati-Hati, Bisa Kena Tilang"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 1,
+   "newCount": 1
   },
   {
    "id": "motc-168-th",
    "name": "168交通安全入口網－泰文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "ขับขี่โดยประมาท ระวังโดนใบสั่ง"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 1,
+   "newCount": 1
   },
   {
    "id": "motc-168-en",
    "name": "168交通安全入口網－英文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [],
+   "newItems": [
+    "Riding while distracted could earn you a ticket"
+   ],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 0,
-   "newCount": 0
+   "fetchedDetails": 1,
+   "newCount": 1
   },
   {
    "id": "judicial-labor",
