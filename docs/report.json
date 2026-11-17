@@ -1,6 +1,6 @@
 {
- "startedAt": "2026-11-16T15:20:55.132Z",
- "finishedAt": "2026-11-16T15:21:27.729Z",
+ "startedAt": "2026-11-17T04:36:16.019Z",
+ "finishedAt": "2026-11-17T04:36:35.369Z",
  "sources": [
   {
    "id": "wda-file",
@@ -18,52 +18,44 @@
    "name": "168交通安全入口網－越南文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [
-    "Không tập trung khi lái xe Cẩn thận bị phạt tiền"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 1,
-   "newCount": 1
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "motc-168-id",
    "name": "168交通安全入口網－印尼文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [
-    "Berkendara Tidak Fokus Hati-Hati, Bisa Kena Tilang"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 1,
-   "newCount": 1
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "motc-168-th",
    "name": "168交通安全入口網－泰文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [
-    "ขับขี่โดยประมาท ระวังโดนใบสั่ง"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 1,
-   "newCount": 1
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "motc-168-en",
    "name": "168交通安全入口網－英文文宣",
    "agency": "交通部",
    "ok": true,
-   "newItems": [
-    "Riding while distracted could earn you a ticket"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 12,
-   "fetchedDetails": 1,
-   "newCount": 1
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "judicial-labor",
