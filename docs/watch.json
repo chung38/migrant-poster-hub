@@ -1,7 +1,14 @@
 {
- "checkedAt": "2026-11-16T15:21:39.426Z",
+ "checkedAt": "2026-11-17T04:09:09.267Z",
  "days": 60,
  "items": [
+  {
+   "topic": "最低工資",
+   "title": "2027最低工資再漲！好清潔解析駐點清潔預算的4項評估重點",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB4ZVVqZ1FtaXNZM3VVX2pGQ3QxdFUtUXY3aFhwR2FsR3Z6bGw0VnlUSGFoeUFaR2l0elhHQk5HQWMwMzlLd1Z5V21WX0UzcGlOVnc?oc=5",
+   "source": "蕃新聞",
+   "pubDate": "2026-11-17T01:58:32.000Z"
+  },
   {
    "topic": "最低工資",
    "title": "違反最低工資將按次累罰新制明年元旦上路",
@@ -99,14 +106,9 @@
    "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBKWDBkUFA2QUE2dmtLTzZ4SmpVd2t3bkprNGhVdlRnYTZ1ZFVpMFFQeDN5M19WUU1pSkJ2LTYxMjZFc2pJeVhyX250S3A0dlJrQ0paNVZHcw?oc=5",
    "source": "勞動部全球資訊網",
    "pubDate": "2026-09-29T07:00:00.000Z"
-  },
-  {
-   "topic": "最低工資",
-   "title": "【最新】最低工資突破3萬大關！116年月薪30,900元、時薪205元連11漲｜「基本工資」QA總整理",
-   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9FdS0wSENwTmtvTkNuUDhTMU5fSWY0aWpYZGh4Wldnel93bTFkREZHR3BYMnExY3d1X05qUGxtZHVUR1MxY3VKYzl3aDdVV0RkeHJDc1JWbmhrVjRRU3ZTb1R4UEphNXIxbXc?oc=5",
-   "source": "104招募管理",
-   "pubDate": "2026-09-29T07:00:00.000Z"
   }
  ],
- "errors": []
+ "errors": [
+  "家事移工薪資：HTTP 429"
+ ]
 }
