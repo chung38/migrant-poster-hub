@@ -1,14 +1,19 @@
 {
- "updatedAt": "2026-11-20T09:06:58.027Z",
+ "updatedAt": "2026-11-20T17:58:27.514Z",
  "days": 3,
  "items": [
   {
    "title": "移工有產假補助5.4萬本國勞工沒有？勞動部：錯誤資訊",
    "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1ia2lrRWFuY09OOW9XalRaLXo1MnBBMzF3UE1RSGlUNUFBR2tFbzlybE05dFB5bEVtZFdwX3ZNVHF1Q01JQ1BnU1ZseE5xdWFfMVlYR1NNSl8xMWs3SnZ3?oc=5",
    "source": "中央社 CNA",
-   "pubDate": "2026-11-20T04:18:00.000Z",
+   "pubDate": "2026-11-20T10:24:06.000Z",
    "count": 11,
    "sources": [
+    {
+     "name": "台灣事實查核中心",
+     "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZUxTQjhVc1AzbVVrMWliSnZOUFplb1ljOVNpbVU2SVpjeDh1bFd4SlJyX1pLWGFTem9qNXgtZUc1SFFQeDV5UDFxQVVvUUd2V05iMlhtMTgwT2pBMFNINGJYdFoyb2FiNlRTYUo0OFhwaEFOOVdzanJJSFotSFBmZVR5ejgxVWJEMDF0dDZoYjdJZVVmY1FuN3hiRjExeGtGVWc?oc=5",
+     "title": "產假、陪產假天數延長，本勞、產業及機構移工均適用。網傳「台灣人一項都沒有」刻意誤導、製造對立。"
+    },
     {
      "name": "勞動部全球資訊網中文網",
      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFAxdjdVOThIWHUySUdHNm9xaDVkNjF4OURUVmJtbndMd2VJV1czbXdMZG53OXlPeTFhUnJOcUpDXzRBSjlYWVlXQWtHbWNvM0FBV3liNl9hNEZRcDVnZWc?oc=5",
@@ -16,8 +21,8 @@
     },
     {
      "name": "Yahoo新聞",
-     "link": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxOM0szRDlzd0NNMXpMX1FlRERieVgzdXhQZTBqejNzcDQ1dlNIS0RiWHZ5RVdSbE1uVExVLU5Xa2V6b0lnMWI0emZiVlU5RTF0aUQ4QnRLX3BLUm5XWkhyTm1CQW9lMEpjVmE0QzE3LWRUdnlFbTB3SG52eFF6ZHNFZGF6bHBiTlhzMGlLU1ctTkpIM0tFRVhpejZVdnZqV196M2NvMTFBUFZ2QW1fY0x4RWdnMzJaTE9HenRyQmVjUU45OGN5WGlLYTdJNFVlQ1VHR1c0ck1xOGZwMUlpUFJPdWM1ckhLYjBOODNBM1Q3Q2RxenRyeHRSTjRNVVlFR29UMURfSDNKb2gwSEVYR25xbFJZV0F3cG03SUp5S3REQ0JNNVpaUWxISFp2TWJBRDhIR0gzSmQ2T2RVLVBnSnZvSDBRS0k1MTMtWFhOSWg5MTN2TFE4cTlpTHhKR0VZeGtVejZN?oc=5",
-     "title": "移工懷孕補助5.4萬？ 勞動部重申：補助是給雇主、不是移工"
+     "link": "https://news.google.com/rss/articles/CBMimgJBVV95cUxQOVdMTWxoZ1JZUmItSGd1aWUzLU44NWpLZWVMU1BHcGxwdk80SFNQNDI4WjNYRHg1UkdPd0Y4M1E4RGpVbExpY1JnSUM3XzR5VEtlOU5VWk5fVnFVUHZxYlp6dXFoZUxhWmZwb0NzZUVNR05QT3JmUXg3cEVYaVNlenZIdUNrSlBBSDE5MmY4NUhYOGFYMXB5b21DWE9zMkFOQmRRWDNHR2NGMEpOMWR1NlpGMjFXc1Z0blNNekI0eFVZSW5NdTNySW93dEw4cy1CVjRtaVNWRjF1WkNadjBOTUp2aGJKZ3JFQlV2d242ZWJyMWxTVnJldU5VZFZFQlg0MjF2dGc5QWp0OGo1dHRPa3BfSVprajZXX1E?oc=5",
+     "title": "性別平等工作法修正 移工產假補助雇主5.4萬 全民買單"
     },
     {
      "name": "中央社 CNA",
@@ -50,11 +55,6 @@
      "title": "性工法修正 移工產假補助5.4萬 全民埋單"
     },
     {
-     "name": "UDN",
-     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5RQmw5Y1YxT0NnbDFaOWg5OXF1UlBHRW10amNPWjZUX1RZY3o3V3FkLVZ6WG5GUWIzU2ZtMG4zTGlYcGpYMlR3WFo2ajlQMUVj0gFWQVVfeXFMT29EUUdxNUE0ejMzMnV0SFlEc3JsSEg4d2JFVlRUbEVJSGdGNUs1MndDaEdWdFZNbXZCc213b3VORFhXN21ZVWRlbmdqUnoxMm40SmFJY3c?oc=5",
-     "title": "移工請產假可獲5.4萬薪資補助？ 勞動部：外籍看護有假、沒薪水"
-    },
-    {
      "name": "信吉衛視+",
      "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9VQndSQW42YU9EYnJ2cHZaMUdna3phcUhZeTA0cFZTaVZHbFgtQ1U3aDRub1BJdDFMUGloUnNuazhBTGhRTi1vZFpaSVZndVVJ?oc=5",
      "title": "移工有產假補助5.4萬本國勞工沒有？勞動部：錯誤資訊"
@@ -65,104 +65,24 @@
      "title": "無薪假有補助了！勞動部鎖定三大製造業 發放薪資補貼最高16300元"
     }
    ],
-   "score": 113.2
+   "score": 112.7
   },
   {
-   "title": "轎車超載 揪4失聯移工1通緝犯",
-   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE96OUd6MzRyMHF0a2dUakVTUzJrTTFCSVc0elBPTF9ldjFEOEp2bTJ1LWFXbVNGV3Ffd1l4TDc5MWpmTTZDMWQ2RkdZdmRKYmIycXc?oc=5",
-   "source": "中華新聞雲／中華日報",
-   "pubDate": "2026-11-19T05:08:47.000Z",
-   "count": 11,
-   "sources": [
-    {
-     "name": "中華新聞雲／中華日報",
-     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE96OUd6MzRyMHF0a2dUakVTUzJrTTFCSVc0elBPTF9ldjFEOEp2bTJ1LWFXbVNGV3Ffd1l4TDc5MWpmTTZDMWQ2RkdZdmRKYmIycXc?oc=5",
-     "title": "轎車超載 揪4失聯移工1通緝犯"
-    },
-    {
-     "name": "內政部警政署警察廣播電臺",
-     "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYUZYUDFyMW5EZzhGbWZqT3RIZk5Fb1JCZnNneWdId1FuSGVySXZUckMwX1JDRTUzMzhrMnRhTjhUSzl3Y0g0ZTRsLVBBMnhxRlRXcFNEbHl5UEZ2cmJlTzVLYW50S0QyQndTb3czUGlCNnVnb1QwVk9MOVZKWlZydDFYb1ZRcGNYeVR6alNiQkpBUG9aVlNER3hlekNRUjhoOHY0YlNrT2RxRFRK?oc=5",
-     "title": "臺南安平員警警巡邏眼尖 查獲5名失聯移工及通緝犯"
-    },
-    {
-     "name": "UDN",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBHeVdZVXlLUjZQRkxOUUw0a1NTbm11dzhPWmk4aUJEcUEtaExsanhPdWt3VmN1WWlfc3FlaVpjUEFmRWJDTEJPandNSVhlRC1ZbWFueVR30gFWQVVfeXFMUEd5V1lVeUtSNlBGTE5RTDRrU1NubXV3OE9aaThpQkRxQS1oTGxqeE91a3dWY3VZaV9zcWVpWmNQQWZFYkNMQk9qd01JWGVELVltYW55VHc?oc=5",
-     "title": "警眼尖見飼料車在工地載客 一舉查獲滿車5名越南籍失聯移工"
-    },
-    {
-     "name": "樂上新聞網",
-     "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9ra3BlQ1lsZkl4bkNXNU1xa1N1eTFCckdhcWZxQVVVVzhtZ3k0V3VhalQ5OUhibEtiNHoydDJTUWU2VVBUekhSRl9OM2U?oc=5",
-     "title": "飼料公司車竟現工地載客！安平警巡邏眼尖攔查 逮5失聯移工及洗錢通緝犯"
-    },
-    {
-     "name": "三立新聞網SETN.com",
-     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBVbm5zN3ZzT1VlYmlVSjlkN1hmQVdrYzJOMHBFbXZXVGpGdEIyLXhpZ29qTG9pZVY2RndMS19jOWEwTkM2cDZDNA?oc=5",
-     "title": "中壢白牌車載客遭警攔 車上失聯移工嚇到「拉壞把手」"
-    },
-    {
-     "name": "自由時報",
-     "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE45VWlxMXMwdWJEa2tzTFMydklnU2NUQU5UUVkxSEtYaUwzNmtUTENwRTBKaENNRTQtcG8ydGJ5NzdXODh0ZW9UZGFNV1EwU3hwSllfOElaV2RzdHczOVZn0gFkQVVfeXFMT211T05FRmdDRDNqY1IxLTk4VFdDRlJETVJOMDhkOGZQel9sN0ppa2d4Slh2S0RRV29acXlTVHduYjR6cGY3dndyQTFfMXFuRnpqaW84aWM2WjRtNGVGc096d3U3WA?oc=5",
-     "title": "工地沒養豬卻見飼料車 警攔查逮5失聯移工"
-    },
-    {
-     "name": "華視新聞網",
-     "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8yZHNlOE1zR0R4dEVOLWVNTU5zSzM2dk93U0xIbzdZTksyeThfVXJCRzctQnRZMlJqZ0JsdUUzN2NMZkNWQk56VldkZ0VwWmpseGZwZ2hMT1FUNDFhTnBBdzVNMmFVWUhCUW1QSlJWQVM?oc=5",
-     "title": "南警攔查無照駕駛自小客逮5名失聯移工及通緝犯- 社會"
-    },
-    {
-     "name": "ENN台灣電報",
-     "link": "https://news.google.com/rss/articles/CBMiOkFVX3lxTFBzUHpWaGZtVDZWbG8zYzB2VkJfdHVCWUw0Qy1oa1BzWUpVUjNXWVdEOVJzMU1nZk80TVE?oc=5",
-     "title": "飼料公司車輛現身工地載客露疑點 安平警攔查揪出5名失聯移工"
-    },
-    {
-     "name": "ETtoday新聞雲",
-     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBodlNVLXdGel94SHhKeTdvTkNVWGNta0w3U0ktQkc0VmRBRUtXLTNmNzVvMnpRN0E3SUk3OWlSUWhEZDF3aVoyUUhyY9IBS0FVX3lxTFBodlNVLXdGel94SHhKeTdvTkNVWGNta0w3U0ktQkc0VmRBRUtXLTNmNzVvMnpRN0E3SUk3OWlSUWhEZDF3aVoyUUhyYw?oc=5",
-     "title": "台南安平攔查工地接送車 5名乘客均為失聯移工、1人遭通緝"
-    },
-    {
-     "name": "記者爆料網",
-     "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1hMXBrWFRub2Rta2VQYjJFQnh5TkctOFc5b2xZMngybEVLdFc5WkJKeGcyUVlMTzJuUmdQUGYtYlN2TXhqRFl6aWNQUm91dw?oc=5",
-     "title": "工地旁神祕載客車露餡！台南警攔查驚見5失聯移工 車上還藏通緝犯"
-    },
-    {
-     "name": "壹蘋新聞網",
-     "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA4MVoyVVRQOXo4dWo5M25tS2M1WEJPN19PMGhjOGZ6MmRWRFRXTERVWlZlNENpRE9IYlUxQlNac3k0cm5ZSnFDRlBQQ2dVc1k0ZE14MW80OEd4OVgyRTRSVFZSM3l0QlF3WXNnaHI2MTd1VHYyNERfYUNudHVMRmM?oc=5",
-     "title": "工地旁載客轎車太可疑！警攔查揪出5失聯移工 還有1人遭通緝"
-    }
-   ],
-   "score": 110
-  },
-  {
-   "title": "失聯移工持假證混入長照業 移民署溯源揪非法仲介與雇主",
-   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1vNGxHMjNhNXZuMlphd2lzaXluekdfWXV6QnFURV9DZnhiaVR2clNZc05SbGRObWZkem9Hc0R5U2MtRUsxZ21iR3NKZlA3bXZj0gFWQVVfeXFMTUYxRmhqTGpIRzRldWRhcXpMVnNzS3hvYUxubDVYQzdWOFBzQTFZdnBvZXlBU2JEb2hTRHFOcHVUbUh6WXFKUGNZQU5OVmFUNXJCZGlzM2c?oc=5",
-   "source": "UDN",
+   "title": "失聯移工當冒牌看護！毆長者落跑露餡 道場主通風報信也沒用",
+   "link": "https://news.google.com/rss/articles/CBMihwNBVV95cUxQX1N2TG1FR2NFNDNWMmxuVUUzMl9Mb3JkTHFPMWUwdkVoUnlYZTl4ZmFRcGRVX1gwOEduQnpsc0tXb3hnUHZGNl8zSlplRFpsS2ZNdDU5cXZJMGpwNXIxRWhtZ3RfTTZZRF9IZUVsel9OUlRuVGNKZFBVNDd6V2trTTZQZG5nNmJKV1dGSUQtS094YzVGb3BJbF9reHJMeFBBRWVPYzdnZjZaNkZwcDRrd01GTnFKSEU2RmlhWVFoaTd2S0I0OWtxcVdGSWx4NEl2SDZybFJJeFpBbFJ6eVRVWUtfVzJ0X01Tc3BjSTAtOWFGSFg0WWZWc2FiYktCVXFmeFk3QzA5eFhMeThmSkZXeU96aXItVUdnUHhOcEtHQy1RbDF1eW51RGM0YzFyWXRYSWdiSnFjdnBBblZhSG1LeVlNWFJHbHVVNXhyY1ZEVWlHYjhIOEpONnJFTHQxTzV5cmowWUh2SG1YakdCUjBwaGlNcjdxT3ZCQzhsYnhRYXktMmFsTFpV?oc=5",
+   "source": "Yahoo",
    "pubDate": "2026-11-19T14:39:53.000Z",
-   "count": 10,
+   "count": 9,
    "sources": [
-    {
-     "name": "UDN",
-     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1vNGxHMjNhNXZuMlphd2lzaXluekdfWXV6QnFURV9DZnhiaVR2clNZc05SbGRObWZkem9Hc0R5U2MtRUsxZ21iR3NKZlA3bXZj0gFWQVVfeXFMTUYxRmhqTGpIRzRldWRhcXpMVnNzS3hvYUxubDVYQzdWOFBzQTFZdnBvZXlBU2JEb2hTRHFOcHVUbUh6WXFKUGNZQU5OVmFUNXJCZGlzM2c?oc=5",
-     "title": "失聯移工持假證混入長照業 移民署溯源揪非法仲介與雇主"
-    },
     {
      "name": "Yahoo",
      "link": "https://news.google.com/rss/articles/CBMihwNBVV95cUxQX1N2TG1FR2NFNDNWMmxuVUUzMl9Mb3JkTHFPMWUwdkVoUnlYZTl4ZmFRcGRVX1gwOEduQnpsc0tXb3hnUHZGNl8zSlplRFpsS2ZNdDU5cXZJMGpwNXIxRWhtZ3RfTTZZRF9IZUVsel9OUlRuVGNKZFBVNDd6V2trTTZQZG5nNmJKV1dGSUQtS094YzVGb3BJbF9reHJMeFBBRWVPYzdnZjZaNkZwcDRrd01GTnFKSEU2RmlhWVFoaTd2S0I0OWtxcVdGSWx4NEl2SDZybFJJeFpBbFJ6eVRVWUtfVzJ0X01Tc3BjSTAtOWFGSFg0WWZWc2FiYktCVXFmeFk3QzA5eFhMeThmSkZXeU96aXItVUdnUHhOcEtHQy1RbDF1eW51RGM0YzFyWXRYSWdiSnFjdnBBblZhSG1LeVlNWFJHbHVVNXhyY1ZEVWlHYjhIOEpONnJFTHQxTzV5cmowWUh2SG1YakdCUjBwaGlNcjdxT3ZCQzhsYnhRYXktMmFsTFpV?oc=5",
      "title": "失聯移工當冒牌看護！毆長者落跑露餡 道場主通風報信也沒用"
     },
     {
-     "name": "蕃新聞",
-     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9nMWh4UVp4OS1qM3Z2elh4ckVOWHZoNkFHbkIwUmNmVmJtZGxWNjVzLVdqN3hWZ2NicmRzUWJPeWhfZGZFaUJOMmctb1pISGl1TlE?oc=5",
-     "title": "假證混入長照市場！失聯移工藏身道場落網 移民署追出非法仲介網"
-    },
-    {
-     "name": "聯合影音",
-     "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5KVEs3X1FRTEkxdHRqUjVDdFZSeHUxRGZCaTNpSjhqWGpZd2oxb2tuOTRTcXJNYjFDQ1VEM0t3RjAybk50WE9vbUlB?oc=5",
-     "title": "失聯移工持假證混入長照業移民署溯源揪非法仲介與雇主"
-    },
-    {
-     "name": "鏡新聞",
-     "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5lTkdhd25PZlVjV0Y5ekh2cnRBUDFzajZBcDA5NTdLRFRFTTBOb0ZhamZWVjF5WkJCWGxZbm5PXzYwc2haanlFb3Zyb2JPX3ljSndaXzRuVTc2bEU1QmfSAV5BVV95cUxOZU5HYXduT2ZVY1dGOXpIdnJ0QVAxc2o2QXAwOTU3S0RURU0wTm9GYWpmVlYxeVpCQlhsWW5uT182MHNoWmp5RW92cm9iT195Y0p3Wl80blU3NmxFNUJn?oc=5",
-     "title": "毆長者落跑露餡！ 失聯移工當冒牌看護躲道場"
+     "name": "UDN",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1vNGxHMjNhNXZuMlphd2lzaXluekdfWXV6QnFURV9DZnhiaVR2clNZc05SbGRObWZkem9Hc0R5U2MtRUsxZ21iR3NKZlA3bXZj0gFWQVVfeXFMTUYxRmhqTGpIRzRldWRhcXpMVnNzS3hvYUxubDVYQzdWOFBzQTFZdnBvZXlBU2JEb2hTRHFOcHVUbUh6WXFKUGNZQU5OVmFUNXJCZGlzM2c?oc=5",
+     "title": "失聯移工持假證混入長照業 移民署溯源揪非法仲介與雇主"
     },
     {
      "name": "CMoney",
@@ -173,6 +93,16 @@
      "name": "中時新聞網",
      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE90VG9YNVVfZTFnWmZmOE5SajF5Zmg5X2JYRFRpQ3JEaS1mN0p3bXEtQ2E2N0ZKaVNadHJxTGw4azZIX2xobkFlVk9EOG9HN09Qb25RcUQ2Z1RTRUxzekxwUDcwWkZRUlN0Y3pDdHlR?oc=5",
      "title": "砸2.8萬買假證！逃逸移工秒變「高薪看護」 中部4家庭受害"
+    },
+    {
+     "name": "鏡新聞",
+     "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1NdmlyY2JVbGtfcXRremd1dWU2ZzdoaTFLRW5aZ2tZZnVMR1FNZTNnUDZnNDVlMXM2a1NkTjBhci1idUZDSHVWUFFUSlhjRC04Y2R5SThBYTDSAV5BVV95cUxOZU5HYXduT2ZVY1dGOXpIdnJ0QVAxc2o2QXAwOTU3S0RURU0wTm9GYWpmVlYxeVpCQlhsWW5uT182MHNoWmp5RW92cm9iT195Y0p3Wl80blU3NmxFNUJn?oc=5",
+     "title": "毆長者落跑露餡！ 失聯移工當冒牌看護躲道場"
+    },
+    {
+     "name": "蕃新聞",
+     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9nMWh4UVp4OS1qM3Z2elh4ckVOWHZoNkFHbkIwUmNmVmJtZGxWNjVzLVdqN3hWZ2NicmRzUWJPeWhfZGZFaUJOMmctb1pISGl1TlE?oc=5",
+     "title": "假證混入長照市場！失聯移工藏身道場落網 移民署追出非法仲介網"
     },
     {
      "name": "自由時報",
@@ -190,29 +120,94 @@
      "title": "(影)直擊移民署查緝現場！冒牌看護台中道場落網"
     }
    ],
-   "score": 100.9
+   "score": 90
   },
   {
-   "title": "南市勞工局帶移工與雇主及被照顧者共遊 從健康飲食到家庭陪伴",
-   "link": "https://news.google.com/rss/articles/CBMipANBVV95cUxQWk52YkJuZ0xFdXAxcDRwWjhoUTlsb012ZmdFUjJqN2FJY1AzRmdGN3IxYmRfTTUxNGZDV3pwZktVRndZMFFNWWc5aEVxV0FDQWtmVlVlbXIwWnBEV1dkbzJYUFFSdGhPcEtuc08tSGZFSjZ2UHIteEF0bTdIZXRfd1l5TjBwN3d4ZndIM0NYR3ltcm80QVM4QmdudFFud2hsLWw5SkNZN0RGREo5Q2xQV3lqQWdWMUJFOGQwcFJoMXlmMGJtellGWk9XbnZEcE5TS1N1RXRLZF9sdXNLdWVsZElMX29oMlFnU2IyZ3NkVm1CcU1qWXI0TzZMa2hUUzEyRk1BVFA3d2EzcW9YVjFJeUhHemhFb0ZlLTJjLXlTRjdvZmFza2tsV3VEM3V0Wnp6c0pZLUt1TE10SlNZdWVNSjVnWEtKY0xxb01jNWVUQUlvMFU3R3hfNTNKTUw1VldiTUNSUVcxMkxjR2hHVElFeDRRakEwbm5HQ0pZdWJUNk94TFFwbVl5TEE4My1wa1JyOWpRY0xLbm0tUzdwTHJvNjctVDk?oc=5",
-   "source": "Yahoo新聞",
-   "pubDate": "2026-11-18T09:37:34.000Z",
-   "count": 4,
+   "title": "搶移工匯款商機！數位至匯11/25登興櫃參考價120元 明年拚營收成長逾5成",
+   "link": "https://news.google.com/rss/articles/CBMitwNBVV95cUxPRS11Yk1LMDJrd0MyaFlySFlpRW1KWGhTbTdjMGhabXk2QmlsQ0JvX2ZGWE1BSml4R1JZMzNXeW1femJfbHJEYXJBT0lfMHRTZVlVZUhsTFZnVzhDMk52VW95bXJYMXFZTkJmSEdIak9PR3ZFMUVyMEFlbldscXk2VGo5YmRjU2dSeEFtMUp2d0xqOTZhZmxFbGM1UFlJT1ltY0g4aGUxZS1ONmQ5azM5bDZwSEJtR0lWeW54cWVvRFR5YVp2bVBMVWh5MDVlUEZHdzlWNkxQUkw3WmtpdFJ2SmxfYmd1bEdCR0hOMkRpbG9UbUlVajhsc1JZNXM1dFBJUi1jMWN0VjR0UlFrWC11TmpCdFZyOU9JVnhHQzZJbGlOYWRMMUdPSmtSd1RRcld2VHdpQXduNHltZmtyVVU2M3lsbXdFUWNCZ2hJTlNhQUhQc1d4OGNkUzR6TnlRY1gtaFhBV18weUxGaWxJVFZHMldaOXVKaWg0M3AyQTd6WkRyWHFILXJJNjlaSHNoMjNLdEIxRmRocFNvV2daWVlSaWh3VThRSVk5RFIyeURjZU5DOFdLMkRn?oc=5",
+   "source": "Yahoo股市",
+   "pubDate": "2026-11-20T12:45:47.000Z",
+   "count": 7,
    "sources": [
     {
-     "name": "Yahoo新聞",
-     "link": "https://news.google.com/rss/articles/CBMipANBVV95cUxQWk52YkJuZ0xFdXAxcDRwWjhoUTlsb012ZmdFUjJqN2FJY1AzRmdGN3IxYmRfTTUxNGZDV3pwZktVRndZMFFNWWc5aEVxV0FDQWtmVlVlbXIwWnBEV1dkbzJYUFFSdGhPcEtuc08tSGZFSjZ2UHIteEF0bTdIZXRfd1l5TjBwN3d4ZndIM0NYR3ltcm80QVM4QmdudFFud2hsLWw5SkNZN0RGREo5Q2xQV3lqQWdWMUJFOGQwcFJoMXlmMGJtellGWk9XbnZEcE5TS1N1RXRLZF9sdXNLdWVsZElMX29oMlFnU2IyZ3NkVm1CcU1qWXI0TzZMa2hUUzEyRk1BVFA3d2EzcW9YVjFJeUhHemhFb0ZlLTJjLXlTRjdvZmFza2tsV3VEM3V0Wnp6c0pZLUt1TE10SlNZdWVNSjVnWEtKY0xxb01jNWVUQUlvMFU3R3hfNTNKTUw1VldiTUNSUVcxMkxjR2hHVElFeDRRakEwbm5HQ0pZdWJUNk94TFFwbVl5TEE4My1wa1JyOWpRY0xLbm0tUzdwTHJvNjctVDk?oc=5",
-     "title": "南市勞工局帶移工與雇主及被照顧者共遊 從健康飲食到家庭陪伴"
+     "name": "Yahoo股市",
+     "link": "https://news.google.com/rss/articles/CBMitwNBVV95cUxPRS11Yk1LMDJrd0MyaFlySFlpRW1KWGhTbTdjMGhabXk2QmlsQ0JvX2ZGWE1BSml4R1JZMzNXeW1femJfbHJEYXJBT0lfMHRTZVlVZUhsTFZnVzhDMk52VW95bXJYMXFZTkJmSEdIak9PR3ZFMUVyMEFlbldscXk2VGo5YmRjU2dSeEFtMUp2d0xqOTZhZmxFbGM1UFlJT1ltY0g4aGUxZS1ONmQ5azM5bDZwSEJtR0lWeW54cWVvRFR5YVp2bVBMVWh5MDVlUEZHdzlWNkxQUkw3WmtpdFJ2SmxfYmd1bEdCR0hOMkRpbG9UbUlVajhsc1JZNXM1dFBJUi1jMWN0VjR0UlFrWC11TmpCdFZyOU9JVnhHQzZJbGlOYWRMMUdPSmtSd1RRcld2VHdpQXduNHltZmtyVVU2M3lsbXdFUWNCZ2hJTlNhQUhQc1d4OGNkUzR6TnlRY1gtaFhBV18weUxGaWxJVFZHMldaOXVKaWg0M3AyQTd6WkRyWHFILXJJNjlaSHNoMjNLdEIxRmRocFNvV2daWVlSaWh3VThRSVk5RFIyeURjZU5DOFdLMkRn?oc=5",
+     "title": "搶移工匯款商機！數位至匯11/25登興櫃參考價120元 明年拚營收成長逾5成"
     },
+    {
+     "name": "自由時報",
+     "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE00dXgzcnlIcnY5bW9MbEVSczFaT2xHaFktdjltZ3N2ZF82aHNNdGhkRnE5Z0t0UUxRV2NWaVNIVDRXMGdaZlpad3p2UndOT0E0Y2E3NVVqMms?oc=5",
+     "title": "搶攻2000億移工經濟、匯兌商機！ 數位至匯11/25每股120元登興櫃"
+    },
+    {
+     "name": "DIGITIMES",
+     "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBXVk1xT1BOaGxuajVUcXk5cUhsei1FbWR4N3N6b2cxNlBjNTVLT2FfV0tUX0REbXI5N2gxQUxSWGdJNlFwY3FiVFlxeS16VkVzR2c0dUhhR0g3XzNVcC02Z1oySkJFa29jWWFZ?oc=5",
+     "title": "數位至匯搶攻移工匯兌商機 25日登興櫃、2027進軍泰國"
+    },
+    {
+     "name": "MoneyDJ",
+     "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNbUE2Tk1jeXhUaUJvZHVjakZrd0hCclo2ZnpOTGlBVGJ4bmFwc1hEZ1V6U2I1X0FiM2lPeEpLb0pIRGJKSmR4bW1DenVGRl9hc3E4WlU5T0NKN29sNUQwakF3ZGFNdkx2bzl2YzZSVWVYc2twVWdfVUVLU055NjZyTXNfQklFRlJkQk96UTkzYWprZw?oc=5",
+     "title": "數位至匯3引擎搶移工經濟 明年毛利率站穩6成再提升"
+    },
+    {
+     "name": "三立新聞",
+     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5qQmt4cHBxeW54dUpmUnQyVEtraVRDSUFwaldld1c1SmthWEU4RENMTHJqVjlLQ2VHUVc3X2ZySmZtQUhpd3FyaEZPTQ?oc=5",
+     "title": "移工匯款商機驚人！數位至匯前10月營收超越去年 25日120元登興櫃"
+    },
+    {
+     "name": "自由財經",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE85bUpocW5fN2ljSXNyaVZfZXhqcDlhXzViUl9DRG1HZmFFRFh3cDZTLXNMd3J6SE1JOFZwZDBlaV9nU3Nodm56QXBjdWJpcm9IcnROYV8wZnN0Y3lJMVlXUlFwMEHSAWRBVV95cUxPOW1KaHFuXzdpY0lzcmlWX2V4anA5YV81YlJfQ0RtR2ZhRURYd3A2Uy1zTHdyekhNSThWcGQwZWlfZ1NzaHZuekFwY3ViaXJvSHJ0TmFfMGZzdGN5STFZV1JRcDBB?oc=5",
+     "title": "搶攻2000億移工經濟、匯兌商機！ 數位至匯11/25每股120元登興櫃"
+    },
+    {
+     "name": "聚財網",
+     "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1Ec3BaV1FGM3A5YmFTQk5OMDB0NmZodGFzMEFQaW1udTBiWnZzOVZBQ0FaV1VhdjU1ZV9ORWVoaTJHb3ZjNnpvUGp6S2o?oc=5",
+     "title": "搶攻2000億移工經濟、匯兌商機！ 數位至匯11/25每股120元登興櫃"
+    }
+   ],
+   "score": 73.1
+  },
+  {
+   "title": "警眼尖見飼料車在工地載客 一舉查獲滿車5名越南籍失聯移工",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1ZVXUzc1BPMUg0S1plX0wzeDVEVnQ1T1A5a09NVDBLcjg5S3VsLTFRQ2JHYUpmMUlnVFNVbVA1OHBBTVVDbjF4YnYyX1RST3Jf0gFWQVVfeXFMUEd5V1lVeUtSNlBGTE5RTDRrU1NubXV3OE9aaThpQkRxQS1oTGxqeE91a3dWY3VZaV9zcWVpWmNQQWZFYkNMQk9qd01JWGVELVltYW55VHc?oc=5",
+   "source": "UDN",
+   "pubDate": "2026-11-18T14:24:00.000Z",
+   "count": 3,
+   "sources": [
+    {
+     "name": "UDN",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1ZVXUzc1BPMUg0S1plX0wzeDVEVnQ1T1A5a09NVDBLcjg5S3VsLTFRQ2JHYUpmMUlnVFNVbVA1OHBBTVVDbjF4YnYyX1RST3Jf0gFWQVVfeXFMUEd5V1lVeUtSNlBGTE5RTDRrU1NubXV3OE9aaThpQkRxQS1oTGxqeE91a3dWY3VZaV9zcWVpWmNQQWZFYkNMQk9qd01JWGVELVltYW55VHc?oc=5",
+     "title": "警眼尖見飼料車在工地載客 一舉查獲滿車5名越南籍失聯移工"
+    },
+    {
+     "name": "記者爆料網",
+     "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1hMXBrWFRub2Rta2VQYjJFQnh5TkctOFc5b2xZMngybEVLdFc5WkJKeGcyUVlMTzJuUmdQUGYtYlN2TXhqRFl6aWNQUm91dw?oc=5",
+     "title": "工地旁神祕載客車露餡！台南警攔查驚見5失聯移工 車上還藏通緝犯"
+    },
+    {
+     "name": "壹蘋新聞網",
+     "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA4MVoyVVRQOXo4dWo5M25tS2M1WEJPN19PMGhjOGZ6MmRWRFRXTERVWlZlNENpRE9IYlUxQlNac3k0cm5ZSnFDRlBQQ2dVc1k0ZE14MW80OEd4OVgyRTRSVFZSM3l0QlF3WXNnaHI2MTd1VHYyNERfYUNudHVMRmM?oc=5",
+     "title": "工地旁載客轎車太可疑！警攔查揪出5失聯移工 還有1人遭通緝"
+    }
+   ],
+   "score": 30
+  },
+  {
+   "title": "勞工局攜職災預防重建中心深入校園 守護外籍生職場健康",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5lOHpsWTlIT1BWbUVtZE84MjJqSHF1cklhRXFzWHNubFBzS0lCR3VXY3VUazIycXBKbVpGUmFUZGFDc1NPUlB5ZW5sYVNYbkxNc2c?oc=5",
+   "source": "中華新聞雲／中華日報",
+   "pubDate": "2026-11-18T07:21:20.000Z",
+   "count": 3,
+   "sources": [
     {
      "name": "中華新聞雲／中華日報",
      "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5lOHpsWTlIT1BWbUVtZE84MjJqSHF1cklhRXFzWHNubFBzS0lCR3VXY3VUazIycXBKbVpGUmFUZGFDc1NPUlB5ZW5sYVNYbkxNc2c?oc=5",
      "title": "勞工局攜職災預防重建中心深入校園 守護外籍生職場健康"
     },
     {
-     "name": "台灣民眾電子報",
-     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5FNHppWHpNZEpicHl4Z2VzZU9Gc2thX1U5OXo2MEFIRjNGZjRUYVZDTG9LR3hZb1ZaYWliWU0wNUFKcjNKb0tQRQ?oc=5",
-     "title": "台南市勞工局首度攜手重建中心深入校園守護外籍生職場健康"
+     "name": "視傳媒",
+     "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBsaGhTODhtdVhTb2ZvOVgwTDBGNTRnczRuZGp4T0NudGNPRTRNTXJWbFU2eGMwMlhYSkItOHlDdTc0aE94LTYzMlRfR0dwbFJra2xBYk5TYkpnVVB5NExIcm5INEh1YjVH?oc=5",
+     "title": "臺南勞工局首度攜手重建中心 深入校園守護外籍生職場健康"
     },
     {
      "name": "ETtoday新聞雲",
@@ -220,117 +215,87 @@
      "title": "外籍生工讀也要懂職安 台南勞工局首度入校教35名越南生防職傷"
     }
    ],
-   "score": 40
+   "score": 30
   },
   {
-   "title": "偽造身分證與長照證明 越南移工從事非法看護遭逮",
-   "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1KR0FKbEZrdG01VmV4NjdaOW96bWhwc19Gc1FHVDdtMUZHanEwTjJlMzhUZmNVQmpUN1h4WkJoU015THNTLWFRWm56QktOQm8?oc=5",
-   "source": "公視新聞",
-   "pubDate": "2026-11-19T07:31:30.000Z",
+   "title": "從半導體、創投轉戰移工匯兌 引進台達電等長線資金打造服務生態圈",
+   "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBMWnFMX0tPQ0p1OWd4Q2Vqc09uSWgzM0xTTHY1bVJkSTRFQkdveEVzeXhtNDFFSU1GRVNSazNvQUVKRFZMVjlfa29LZHoyMWM?oc=5",
+   "source": "鉅亨網",
+   "pubDate": "2026-11-20T10:45:16.000Z",
    "count": 2,
    "sources": [
     {
-     "name": "公視新聞",
-     "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1KR0FKbEZrdG01VmV4NjdaOW96bWhwc19Gc1FHVDdtMUZHanEwTjJlMzhUZmNVQmpUN1h4WkJoU015THNTLWFRWm56QktOQm8?oc=5",
-     "title": "偽造身分證與長照證明 越南移工從事非法看護遭逮"
+     "name": "鉅亨網",
+     "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBMWnFMX0tPQ0p1OWd4Q2Vqc09uSWgzM0xTTHY1bVJkSTRFQkdveEVzeXhtNDFFSU1GRVNSazNvQUVKRFZMVjlfa29LZHoyMWM?oc=5",
+     "title": "從半導體、創投轉戰移工匯兌 引進台達電等長線資金打造服務生態圈"
     },
+    {
+     "name": "TradingView",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5UTk9FR2VyV042YmxRY0JXRm5Idk1fTDJRTlZId24wN1pVcXg0dUcyUWVqTWpWUm16M2l1QVNsUWlyVzREeXc3LWhMQ0xpTmFhYnhTcnRFbDVvY3JpQ3pmakZweTY?oc=5",
+     "title": "從半導體、創投轉戰移工匯兌 引進台達電等長線資金打造服務生態圈"
+    }
+   ],
+   "score": 22.8
+  },
+  {
+   "title": "中壢毒駕撞寶雅！菲籍移工命危搶救不治 駕駛快篩陽性遭移送",
+   "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBrRXE5QmRvWWlpUE8tcEtfSHFvdGxwc1VoNXZ1VlZpaWdnOXJ2V1FCelQ3SGFpbmh3bmlVd0JrcTk1MHRoTThDS2F3U2NjRkZCNjhQTEJ3?oc=5",
+   "source": "東森新聞",
+   "pubDate": "2026-11-20T15:15:00.000Z",
+   "count": 1,
+   "sources": [
+    {
+     "name": "東森新聞",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBrRXE5QmRvWWlpUE8tcEtfSHFvdGxwc1VoNXZ1VlZpaWdnOXJ2V1FCelQ3SGFpbmh3bmlVd0JrcTk1MHRoTThDS2F3U2NjRkZCNjhQTEJ3?oc=5",
+     "title": "中壢毒駕撞寶雅！菲籍移工命危搶救不治 駕駛快篩陽性遭移送"
+    }
+   ],
+   "score": 13.5
+  },
+  {
+   "title": "從模範移工到外國技術人力 勞動部助優秀人力續留臺灣",
+   "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8xQlB1SWxTRC1CQzF4WlJoQ0tRWnhqd2FTNUJVRDBpbk0zLVVvVU5IeFFSZFRWSlRub2F3cHVPcFJOVnVQRDFULXlOWGxmUjFXTGxyUldrMDNlRmU4dXZySDN0TUhJQ2NmbEcyamZvYlM?oc=5",
+   "source": "勞動部勞動力發展署全球資訊網",
+   "pubDate": "2026-11-20T10:32:54.000Z",
+   "count": 1,
+   "sources": [
+    {
+     "name": "勞動部勞動力發展署全球資訊網",
+     "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8xQlB1SWxTRC1CQzF4WlJoQ0tRWnhqd2FTNUJVRDBpbk0zLVVvVU5IeFFSZFRWSlRub2F3cHVPcFJOVnVQRDFULXlOWGxmUjFXTGxyUldrMDNlRmU4dXZySDN0TUhJQ2NmbEcyamZvYlM?oc=5",
+     "title": "從模範移工到外國技術人力 勞動部助優秀人力續留臺灣"
+    }
+   ],
+   "score": 12.8
+  },
+  {
+   "title": "移工憂鬱、焦慮誰來接住？萬海慈善挺協會 靠「3種方式」陪伴1095天",
+   "link": "https://news.google.com/rss/articles/CBMi1gJBVV95cUxONFVhZGFncmRUdWFPZzBscEZtUHpWdXBYc2VUNmxPenVabFYxNURrQ0ZLel9GNXRBeERaTGlyZDB3MmU3Z2hPakV2emNnd1lJSXNWczAzV2RZOUdRN3N4b1pUaEdxR21obDc4QXZVa2dFQkYwRDFRZlBzdkJRb0JwMjJqM196YXFsUzREeHBGcjZzRFUxVklwd2hQSTFyVXYzcF82ZHhaOXJqdWtkaGJSdmdLNXRoV3RYZFc0ZHk0amx3c0ZrenQwUUhkZXFOWlBvdEZiS3V2ZWVNallBYVZIRzVveDRhRHVkbmVaZG9ERERYN19Bd01HSVBKYTNXdmhzbllvdnZMR2h6X2Z4WFRsbGMxX1Q5VjVqM1BIQWt3S0tUT00zdzJCMUJDbW1nUUkwTGNfaE5IOXEwRUk4NTE1NFR1cXlCbGtPUmJnUEIzZ0pYSmdqaUE?oc=5",
+   "source": "Yahoo新聞",
+   "pubDate": "2026-11-20T06:19:08.000Z",
+   "count": 1,
+   "sources": [
     {
      "name": "Yahoo新聞",
-     "link": "https://news.google.com/rss/articles/CBMi3AJBVV95cUxOM0lhS2oxQ0hvcW5USmZvQjVERUVZZDdDMlVIWlF3OUNQSVoxNnhRWE1PVHU4WTc3Qm5GOUs2clFIaXZuR0xJOWp0X3M4TUxnMnVneXpiMzYtZTc0VEt1SDlRY01QM3ZBaUFIWWhSckhMTHRyNFAtQnJ2VlhyMTN6QWdJX2RTdEZtNk5GVlNoSk0yOUNlTFY1RXdoTkNDMUlwZE1KN0VUTEh2RVhES2tSR1REOXRKdjQ0Y1VNMjZaMmRmUlQ1bWM2YzJCc2FLTWwtXzBEcEZIRTBaUVg4UnlZM0RYckVGYXc2M2hLS1F1WmFJT082aGlwM1E1Zl9xV2V4Sjllem9SNEpVVmo5SzNSNE85SUp0b1pydEQ5cC1kLXZLTXlLLUI1SVpwcXZJOGRIMmtOWHp2aG1KV2xUbmgzNEFwVGJpTXQ2U0otV2ZoaDZNcHZxSkRXby1nbXg?oc=5",
-     "title": "偽造身分證與長照證明 越南移工從事非法看護遭逮"
+     "link": "https://news.google.com/rss/articles/CBMi1gJBVV95cUxONFVhZGFncmRUdWFPZzBscEZtUHpWdXBYc2VUNmxPenVabFYxNURrQ0ZLel9GNXRBeERaTGlyZDB3MmU3Z2hPakV2emNnd1lJSXNWczAzV2RZOUdRN3N4b1pUaEdxR21obDc4QXZVa2dFQkYwRDFRZlBzdkJRb0JwMjJqM196YXFsUzREeHBGcjZzRFUxVklwd2hQSTFyVXYzcF82ZHhaOXJqdWtkaGJSdmdLNXRoV3RYZFc0ZHk0amx3c0ZrenQwUUhkZXFOWlBvdEZiS3V2ZWVNallBYVZIRzVveDRhRHVkbmVaZG9ERERYN19Bd01HSVBKYTNXdmhzbllvdnZMR2h6X2Z4WFRsbGMxX1Q5VjVqM1BIQWt3S0tUT00zdzJCMUJDbW1nUUkwTGNfaE5IOXEwRUk4NTE1NFR1cXlCbGtPUmJnUEIzZ0pYSmdqaUE?oc=5",
+     "title": "移工憂鬱、焦慮誰來接住？萬海慈善挺協會 靠「3種方式」陪伴1095天"
     }
    ],
-   "score": 20
+   "score": 12.1
   },
   {
-   "title": "產假延長移工也適用 仲介團體籲重啟源頭健檢",
-   "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5RVTJERHl2ZHhzcUdNdUpSUXU3dUpzanc0a2FsUG9HZUhlNThVb0oxRGh2cmFYY2F2aS00ZFB4LWRTV0hVMVp2Vw?oc=5",
-   "source": "5168實價登錄比價王",
-   "pubDate": "2026-11-18T01:06:23.000Z",
-   "count": 2,
+   "title": "東聯互動參與明志科大移工華語成果發表 關注語言學習，促進多元共融",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB0RU9ydnZMdkwwSW1FVDNCRXFJTVRYdGR5d2N4N1hXOTVia0R5WTFrc1VVajg4MDBYajdiX0hhSFE2Nm51Sk9wMnl3NHlWRjJQNEE?oc=5",
+   "source": "蕃新聞",
+   "pubDate": "2026-11-20T02:59:19.000Z",
+   "count": 1,
    "sources": [
-    {
-     "name": "5168實價登錄比價王",
-     "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5RVTJERHl2ZHhzcUdNdUpSUXU3dUpzanc0a2FsUG9HZUhlNThVb0oxRGh2cmFYY2F2aS00ZFB4LWRTV0hVMVp2Vw?oc=5",
-     "title": "產假延長移工也適用 仲介團體籲重啟源頭健檢"
-    },
-    {
-     "name": "經濟日報",
-     "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQVjJMMFAweWNua3oyS0FsZ2h1RzNWd3lJeEYxdVhzRTJfbTZubzR1dHFPUDhEUDdvb3dWdGRJLTB5cFBJY29ET3VKNEJUOEx1b0VNckxMNG9wMlNCVzJMWVRiZ1MzSmNHcTdaZjRBRkREQWdMOUNWTEVubXR5N1h3OdIBX0FVX3lxTE9JZUJjUXJjd1RIdUNzeWd2cDhMOXI5dXotSGF6TnltLWxtSmVadUFOMDZGakJtcWxmQkRLb2N4NG9JUGc4LTk2aEptaTNOektUU0JUdFgxbEl2RlRwUWRJ?oc=5",
-     "title": "移工懷孕、14周產假全由雇主埋單 仲介全聯會籲政府重啟源頭健檢"
-    }
-   ],
-   "score": 20
-  },
-  {
-   "title": "勞動部推友善職場 育兒勞工減時不扣薪 明年上路",
-   "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1paV91VTlxTk1jSlJxckZwM01wUGlzd3JmYnVlTl9FM3A0WktmZzJZb2x2WDJTOHFHcDN4bVVnV2FsMHJzcG10ZDVJWm82UTlJdS1TTlVwbkcyOTBQMGVFY9IBYEFVX3lxTE1paV91VTlxTk1jSlJxckZwM01wUGlzd3JmYnVlTl9FM3A0WktmZzJZb2x2WDJTOHFHcDN4bVVnV2FsMHJzcG10ZDVJWm82UTlJdS1TTlVwbkcyOTBQMGVFYw?oc=5",
-   "source": "自由時報",
-   "pubDate": "2026-11-17T21:31:51.000Z",
-   "count": 2,
-   "sources": [
-    {
-     "name": "自由時報",
-     "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1paV91VTlxTk1jSlJxckZwM01wUGlzd3JmYnVlTl9FM3A0WktmZzJZb2x2WDJTOHFHcDN4bVVnV2FsMHJzcG10ZDVJWm82UTlJdS1TTlVwbkcyOTBQMGVFY9IBYEFVX3lxTE1paV91VTlxTk1jSlJxckZwM01wUGlzd3JmYnVlTl9FM3A0WktmZzJZb2x2WDJTOHFHcDN4bVVnV2FsMHJzcG10ZDVJWm82UTlJdS1TTlVwbkcyOTBQMGVFYw?oc=5",
-     "title": "勞動部推友善職場 育兒勞工減時不扣薪 明年上路"
-    },
-    {
-     "name": "LINE TODAY",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0yczAwbTNMam1nSnJOeUFWVDRvZnJVdW5yT2ltT185alA0Zkk3dTdrdWRNdHVvbl85TjJNdXJTQ3JQTDB3VTd2Q3pOQmdtQzdZRU9vOVVB?oc=5",
-     "title": "勞動部推友善職場 育兒勞工減時不扣薪 明年上路"
-    }
-   ],
-   "score": 20
-  },
-  {
-   "title": "黃秀芳憂失聯移工肇事 洪申翰：人數降至約8.8萬",
-   "link": "https://news.google.com/rss/articles/CBMi3wJBVV95cUxNVVBBSGlfX255dnktenlBOFBYV1FIQXlDVkliZDRLSjJnRUNacGQ0NmdlTDNpVDZxNzY2RjhFY0xrMTJGY1RKdDhTdFdQZEdlUnNMMnl0YktyaEkyUWw3dDI3REJXMFJ1TkVfbTc5Um5wTVJzekhBR3c2RVNJYTFCdXM5Y1pWX3JNZEhNbGdlOC1wTGRwbl94UGNxSjhzaTVBellIQWxuTlVSclVmbXAyRUR3RmtsbjExVFhzLTBVbjN5NXBMZEdERHEyNnJMZ1pWVmp3V2p5azJLdlpmMmoyZUJ5MDNNRUR6eERacHBFYlVkS3BGOUI1bWl0ZkdaaFpuM2tDNGdONTJ3YUhMcHBLQUc5bkE4S284RGdVVEZ1MzBWUEhRUzJJXzMtS1JmdkxkdjQ0T2JIa3JBaklvMVh6TG91N1pOU0JvYXo0T29scDZIVjM3dER6WV9hMTlMa1k?oc=5",
-   "source": "報新聞 Mega News",
-   "pubDate": "2026-11-17T12:36:52.000Z",
-   "count": 2,
-   "sources": [
-    {
-     "name": "報新聞 Mega News",
-     "link": "https://news.google.com/rss/articles/CBMi3wJBVV95cUxNVVBBSGlfX255dnktenlBOFBYV1FIQXlDVkliZDRLSjJnRUNacGQ0NmdlTDNpVDZxNzY2RjhFY0xrMTJGY1RKdDhTdFdQZEdlUnNMMnl0YktyaEkyUWw3dDI3REJXMFJ1TkVfbTc5Um5wTVJzekhBR3c2RVNJYTFCdXM5Y1pWX3JNZEhNbGdlOC1wTGRwbl94UGNxSjhzaTVBellIQWxuTlVSclVmbXAyRUR3RmtsbjExVFhzLTBVbjN5NXBMZEdERHEyNnJMZ1pWVmp3V2p5azJLdlpmMmoyZUJ5MDNNRUR6eERacHBFYlVkS3BGOUI1bWl0ZkdaaFpuM2tDNGdONTJ3YUhMcHBLQUc5bkE4S284RGdVVEZ1MzBWUEhRUzJJXzMtS1JmdkxkdjQ0T2JIa3JBaklvMVh6TG91N1pOU0JvYXo0T29scDZIVjM3dER6WV9hMTlMa1k?oc=5",
-     "title": "黃秀芳憂失聯移工肇事 洪申翰：人數降至約8.8萬"
-    },
     {
      "name": "蕃新聞",
-     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFAyRDIyTHQyV0VOOFk1VFhlM1U2MnVpUTBoNnViOGlwZ0IycVN2Ym9kREFKWWpKVDFrSzUwTnk1c3lIbGI1dzdXenA4UnJkMGdRYVE?oc=5",
-     "title": "黃秀芳憂失聯移工肇事 洪申翰：人數降至約8.8萬"
+     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB0RU9ydnZMdkwwSW1FVDNCRXFJTVRYdGR5d2N4N1hXOTVia0R5WTFrc1VVajg4MDBYajdiX0hhSFE2Nm51Sk9wMnl3NHlWRjJQNEE?oc=5",
+     "title": "東聯互動參與明志科大移工華語成果發表 關注語言學習，促進多元共融"
     }
    ],
-   "score": 20
-  },
-  {
-   "title": "數位至匯3引擎搶移工經濟明年毛利率站穩6成再提升- 新聞",
-   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNbUE2Tk1jeXhUaUJvZHVjakZrd0hCclo2ZnpOTGlBVGJ4bmFwc1hEZ1V6U2I1X0FiM2lPeEpLb0pIRGJKSmR4bW1DenVGRl9hc3E4WlU5T0NKN29sNUQwakF3ZGFNdkx2bzl2YzZSVWVYc2twVWdfVUVLU055NjZyTXNfQklFRlJkQk96UTkzYWprZw?oc=5",
-   "source": "MoneyDJ",
-   "pubDate": "2026-11-20T08:17:00.000Z",
-   "count": 1,
-   "sources": [
-    {
-     "name": "MoneyDJ",
-     "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNbUE2Tk1jeXhUaUJvZHVjakZrd0hCclo2ZnpOTGlBVGJ4bmFwc1hEZ1V6U2I1X0FiM2lPeEpLb0pIRGJKSmR4bW1DenVGRl9hc3E4WlU5T0NKN29sNUQwakF3ZGFNdkx2bzl2YzZSVWVYc2twVWdfVUVLU055NjZyTXNfQklFRlJkQk96UTkzYWprZw?oc=5",
-     "title": "數位至匯3引擎搶移工經濟明年毛利率站穩6成再提升- 新聞"
-    }
-   ],
-   "score": 13.9
-  },
-  {
-   "title": "移工匯款商機驚人！數位至匯前10月營收超越去年 25日120元登興櫃",
-   "link": "https://news.google.com/rss/articles/CBMihANBVV95cUxPTUFhTmlXVDNsOEZwQ0VYT1Bnc2d1NGpwSmV1UmNIRkgzZU9OaHVFM3hjSU4yUG9pcVRrdkZUdU5pSV9QaGlOd284WEFNSUJIb0o1c2pEUHZRZVRfN2hIYWt5YkpDcDRrbVBlVTlBdGhzY2hjYllsWUx1RlNVbjlJblNiSTNaeDFTd3JCVGthVjJoS1AxLUo4T0tYaFdTNnBOQ2EycVdUS2RpNnVTNkZSMlU0bG5uRHluTHhoYTlfcUhkLVpXUDBNN20xdFc4RmVKM242SUpCLVhocHRSUWNvS01YMXRrNHlLbnVfNXdrMFNUdC1jeUI2ZUxKLUk4VURkZEFZNFpTcDlXbzRhRFIxQlotMTk2SmF6bHVodXI1TFU1Tzhucno0SlVTVmpmTFVmcERjb2NWOVB3RjNhZUNXamMwTElyczNwNjRQWlJMREpINEJiUF94Y21UX2E3VUZkRWNOazdXZTZzWnVHaHlleTdCQndFczNQUXNwTFRSek5xZWFT?oc=5",
-   "source": "Yahoo",
-   "pubDate": "2026-11-20T07:45:00.000Z",
-   "count": 1,
-   "sources": [
-    {
-     "name": "Yahoo",
-     "link": "https://news.google.com/rss/articles/CBMihANBVV95cUxPTUFhTmlXVDNsOEZwQ0VYT1Bnc2d1NGpwSmV1UmNIRkgzZU9OaHVFM3hjSU4yUG9pcVRrdkZUdU5pSV9QaGlOd284WEFNSUJIb0o1c2pEUHZRZVRfN2hIYWt5YkpDcDRrbVBlVTlBdGhzY2hjYllsWUx1RlNVbjlJblNiSTNaeDFTd3JCVGthVjJoS1AxLUo4T0tYaFdTNnBOQ2EycVdUS2RpNnVTNkZSMlU0bG5uRHluTHhoYTlfcUhkLVpXUDBNN20xdFc4RmVKM242SUpCLVhocHRSUWNvS01YMXRrNHlLbnVfNXdrMFNUdC1jeUI2ZUxKLUk4VURkZEFZNFpTcDlXbzRhRFIxQlotMTk2SmF6bHVodXI1TFU1Tzhucno0SlVTVmpmTFVmcERjb2NWOVB3RjNhZUNXamMwTElyczNwNjRQWlJMREpINEJiUF94Y21UX2E3VUZkRWNOazdXZTZzWnVHaHlleTdCQndFczNQUXNwTFRSek5xZWFT?oc=5",
-     "title": "移工匯款商機驚人！數位至匯前10月營收超越去年 25日120元登興櫃"
-    }
-   ],
-   "score": 13.8
+   "score": 11.5
   }
  ],
  "errors": []
