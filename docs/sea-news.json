@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T18:35:55.455Z",
+ "updatedAt": "2026-11-21T07:00:00.775Z",
  "mode": "headline",
  "countries": [
   {
@@ -11,24 +11,24 @@
    "items": [
     {
      "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%85%9A%E4%B8%AD%E5%A4%AE%E6%80%BB%E4%B9%A6%E8%AE%B0%E5%9B%BD%E5%AE%B6%E4%B8%BB%E5%B8%AD%E8%8B%8F%E6%9E%97%E4%B8%BB%E6%8C%81%E4%BB%AA%E5%BC%8F-%E6%AC%A2%E8%BF%8E%E9%98%BF%E5%A1%9E%E6%8B%9C%E7%96%86%E6%80%BB%E7%BB%9F%E8%AE%BF%E8%B6%8A-post146636.html",
+     "title": "越南黨中央總書記、國家主席蘇林主持儀式 歡迎阿塞拜疆總統訪越",
+     "date": null,
+     "source": "西貢解放日報（華文版）",
+     "hot": true
+    },
+    {
+     "kind": "headline",
+     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E6%89%BF%E5%8A%9E2027%E5%B9%B4apec%E4%BC%9A%E8%AE%AE%E8%8E%B7%E5%BE%97%E5%9B%BD%E9%99%85%E6%94%AF%E6%8C%81%E4%B8%8E%E6%9C%9F%E5%BE%85-post146623.html",
+     "title": "越南承辦2027年APEC會議獲得國際支持與期待",
+     "date": null,
+     "source": "西貢解放日報（華文版）",
+     "hot": true
+    },
+    {
+     "kind": "headline",
      "url": "https://cn.sggp.org.vn/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%B1%8A%E5%9B%BD%E4%BC%9A%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BC%9A%E8%AE%AE%E9%80%9A%E8%BF%87%E5%85%B3%E4%BA%8E%E7%A8%8E%E6%94%B6%E5%92%8C%E6%8A%95%E8%B5%84%E7%9A%84%E4%B8%A4%E9%A1%B9%E9%87%8D%E8%A6%81%E6%B3%95%E5%BE%8B-post146624.html",
      "title": "第十六屆國會第二次會議：通過關於稅收和投資的兩項重要法律",
-     "date": null,
-     "source": "西貢解放日報（華文版）",
-     "hot": true
-    },
-    {
-     "kind": "headline",
-     "url": "https://cn.sggp.org.vn/%E8%83%A1%E5%BF%97%E6%98%8E%E5%B8%82%E5%B8%82%E5%A7%94%E5%89%AF%E4%B9%A6%E8%AE%B0%E9%98%AE%E7%A6%8F%E7%A6%84%E6%8F%90%E5%8D%87%E5%8C%BA%E5%9F%9F%E7%BB%BC%E5%90%88%E5%8C%BB%E9%99%A2%E8%83%BD%E5%8A%9B%E6%9E%84%E5%BB%BA%E4%BA%92%E8%81%94%E4%BA%92%E9%80%9A%E7%9A%84%E7%8E%B0%E4%BB%A3%E5%8C%96%E5%8C%BB%E7%96%97%E5%8D%AB%E7%94%9F%E4%BD%93%E7%B3%BB-post146626.html",
-     "title": "胡志明市市委副書記阮福祿：提升區域綜合醫院能力，構建互聯互通的現代化醫療衛生體系",
-     "date": null,
-     "source": "西貢解放日報（華文版）",
-     "hot": true
-    },
-    {
-     "kind": "headline",
-     "url": "https://cn.sggp.org.vn/%E8%B6%8A%E5%8D%97%E5%BB%BA%E8%AE%BE%E9%83%A8%E9%95%BF%E5%B0%86%E9%93%81%E8%B7%AF%E5%90%88%E4%BD%9C%E6%89%93%E9%80%A0%E6%88%90%E4%B8%BA%E8%B6%8A%E4%B8%AD%E5%85%B3%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%88%98%E7%95%A5%E4%BA%AE%E7%82%B9-post146617.html",
-     "title": "越南建設部長：將鐵路合作打造成為越中關係中的戰略亮點",
      "date": null,
      "source": "西貢解放日報（華文版）",
      "hot": true
@@ -45,7 +45,7 @@
     {
      "kind": "headline",
      "url": "https://www.shangbao.com.ph/fgyw/2026/11-21/208763.shtml",
-     "title": "馬科斯深圳招商成果豐碩 中企承諾投資411億美元",
+     "title": "馬科斯深圳招商成果豐碩 中企承諾投資411億披索",
      "date": "2026-11-21",
      "source": "菲律賓商報"
     },
@@ -111,16 +111,16 @@
     },
     {
      "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/18/hukum-1795016328",
-     "title": "印尼國家警察刑事偵查局破獲印尼-馬來西亞毒品網絡",
-     "date": "2026-11-18",
+     "url": "https://shangbaoindonesia.com/read/2026/11/19/society-1795098962",
+     "title": "老人學校幫助老年人 保持健康和高效工作",
+     "date": "2026-11-19",
      "source": "印尼商報"
     },
     {
      "kind": "headline",
-     "url": "https://shangbaoindonesia.com/read/2026/11/19/society-1795098962",
-     "title": "老人學校幫助老年人 保持健康和高效工作",
-     "date": "2026-11-19",
+     "url": "https://shangbaoindonesia.com/read/2026/11/20/kesra-1795181912",
+     "title": "國家營養局將免費營養餐 覆蓋範圍擴大至7800萬人",
+     "date": "2026-11-20",
      "source": "印尼商報"
     }
    ]
