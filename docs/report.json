@@ -1,24 +1,17 @@
 {
- "startedAt": "2026-11-27T04:19:49.341Z",
- "finishedAt": "2026-11-27T04:20:41.970Z",
+ "startedAt": "2026-11-28T03:59:03.178Z",
+ "finishedAt": "2026-11-28T03:59:17.098Z",
  "sources": [
   {
    "id": "wda-file",
    "name": "勞動力發展署 跨國勞動力權益維護資訊網－宣導品",
    "agency": "勞動部",
    "ok": true,
-   "newItems": [
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版－中文版",
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版－印尼文版",
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版－泰文版",
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版－英文版",
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版－越南文版",
-    "LINE@移點通-【提神飲料天天喝？小心酒精增加健康風險！】-多國語言版"
-   ],
+   "newItems": [],
    "errors": [],
    "listedDetails": 15,
-   "fetchedDetails": 1,
-   "newCount": 6
+   "fetchedDetails": 0,
+   "newCount": 0
   },
   {
    "id": "motc-168-vi",
@@ -90,11 +83,11 @@
    "id": "chcg-lazybag",
    "name": "彰化縣外國人在地服務網－懶人包（中、英、印、越、泰）",
    "agency": "彰化縣政府",
-   "ok": true,
+   "ok": false,
    "newItems": [],
-   "errors": [],
-   "listedDetails": 0,
-   "fetchedDetails": 0,
+   "errors": [
+    "列表頁讀取失敗：fetch failed"
+   ],
    "newCount": 0
   }
  ]
